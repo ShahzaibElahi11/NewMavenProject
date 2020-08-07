@@ -1,0 +1,12 @@
+-------------------------------------------------------------------------------
+Test set: TestSuite
+-------------------------------------------------------------------------------
+Tests run: 120, Failures: 1, Errors: 0, Skipped: 0, Time elapsed: 24.716 sec <<< FAILURE!
+PostCreateUserNew(testcases.TestUserManagement)  Time elapsed: 0.121 sec  <<< FAILURE!
+java.lang.AssertionError: 
+Expected: <200>
+     but: was <400>
+	at org.hamcrest.MatcherAssert.assertThat(MatcherAssert.java:20)
+	at org.hamcrest.MatcherAssert.assertThat(MatcherAssert.java:8)
+	at testcases.TestUserManagement.PostCreateUserNew(TestUserManagement.java:322)
+

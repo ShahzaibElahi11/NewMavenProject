@@ -1,0 +1,14 @@
+testcases\TestAdapterConfiguration.class
+testcases\TestDashboard.class
+testcases\APITest.class
+testcases\TestUserAuditLogs.class
+api\Apis.class
+testcases\TestPolicyRoutine.class
+utils\BaseClass.class
+testcases\TestLDAP.class
+testcases\TestIntegrationController.class
+testcases\TestUserManagement.class
+testcases\TestDeviceDetail.class
+testcases\TestQueryWizard.class
+testcases\TestUserDetails.class
+testcases\TestClass2.class
