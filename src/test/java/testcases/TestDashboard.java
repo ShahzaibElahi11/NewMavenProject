@@ -189,6 +189,15 @@ public class TestDashboard extends BaseClass {
         assertEquals(actualStatus, 200);
     }
 
+    @Test
+    public void GetCloudVSNonCloud1() throws IOException {
+
+        HttpGet get = new HttpGet(BASE_ENDPOINT + "/query/pie/?field=adapterProperties&match=CLOUD%20PROVIDER");
+        get.setHeader("Authorization", "Bearer " + token);
+        response = client.execute(get);
+        int actualStatus = response.getStatusLine().getStatusCode();
+        assertEquals(actualStatus, 200);
+    }
 
 
 }
