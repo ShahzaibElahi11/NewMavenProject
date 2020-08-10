@@ -1,298 +1,162 @@
 package testcases;
 
-import api.Apis;
+import api.DeviceApis;
 import io.restassured.response.Response;
-import org.apache.commons.codec.binary.Base64;
-import org.apache.http.HttpHeaders;
+
+import org.apache.http.HttpStatus;
 import org.apache.http.client.methods.HttpDelete;
-import org.apache.http.client.methods.HttpGet;
-import org.apache.http.client.methods.HttpPost;
-import org.apache.http.entity.ContentType;
-import org.apache.http.entity.StringEntity;
-import org.testng.Assert;
-import org.testng.annotations.Test;
-import models.DeviceNotes;
-import models.DeviceTag;
+import org.junit.Ignore;
+import org.junit.Test;
+import models.devices.DeviceNotes;
+import models.devices.DeviceTag;
 import utils.BaseClass;
 
 import java.io.IOException;
-import java.nio.charset.Charset;
 import java.util.Collections;
 
-import static io.restassured.RestAssured.given;
-import static org.apache.commons.codec.binary.Base64.encodeBase64;
+import static junit.framework.TestCase.assertEquals;
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.MatcherAssert.assertThat;
-import static org.testng.Assert.assertEquals;
 
 public class TestDeviceDetail extends BaseClass {
 
 
     public static final String DEVICE_ENDPOINT = "/devices/";
-    public static final String DEVICE_ALL_TAGS = "tags/";
-    public static final String LOAD_BALANCER_RULE = "loadbalancer-rules?_id=";
-
     public static final String DELETE_SINGLE_TAG = "deleteSingleTag?deviceId=";
     public static final String DELETE_BULK_TAG = "deleteBulkTag";
-
     public static final String  DELETE_NOTE = "deleteNote?deviceId=";
-
     public static final String SINGLE_TAG_NAME = "Automation_Tag_Number_482";
     public static final String DELETE_DEVICE = "removeDiscoveredDevice?_id=";
     //re-think
     public static final String DELETE_DEVICE_ID = "5f0d7cd312e1364a117ce134";
-    public static final String DEVICE_HARDWARE = "hardware/connected?_id=";
-    public static final String USER_FOR_DEVICE = "users?_id=";
+
 
 
     @Test
-    public void GetAllDevices() throws IOException {
-
-        HttpGet get = new HttpGet(BASE_ENDPOINT + "/devices/getAllDevices?page=0&size=100");
-        get.setHeader("Authorization", "Bearer " + token);
-        response = client.execute(get);
-        int actualStatus = response.getStatusLine().getStatusCode();
-        assertEquals(actualStatus, 200);
-    }
-
-    @Test(enabled = false)
-    public void GetAllDevices1() throws IOException {
-        Response response = given()
-                .contentType(io.restassured.http.ContentType.JSON)
-                .header("Authorization","Bearer" + token )
-                .when()
-                .get(BASE_ENDPOINT + "/devices/getAllDevices?page=0&size=20");
-        assertThat(response.getStatusCode(),equalTo(200));
+    public void GetAllDevices() {
+        Response response = DeviceApis.getAllDevices();
+        assertThat(response.getStatusCode(),equalTo(HttpStatus.SC_OK));
     }
 
     @Test
-    public void GetDevicesDetailsByID() throws IOException {
+    public void GetDevicesDetailsById(){
+        Response response = DeviceApis.getDevicesDetailsById();
+        assertThat(response.getStatusCode(),equalTo(HttpStatus.SC_OK));
+    }
 
-        HttpGet get = new HttpGet(BASE_ENDPOINT + "/devices/deviceDetail?_id=" + DEVICE_DETAIL_ID);
-        get.setHeader("Authorization", "Bearer " + token);
-        response = client.execute(get);
-        int actualStatus = response.getStatusLine().getStatusCode();
-        assertEquals(actualStatus, 200);
+
+    @Test
+    public void GetDeviceAdaptersList(){
+
+        Response response = DeviceApis.getDeviceAdaptersListById();
+        assertThat(response.getStatusCode(),equalTo(HttpStatus.SC_OK));
     }
 
     @Test
-    public void GetDeviceAdaptersList() throws IOException {
+    public void GetDrivesDetailsById(){
 
-        HttpGet get = new HttpGet(BASE_ENDPOINT + "/devices/adapters/list?_id=" + DEVICE_DETAIL_ID);
-        get.setHeader("Authorization", "Bearer " + token);
-        response = client.execute(get);
-        int actualStatus = response.getStatusLine().getStatusCode();
-        assertEquals(actualStatus, 200);
+        Response response = DeviceApis.getDrivesDetailsById();
+        assertThat(response.getStatusCode(),equalTo(HttpStatus.SC_OK));
     }
 
     @Test
-    public void GetDrivesDetailsById() throws IOException {
-
-        HttpGet get = new HttpGet(BASE_ENDPOINT + "/devices/drives?_id=" + DEVICE_DETAIL_ID);
-        get.setHeader("Authorization", "Bearer " + token);
-        response = client.execute(get);
-        int actualStatus = response.getStatusLine().getStatusCode();
-        assertEquals(actualStatus, 200);
+    public void GetOSPatchesDetailsById(){
+        Response response = DeviceApis.getOSPatchesDetailsById();
+        assertThat(response.getStatusCode(),equalTo(HttpStatus.SC_OK));
     }
 
     @Test
-    public void GetOSPatchesDetailsById() throws IOException {
-
-        HttpGet get = new HttpGet(BASE_ENDPOINT + "/devices/os/patches/installed?_id=" + DEVICE_DETAIL_ID);
-        get.setHeader("Authorization", "Bearer " + token);
-        response = client.execute(get);
-        int actualStatus = response.getStatusLine().getStatusCode();
-        assertEquals(actualStatus, 200);
+    public void GetRunningProcessesDetailsById(){
+        Response response = DeviceApis.getRunningProcessesDetailsById();
+        assertThat(response.getStatusCode(),equalTo(HttpStatus.SC_OK));
     }
 
     @Test
-    public void GetRunningProcessesDetailsById() throws IOException {
-
-        HttpGet get = new HttpGet(BASE_ENDPOINT + "/devices/processes/running?_id=" + DEVICE_DETAIL_ID);
-        get.setHeader("Authorization", "Bearer " + token);
-        response = client.execute(get);
-        int actualStatus = response.getStatusLine().getStatusCode();
-        assertEquals(actualStatus, 200);
+    public void GetInstalledSoftwareDetailsById(){
+        Response response = DeviceApis.getInstalledSoftwareDetailsById();
+        assertThat(response.getStatusCode(),equalTo(HttpStatus.SC_OK));
     }
 
     @Test
-    public void GetInstalledSoftwareDetailsById() throws IOException {
-
-        HttpGet get = new HttpGet(BASE_ENDPOINT + "/devices/software/installed?_id=" + DEVICE_DETAIL_ID);
-        get.setHeader("Authorization", "Bearer " + token);
-        response = client.execute(get);
-        int actualStatus = response.getStatusLine().getStatusCode();
-        assertEquals(actualStatus, 200);
+    public void GetOSDetailsById(){
+        Response response = DeviceApis.getOSDetailsById();
+        assertThat(response.getStatusCode(),equalTo(HttpStatus.SC_OK));
     }
 
     @Test
-    public void GetOSDetailsById() throws IOException {
-
-        HttpGet get = new HttpGet(BASE_ENDPOINT + "/devices/os/info?_id=" + DEVICE_DETAIL_ID);
-        get.setHeader("Authorization", "Bearer " + token);
-        response = client.execute(get);
-        int actualStatus = response.getStatusLine().getStatusCode();
-        assertEquals(actualStatus, 200);
+    public void GetUserDetailsById(){
+        Response response = DeviceApis.getUserDetailsById();
+        assertThat(response.getStatusCode(),equalTo(HttpStatus.SC_OK));
     }
 
     @Test
-    public void GetUserDetailsById() throws IOException {
-
-        HttpGet get = new HttpGet(BASE_ENDPOINT + "/devices/users?_id=" + DEVICE_DETAIL_ID);
-        get.setHeader("Authorization", "Bearer " + token);
-        response = client.execute(get);
-        int actualStatus = response.getStatusLine().getStatusCode();
-        assertEquals(actualStatus, 200);
+    public void GetNetworkInterfacesDetailsById(){
+        Response response = DeviceApis.getNetworkInterfacesDetailsById();
+        assertThat(response.getStatusCode(),equalTo(HttpStatus.SC_OK));
     }
 
     @Test
-    public void GetNetworkInterfacesDetailsById() throws IOException {
-
-        HttpGet get = new HttpGet(BASE_ENDPOINT + "/devices/network/interfaces?_id=" + DEVICE_DETAIL_ID);
-        get.setHeader("Authorization", "Bearer " + token);
-        response = client.execute(get);
-        int actualStatus = response.getStatusLine().getStatusCode();
-        assertEquals(actualStatus, 200);
+    public void GetSharedFoldersDetailsById(){
+        Response response = DeviceApis.getSharedFoldersDetailsById();
+        assertThat(response.getStatusCode(),equalTo(HttpStatus.SC_OK));
     }
 
     @Test
-    public void GetSharedFoldersDetailsById() throws IOException {
-
-        HttpGet get = new HttpGet(BASE_ENDPOINT + "/devices/shared/folders?_id=" + DEVICE_DETAIL_ID);
-        get.setHeader("Authorization", "Bearer " + token);
-        response = client.execute(get);
-        int actualStatus = response.getStatusLine().getStatusCode();
-        assertEquals(actualStatus, 200);
+    public void GetDeviceNoteDetailsById(){
+        Response response = DeviceApis.getDeviceNoteDetailsById();
+        assertThat(response.getStatusCode(),equalTo(HttpStatus.SC_OK));
     }
 
     @Test
-    public void GetDeviceNoteDetailsById() throws IOException {
-
-        HttpGet get = new HttpGet(BASE_ENDPOINT + "/devices/getDeviceNote?deviceId=" + DEVICE_DETAIL_ID);
-        get.setHeader("Authorization", "Bearer " + token);
-        response = client.execute(get);
-        int actualStatus = response.getStatusLine().getStatusCode();
-        assertEquals(actualStatus, 200);
-    }
-
-    @Test
-    public void GetDeviceTagDetailsById() throws IOException {
-
-        HttpGet get = new HttpGet(BASE_ENDPOINT + "/devices/getDeviceTag?deviceId=" + DEVICE_DETAIL_ID);
-        get.setHeader("Authorization", "Bearer " + token);
-        response = client.execute(get);
-        int actualStatus = response.getStatusLine().getStatusCode();
-        assertEquals(actualStatus, 200);
+    public void GetDeviceTagDetailsById(){
+        Response response = DeviceApis.getDeviceTagDetailsById();
+        assertThat(response.getStatusCode(),equalTo(HttpStatus.SC_OK));
     }
 
     @Test //extra
-    public void GetGeneralDetailsById() throws IOException {
-
-        HttpGet get = new HttpGet(BASE_ENDPOINT + "/devices/general?_id=" + DEVICE_DETAIL_ID);
-        get.setHeader("Authorization", "Bearer " + token);
-        response = client.execute(get);
-        int actualStatus = response.getStatusLine().getStatusCode();
-        assertEquals(actualStatus, 200);
+    public void GetGeneralDetailsById(){
+        Response response = DeviceApis.getGeneralDetailsById();
+        assertThat(response.getStatusCode(),equalTo(HttpStatus.SC_OK));
     }
 
     @Test
     public void GeAdapterDetailsById() throws IOException {
-
-        HttpGet get = new HttpGet(BASE_ENDPOINT + "/devices/adapter/data?_id=" + DEVICE_DETAIL_ID + "&adapter");
-        get.setHeader("Authorization", "Bearer " + token);
-        response = client.execute(get);
-        int actualStatus = response.getStatusLine().getStatusCode();
-        assertEquals(actualStatus, 200);
+        Response response = DeviceApis.getAdapterDetailsById();
+        assertThat(response.getStatusCode(),equalTo(HttpStatus.SC_OK));
     }
 
     @Test
-    public void PostInsertDeviceTag()throws IOException {
-
-        HttpPost request = new HttpPost(BASE_ENDPOINT + "/devices/insertTag");
-
-        String auth = new String();
-        byte[] encodedAuth = encodeBase64(auth.getBytes(Charset.forName("ISO-8859-1")));
-        String authHeader = "Basic " + new String(encodedAuth);
-
-        request.setHeader(HttpHeaders.AUTHORIZATION, authHeader);
-        request.setHeader("Authorization", "Bearer " + token);
-
-        String json = "{ \"tag\":\"Automation_Tag_Number_"+value+"\", \"deviceIds\":[\""+DEVICE_DETAIL_ID+"\"]}";
-
-        request.setEntity(new StringEntity(json, ContentType.APPLICATION_JSON));
-        response = client.execute(request);
-
-        int actualStatusCode = response.getStatusLine().getStatusCode();
-        Assert.assertEquals(actualStatusCode, 200);
-    }
-
-    @Test
-    public void PostInsertDeviceTagNew(){
-
+    public void PostInsertDeviceTag(){
         DeviceTag deviceTag = new DeviceTag("Automation_Device_Tag_Number_"+value+"1", Collections.singletonList(DEVICE_DETAIL_ID));
-
-        Response response = Apis.postInsertDeviceTag(deviceTag);
-        assertThat(response.getStatusCode(), equalTo(200));
-
-
+        Response response = DeviceApis.postInsertDeviceTag(deviceTag);
+        assertThat(response.getStatusCode(), equalTo(HttpStatus.SC_OK));
     }
 
     @Test
-    public void PostInsertNote()throws IOException {
-
-        HttpPost request = new HttpPost(BASE_ENDPOINT + "/devices/insertNote");
-
-        String auth = new String();
-        byte[] encodedAuth = Base64.encodeBase64(auth.getBytes(Charset.forName("ISO-8859-1")));
-        String authHeader = "Basic " + new String(encodedAuth);
-
-        request.setHeader(HttpHeaders.AUTHORIZATION, authHeader);
-        request.setHeader("Authorization", "Bearer " + token);
-
-        String json = "{ \"note\":\"Automation_Note_Number_" + value + "\", \"deviceId\":\""+DEVICE_DETAIL_ID+"\"}";
-
-        request.setEntity(new StringEntity(json, ContentType.APPLICATION_JSON));
-        // Send
-        response = client.execute(request);
-
-        int actualStatusCode = response.getStatusLine().getStatusCode();
-        Assert.assertEquals(actualStatusCode, 200);
-
-    }
-
-    @Test
-    public void PostInsertDeviceNoteNew() {
-
+    public void PostInsertDeviceNote() {
         DeviceNotes deviceNotes = new DeviceNotes("Automation_Notes_#_"+value+"", ""+DEVICE_DETAIL_ID);
-
-        Response response = Apis.postInsertDeviceNote(deviceNotes);
-        assertThat(response.getStatusCode(), equalTo(200));
+        Response response = DeviceApis.postInsertDeviceNote(deviceNotes);
+        assertThat(response.getStatusCode(), equalTo(HttpStatus.SC_OK));
     }
 
     /**
      * insert new
      */
     @Test
-    public void GetAllTags() throws IOException {
+    public void GetAllTags(){
 
-        HttpGet get = new HttpGet(BASE_ENDPOINT + DEVICE_ENDPOINT + DEVICE_ALL_TAGS);
-        get.setHeader("Authorization", "Bearer " + token);
-        response = client.execute(get);
-        int actualStatus = response.getStatusLine().getStatusCode();
-        assertEquals(actualStatus, 200);
+        Response response = DeviceApis.getAllTags();
+        assertThat(response.getStatusCode(),equalTo(HttpStatus.SC_OK));
     }
 
     @Test
-    public void GetLoadBalancerRulesForDevice() throws IOException {
+    public void GetLoadBalancerRulesForDevice(){
+        Response response = DeviceApis.getLoadBalancerRulesForDevice();
+        assertThat(response.getStatusCode(),equalTo(HttpStatus.SC_OK));
 
-        HttpGet get = new HttpGet(BASE_ENDPOINT + DEVICE_ENDPOINT + LOAD_BALANCER_RULE + DEVICE_DETAIL_ID);
-        get.setHeader("Authorization", "Bearer " + token);
-        response = client.execute(get);
-        int actualStatus = response.getStatusLine().getStatusCode();
-        assertEquals(actualStatus, 200);
     }
 
-
+    @Ignore
     @Test // Not throw exception if tag name not exist.
     public void DeleteDeviceSingleTag() throws IOException {
 
@@ -303,7 +167,8 @@ public class TestDeviceDetail extends BaseClass {
         assertEquals(actualStatus, 200);
     }
 
-    @Test(enabled = false) // issue - not complete. also postman issue
+    @Ignore
+    @Test // issue - not complete. also postman issue
     public void DeleteDeviceBukTag() throws IOException {
 
         HttpDelete request = new HttpDelete(BASE_ENDPOINT + DEVICE_ENDPOINT + DELETE_BULK_TAG) ;
@@ -318,7 +183,7 @@ public class TestDeviceDetail extends BaseClass {
         int actualStatus = response.getStatusLine().getStatusCode();
         assertEquals(actualStatus, 200);
     }
-
+    @Ignore
     @Test // Not throw exception if note does not exist.
     public void DeleteDeviceNote() throws IOException {
 
@@ -329,7 +194,7 @@ public class TestDeviceDetail extends BaseClass {
         assertEquals(actualStatus, 200);
     }
 
-
+    @Ignore
     @Test // Not throw exception if note does not exist.
     public void DeleteDiscoveredDevice() throws IOException {
 
@@ -341,23 +206,17 @@ public class TestDeviceDetail extends BaseClass {
     }
 
     @Test
-    public void GetConnectedHardwareForDevice() throws IOException {
-
-        HttpGet get = new HttpGet(BASE_ENDPOINT + DEVICE_ENDPOINT + DEVICE_HARDWARE + DEVICE_DETAIL_ID);
-        get.setHeader("Authorization", "Bearer " + token);
-        response = client.execute(get);
-        int actualStatus = response.getStatusLine().getStatusCode();
-        assertEquals(actualStatus, 200);
+    public void GetConnectedHardwareForDevice() {
+        Response response = DeviceApis.getConnectedHardwareForDevice();
+        assertThat(response.getStatusCode(),equalTo(HttpStatus.SC_OK));
     }
 
     @Test
-    public void GetUsersForDevice() throws IOException {
+    public void GetUsersForDevice(){
 
-        HttpGet get = new HttpGet(BASE_ENDPOINT + DEVICE_ENDPOINT + USER_FOR_DEVICE + DEVICE_DETAIL_ID);
-        get.setHeader("Authorization", "Bearer " + token);
-        response = client.execute(get);
-        int actualStatus = response.getStatusLine().getStatusCode();
-        assertEquals(actualStatus, 200);
+        Response response = DeviceApis.getUsersForDevice();
+        assertThat(response.getStatusCode(),equalTo(HttpStatus.SC_OK));
+
     }
 
 }

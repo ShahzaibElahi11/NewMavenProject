@@ -1,0 +1,162 @@
+package api;
+
+import io.restassured.http.ContentType;
+import io.restassured.response.Response;
+import models.usermanagement.AdminUser;
+import models.usermanagement.Login;
+import models.usermanagement.Role;
+import utils.BaseClass;
+
+import static io.restassured.RestAssured.given;
+
+public class UserManagementApis extends BaseClass {
+    public static final String ROLE_ENDPOINT = "/role/";
+    public static final String CREATE_ROLE = "createRole";
+    public static final String GET_ALL_ROLE = "getAllRole";
+    public static final String ROLE_DETAILS = "getRoleDetail?id=";
+    public static final String UPDATE_ROLE = "updateRole?id=";
+    public static final String DELETE_ROLE = "deleteRole?id=";
+
+    public static final String PERMISSION_ENDPOINT = "/permission/";
+    public static final String CREATE_PERMISSION = "createPermission";
+    public static final String GET_ALL_PERMISSION = "getAllPermission";
+    public static final String PERMISSION_DETAILS = "getPermissionDetail?id=";
+    public static final String UPDATE_PERMISSION = "updatePermission?id=";
+    public static final String DELETE_PERMISSION  = "deletePermission?id=";
+
+    public static final String GET_ALL_MODULES = "getAllModules";
+    public static final String GET_ROLE_MODULES = "getRoleModules?role=";
+    public static final String GET_ROLE_PERMISSION = "getRolePermission?module=";
+    public static final String GET_USER_MODULES = "getUserModules?userId=";
+
+    public final static String ADMIN_USER_ENDPOINT = "/adminUsers/";
+    public static final String CREATE_ADMIN_USER = "createUser";
+    public static final String GET_ALL_ADMIN_USER = "getAllAdminUsers";
+    public static final String ADMIN_USER_DETAILS = "getAdminUserDetail?_id=";
+    public static final String UPDATE_ADMIN_USER = "updateUser?id=";
+    public static final String DELETE_ADMIN_USER  = "deleteAdminUser?_id=";
+    public static final String ALL_ADMIN_USERNAME = "getAllUsername";
+
+
+    public final static String LOGIN = "/login";
+    public static final String PAGINATION_PARAMETER = "?page=0&size=100";
+
+
+    public static Response postCreateRole(Role role) {
+        return given()
+                .contentType(ContentType.JSON)
+                .header("Authorization", "Bearer" + token)
+                .body(role)
+                .when()
+                .post(BASE_ENDPOINT + ROLE_ENDPOINT + CREATE_ROLE);
+
+    }
+
+    public static Response getAllRole() {
+        return given()
+                .contentType(ContentType.JSON)
+                .header("Authorization", "Bearer" + token)
+                .get(BASE_ENDPOINT + ROLE_ENDPOINT + GET_ALL_ROLE);
+    }
+
+    public static Response getRoleDetails() {
+        return given()
+                .contentType(ContentType.JSON)
+                .header("Authorization", "Bearer" + token)
+                .get(BASE_ENDPOINT + ROLE_ENDPOINT + ROLE_DETAILS + ROLE_ID);
+    }
+
+    public static Response getAllPermission() {
+        return given()
+                .contentType(ContentType.JSON)
+                .header("Authorization", "Bearer" + token)
+                .get(BASE_ENDPOINT + PERMISSION_ENDPOINT + GET_ALL_PERMISSION);
+    }
+
+    public static Response getPermissionDetails() {
+        return given()
+                .contentType(ContentType.JSON)
+                .header("Authorization", "Bearer" + token)
+                .get(BASE_ENDPOINT + PERMISSION_ENDPOINT + PERMISSION_DETAILS + PERMISSION_ID);
+    }
+
+    public static Response getAllModules() {
+        return given()
+                .contentType(ContentType.JSON)
+                .header("Authorization", "Bearer" + token)
+                .get(BASE_ENDPOINT + PERMISSION_ENDPOINT + GET_ALL_MODULES);
+    }
+
+    public static Response getRoleModules() {
+        return given()
+                .contentType(ContentType.JSON)
+                .header("Authorization", "Bearer" + token)
+                .get(BASE_ENDPOINT + PERMISSION_ENDPOINT + GET_ROLE_MODULES + "ADMIN");
+    }
+
+    public static Response getRolePermission() {
+        return given()
+                .contentType(ContentType.JSON)
+                .header("Authorization", "Bearer" + token)
+                .get(BASE_ENDPOINT + PERMISSION_ENDPOINT + GET_ROLE_PERMISSION +"dashboard&role=ADMIN");
+    }
+
+    public static Response getUserModules() {
+        return given()
+                .contentType(ContentType.JSON)
+                .header("Authorization", "Bearer" + token)
+                .get(BASE_ENDPOINT + PERMISSION_ENDPOINT + GET_USER_MODULES + ADMIN_USER_ID);
+    }
+
+    public static Response getAllAdminUser() {
+        return given()
+                .contentType(ContentType.JSON)
+                .header("Authorization", "Bearer" + token)
+                .get(BASE_ENDPOINT + ADMIN_USER_ENDPOINT + GET_ALL_ADMIN_USER + PAGINATION_PARAMETER);
+    }
+
+    public static Response getAdminUserDetail() {
+        return given()
+                .contentType(ContentType.JSON)
+                .header("Authorization", "Bearer" + token)
+                .get(BASE_ENDPOINT + ADMIN_USER_ENDPOINT + ADMIN_USER_DETAILS + ADMIN_USER_ID);
+    }
+
+
+    public static Response getAllAdminUserName() {
+        return given()
+                .contentType(ContentType.JSON)
+                .header("Authorization", "Bearer" + token)
+                .get(BASE_ENDPOINT + ADMIN_USER_ENDPOINT + ALL_ADMIN_USERNAME );
+    }
+
+
+    public static Response updateRole(Role role) {
+        return given()
+                .contentType(ContentType.JSON)
+                .header("Authorization", "Bearer" + token)
+                .body(role)
+                .when()
+                .put(BASE_ENDPOINT + ROLE_ENDPOINT + UPDATE_ROLE + ROLE_ID);
+        //
+
+    }
+
+    public static Response postLogin(Login login) {
+        return given()
+                .contentType(ContentType.JSON)
+                .header("Authorization", "Bearer" + token)
+                .body(login)
+                .when()
+                .post(BASE_ENDPOINT + "/login");
+    }
+
+    public static Response postCreateUser(AdminUser adminUser) {
+        return given()
+                .contentType(ContentType.JSON)
+                .header("Authorization", "Bearer" + token)
+                .body(adminUser)
+                .when()
+                .post(BASE_ENDPOINT + ADMIN_USER_ENDPOINT + CREATE_ADMIN_USER);
+    }
+}

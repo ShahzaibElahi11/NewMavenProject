@@ -7,8 +7,9 @@ import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClientBuilder;
 import org.json.JSONException;
 import org.json.JSONObject;
-import org.testng.annotations.AfterMethod;
-import org.testng.annotations.BeforeMethod;
+import org.junit.After;
+import org.junit.Before;
+
 
 import java.io.*;
 import java.net.URL;
@@ -24,35 +25,36 @@ public class BaseClass {
 
     protected CloseableHttpClient client;
     protected CloseableHttpResponse response;
-
-    @BeforeMethod
-    public void setup() {
-        client = HttpClientBuilder.create().build();
-
-    }
-
-    @AfterMethod
-    public void closeResources() throws IOException {
-        client.close();
-        response.close();
-    }
-
-    /**
-     * Application Base Endpoints
-     */
-    protected static final String BASE_ENDPOINT = "http://inventaserver:9092";
-    protected static final String ADAPTER_CONFIG_ENDPOINT = "http://inventaserver:9098";
+//
+//    @Before
+//    public void setup() {
+//        client = HttpClientBuilder.create().build();
+//
+//    }
+//
+//    @After
+//    public void closeResources() throws IOException {
+//        client.close();
+//        response.close();
+//    }
 
 
-    /**
-     * Token Implementation
-     */
-    public static final String SECRET = "Inventa123";
-    public static final int EXPIRATION_TIME = 360000000;
+
+    protected static final String BASE_ENDPOINT = ApplicationConfiguration.getBaseURL_InventaService();
+    protected static final String BASE_ENDPOINT_ADAPTER = ApplicationConfiguration.getBaseURL_AdapterService();
+
+    //For Token
+    public static final String SUBJECT = ApplicationConfiguration.getSubject();
+    public static final int EXPIRATION_TIME = Integer.parseInt(ApplicationConfiguration.getExpirationTime());
+    public static final String SECRET = ApplicationConfiguration.getSecretKey();
+
     protected static final String token = JWT.create()
-            .withSubject("admininventa")
-            .withExpiresAt(new Date(System.currentTimeMillis() + EXPIRATION_TIME))
+            .withSubject(SUBJECT)
+            .withExpiresAt(new Date(System.currentTimeMillis()+ EXPIRATION_TIME))
             .sign(HMAC512(SECRET.getBytes()));
+
+
+
 
     /**
      * Random Number Generation
@@ -126,7 +128,7 @@ public class BaseClass {
             DEVICE_DETAIL_ID = getIdFromURL("http://inventaserver:9092/devices/getAllDevices?page=0&size=1&sortBy=_id");
             USER_ID = getIdFromURL("http://inventaserver:9092/users/getAllUsers/?page=0&size=1");
             PR_ID = getIdFromURL("http://inventaserver:9092/policy-routine/?page=0&size=1");
-            PERMISSION_ID = getIdFromRolePermissionURL("http://inventaserver:9092/permission/getAllPermission");
+            PERMISSION_ID = getIdFromRolePermissionURL("http://inventaserver:9092/permission/getAllPermission?page=0&size=1");
             ROLE_ID = getIdFromRolePermissionURL("http://inventaserver:9092/role/getAllRole?page=0&size=1");
             ADMIN_USER_ID = getIdFromURL("http://inventaserver:9092/adminUsers/getAllAdminUsers?page=0&size=1");
             SAVED_DEVICE_QUERY_NAME = getNameFromSaveQueryWizardURL("http://inventaserver:9092/saved-query/?type=DEVICE&page=0&size=1");

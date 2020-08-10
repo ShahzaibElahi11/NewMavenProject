@@ -2,202 +2,80 @@ package testcases;
 
 import api.DashboardApis;
 import io.restassured.response.Response;
-import org.apache.http.client.methods.HttpGet;
-import org.testng.annotations.Test;
-import utils.BaseClass;
-
-import java.io.IOException;
-
+import org.apache.http.HttpStatus;
+import org.junit.Test;
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.MatcherAssert.assertThat;
-import static org.testng.Assert.assertEquals;
 
-public class TestDashboard extends BaseClass {
+public class TestDashboard {
 
     @Test
-    public void GetAllAdaptersCountNew() {
+    public void GetAllAdaptersCount() {
 
         Response response = DashboardApis.getAllAdaptersCount();
-        assertThat(response.getStatusCode(),equalTo(200));
+        assertThat(response.getStatusCode(),equalTo(HttpStatus.SC_OK));
     }
     @Test
-    public void GetADAdapterCountNew(){
+    public void GetADAdapterCount(){
         Response response = DashboardApis.getAdAdapterCount();
-        assertThat(response.getStatusCode(),equalTo(200));
+        assertThat(response.getStatusCode(),equalTo(HttpStatus.SC_OK));
     }
     @Test
-    public void GetAzureAdapterCountNew(){
+    public void GetAzureAdapterCount(){
         Response response = DashboardApis.getAzureAdapterCount();
-        assertThat(response.getStatusCode(),equalTo(200));
+        assertThat(response.getStatusCode(),equalTo(HttpStatus.SC_OK));
     }
 
     @Test
-    public void GetWMICAdapterCountNew(){
+    public void GetWMICAdapterCount(){
         Response response = DashboardApis.getWmicAdapterCount();
-        assertThat(response.getStatusCode(),equalTo(200));
+        assertThat(response.getStatusCode(),equalTo(HttpStatus.SC_OK));
     }
 
     @Test
-    public void GetOSDistributionNew(){
+    public void GetOSDistribution(){
         Response response = DashboardApis.getOSDistribution();
-        assertThat(response.getStatusCode(),equalTo(200));
+        assertThat(response.getStatusCode(),equalTo(HttpStatus.SC_OK));
     }
 
     @Test
-    public void GetTotalUserCountNew(){
+    public void GetTotalUserCount(){
         Response response = DashboardApis.getTotalUserCount();
-        assertThat(response.getStatusCode(),equalTo(200));
+        assertThat(response.getStatusCode(),equalTo(HttpStatus.SC_OK));
     }
     @Test
-    public void GetAzureAssetTypeDistributionNew(){
+    public void GetAzureAssetTypeDistribution(){
         Response response = DashboardApis.getAzureAssetTypeDistribution();
-        assertThat(response.getStatusCode(),equalTo(200));
+        assertThat(response.getStatusCode(),equalTo(HttpStatus.SC_OK));
     }
     @Test
-    public void GetADAssetTypeDistributionNew(){
+    public void GetADAssetTypeDistribution(){
         Response response = DashboardApis.getAdAssetTypeDistribution();
-        assertThat(response.getStatusCode(),equalTo(200));
+        assertThat(response.getStatusCode(),equalTo(HttpStatus.SC_OK));
     }
 
     @Test
-    public void GetAWSAssetTypeDistributionNew(){
+    public void GetAWSAssetTypeDistribution(){
         Response response = DashboardApis.getAwsAssetTypeDistribution();
-        assertThat(response.getStatusCode(),equalTo(200));
+        assertThat(response.getStatusCode(),equalTo(HttpStatus.SC_OK));
     }
     @Test
-    public void GetWMICAssetTypeDistributionNew(){
+    public void GetWMICAssetTypeDistribution(){
         Response response = DashboardApis.getWmicAssetTypeDistribution();
-        assertThat(response.getStatusCode(),equalTo(200));
+        assertThat(response.getStatusCode(),equalTo(HttpStatus.SC_OK));
     }
 
     @Test
-    public void GetCloudVSNonCloudNew(){
+    public void GetCloudVSNonCloud(){
         Response response = DashboardApis.getCloudVSNonCloud();
-        assertThat(response.getStatusCode(),equalTo(200));
+        assertThat(response.getStatusCode(),equalTo(HttpStatus.SC_OK));
 
     }
 
 
 
-    @Test
-    public void GetAllAdaptersCount() throws IOException {
 
-        HttpGet get = new HttpGet(BASE_ENDPOINT + "/query/adapters/count/devices/");
-        get.setHeader("Authorization", "Bearer " + token);
-        response = client.execute(get);
-        int actualStatus = response.getStatusLine().getStatusCode();
-        assertEquals(actualStatus, 200);
-    }
 
-    @Test
-    public void GetADAdapterCount() throws IOException {
-
-        HttpGet get = new HttpGet(BASE_ENDPOINT + "/query/adapters/count/devices/?adapter=adapter_ad");
-        get.setHeader("Authorization", "Bearer " + token);
-        response = client.execute(get);
-        int actualStatus = response.getStatusLine().getStatusCode();
-        assertEquals(actualStatus, 200);
-    }
-
-    @Test
-    public void GetAzureAdapterCount() throws IOException {
-
-        HttpGet get = new HttpGet(BASE_ENDPOINT + "/query/adapters/count/devices/?adapter=adapter_azure");
-        get.setHeader("Authorization", "Bearer " + token);
-        response = client.execute(get);
-        int actualStatus = response.getStatusLine().getStatusCode();
-        assertEquals(actualStatus, 200);
-    }
-
-    @Test
-    public void GetWMICAdapterCount() throws IOException {
-
-        HttpGet get = new HttpGet(BASE_ENDPOINT + "/query/adapters/count/devices/?adapter=adapter_wmic");
-        get.setHeader("Authorization", "Bearer " + token);
-        response = client.execute(get);
-        int actualStatus = response.getStatusLine().getStatusCode();
-        assertEquals(actualStatus, 200);
-    }
-
-    @Test
-    public void GetOSDistribution() throws IOException {
-
-        HttpGet get = new HttpGet(BASE_ENDPOINT + "/query/dist/?field=common.operatingSystem.type");
-        get.setHeader("Authorization", "Bearer " + token);
-        response = client.execute(get);
-        int actualStatus = response.getStatusLine().getStatusCode();
-        assertEquals(actualStatus, 200);
-    }
-
-    @Test
-    public void GetTotalUserCount() throws IOException {
-
-        HttpGet get = new HttpGet(BASE_ENDPOINT + "/query/count/users/");
-        get.setHeader("Authorization", "Bearer " + token);
-        response = client.execute(get);
-        int actualStatus = response.getStatusLine().getStatusCode();
-        assertEquals(actualStatus, 200);
-    }
-
-    @Test
-    public void GetAzureAssetTypeDistribution() throws IOException {
-
-        HttpGet get = new HttpGet(BASE_ENDPOINT + "/query/dist/?field=type&match=adapters.adapter_azure");
-        get.setHeader("Authorization", "Bearer " + token);
-        response = client.execute(get);
-        int actualStatus = response.getStatusLine().getStatusCode();
-        assertEquals(actualStatus, 200);
-    }
-
-    @Test
-    public void GetADAssetTypeDistribution() throws IOException {
-
-        HttpGet get = new HttpGet(BASE_ENDPOINT + "/query/dist/?field=type&match=adapters.adapter_ad");
-        get.setHeader("Authorization", "Bearer " + token);
-        response = client.execute(get);
-        int actualStatus = response.getStatusLine().getStatusCode();
-        assertEquals(actualStatus, 200);
-    }
-
-    @Test
-    public void GetAWSAssetTypeDistribution() throws IOException {
-
-        HttpGet get = new HttpGet(BASE_ENDPOINT + "/query/dist/?field=type&match=adapters.adapter_aws");
-        get.setHeader("Authorization", "Bearer " + token);
-        response = client.execute(get);
-        int actualStatus = response.getStatusLine().getStatusCode();
-        assertEquals(actualStatus, 200);
-    }
-
-    @Test
-    public void GetWMICAssetTypeDistribution() throws IOException {
-
-        HttpGet get = new HttpGet(BASE_ENDPOINT + "/query/dist/?field=type&match=adapters.adapter_wmic");
-        get.setHeader("Authorization", "Bearer " + token);
-        response = client.execute(get);
-        int actualStatus = response.getStatusLine().getStatusCode();
-        assertEquals(actualStatus, 200);
-    }
-
-    @Test
-    public void GetCloudVSNonCloud() throws IOException {
-
-        HttpGet get = new HttpGet(BASE_ENDPOINT + "/query/pie/?field=adapterProperties&match=CLOUD%20PROVIDER");
-        get.setHeader("Authorization", "Bearer " + token);
-        response = client.execute(get);
-        int actualStatus = response.getStatusLine().getStatusCode();
-        assertEquals(actualStatus, 200);
-    }
-
-    @Test
-    public void GetCloudVSNonCloud1() throws IOException {
-
-        HttpGet get = new HttpGet(BASE_ENDPOINT + "/query/pie/?field=adapterProperties&match=CLOUD%20PROVIDER");
-        get.setHeader("Authorization", "Bearer " + token);
-        response = client.execute(get);
-        int actualStatus = response.getStatusLine().getStatusCode();
-        assertEquals(actualStatus, 200);
-    }
 
 
 }

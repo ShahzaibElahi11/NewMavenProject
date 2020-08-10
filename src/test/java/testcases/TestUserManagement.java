@@ -1,145 +1,88 @@
 package testcases;
 
-import api.Apis;
+import api.UserManagementApis;
 import io.restassured.response.Response;
 import org.apache.commons.codec.binary.Base64;
 import org.apache.http.HttpHeaders;
+import org.apache.http.HttpStatus;
 import org.apache.http.client.methods.HttpDelete;
-import org.apache.http.client.methods.HttpGet;
-import org.apache.http.client.methods.HttpPost;
 import org.apache.http.client.methods.HttpPut;
 import org.apache.http.entity.ContentType;
 import org.apache.http.entity.StringEntity;
-import org.testng.Assert;
-import org.testng.annotations.Test;
-import models.AdminUser;
-import models.Login;
-import models.Role;
+
+import models.usermanagement.AdminUser;
+import models.usermanagement.Login;
+import models.usermanagement.Role;
+import org.junit.Assert;
+import org.junit.Ignore;
+import org.junit.Test;
+import utils.ApplicationConfiguration;
 import utils.BaseClass;
 
 import java.io.IOException;
 import java.nio.charset.Charset;
 import java.util.Collections;
 
+import static junit.framework.TestCase.assertEquals;
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.MatcherAssert.assertThat;
-import static org.testng.Assert.assertEquals;
 
 public class TestUserManagement extends BaseClass {
     public static final String ROLE_ENDPOINT = "/role/";
-    public static final String CREATE_ROLE = "createRole";
-    public static final String GET_ALL_ROLE = "getAllRole";
-    public static final String ROLE_DETAILS = "getRoleDetail?id=";
-    public static final String UPDATE_ROLE = "updateRole?id=";
+
     public static final String DELETE_ROLE = "deleteRole?id=";
 
     public static final String PERMISSION_ENDPOINT = "/permission/";
-    public static final String CREATE_PERMISSION = "createPermission";
-    public static final String GET_ALL_PERMISSION = "getAllPermission";
-    public static final String PERMISSION_DETAILS = "getPermissionDetail?id=";
+
     public static final String UPDATE_PERMISSION = "updatePermission?id=";
     public static final String DELETE_PERMISSION  = "deletePermission?id=";
 
-    public static final String GET_ALL_MODULES = "getAllModules";
-    public static final String GET_ROLE_MODULES = "getRoleModules?role=";
-    public static final String GET_ROLE_PERMISSION = "getRolePermission?module=";
-    public static final String GET_USER_MODULES = "getUserModules?userId=";
 
     public final static String ADMIN_USER_ENDPOINT = "/adminUsers/";
-    public static final String CREATE_ADMIN_USER = "createUser";
-    public static final String GET_ALL_ADMIN_USER = "getAllAdminUsers";
-    public static final String ADMIN_USER_DETAILS = "getAdminUserDetail?_id=";
+
     public static final String UPDATE_ADMIN_USER = "updateUser?id=";
     public static final String DELETE_ADMIN_USER  = "deleteAdminUser?_id=";
-    public static final String ALL_ADMIN_USERNAME = "getAllUsername";
 
 
-    public final static String LOGIN = "/login";
-    public static final String PAGINATION_PARAMETER = "?page=0&size=100";
+    protected static final String USERNAME = ApplicationConfiguration.getUSERNAME();
+    protected static final String PASSWORD = ApplicationConfiguration.getPASSWORD();
 
 
-
-    @Test
-    public void PostCreateRole()throws IOException {
-
-        HttpPost request = new HttpPost(BASE_ENDPOINT + ROLE_ENDPOINT + CREATE_ROLE);
-        String auth = new String();
-        byte[] encodedAuth = Base64.encodeBase64(auth.getBytes(Charset.forName("ISO-8859-1")));
-        String authHeader = "Basic " + new String(encodedAuth);
-
-        request.setHeader(HttpHeaders.AUTHORIZATION, authHeader);
-        request.setHeader("Authorization", "Bearer " + token);
-
-        String json = "{ \"title\":\"AutomationRole_" + value + "\" , \"description\":\"This is Test Role Created By Regression Script \", \"status\":true, \"createdBy\":\"Automation Script\", \"permissionIds\":[\""+ PERMISSION_ID + "\"]}";
-        request.setEntity(new StringEntity(json, ContentType.APPLICATION_JSON));
-        // Send
-        response = client.execute(request);
-
-        int actualStatusCode = response.getStatusLine().getStatusCode();
-        Assert.assertEquals(actualStatusCode, 200);
-    }
 
     @Test
-    public  void PostCreateRoleNew(){
+    public  void PostCreateRole(){
         Role role = new Role("Automation_Role_"+value+"1", "This is Test Role Created By new Regression Script", true, "Automation Script", Collections.singletonList(PERMISSION_ID));
-        Response response = Apis.postCreateRole(role);
-        assertThat(response.getStatusCode(), equalTo(200));
+        Response response = UserManagementApis.postCreateRole(role);
+        assertThat(response.getStatusCode(), equalTo(HttpStatus.SC_OK));
 
 
     }
     @Test
-    public void GetAllRole() throws IOException {
-
-        HttpGet get = new HttpGet(BASE_ENDPOINT + ROLE_ENDPOINT + GET_ALL_ROLE);
-        get.setHeader("Authorization", "Bearer " + token);
-        response = client.execute(get);
-        int actualStatus = response.getStatusLine().getStatusCode();
-        assertEquals(actualStatus, 200);
+    public void GetAllRole() {
+        Response response = UserManagementApis.getAllRole();
+        assertThat(response.getStatusCode(),equalTo(HttpStatus.SC_OK));
     }
 
+
+    @Ignore
     @Test
-    public void PutUpdateRole()throws IOException {
-
-        HttpPut request = new HttpPut(BASE_ENDPOINT + ROLE_ENDPOINT + UPDATE_ROLE + ROLE_ID);
-        String auth = new String();
-        byte[] encodedAuth = Base64.encodeBase64(auth.getBytes(Charset.forName("ISO-8859-1")));
-        String authHeader = "Basic " + new String(encodedAuth);
-
-        request.setHeader(HttpHeaders.AUTHORIZATION, authHeader);
-        request.setHeader("Authorization", "Bearer " + token);
-
-        String json = " { \"title\": \"Role_Update_" + value + "\", \"description\": \"Role has been updated through old Automation.\", \"permissionIds\":[\""+ PERMISSION_ID +"\"]}";
-
-        request.setEntity(new StringEntity(json, ContentType.APPLICATION_JSON));
-        // Send
-        response = client.execute(request);
-
-        int actualStatusCode = response.getStatusLine().getStatusCode();
-        Assert.assertEquals(actualStatusCode, 200);
-    }
-
-    @Test
-    public void PutUpdateRoleNew(){
+    public void PutUpdateRole(){
         Role role = new Role("Update_Automation_Role_"+value+"1", "Updated By Regression new Script", true, "Automation Script", Collections.singletonList(PERMISSION_ID));
-        Response response = Apis.updateRole(role);
-        assertThat(response.getStatusCode(), equalTo(200));
+        Response response = UserManagementApis.updateRole(role);
+        assertThat(response.getStatusCode(), equalTo(HttpStatus.SC_OK));
 
     }
 
     @Test
-    public void GetRoleDetails() throws IOException {
+    public void GetRoleDetails() {
 
-        HttpGet get = new HttpGet(BASE_ENDPOINT + ROLE_ENDPOINT + ROLE_DETAILS + ROLE_ID);
-        get.setHeader("Authorization", "Bearer " + token);
-        response = client.execute(get);
-        int actualStatus = response.getStatusLine().getStatusCode();
-        assertEquals(actualStatus, 200);
+        Response response = UserManagementApis.getRoleDetails();
+        assertThat(response.getStatusCode(),equalTo(HttpStatus.SC_OK));
     }
-
-    @Test(enabled = false)
+    @Ignore
+    @Test
     public void DeleteRole() throws IOException {
         //exception: role associate with user
-        PostCreateRole();
         HttpDelete delete = new HttpDelete(BASE_ENDPOINT + ROLE_ENDPOINT + DELETE_ROLE + "5f2977fde4aa4d358de5ee3f")  ;
         delete.setHeader("Authorization", "Bearer " + token);
         response = client.execute(delete);
@@ -148,67 +91,23 @@ public class TestUserManagement extends BaseClass {
     }
 
 
-    @Test(enabled = false) //Currently not used in website as per siraj.
-    public void PostCreatePermission()throws IOException {
 
-        HttpPost request = new HttpPost(BASE_ENDPOINT + PERMISSION_ENDPOINT + CREATE_PERMISSION);
-        String auth = new String();
-        byte[] encodedAuth = Base64.encodeBase64(auth.getBytes(Charset.forName("ISO-8859-1")));
-        String authHeader = "Basic " + new String(encodedAuth);
+    @Test
+    public void GetAllPermission() {
 
-        request.setHeader(HttpHeaders.AUTHORIZATION, authHeader);
-        request.setHeader("Authorization", "Bearer " + token);
-
-        String json ="{ \"title\": \"Auto_Permission_" + value + "\", \"description\": \"Create Permission through Automation.\", \"module\": \"dashboard\" }";
-        request.setEntity(new StringEntity(json, ContentType.APPLICATION_JSON));
-        response = client.execute(request);
-
-        int actualStatusCode = response.getStatusLine().getStatusCode();
-        Assert.assertEquals(actualStatusCode, 200);
+        Response response = UserManagementApis.getAllPermission();
+        assertThat(response.getStatusCode(),equalTo(HttpStatus.SC_OK));
     }
 
     @Test
-    public void GetAllPermission() throws IOException {
+    public void GetPermissionDetails() {
 
-        HttpGet get = new HttpGet(BASE_ENDPOINT + PERMISSION_ENDPOINT + GET_ALL_PERMISSION);
-        get.setHeader("Authorization", "Bearer " + token);
-        response = client.execute(get);
-        int actualStatus = response.getStatusLine().getStatusCode();
-        assertEquals(actualStatus, 200);
+        Response response = UserManagementApis.getPermissionDetails();
+        assertThat(response.getStatusCode(),equalTo(HttpStatus.SC_OK));
     }
 
+    @Ignore
     @Test
-    public void GetPermissionDetails() throws IOException {
-
-        HttpGet get = new HttpGet(BASE_ENDPOINT + PERMISSION_ENDPOINT + PERMISSION_DETAILS + PERMISSION_ID);
-        get.setHeader("Authorization", "Bearer " + token);
-        response = client.execute(get);
-        int actualStatus = response.getStatusLine().getStatusCode();
-        assertEquals(actualStatus, 200);
-    }
-
-    @Test(enabled = false) //Currently not used in website asp per siraj.
-    public void PutUpdatePermission()throws IOException {
-
-        HttpPut request = new HttpPut(BASE_ENDPOINT + PERMISSION_ENDPOINT + UPDATE_PERMISSION + PERMISSION_ID);
-        String auth = new String();
-        byte[] encodedAuth = Base64.encodeBase64(auth.getBytes(Charset.forName("ISO-8859-1")));
-        String authHeader = "Basic " + new String(encodedAuth);
-
-        request.setHeader(HttpHeaders.AUTHORIZATION, authHeader);
-        request.setHeader("Authorization", "Bearer " + token);
-
-        String json = "{ \"title\": \"UpdatePermission_" + value + "\", \"description\": \"Update Permission through Automation.\", \"module\": \"dashboard\" }";
-
-        request.setEntity(new StringEntity(json, ContentType.APPLICATION_JSON));
-        // Send
-        response = client.execute(request);
-
-        int actualStatusCode = response.getStatusLine().getStatusCode();
-        Assert.assertEquals(actualStatusCode, 200);
-    }
-
-    @Test(enabled = false)
     public void DeletePermission() throws IOException {
 
         HttpDelete delete = new HttpDelete(BASE_ENDPOINT + PERMISSION_ENDPOINT + DELETE_PERMISSION + "5f22b8856d329947e1949a19")  ;
@@ -218,131 +117,63 @@ public class TestUserManagement extends BaseClass {
         assertEquals(actualStatus, 200);
     }
 
-
-    /**
-     * new added
-     */
-
     @Test
-    public void GetAllModules() throws IOException {
+    public void GetAllModules() {
 
-        HttpGet get = new HttpGet(BASE_ENDPOINT + PERMISSION_ENDPOINT + GET_ALL_MODULES);
-        get.setHeader("Authorization", "Bearer " + token);
-        response = client.execute(get);
-        int actualStatus = response.getStatusLine().getStatusCode();
-        assertEquals(actualStatus, 200);
+        Response response = UserManagementApis.getAllModules();
+        assertThat(response.getStatusCode(),equalTo(HttpStatus.SC_OK));
     }
 
     @Test
-    public void GetRoleModules() throws IOException {
+    public void GetRoleModules() {
+        Response response = UserManagementApis.getRoleModules();
+        assertThat(response.getStatusCode(),equalTo(HttpStatus.SC_OK));
 
-        HttpGet get = new HttpGet(BASE_ENDPOINT + PERMISSION_ENDPOINT + GET_ROLE_MODULES + "ADMIN");
-        get.setHeader("Authorization", "Bearer " + token);
-        response = client.execute(get);
-        int actualStatus = response.getStatusLine().getStatusCode();
-        assertEquals(actualStatus, 200);
     }
     @Test
-    public void GetRolePermission() throws IOException {
-
-        HttpGet get = new HttpGet(BASE_ENDPOINT + PERMISSION_ENDPOINT + GET_ROLE_PERMISSION +"dashboard&role=ADMIN");
-        get.setHeader("Authorization", "Bearer " + token);
-        response = client.execute(get);
-        int actualStatus = response.getStatusLine().getStatusCode();
-        assertEquals(actualStatus, 200);
+    public void GetRolePermission() {
+        Response response = UserManagementApis.getRolePermission();
+        assertThat(response.getStatusCode(),equalTo(HttpStatus.SC_OK));
     }
 
     @Test
-    public void GetUserModules() throws IOException {
+    public void GetUserModules() {
+        Response response = UserManagementApis.getUserModules();
+        assertThat(response.getStatusCode(),equalTo(HttpStatus.SC_OK));
 
-        HttpGet get = new HttpGet(BASE_ENDPOINT + PERMISSION_ENDPOINT + GET_USER_MODULES + ADMIN_USER_ID);
-        get.setHeader("Authorization", "Bearer " + token);
-        response = client.execute(get);
-        int actualStatus = response.getStatusLine().getStatusCode();
-        assertEquals(actualStatus, 200);
     }
 
 
     @Test
-    public void PostLogin()throws IOException {
-
-        HttpPost request = new HttpPost(BASE_ENDPOINT + LOGIN);
-        String auth = new String();
-        byte[] encodedAuth = Base64.encodeBase64(auth.getBytes(Charset.forName("ISO-8859-1")));
-        String authHeader = "Basic " + new String(encodedAuth);
-
-        request.setHeader(HttpHeaders.AUTHORIZATION, authHeader);
-        request.setHeader("Authorization", "Bearer " + token);
-
-        String json = "{\"username\":\"admininventa\",\"password\":\"admin\"}";
-        request.setEntity(new StringEntity(json, ContentType.APPLICATION_JSON));
-        // Send
-        response = client.execute(request);
-
-        int actualStatusCode = response.getStatusLine().getStatusCode();
-        Assert.assertEquals(actualStatusCode, 200);
-    }
-
-    @Test
-    public void PostLoginNew() {
-        Login login = new Login("admininventa", "admin");
-        Response response = Apis.postLogin(login);
+    public void PostLogin() {
+        Login login = new Login(USERNAME,PASSWORD);
+        Response response = UserManagementApis.postLogin(login);
         assertThat(response.getStatusCode(), equalTo(200));
     }
 
-    /**
-     * Pending - not implement because of static value
-     * localhost:9090/adminUsers/changeUserPassword
-     */
 
     @Test
-    public void PostCreateUser()throws IOException {
-
-        HttpPost request = new HttpPost(BASE_ENDPOINT + ADMIN_USER_ENDPOINT + CREATE_ADMIN_USER);
-        String auth = new String();
-        byte[] encodedAuth = Base64.encodeBase64(auth.getBytes(Charset.forName("ISO-8859-1")));
-        String authHeader = "Basic " + new String(encodedAuth);
-
-        request.setHeader(HttpHeaders.AUTHORIZATION, authHeader);
-        request.setHeader("Authorization", "Bearer " + token);
-
-        String json = "{ \"emailAddress\": \"automation2"+value+"@gmail.com\", \"phone\":\"2"+value+"\", \"userName\":\"Automation_User_2"+value+"\", \"password\":\"password123\", \"passwordConfirm\":\"password123\", \"roleIds\":\""+ ROLE_ID +"\", \"firstName\": \"Automation_Test_User_Name_"+value+" \", \"lastName\": \"User\", \"userType\": \"OPERATOR\"}";
-        request.setEntity(new StringEntity(json, ContentType.APPLICATION_JSON));
-        // Send
-        response = client.execute(request);
-
-        int actualStatusCode = response.getStatusLine().getStatusCode();
-        Assert.assertEquals(actualStatusCode, 200);
-    }
-
-    @Test
-    public void PostCreateUserNew(){
-        AdminUser adminUser = new AdminUser( "Automation"+value+"@gmail.com", "000"+value+"333", "AutomationUser1"+value+"1", "password123", "password123", ROLE_ID, "firstName"+value+"1", "lastName"+value+"1", "OPERATOR");
-        Response response = Apis.postCreateUser(adminUser);
+    public void PostCreateUser(){
+        AdminUser adminUser = new AdminUser( "Automation"+value+"1@gmail.com", "000"+value+"333", "AutomationUser1"+value+"1", "password123", "password123", ROLE_ID, "firstName"+value+"1", "lastName"+value+"1", "OPERATOR");
+        Response response = UserManagementApis.postCreateUser(adminUser);
         assertThat(response.getStatusCode(), equalTo(200));
 
     }
     @Test
-    public void GetAllAdminUser() throws IOException {
+    public void GetAllAdminUser() {
+        Response response = UserManagementApis.getAllAdminUser();
+        assertThat(response.getStatusCode(),equalTo(HttpStatus.SC_OK));
 
-        HttpGet get = new HttpGet(BASE_ENDPOINT + ADMIN_USER_ENDPOINT + GET_ALL_ADMIN_USER + PAGINATION_PARAMETER);
-        get.setHeader("Authorization", "Bearer " + token);
-        response = client.execute(get);
-        int actualStatus = response.getStatusLine().getStatusCode();
-        assertEquals(actualStatus, 200);
     }
 
     @Test
-    public void GetAdminUserDetail() throws IOException {
+    public void GetAdminUserDetail() {
+        Response response = UserManagementApis.getAdminUserDetail();
+        assertThat(response.getStatusCode(),equalTo(HttpStatus.SC_OK));
 
-        HttpGet get = new HttpGet(BASE_ENDPOINT + ADMIN_USER_ENDPOINT + ADMIN_USER_DETAILS + ADMIN_USER_ID);
-        get.setHeader("Authorization", "Bearer " + token);
-        response = client.execute(get);
-        int actualStatus = response.getStatusLine().getStatusCode();
-        assertEquals(actualStatus, 200);
     }
-
-    @Test(enabled = false)
+    @Ignore
+    @Test
     public void PutUpdateAdminUser()throws IOException {
 
         HttpPut request = new HttpPut(BASE_ENDPOINT + ADMIN_USER_ENDPOINT + UPDATE_ADMIN_USER + ADMIN_USER_ID);
@@ -362,8 +193,8 @@ public class TestUserManagement extends BaseClass {
         int actualStatusCode = response.getStatusLine().getStatusCode();
         Assert.assertEquals(actualStatusCode, 200);
     }
-
-    @Test(enabled = false)
+    @Ignore
+    @Test
     public void DeleteAdminUser() throws IOException {
 
         HttpDelete delete = new HttpDelete(BASE_ENDPOINT + ADMIN_USER_ENDPOINT + DELETE_ADMIN_USER + "pls insert id")  ;
@@ -376,21 +207,9 @@ public class TestUserManagement extends BaseClass {
     @Test
     public void GetAllAdminUserName() throws IOException {
 
-        HttpGet get = new HttpGet(BASE_ENDPOINT + ADMIN_USER_ENDPOINT + ALL_ADMIN_USERNAME );
-        get.setHeader("Authorization", "Bearer " + token);
-        response = client.execute(get);
-        int actualStatus = response.getStatusLine().getStatusCode();
-        assertEquals(actualStatus, 200);
+        Response response = UserManagementApis.getAllAdminUserName();
+        assertThat(response.getStatusCode(),equalTo(HttpStatus.SC_OK));
+
     }
 
-
-    @Test
-    public void GetUserAdaptersList() throws IOException {
-
-        HttpGet get = new HttpGet("http://inventaserver:9092/role/getAllRole?page=0&size=1");
-        get.setHeader("Authorization", "Bearer " + token);
-        response = client.execute(get);
-        int actualStatus = response.getStatusLine().getStatusCode();
-        assertEquals(actualStatus, 200);
-    }
 }

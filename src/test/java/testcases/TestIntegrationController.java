@@ -1,38 +1,29 @@
 package testcases;
 
-import org.apache.http.client.methods.HttpGet;
-import org.testng.annotations.Test;
+import io.restassured.http.ContentType;
+import io.restassured.response.Response;
+import org.apache.http.HttpStatus;
+import org.junit.Test;
 import utils.BaseClass;
+import static io.restassured.RestAssured.given;
+import static org.hamcrest.CoreMatchers.equalTo;
+import static org.hamcrest.MatcherAssert.assertThat;
 
-import java.io.IOException;
-
-import static org.testng.Assert.assertEquals;
 
 public class TestIntegrationController extends BaseClass {
 
     public static final String DOCKER_ENDPOINT = "/docker/";
     public static final String ACTIVE_MQ = "activemq";
-    public static final String MONGO = "mongo";
 
 
     @Test
-    public void GetActiveMQConnectivity() throws IOException {
+    public void GetActiveMQConnectivity(){
+        Response response = given()
+                .contentType(ContentType.JSON)
+                .header("Authorization", "Bearer" + token)
+                .get(BASE_ENDPOINT + DOCKER_ENDPOINT + ACTIVE_MQ);
+        assertThat(response.getStatusCode(), equalTo(HttpStatus.SC_OK));
 
-        HttpGet get = new HttpGet(BASE_ENDPOINT + DOCKER_ENDPOINT + ACTIVE_MQ);
-        get.setHeader("Authorization", "Bearer " + token);
-        response = client.execute(get);
-        int actualStatus = response.getStatusLine().getStatusCode();
-        assertEquals(actualStatus, 200);
-    }
-
-    @Test(enabled = false)
-    public void GetMongoConnectivity() throws IOException {
-
-        HttpGet get = new HttpGet(BASE_ENDPOINT + DOCKER_ENDPOINT + ACTIVE_MQ);
-        get.setHeader("Authorization", "Bearer " + token);
-        response = client.execute(get);
-        int actualStatus = response.getStatusLine().getStatusCode();
-        assertEquals(actualStatus, 200);
     }
 
 }

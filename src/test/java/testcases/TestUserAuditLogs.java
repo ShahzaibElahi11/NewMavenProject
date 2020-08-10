@@ -1,53 +1,45 @@
 package testcases;
 
-import org.apache.http.client.methods.HttpGet;
-import org.testng.annotations.Test;
+import api.AuditApis;
+import io.restassured.response.Response;
+import org.apache.http.HttpStatus;
+import org.junit.Test;
 import utils.BaseClass;
 
-import java.io.IOException;
 
-import static org.testng.Assert.assertEquals;
+import static org.hamcrest.CoreMatchers.equalTo;
+import static org.hamcrest.MatcherAssert.assertThat;
+
 
 public class TestUserAuditLogs extends BaseClass {
 
     @Test
-    public void GetUserAudit() throws IOException {
-        //https://netpace.atlassian.net/browse/VIN-1268
-        HttpGet get = new HttpGet(BASE_ENDPOINT + "/audit/getUserAudit?username=admininventa");
-        get.setHeader("Authorization", "Bearer " + token);
-        response = client.execute(get);
-        int actualStatus = response.getStatusLine().getStatusCode();
-        assertEquals(actualStatus, 200);
+    public void GetUserAudit(){
+        Response response = AuditApis.getUserAudit();
+        assertThat(response.getStatusCode(),equalTo(HttpStatus.SC_OK));
+
     }
 
     @Test
-    public void GetAuditDetail() throws IOException {
+    public void GetAuditDetail(){
 
-        HttpGet get = new HttpGet(BASE_ENDPOINT + "/audit/getAuditDetail?id=" + AUDIT_DETAIL_ID);
-        get.setHeader("Authorization", "Bearer " + token);
-        response = client.execute(get);
-        int actualStatus = response.getStatusLine().getStatusCode();
-        assertEquals(actualStatus, 200);
+        Response response = AuditApis.getAuditDetail();
+        assertThat(response.getStatusCode(),equalTo(HttpStatus.SC_OK));
     }
 
     @Test
-    public void GetAllUserAuditList() throws IOException {
+    public void GetAllUserAuditList(){
 
-        HttpGet get = new HttpGet(BASE_ENDPOINT + "/audit/getAllAudit?page=0&size=100");
-        get.setHeader("Authorization", "Bearer " + token);
-        response = client.execute(get);
-        int actualStatus = response.getStatusLine().getStatusCode();
-        assertEquals(actualStatus, 200);
+        Response response = AuditApis.getAllUserAuditList();
+        assertThat(response.getStatusCode(),equalTo(HttpStatus.SC_OK));
     }
 
     @Test
-    public void GetAllUsersName() throws IOException {
+    public void GetAllUsersName(){
 
-        HttpGet get = new HttpGet(BASE_ENDPOINT + "/adminUsers/getAllUsername");
-        get.setHeader("Authorization", "Bearer " + token);
-        response = client.execute(get);
-        int actualStatus = response.getStatusLine().getStatusCode();
-        assertEquals(actualStatus, 200);
+        Response response = AuditApis.getAllUsersName();
+        assertThat(response.getStatusCode(),equalTo(HttpStatus.SC_OK));
+
     }
 
 
