@@ -37,6 +37,7 @@ public class TestLDAP extends BaseClass {
 
     @Test
     public void PostADLogin() {
+        //
         AdLogin adLogin = new AdLogin(AD_USERNAME, AD_PASSWORD);
         Response response = LdapApis.postAdLogin(adLogin);
         assertThat(response.getStatusCode(), equalTo(200));
