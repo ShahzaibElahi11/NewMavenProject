@@ -48,7 +48,7 @@ public class UserManagementApis extends BaseClass {
                 .header("Authorization", "Bearer" + token)
                 .body(role)
                 .when()
-                .post(BASE_ENDPOINT + ROLE_ENDPOINT + CREATE_ROLE);
+                .post(BASE_ENDPOINT_INVENTA + ROLE_ENDPOINT + CREATE_ROLE);
 
     }
 
@@ -56,70 +56,70 @@ public class UserManagementApis extends BaseClass {
         return given()
                 .contentType(ContentType.JSON)
                 .header("Authorization", "Bearer" + token)
-                .get(BASE_ENDPOINT + ROLE_ENDPOINT + GET_ALL_ROLE);
+                .get(BASE_ENDPOINT_INVENTA + ROLE_ENDPOINT + GET_ALL_ROLE);
     }
 
     public static Response getRoleDetails() {
         return given()
                 .contentType(ContentType.JSON)
                 .header("Authorization", "Bearer" + token)
-                .get(BASE_ENDPOINT + ROLE_ENDPOINT + ROLE_DETAILS + ROLE_ID);
+                .get(BASE_ENDPOINT_INVENTA + ROLE_ENDPOINT + ROLE_DETAILS + ROLE_ID);
     }
 
     public static Response getAllPermission() {
         return given()
                 .contentType(ContentType.JSON)
                 .header("Authorization", "Bearer" + token)
-                .get(BASE_ENDPOINT + PERMISSION_ENDPOINT + GET_ALL_PERMISSION);
+                .get(BASE_ENDPOINT_INVENTA + PERMISSION_ENDPOINT + GET_ALL_PERMISSION);
     }
 
     public static Response getPermissionDetails() {
         return given()
                 .contentType(ContentType.JSON)
                 .header("Authorization", "Bearer" + token)
-                .get(BASE_ENDPOINT + PERMISSION_ENDPOINT + PERMISSION_DETAILS + PERMISSION_ID);
+                .get(BASE_ENDPOINT_INVENTA + PERMISSION_ENDPOINT + PERMISSION_DETAILS + PERMISSION_ID);
     }
 
     public static Response getAllModules() {
         return given()
                 .contentType(ContentType.JSON)
                 .header("Authorization", "Bearer" + token)
-                .get(BASE_ENDPOINT + PERMISSION_ENDPOINT + GET_ALL_MODULES);
+                .get(BASE_ENDPOINT_INVENTA + PERMISSION_ENDPOINT + GET_ALL_MODULES);
     }
 
     public static Response getRoleModules() {
         return given()
                 .contentType(ContentType.JSON)
                 .header("Authorization", "Bearer" + token)
-                .get(BASE_ENDPOINT + PERMISSION_ENDPOINT + GET_ROLE_MODULES + "ADMIN");
+                .get(BASE_ENDPOINT_INVENTA + PERMISSION_ENDPOINT + GET_ROLE_MODULES + "ADMIN");
     }
 
     public static Response getRolePermission() {
         return given()
                 .contentType(ContentType.JSON)
                 .header("Authorization", "Bearer" + token)
-                .get(BASE_ENDPOINT + PERMISSION_ENDPOINT + GET_ROLE_PERMISSION +"dashboard&role=ADMIN");
+                .get(BASE_ENDPOINT_INVENTA + PERMISSION_ENDPOINT + GET_ROLE_PERMISSION +"dashboard&role=ADMIN");
     }
 
     public static Response getUserModules() {
         return given()
                 .contentType(ContentType.JSON)
                 .header("Authorization", "Bearer" + token)
-                .get(BASE_ENDPOINT + PERMISSION_ENDPOINT + GET_USER_MODULES + ADMIN_USER_ID);
+                .get(BASE_ENDPOINT_INVENTA + PERMISSION_ENDPOINT + GET_USER_MODULES + ADMIN_USER_ID);
     }
 
     public static Response getAllAdminUser() {
         return given()
                 .contentType(ContentType.JSON)
                 .header("Authorization", "Bearer" + token)
-                .get(BASE_ENDPOINT + ADMIN_USER_ENDPOINT + GET_ALL_ADMIN_USER + PAGINATION_PARAMETER);
+                .get(BASE_ENDPOINT_INVENTA + ADMIN_USER_ENDPOINT + GET_ALL_ADMIN_USER + PAGINATION_PARAMETER);
     }
 
     public static Response getAdminUserDetail() {
         return given()
                 .contentType(ContentType.JSON)
                 .header("Authorization", "Bearer" + token)
-                .get(BASE_ENDPOINT + ADMIN_USER_ENDPOINT + ADMIN_USER_DETAILS + ADMIN_USER_ID);
+                .get(BASE_ENDPOINT_INVENTA + ADMIN_USER_ENDPOINT + ADMIN_USER_DETAILS + ADMIN_USER_ID);
     }
 
 
@@ -127,7 +127,7 @@ public class UserManagementApis extends BaseClass {
         return given()
                 .contentType(ContentType.JSON)
                 .header("Authorization", "Bearer" + token)
-                .get(BASE_ENDPOINT + ADMIN_USER_ENDPOINT + ALL_ADMIN_USERNAME );
+                .get(BASE_ENDPOINT_INVENTA + ADMIN_USER_ENDPOINT + ALL_ADMIN_USERNAME );
     }
 
 
@@ -137,7 +137,7 @@ public class UserManagementApis extends BaseClass {
                 .header("Authorization", "Bearer" + token)
                 .body(role)
                 .when()
-                .put(BASE_ENDPOINT + ROLE_ENDPOINT + UPDATE_ROLE + ROLE_ID);
+                .put(BASE_ENDPOINT_INVENTA + ROLE_ENDPOINT + UPDATE_ROLE + ROLE_ID);
         //
 
     }
@@ -148,7 +148,7 @@ public class UserManagementApis extends BaseClass {
                 .header("Authorization", "Bearer" + token)
                 .body(login)
                 .when()
-                .post(BASE_ENDPOINT + "/login");
+                .post(BASE_ENDPOINT_INVENTA + "/login");
     }
 
     public static Response postCreateUser(AdminUser adminUser) {
@@ -157,6 +157,6 @@ public class UserManagementApis extends BaseClass {
                 .header("Authorization", "Bearer" + token)
                 .body(adminUser)
                 .when()
-                .post(BASE_ENDPOINT + ADMIN_USER_ENDPOINT + CREATE_ADMIN_USER);
+                .post(BASE_ENDPOINT_INVENTA + ADMIN_USER_ENDPOINT + CREATE_ADMIN_USER);
     }
 }

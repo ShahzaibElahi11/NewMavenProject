@@ -83,7 +83,7 @@ public class TestUserManagement extends BaseClass {
     @Test
     public void DeleteRole() throws IOException {
         //exception: role associate with user
-        HttpDelete delete = new HttpDelete(BASE_ENDPOINT + ROLE_ENDPOINT + DELETE_ROLE + "5f2977fde4aa4d358de5ee3f")  ;
+        HttpDelete delete = new HttpDelete(BASE_ENDPOINT_INVENTA + ROLE_ENDPOINT + DELETE_ROLE + "5f2977fde4aa4d358de5ee3f")  ;
         delete.setHeader("Authorization", "Bearer " + token);
         response = client.execute(delete);
         int actualStatus = response.getStatusLine().getStatusCode();
@@ -110,7 +110,7 @@ public class TestUserManagement extends BaseClass {
     @Test
     public void DeletePermission() throws IOException {
 
-        HttpDelete delete = new HttpDelete(BASE_ENDPOINT + PERMISSION_ENDPOINT + DELETE_PERMISSION + "5f22b8856d329947e1949a19")  ;
+        HttpDelete delete = new HttpDelete(BASE_ENDPOINT_INVENTA + PERMISSION_ENDPOINT + DELETE_PERMISSION + "5f22b8856d329947e1949a19")  ;
         delete.setHeader("Authorization", "Bearer " + token);
         response = client.execute(delete);
         int actualStatus = response.getStatusLine().getStatusCode();
@@ -176,7 +176,7 @@ public class TestUserManagement extends BaseClass {
     @Test
     public void PutUpdateAdminUser()throws IOException {
 
-        HttpPut request = new HttpPut(BASE_ENDPOINT + ADMIN_USER_ENDPOINT + UPDATE_ADMIN_USER + ADMIN_USER_ID);
+        HttpPut request = new HttpPut(BASE_ENDPOINT_INVENTA + ADMIN_USER_ENDPOINT + UPDATE_ADMIN_USER + ADMIN_USER_ID);
         String auth = new String();
         byte[] encodedAuth = Base64.encodeBase64(auth.getBytes(Charset.forName("ISO-8859-1")));
         String authHeader = "Basic " + new String(encodedAuth);
@@ -197,7 +197,7 @@ public class TestUserManagement extends BaseClass {
     @Test
     public void DeleteAdminUser() throws IOException {
 
-        HttpDelete delete = new HttpDelete(BASE_ENDPOINT + ADMIN_USER_ENDPOINT + DELETE_ADMIN_USER + "pls insert id")  ;
+        HttpDelete delete = new HttpDelete(BASE_ENDPOINT_INVENTA + ADMIN_USER_ENDPOINT + DELETE_ADMIN_USER + "pls insert id")  ;
         delete.setHeader("Authorization", "Bearer " + token);
         response = client.execute(delete);
         int actualStatus = response.getStatusLine().getStatusCode();

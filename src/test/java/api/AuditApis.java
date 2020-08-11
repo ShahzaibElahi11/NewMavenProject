@@ -15,28 +15,28 @@ public class AuditApis extends BaseClass {
         return given()
                 .contentType(ContentType.JSON)
                 .header("Authorization", "Bearer" + token)
-                .get(BASE_ENDPOINT + AUDIT_ENDPOINT + "getUserAudit?username=admininventa");
+                .get(BASE_ENDPOINT_INVENTA + AUDIT_ENDPOINT + "getUserAudit?username=admininventa");
     }
 
     public static Response getAuditDetail() {
         return given()
                 .contentType(ContentType.JSON)
                 .header("Authorization", "Bearer" + token)
-                .get(BASE_ENDPOINT + AUDIT_ENDPOINT + "getAuditDetail?id=" + AUDIT_DETAIL_ID);
+                .get(BASE_ENDPOINT_INVENTA + AUDIT_ENDPOINT + "getAuditDetail?id=" + AUDIT_DETAIL_ID);
     }
 
     public static Response getAllUserAuditList() {
         return given()
                 .contentType(ContentType.JSON)
                 .header("Authorization", "Bearer" + token)
-                .get(BASE_ENDPOINT + AUDIT_ENDPOINT + "getAllAudit?page=0&size=10");
+                .get(BASE_ENDPOINT_INVENTA + AUDIT_ENDPOINT + "getAllAudit?page=0&size=10");
     }
 
     public static Response getAllUsersName() {
         return given()
                 .contentType(ContentType.JSON)
                 .header("Authorization", "Bearer" + token)
-                .get(BASE_ENDPOINT + "/adminUsers/getAllUsername");
+                .get(BASE_ENDPOINT_INVENTA + "/adminUsers/getAllUsername");
     }
 
 }

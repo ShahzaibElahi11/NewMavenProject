@@ -23,28 +23,28 @@ public class PolicyRoutineApis extends BaseClass {
         return given()
                 .contentType(ContentType.JSON)
                 .header("Authorization", "Bearer" + token)
-                .get(BASE_ENDPOINT + POLICY_ROUTINE);
+                .get(BASE_ENDPOINT_INVENTA + POLICY_ROUTINE);
     }
 
     public static Response getPolicyRoutineActions() {
         return given()
                 .contentType(ContentType.JSON)
                 .header("Authorization", "Bearer" + token)
-                .get(BASE_ENDPOINT + POLICY_ROUTINE + PR_ACTION);
+                .get(BASE_ENDPOINT_INVENTA + POLICY_ROUTINE + PR_ACTION);
     }
 
     public static Response getPolicyRoutineDeviceActions() {
         return given()
                 .contentType(ContentType.JSON)
                 .header("Authorization", "Bearer" + token)
-                .get(BASE_ENDPOINT + POLICY_ROUTINE + PR_ACTION + "/devices");
+                .get(BASE_ENDPOINT_INVENTA + POLICY_ROUTINE + PR_ACTION + "/devices");
     }
 
     public static Response getPolicyRoutineUserActions() {
         return given()
                 .contentType(ContentType.JSON)
                 .header("Authorization", "Bearer" + token)
-                .get(BASE_ENDPOINT + POLICY_ROUTINE + PR_ACTION + "/users");
+                .get(BASE_ENDPOINT_INVENTA + POLICY_ROUTINE + PR_ACTION + "/users");
     }
 
 
@@ -52,7 +52,7 @@ public class PolicyRoutineApis extends BaseClass {
         return given()
                 .contentType(ContentType.JSON)
                 .header("Authorization", "Bearer" + token)
-                .get(BASE_ENDPOINT + POLICY_ROUTINE + PR_TABLE);
+                .get(BASE_ENDPOINT_INVENTA + POLICY_ROUTINE + PR_TABLE);
     }
 
 
@@ -60,14 +60,14 @@ public class PolicyRoutineApis extends BaseClass {
         return given()
                 .contentType(ContentType.JSON)
                 .header("Authorization", "Bearer" + token)
-                .get(BASE_ENDPOINT + POLICY_ROUTINE + PR_TABLE + "&filter=" + PR_FILTER_NAME);
+                .get(BASE_ENDPOINT_INVENTA + POLICY_ROUTINE + PR_TABLE + "&filter=" + PR_FILTER_NAME);
     }
 
     public static Response getPolicyRoutineSummary() {
         return given()
                 .contentType(ContentType.JSON)
                 .header("Authorization", "Bearer" + token)
-                .get(BASE_ENDPOINT + POLICY_ROUTINE + "summary/" + PR_ID);
+                .get(BASE_ENDPOINT_INVENTA + POLICY_ROUTINE + "summary/" + PR_ID);
     }
     public static Response postEnforcePolicyDevice(EnforcePolicyOnDevice enforcePolicyOnDevice) {
         return given()
@@ -75,7 +75,7 @@ public class PolicyRoutineApis extends BaseClass {
                 .header("Authorization", "Bearer" + token)
                 .body(enforcePolicyOnDevice)
                 .when()
-                .post(BASE_ENDPOINT + POLICY_ROUTINE + "enforce/" + DEVICE_DETAIL_ID + "/devices/");
+                .post(BASE_ENDPOINT_INVENTA + POLICY_ROUTINE + "enforce/" + DEVICE_DETAIL_ID + "/devices/");
     }
 
     public static Response postEnforcePolicyUser(EnforcePolicyOnUser enforcePolicyOnUser) {
@@ -84,7 +84,7 @@ public class PolicyRoutineApis extends BaseClass {
                 .header("Authorization", "Bearer" + token)
                 .body(enforcePolicyOnUser)
                 .when()
-                .post(BASE_ENDPOINT + POLICY_ROUTINE + "enforce/" + USER_ID + "/users/");
+                .post(BASE_ENDPOINT_INVENTA + POLICY_ROUTINE + "enforce/" + USER_ID + "/users/");
     }
 
 
@@ -93,7 +93,7 @@ public class PolicyRoutineApis extends BaseClass {
         return given()
                 .contentType(ContentType.JSON)
                 .header("Authorization", "Bearer" + token)
-                .get(BASE_ENDPOINT + POLICY_ROUTINE + PR_ACTION + "/pair");
+                .get(BASE_ENDPOINT_INVENTA + POLICY_ROUTINE + PR_ACTION + "/pair");
     }
 
 
@@ -101,14 +101,14 @@ public class PolicyRoutineApis extends BaseClass {
         return given()
                 .contentType(ContentType.JSON)
                 .header("Authorization", "Bearer" + token)
-                .get(BASE_ENDPOINT + POLICY_ROUTINE + PR_ID);
+                .get(BASE_ENDPOINT_INVENTA + POLICY_ROUTINE + PR_ID);
     }
 
     public static Response deletePolicyRoutine() {
         return given()
                 .header("Authorization", "Bearer" + token)
                 .when()
-                .delete(BASE_ENDPOINT + POLICY_ROUTINE + "?ids=" + PR_ID);
+                .delete(BASE_ENDPOINT_INVENTA + POLICY_ROUTINE + "?ids=" + PR_ID);
 
     }
     public static Response postPolicyRoutine(PolicyRoutine policyRoutine) {
@@ -117,8 +117,18 @@ public class PolicyRoutineApis extends BaseClass {
                 .header("Authorization", "Bearer" + token)
                 .body(policyRoutine)
                 .when()
-                .post(BASE_ENDPOINT + POLICY_ROUTINE);
+                .post(BASE_ENDPOINT_INVENTA + POLICY_ROUTINE);
     }
 
+
+    public static Response updatePolicyRoutine(PolicyRoutine policyRoutine) {
+        return given()
+                .contentType(ContentType.JSON)
+                .header("Authorization", "Bearer" + token)
+                .body(policyRoutine)
+                .when()
+                .put(BASE_ENDPOINT_INVENTA + POLICY_ROUTINE + PR_ID);
+        //.put("http://inventaserver:9092/policy-routine/5f3280a5d0017f0adbf665b8");
+    }
 }
 

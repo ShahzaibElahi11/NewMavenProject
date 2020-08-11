@@ -12,7 +12,7 @@ public class DashboardApis extends BaseClass {
         return given()
                 .contentType(ContentType.JSON)
                 .header("Authorization", "Bearer" + token)
-                .get(BASE_ENDPOINT + "/query/adapters/count/devices/");
+                .get(BASE_ENDPOINT_INVENTA + "/query/adapters/count/devices/");
 
     }
 
@@ -20,21 +20,21 @@ public class DashboardApis extends BaseClass {
         return given()
                 .contentType(ContentType.JSON)
                 .header("Authorization", "Bearer" + token)
-                .get(BASE_ENDPOINT + "/query/adapters/count/devices/?adapter=adapter_ad");
+                .get(BASE_ENDPOINT_INVENTA + "/query/adapters/count/devices/?adapter=adapter_ad");
     }
 
     public static Response getAzureAdapterCount() {
         return given()
                 .contentType(ContentType.JSON)
                 .header("Authorization", "Bearer" + token)
-                .get(BASE_ENDPOINT + "/query/adapters/count/devices/?adapter=adapter_azure");
+                .get(BASE_ENDPOINT_INVENTA + "/query/adapters/count/devices/?adapter=adapter_azure");
     }
 
     public static Response getWmicAdapterCount() {
         return given()
                 .contentType(ContentType.JSON)
                 .header("Authorization", "Bearer" + token)
-                .get(BASE_ENDPOINT + "/query/adapters/count/devices/?adapter=adapter_wmic");
+                .get(BASE_ENDPOINT_INVENTA + "/query/adapters/count/devices/?adapter=adapter_wmic");
     }
 
 
@@ -42,14 +42,14 @@ public class DashboardApis extends BaseClass {
         return given()
                 .contentType(ContentType.JSON)
                 .header("Authorization", "Bearer" + token)
-                .get(BASE_ENDPOINT + "/query/dist/?field=common.operatingSystem.type");
+                .get(BASE_ENDPOINT_INVENTA + "/query/dist/?field=common.operatingSystem.type");
     }
 
     public static Response getTotalUserCount() {
         return given()
                 .contentType(ContentType.JSON)
                 .header("Authorization", "Bearer" + token)
-                .get(BASE_ENDPOINT + "/query/count/users/");
+                .get(BASE_ENDPOINT_INVENTA + "/query/count/users/");
 
     }
 
@@ -57,14 +57,14 @@ public class DashboardApis extends BaseClass {
         return given()
                 .contentType(ContentType.JSON)
                 .header("Authorization", "Bearer" + token)
-                .get(BASE_ENDPOINT + "/query/dist/?field=type&match=adapters.adapter_azure");
+                .get(BASE_ENDPOINT_INVENTA + "/query/dist/?field=type&match=adapters.adapter_azure");
     }
 
     public static Response getAdAssetTypeDistribution() {
         return given()
                 .contentType(ContentType.JSON)
                 .header("Authorization", "Bearer" + token)
-                .get(BASE_ENDPOINT + "/query/dist/?field=type&match=adapters.adapter_ad");
+                .get(BASE_ENDPOINT_INVENTA + "/query/dist/?field=type&match=adapters.adapter_ad");
 
     }
 
@@ -72,14 +72,14 @@ public class DashboardApis extends BaseClass {
         return given()
                 .contentType(ContentType.JSON)
                 .header("Authorization", "Bearer" + token)
-                .get(BASE_ENDPOINT + "/query/dist/?field=type&match=adapters.adapter_aws");
+                .get(BASE_ENDPOINT_INVENTA + "/query/dist/?field=type&match=adapters.adapter_aws");
     }
 
     public static Response getWmicAssetTypeDistribution() {
         return given()
                 .contentType(ContentType.JSON)
                 .header("Authorization", "Bearer" + token)
-                .get(BASE_ENDPOINT + "/query/dist/?field=type&match=adapters.adapter_wmic");
+                .get(BASE_ENDPOINT_INVENTA + "/query/dist/?field=type&match=adapters.adapter_wmic");
 
     }
 
@@ -87,6 +87,6 @@ public class DashboardApis extends BaseClass {
         return given()
                 .contentType(ContentType.JSON)
                 .header("Authorization", "Bearer" + token)
-                .get(BASE_ENDPOINT + "/query/pie/?field=adapterProperties&match=CLOUD%20PROVIDER");
+                .get(BASE_ENDPOINT_INVENTA + "/query/pie/?field=adapterProperties&match=CLOUD%20PROVIDER");
     }
 }

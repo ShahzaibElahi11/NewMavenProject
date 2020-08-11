@@ -52,6 +52,9 @@ public class TestAdapterConfiguration extends BaseClass {
     public void GetAZUREAdapterConfiguration(){
         Response response = AdapterConfigurationApis.getAzureAdapterConfiguration();
         assertThat(response.getStatusCode(),equalTo(HttpStatus.SC_OK));
+
+
+
     }
 
     @Test

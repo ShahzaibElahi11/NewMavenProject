@@ -21,7 +21,7 @@ public class TestIntegrationController extends BaseClass {
         Response response = given()
                 .contentType(ContentType.JSON)
                 .header("Authorization", "Bearer" + token)
-                .get(BASE_ENDPOINT + DOCKER_ENDPOINT + ACTIVE_MQ);
+                .get(BASE_ENDPOINT_INVENTA + DOCKER_ENDPOINT + ACTIVE_MQ);
         assertThat(response.getStatusCode(), equalTo(HttpStatus.SC_OK));
 
     }

@@ -103,7 +103,7 @@ public class TestQueryWizard extends BaseClass {
     @Test
     public void PostDeviceSaveQuery()throws IOException {
 
-        HttpPost request = new HttpPost(BASE_ENDPOINT + SAVED_QUERY);
+        HttpPost request = new HttpPost(BASE_ENDPOINT_INVENTA + SAVED_QUERY);
         String auth = new String();
         byte[] encodedAuth = Base64.encodeBase64(auth.getBytes(Charset.forName("ISO-8859-1")));
         String authHeader = "Basic " + new String(encodedAuth);
@@ -123,7 +123,7 @@ public class TestQueryWizard extends BaseClass {
     @Test
     public void PostUserSaveQuery()throws IOException {
 
-        HttpPost request = new HttpPost(BASE_ENDPOINT + SAVED_QUERY);
+        HttpPost request = new HttpPost(BASE_ENDPOINT_INVENTA + SAVED_QUERY);
         String auth = new String();
         byte[] encodedAuth = Base64.encodeBase64(auth.getBytes(Charset.forName("ISO-8859-1")));
         String authHeader = "Basic " + new String(encodedAuth);
@@ -144,7 +144,7 @@ public class TestQueryWizard extends BaseClass {
     @Test
     public void PostSaveQueryOverWrite()throws IOException {
 
-        HttpPost request = new HttpPost(BASE_ENDPOINT + SAVED_QUERY);
+        HttpPost request = new HttpPost(BASE_ENDPOINT_INVENTA + SAVED_QUERY);
         String auth = new String();
         byte[] encodedAuth = Base64.encodeBase64(auth.getBytes(Charset.forName("ISO-8859-1")));
         String authHeader = "Basic " + new String(encodedAuth);

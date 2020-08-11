@@ -32,35 +32,35 @@ public class QueryWizardApis extends BaseClass {
         return given()
                 .contentType(ContentType.JSON)
                 .header("Authorization", "Bearer" + token)
-                .get(BASE_ENDPOINT + QUERY_ENDPOINT + EQUAL_OPERATOR);
+                .get(BASE_ENDPOINT_INVENTA + QUERY_ENDPOINT + EQUAL_OPERATOR);
     }
 
     public static Response getNotEqualOperator() {
         return given()
                 .contentType(ContentType.JSON)
                 .header("Authorization", "Bearer" + token)
-                .get(BASE_ENDPOINT + QUERY_ENDPOINT + NOT_EQUAL_OPERATOR);
+                .get(BASE_ENDPOINT_INVENTA + QUERY_ENDPOINT + NOT_EQUAL_OPERATOR);
     }
 
     public static Response getExistsOperatorTrue() {
         return given()
                 .contentType(ContentType.JSON)
                 .header("Authorization", "Bearer" + token)
-                .get(BASE_ENDPOINT + QUERY_ENDPOINT + EXIST_OPERATOR_TRUE);
+                .get(BASE_ENDPOINT_INVENTA + QUERY_ENDPOINT + EXIST_OPERATOR_TRUE);
     }
 
     public static Response getExistsOperatorFalse() {
         return given()
                 .contentType(ContentType.JSON)
                 .header("Authorization", "Bearer" + token)
-                .get(BASE_ENDPOINT + QUERY_ENDPOINT + EXIST_OPERATOR_FALSE);
+                .get(BASE_ENDPOINT_INVENTA + QUERY_ENDPOINT + EXIST_OPERATOR_FALSE);
     }
 
     public static Response getStartWithOperator() {
         return given()
                 .contentType(ContentType.JSON)
                 .header("Authorization", "Bearer" + token)
-                .get(BASE_ENDPOINT + QUERY_ENDPOINT + START_WITH_OPERATOR);
+                .get(BASE_ENDPOINT_INVENTA + QUERY_ENDPOINT + START_WITH_OPERATOR);
     }
 
 
@@ -68,7 +68,7 @@ public class QueryWizardApis extends BaseClass {
         return given()
                 .contentType(ContentType.JSON)
                 .header("Authorization", "Bearer" + token)
-                .get(BASE_ENDPOINT + QUERY_ENDPOINT + END_WITH_OPERATOR);
+                .get(BASE_ENDPOINT_INVENTA + QUERY_ENDPOINT + END_WITH_OPERATOR);
     }
 
 
@@ -76,28 +76,28 @@ public class QueryWizardApis extends BaseClass {
         return given()
                 .contentType(ContentType.JSON)
                 .header("Authorization", "Bearer" + token)
-                .get(BASE_ENDPOINT + QUERY_ENDPOINT + IN_OPERATOR);
+                .get(BASE_ENDPOINT_INVENTA + QUERY_ENDPOINT + IN_OPERATOR);
     }
 
     public static Response getContainOperator() {
         return given()
                 .contentType(ContentType.JSON)
                 .header("Authorization", "Bearer" + token)
-                .get(BASE_ENDPOINT + QUERY_ENDPOINT + CONTAIN_OPERATOR);
+                .get(BASE_ENDPOINT_INVENTA + QUERY_ENDPOINT + CONTAIN_OPERATOR);
     }
 
     public static Response getANDOperator() {
         return given()
                 .contentType(ContentType.JSON)
                 .header("Authorization", "Bearer" + token)
-                .get(BASE_ENDPOINT + QUERY_ENDPOINT + AND_OPERATOR);
+                .get(BASE_ENDPOINT_INVENTA + QUERY_ENDPOINT + AND_OPERATOR);
     }
 
     public static Response getOROperator() {
         return given()
                 .contentType(ContentType.JSON)
                 .header("Authorization", "Bearer" + token)
-                .get(BASE_ENDPOINT + QUERY_ENDPOINT + OR_OPERATOR);
+                .get(BASE_ENDPOINT_INVENTA + QUERY_ENDPOINT + OR_OPERATOR);
     }
 
 
@@ -105,14 +105,14 @@ public class QueryWizardApis extends BaseClass {
         return given()
                 .contentType(ContentType.JSON)
                 .header("Authorization", "Bearer" + token)
-                .get(BASE_ENDPOINT + QUERY_ENDPOINT + DETAIL_QUERY);
+                .get(BASE_ENDPOINT_INVENTA + QUERY_ENDPOINT + DETAIL_QUERY);
     }
 
     public static Response getStatementQuery() {
         return given()
                 .contentType(ContentType.JSON)
                 .header("Authorization", "Bearer" + token)
-                .get(BASE_ENDPOINT + QUERY_ENDPOINT + STATEMENT_QUERY);
+                .get(BASE_ENDPOINT_INVENTA + QUERY_ENDPOINT + STATEMENT_QUERY);
     }
 
 
@@ -120,7 +120,7 @@ public class QueryWizardApis extends BaseClass {
         return given()
                 .contentType(ContentType.JSON)
                 .header("Authorization", "Bearer" + token)
-                .get(BASE_ENDPOINT + SAVED_QUERY + "?type=DEVICE&" + SAVED_QUERY_PAGINATION);
+                .get(BASE_ENDPOINT_INVENTA + SAVED_QUERY + "?type=DEVICE&" + SAVED_QUERY_PAGINATION);
     }
 
 
@@ -128,7 +128,7 @@ public class QueryWizardApis extends BaseClass {
         return given()
                 .contentType(ContentType.JSON)
                 .header("Authorization", "Bearer" + token)
-                .get(BASE_ENDPOINT + SAVED_QUERY + "?type=USER&" + SAVED_QUERY_PAGINATION);
+                .get(BASE_ENDPOINT_INVENTA + SAVED_QUERY + "?type=USER&" + SAVED_QUERY_PAGINATION);
     }
 
 
@@ -136,7 +136,7 @@ public class QueryWizardApis extends BaseClass {
         return given()
                 .contentType(ContentType.JSON)
                 .header("Authorization", "Bearer" + token)
-                .get(BASE_ENDPOINT + SAVED_QUERY + "execute/device/" + SAVED_DEVICE_QUERY_NAME);
+                .get(BASE_ENDPOINT_INVENTA + SAVED_QUERY + "execute/device/" + SAVED_DEVICE_QUERY_NAME);
     }
 
 
@@ -144,7 +144,7 @@ public class QueryWizardApis extends BaseClass {
         return given()
                 .contentType(ContentType.JSON)
                 .header("Authorization", "Bearer" + token)
-                .get(BASE_ENDPOINT + SAVED_QUERY + "execute/user/" + SAVED_USER_QUERY_NAME);
+                .get(BASE_ENDPOINT_INVENTA + SAVED_QUERY + "execute/user/" + SAVED_USER_QUERY_NAME);
     }
 
 
@@ -152,21 +152,21 @@ public class QueryWizardApis extends BaseClass {
         return given()
                 .contentType(ContentType.JSON)
                 .header("Authorization", "Bearer" + token)
-                .get(BASE_ENDPOINT + SAVED_QUERY + "?" +SAVED_QUERY_PAGINATION);
+                .get(BASE_ENDPOINT_INVENTA + SAVED_QUERY + "?" +SAVED_QUERY_PAGINATION);
     }
 
     public static Response getAllSavedQueriesNoPaginationDevice() {
         return given()
                 .contentType(ContentType.JSON)
                 .header("Authorization", "Bearer" + token)
-                .get(BASE_ENDPOINT + SAVED_QUERY + "unpaged?type=DEVICE");
+                .get(BASE_ENDPOINT_INVENTA + SAVED_QUERY + "unpaged?type=DEVICE");
     }
 
     public static Response getAllSavedQueriesNoPaginationUser() {
         return given()
                 .contentType(ContentType.JSON)
                 .header("Authorization", "Bearer" + token)
-                .get(BASE_ENDPOINT + SAVED_QUERY + "?" +SAVED_QUERY_PAGINATION);
+                .get(BASE_ENDPOINT_INVENTA + SAVED_QUERY + "?" +SAVED_QUERY_PAGINATION);
     }
 
 }

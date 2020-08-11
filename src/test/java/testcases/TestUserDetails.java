@@ -87,7 +87,7 @@ public class TestUserDetails extends BaseClass {
     @Test // Not throw exception if tag name not exist.
     public void DeleteUserSingleTag() throws IOException {
 
-        HttpDelete delete = new HttpDelete(BASE_ENDPOINT + USER_ENDPOINT + DELETE_SINGLE_TAG + USER_ID +"&tag="+ SINGLE_TAG_NAME)  ;
+        HttpDelete delete = new HttpDelete(BASE_ENDPOINT_INVENTA + USER_ENDPOINT + DELETE_SINGLE_TAG + USER_ID +"&tag="+ SINGLE_TAG_NAME)  ;
         delete.setHeader("Authorization", "Bearer " + token);
         response = client.execute(delete);
         int actualStatus = response.getStatusLine().getStatusCode();
@@ -97,7 +97,7 @@ public class TestUserDetails extends BaseClass {
     @Test// issue - not complete.
     public void DeleteUserBukTag() throws IOException {
 
-        HttpDelete request = new HttpDelete(BASE_ENDPOINT + USER_ENDPOINT + DELETE_BULK_TAG) ;
+        HttpDelete request = new HttpDelete(BASE_ENDPOINT_INVENTA + USER_ENDPOINT + DELETE_BULK_TAG) ;
         request.setHeader("Authorization", "Bearer " + token);
 
         String json = "{ \"userIds\": [\"5ef29cb2c454b418263ff7b5\"] }";
@@ -114,7 +114,7 @@ public class TestUserDetails extends BaseClass {
     @Test // Not throw exception if note does not exist.
     public void DeleteUserNote() throws IOException {
 
-        HttpDelete delete = new HttpDelete(BASE_ENDPOINT + USER_ENDPOINT + DELETE_NOTE + USER_ID )  ;
+        HttpDelete delete = new HttpDelete(BASE_ENDPOINT_INVENTA + USER_ENDPOINT + DELETE_NOTE + USER_ID )  ;
         delete.setHeader("Authorization", "Bearer " + token);
         response = client.execute(delete);
         int actualStatus = response.getStatusLine().getStatusCode();

@@ -160,7 +160,7 @@ public class TestDeviceDetail extends BaseClass {
     @Test // Not throw exception if tag name not exist.
     public void DeleteDeviceSingleTag() throws IOException {
 
-        HttpDelete delete = new HttpDelete(BASE_ENDPOINT + DEVICE_ENDPOINT + DELETE_SINGLE_TAG + DEVICE_DETAIL_ID +"&tag="+ SINGLE_TAG_NAME)  ;
+        HttpDelete delete = new HttpDelete(BASE_ENDPOINT_INVENTA + DEVICE_ENDPOINT + DELETE_SINGLE_TAG + DEVICE_DETAIL_ID +"&tag="+ SINGLE_TAG_NAME)  ;
         delete.setHeader("Authorization", "Bearer " + token);
         response = client.execute(delete);
         int actualStatus = response.getStatusLine().getStatusCode();
@@ -171,7 +171,7 @@ public class TestDeviceDetail extends BaseClass {
     @Test // issue - not complete. also postman issue
     public void DeleteDeviceBukTag() throws IOException {
 
-        HttpDelete request = new HttpDelete(BASE_ENDPOINT + DEVICE_ENDPOINT + DELETE_BULK_TAG) ;
+        HttpDelete request = new HttpDelete(BASE_ENDPOINT_INVENTA + DEVICE_ENDPOINT + DELETE_BULK_TAG) ;
         request.setHeader("Authorization", "Bearer " + token);
 
         String json = "{ \"userIds\": [\"5ef29cb2c454b418263ff7b5\"] }";
@@ -187,7 +187,7 @@ public class TestDeviceDetail extends BaseClass {
     @Test // Not throw exception if note does not exist.
     public void DeleteDeviceNote() throws IOException {
 
-        HttpDelete delete = new HttpDelete(BASE_ENDPOINT + DEVICE_ENDPOINT + DELETE_NOTE + DEVICE_DETAIL_ID )  ;
+        HttpDelete delete = new HttpDelete(BASE_ENDPOINT_INVENTA + DEVICE_ENDPOINT + DELETE_NOTE + DEVICE_DETAIL_ID )  ;
         delete.setHeader("Authorization", "Bearer " + token);
         response = client.execute(delete);
         int actualStatus = response.getStatusLine().getStatusCode();
@@ -198,7 +198,7 @@ public class TestDeviceDetail extends BaseClass {
     @Test // Not throw exception if note does not exist.
     public void DeleteDiscoveredDevice() throws IOException {
 
-        HttpDelete delete = new HttpDelete(BASE_ENDPOINT + DEVICE_ENDPOINT + DELETE_DEVICE + DELETE_DEVICE_ID ) ;
+        HttpDelete delete = new HttpDelete(BASE_ENDPOINT_INVENTA + DEVICE_ENDPOINT + DELETE_DEVICE + DELETE_DEVICE_ID ) ;
         delete.setHeader("Authorization", "Bearer " + token);
         response = client.execute(delete);
         int actualStatus = response.getStatusLine().getStatusCode();

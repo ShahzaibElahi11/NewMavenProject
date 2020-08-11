@@ -21,7 +21,7 @@ public class LdapApis extends BaseClass {
                 .header("Authorization", "Bearer" + token)
                 .body(ldapConfiguration)
                 .when()
-                .post(BASE_ENDPOINT + CONFIG_ENDPOINT);
+                .post(BASE_ENDPOINT_INVENTA + CONFIG_ENDPOINT);
 
     }
 
@@ -29,7 +29,7 @@ public class LdapApis extends BaseClass {
         return given()
                 .contentType(ContentType.JSON)
                 .header("Authorization", "Bearer" + token)
-                .get(BASE_ENDPOINT + CONFIG_ENDPOINT + CONFIG_TYPE);
+                .get(BASE_ENDPOINT_INVENTA + CONFIG_ENDPOINT + CONFIG_TYPE);
     }
 
     public static Response postAdLogin(AdLogin adLogin) {
@@ -38,6 +38,6 @@ public class LdapApis extends BaseClass {
                 .header("Authorization", "Bearer" + token)
                 .body(adLogin)
                 .when()
-                .post(BASE_ENDPOINT + AD_LOGIN);
+                .post(BASE_ENDPOINT_INVENTA + AD_LOGIN);
     }
 }

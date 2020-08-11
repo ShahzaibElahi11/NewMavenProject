@@ -2,6 +2,7 @@ package testcases;
 
 import api.PolicyRoutineApis;
 import io.restassured.response.Response;
+import models.policyroutine.*;
 import org.apache.commons.codec.binary.Base64;
 import org.apache.http.HttpHeaders;
 import org.apache.http.HttpStatus;
@@ -9,10 +10,6 @@ import org.apache.http.client.methods.HttpDelete;
 import org.apache.http.client.methods.HttpPut;
 import org.apache.http.entity.ContentType;
 import org.apache.http.entity.StringEntity;
-import models.policyroutine.EnforcePolicyOnDevice;
-import models.policyroutine.EnforcePolicyOnUser;
-import models.policyroutine.PolicyRoutineMainAction;
-import models.policyroutine.PolicyRoutine;
 import org.junit.Assert;
 import org.junit.Ignore;
 import org.junit.Test;
@@ -32,37 +29,43 @@ public class TestPolicyRoutine extends BaseClass {
     //re-think
     public static final String PR_DELETE_ID = "5f22c5496d329947e1949ed0";
 
-
+    //Update Post Method Using Builder Class
     @Test
     public void PostCreatePolicyRoutine() {
-        //need Improvement
-        PolicyRoutineMainAction policyRoutineMainAction = new PolicyRoutineMainAction(new String("RC02"));
-        PolicyRoutine policyRoutine = new PolicyRoutine("Automation Policy Routine #" + value + "1", policyRoutineMainAction);
+        PolicyRoutineProperties policyRoutineProperties = new PolicyRoutineProperties.Builder()
+            .setUsername("test")
+            .setPassword("password123")
+            .build();
+        PolicyRoutineMainAction policyRoutineMainAction = new PolicyRoutineMainAction.Builder()
+                .setAction("RC02")
+                .setProperties(policyRoutineProperties)
+                .build();
+        PolicyRoutine policyRoutine = new PolicyRoutine.Builder()
+                .setName("Automation Policy Routine # "+value)
+                .setMainAction(policyRoutineMainAction)
+                .build();
         Response response = PolicyRoutineApis.postPolicyRoutine(policyRoutine);
         assertThat(response.getStatusCode(), equalTo(200));
-
     }
 
-    @Ignore
+
     @Test
-    public void PutPolicyRoutine() throws IOException {
+    public void PutPolicyRoutineNew(){
+        PolicyRoutineProperties policyRoutineProperties = new PolicyRoutineProperties.Builder()
+                .setUsername("test")
+                .setPassword("password123")
+                .build();
+        PolicyRoutineMainAction policyRoutineMainAction = new PolicyRoutineMainAction.Builder()
+                .setAction("RC02")
+                .setProperties(policyRoutineProperties)
+                .build();
+        PolicyRoutine policyRoutine = new PolicyRoutine.Builder()
+                .setName("Update_Automation Policy Routine # "+value)
+                .setMainAction(policyRoutineMainAction)
+                .build();
+        Response response = PolicyRoutineApis.updatePolicyRoutine(policyRoutine);
+        assertThat(response.getStatusCode(), equalTo(200));
 
-        HttpPut request = new HttpPut(BASE_ENDPOINT + POLICY_ROUTINE + PR_ID);
-        String auth = new String();
-        byte[] encodedAuth = Base64.encodeBase64(auth.getBytes(Charset.forName("ISO-8859-1")));
-        String authHeader = "Basic " + new String(encodedAuth);
-
-        request.setHeader(HttpHeaders.AUTHORIZATION, authHeader);
-        request.setHeader("Authorization", "Bearer " + token);
-
-        String json = "{\"name\": \"Automation Updated Policy Routine # " + value + "\",\"mainAction\": {\"action\": \"RC02\", \"properties\": {\"user\": \"user1\", \"password\":\"ppp\"}},\"successCount\": 1}";
-
-        request.setEntity(new StringEntity(json, ContentType.APPLICATION_JSON));
-        // Send
-        response = client.execute(request);
-
-        int actualStatusCode = response.getStatusLine().getStatusCode();
-        Assert.assertEquals(actualStatusCode, 200);
     }
 
     @Test
@@ -76,7 +79,7 @@ public class TestPolicyRoutine extends BaseClass {
     @Test
     public void DeletePolicyRoutineOld() throws IOException {
 
-        HttpDelete delete = new HttpDelete(BASE_ENDPOINT + POLICY_ROUTINE + "?ids=" + PR_DELETE_ID);
+        HttpDelete delete = new HttpDelete(BASE_ENDPOINT_INVENTA + POLICY_ROUTINE + "?ids=" + PR_DELETE_ID);
         delete.setHeader("Authorization", "Bearer " + token);
         response = client.execute(delete);
         int actualStatus = response.getStatusLine().getStatusCode();

@@ -2,6 +2,7 @@ package utils;
 
 import com.auth0.jwt.JWT;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import org.apache.commons.lang3.RandomStringUtils;
 import org.apache.http.client.methods.CloseableHttpResponse;
 import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClientBuilder;
@@ -40,7 +41,7 @@ public class BaseClass {
 
 
 
-    protected static final String BASE_ENDPOINT = ApplicationConfiguration.getBaseURL_InventaService();
+    protected static final String BASE_ENDPOINT_INVENTA = ApplicationConfiguration.getBaseURL_InventaService();
     protected static final String BASE_ENDPOINT_ADAPTER = ApplicationConfiguration.getBaseURL_AdapterService();
 
     //For Token
@@ -61,6 +62,10 @@ public class BaseClass {
      */
     static Random rand = new Random();
     protected static final int value = rand.nextInt(5000);
+
+    //protected static final String randomString = RandomStringUtils.randomAlphabetic(8);
+
+
 
     /**
      * ID Extraction Implementation

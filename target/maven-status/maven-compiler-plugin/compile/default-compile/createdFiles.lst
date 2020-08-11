@@ -1,12 +1,16 @@
 models\devices\DeviceNotes.class
+models\policyroutine\PolicyRoutineProperties$Builder.class
 models\configuration\AwsConfiguration.class
+models\policyroutine\PolicyRoutineProperties.class
 models\policyroutine\PolicyRoutineMainAction.class
 models\ldap\LdapConfiguration.class
 models\usermanagement\Role.class
 models\users\UserNote.class
+models\policyroutine\PolicyRoutineMainAction$Builder.class
 models\policyroutine\PolicyRoutine.class
 models\devices\DeviceTag.class
 models\users\UserTag.class
+models\policyroutine\PolicyRoutine$Builder.class
 models\usermanagement\Login.class
 models\policyroutine\EnforcePolicyOnUser.class
 models\ldap\AdLogin.class
