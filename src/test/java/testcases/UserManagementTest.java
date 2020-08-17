@@ -2,6 +2,7 @@ package testcases;
 
 import api.UserManagementApis;
 import io.restassured.response.Response;
+import net.serenitybdd.junit.runners.SerenityRunner;
 import org.apache.commons.codec.binary.Base64;
 import org.apache.http.HttpHeaders;
 import org.apache.http.HttpStatus;
@@ -13,9 +14,11 @@ import org.apache.http.entity.StringEntity;
 import models.usermanagement.AdminUser;
 import models.usermanagement.Login;
 import models.usermanagement.Role;
+
 import org.junit.Assert;
 import org.junit.Ignore;
 import org.junit.Test;
+import org.junit.runner.RunWith;
 import utils.ApplicationConfiguration;
 import utils.BaseClass;
 
@@ -24,19 +27,16 @@ import java.nio.charset.Charset;
 import java.util.Collections;
 
 import static junit.framework.TestCase.assertEquals;
-import static org.hamcrest.CoreMatchers.equalTo;
-import static org.hamcrest.MatcherAssert.assertThat;
 
-public class TestUserManagement extends BaseClass {
+@RunWith(SerenityRunner.class)
+public class UserManagementTest extends BaseClass {
     public static final String ROLE_ENDPOINT = "/role/";
 
     public static final String DELETE_ROLE = "deleteRole?id=";
 
     public static final String PERMISSION_ENDPOINT = "/permission/";
 
-    public static final String UPDATE_PERMISSION = "updatePermission?id=";
     public static final String DELETE_PERMISSION  = "deletePermission?id=";
-
 
     public final static String ADMIN_USER_ENDPOINT = "/adminUsers/";
 
@@ -53,14 +53,13 @@ public class TestUserManagement extends BaseClass {
     public  void PostCreateRole(){
         Role role = new Role("Automation_Role_"+value+"1", "This is Test Role Created By new Regression Script", true, "Automation Script", Collections.singletonList(PERMISSION_ID));
         Response response = UserManagementApis.postCreateRole(role);
-        assertThat(response.getStatusCode(), equalTo(HttpStatus.SC_OK));
-
+        Assert.assertEquals("Invalid Status in Response: ", response.getStatusCode(), HttpStatus.SC_OK);
 
     }
     @Test
     public void GetAllRole() {
         Response response = UserManagementApis.getAllRole();
-        assertThat(response.getStatusCode(),equalTo(HttpStatus.SC_OK));
+        Assert.assertEquals("Invalid Status in Response: ", response.getStatusCode(), HttpStatus.SC_OK);
     }
 
 
@@ -69,7 +68,7 @@ public class TestUserManagement extends BaseClass {
     public void PutUpdateRole(){
         Role role = new Role("Update_Automation_Role_"+value+"1", "Updated By Regression new Script", true, "Automation Script", Collections.singletonList(PERMISSION_ID));
         Response response = UserManagementApis.updateRole(role);
-        assertThat(response.getStatusCode(), equalTo(HttpStatus.SC_OK));
+        Assert.assertEquals("Invalid Status in Response: ", response.getStatusCode(), HttpStatus.SC_OK);
 
     }
 
@@ -77,7 +76,7 @@ public class TestUserManagement extends BaseClass {
     public void GetRoleDetails() {
 
         Response response = UserManagementApis.getRoleDetails();
-        assertThat(response.getStatusCode(),equalTo(HttpStatus.SC_OK));
+        Assert.assertEquals("Invalid Status in Response: ", response.getStatusCode(), HttpStatus.SC_OK);
     }
     @Ignore
     @Test
@@ -96,14 +95,14 @@ public class TestUserManagement extends BaseClass {
     public void GetAllPermission() {
 
         Response response = UserManagementApis.getAllPermission();
-        assertThat(response.getStatusCode(),equalTo(HttpStatus.SC_OK));
+        Assert.assertEquals("Invalid Status in Response: ", response.getStatusCode(), HttpStatus.SC_OK);
     }
 
     @Test
     public void GetPermissionDetails() {
 
         Response response = UserManagementApis.getPermissionDetails();
-        assertThat(response.getStatusCode(),equalTo(HttpStatus.SC_OK));
+        Assert.assertEquals("Invalid Status in Response: ", response.getStatusCode(), HttpStatus.SC_OK);
     }
 
     @Ignore
@@ -114,32 +113,32 @@ public class TestUserManagement extends BaseClass {
         delete.setHeader("Authorization", "Bearer " + token);
         response = client.execute(delete);
         int actualStatus = response.getStatusLine().getStatusCode();
-        assertEquals(actualStatus, 200);
+        assertEquals(actualStatus, HttpStatus.SC_OK);
     }
 
     @Test
     public void GetAllModules() {
 
         Response response = UserManagementApis.getAllModules();
-        assertThat(response.getStatusCode(),equalTo(HttpStatus.SC_OK));
+        Assert.assertEquals("Invalid Status in Response: ", response.getStatusCode(), HttpStatus.SC_OK);
     }
 
     @Test
     public void GetRoleModules() {
         Response response = UserManagementApis.getRoleModules();
-        assertThat(response.getStatusCode(),equalTo(HttpStatus.SC_OK));
+        Assert.assertEquals("Invalid Status in Response: ", response.getStatusCode(), HttpStatus.SC_OK);
 
     }
     @Test
     public void GetRolePermission() {
         Response response = UserManagementApis.getRolePermission();
-        assertThat(response.getStatusCode(),equalTo(HttpStatus.SC_OK));
+        Assert.assertEquals("Invalid Status in Response: ", response.getStatusCode(), HttpStatus.SC_OK);
     }
 
     @Test
     public void GetUserModules() {
         Response response = UserManagementApis.getUserModules();
-        assertThat(response.getStatusCode(),equalTo(HttpStatus.SC_OK));
+        Assert.assertEquals("Invalid Status in Response: ", response.getStatusCode(), HttpStatus.SC_OK);
 
     }
 
@@ -148,28 +147,28 @@ public class TestUserManagement extends BaseClass {
     public void PostLogin() {
         Login login = new Login(USERNAME,PASSWORD);
         Response response = UserManagementApis.postLogin(login);
-        assertThat(response.getStatusCode(), equalTo(200));
+        Assert.assertEquals("Invalid Status in Response: ", response.getStatusCode(), HttpStatus.SC_OK);
     }
 
 
     @Test
     public void PostCreateUser(){
-        AdminUser adminUser = new AdminUser( "Automation"+value+"1@gmail.com", "000"+value+"333", "AutomationUser1"+value+"1", "password123", "password123", ROLE_ID, "firstName"+value+"1", "lastName"+value+"1", "OPERATOR");
+        AdminUser adminUser = new AdminUser( "Automation"+value+"1@gmail.com", "000"+value+"333", "AutomationUser1"+value+"1", "password123", "password123", ROLE_ID, "firstName "+randomString, "lastName "+randomString, "OPERATOR", true);
         Response response = UserManagementApis.postCreateUser(adminUser);
-        assertThat(response.getStatusCode(), equalTo(200));
+        Assert.assertEquals("Invalid Status in Response: ", response.getStatusCode(), HttpStatus.SC_OK);
 
     }
     @Test
     public void GetAllAdminUser() {
         Response response = UserManagementApis.getAllAdminUser();
-        assertThat(response.getStatusCode(),equalTo(HttpStatus.SC_OK));
+        Assert.assertEquals("Invalid Status in Response: ", response.getStatusCode(), HttpStatus.SC_OK);
 
     }
 
     @Test
     public void GetAdminUserDetail() {
         Response response = UserManagementApis.getAdminUserDetail();
-        assertThat(response.getStatusCode(),equalTo(HttpStatus.SC_OK));
+        Assert.assertEquals("Invalid Status in Response: ", response.getStatusCode(), HttpStatus.SC_OK);
 
     }
     @Ignore
@@ -201,14 +200,14 @@ public class TestUserManagement extends BaseClass {
         delete.setHeader("Authorization", "Bearer " + token);
         response = client.execute(delete);
         int actualStatus = response.getStatusLine().getStatusCode();
-        assertEquals(actualStatus, 200);
+        assertEquals(actualStatus, HttpStatus.SC_OK);
     }
 
     @Test
-    public void GetAllAdminUserName() throws IOException {
+    public void GetAllAdminUserName(){
 
         Response response = UserManagementApis.getAllAdminUserName();
-        assertThat(response.getStatusCode(),equalTo(HttpStatus.SC_OK));
+        Assert.assertEquals("Invalid Status in Response: ", response.getStatusCode(), HttpStatus.SC_OK);
 
     }
 

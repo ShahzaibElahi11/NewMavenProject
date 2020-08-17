@@ -34,63 +34,63 @@ public class UserApis extends BaseClass {
     public static Response getAllUsers() {
         return given()
                 .contentType(ContentType.JSON)
-                .header("Authorization", "Bearer" + token)
+                .header("Authorization", "Bearer " + token)
                 .get(BASE_ENDPOINT_INVENTA + USER_ENDPOINT + ALL_USERS + PAGINATION);
     }
 
     public static Response getUserByID() {
         return given()
                 .contentType(ContentType.JSON)
-                .header("Authorization", "Bearer" + token)
+                .header("Authorization", "Bearer " + token)
                 .get(BASE_ENDPOINT_INVENTA + USER_ENDPOINT + USER_DETAIL + USER_ID);
     }
 
     public static Response getUserAdaptersList() {
         return given()
                 .contentType(ContentType.JSON)
-                .header("Authorization", "Bearer" + token)
+                .header("Authorization", "Bearer " + token)
                 .get(BASE_ENDPOINT_INVENTA + USER_ENDPOINT + USER_ADAPTER_lIST + USER_ID);
     }
 
     public static Response getAllUserTags() {
         return given()
                 .contentType(ContentType.JSON)
-                .header("Authorization", "Bearer" + token)
+                .header("Authorization", "Bearer " + token)
                 .get(BASE_ENDPOINT_INVENTA + USER_ENDPOINT + ALL_USERS + PAGINATION);
     }
 
     public static Response getUserTagById() {
         return given()
                 .contentType(ContentType.JSON)
-                .header("Authorization", "Bearer" + token)
+                .header("Authorization", "Bearer " + token)
                 .get(BASE_ENDPOINT_INVENTA + USER_ENDPOINT + USER_TAG + USER_ID);
     }
 
     public static Response getUserNoteById() {
         return given()
                 .contentType(ContentType.JSON)
-                .header("Authorization", "Bearer" + token)
+                .header("Authorization", "Bearer " + token)
                 .get(BASE_ENDPOINT_INVENTA + USER_ENDPOINT + USER_NOTE + USER_ID);
     }
 
     public static Response getUsersAdapterData() {
         return given()
                 .contentType(ContentType.JSON)
-                .header("Authorization", "Bearer" + token)
+                .header("Authorization", "Bearer " + token)
                 .get(BASE_ENDPOINT_INVENTA + USER_ENDPOINT + USER_ADAPTER_DATA + USER_ID+ "&adapter");
     }
 
     public static Response getGeneralDetails() {
         return given()
                 .contentType(ContentType.JSON)
-                .header("Authorization", "Bearer" + token)
+                .header("Authorization", "Bearer " + token)
                 .get(BASE_ENDPOINT_INVENTA + USER_ENDPOINT + USER_GENERAL_DETAILS + USER_ID);
     }
 
     public static Response postInsertUserNote(UserNote userNote) {
         return given()
                 .contentType(ContentType.JSON)
-                .header("Authorization", "Bearer" + token)
+                .header("Authorization", "Bearer " + token)
                 .body(userNote)
                 .when()
                 .post(BASE_ENDPOINT_INVENTA + USER_ENDPOINT + INSERT_NOTE);
@@ -100,7 +100,7 @@ public class UserApis extends BaseClass {
     public static Response postInsertUserTag(UserTag userTag) {
         return given()
                 .contentType(ContentType.JSON)
-                .header("Authorization", "Bearer" + token)
+                .header("Authorization", "Bearer " + token)
                 .body(userTag)
                 .when()
                 .post(BASE_ENDPOINT_INVENTA + USER_ENDPOINT + INSERT_TAG);
@@ -109,7 +109,7 @@ public class UserApis extends BaseClass {
 
     public static Response deleteUserNote() {
         return given()
-                .header("Authorization", "Bearer" + token)
+                .header("Authorization", "Bearer " + token)
                 .when()
                 .delete(BASE_ENDPOINT_INVENTA + USER_ENDPOINT + DELETE_NOTE + USER_ID);
 

@@ -3,6 +3,7 @@ package testcases;
 import api.AdapterConfigurationApis;
 import io.restassured.response.Response;
 import models.configuration.AwsConfiguration;
+import net.serenitybdd.junit.runners.SerenityRunner;
 import org.apache.commons.codec.binary.Base64;
 import org.apache.http.HttpHeaders;
 import org.apache.http.HttpStatus;
@@ -13,16 +14,16 @@ import org.apache.http.entity.StringEntity;
 import org.junit.Assert;
 import org.junit.Ignore;
 import org.junit.Test;
+import org.junit.runner.RunWith;
 import utils.ApplicationConfiguration;
 import utils.BaseClass;
 
 import java.io.IOException;
 import java.nio.charset.Charset;
 
-import static org.hamcrest.CoreMatchers.equalTo;
-import static org.hamcrest.MatcherAssert.assertThat;
 
-public class TestAdapterConfiguration extends BaseClass {
+@RunWith(SerenityRunner.class)
+public class AdapterConfigurationTest extends BaseClass {
     public final static String ADAPTER_ENDPOINT = "/adapters/";
     public final static String ADAPTER_CONFIGURATION = "active-directory/configure/?type=";
     public final static String ADAPTER_AD_AZURE_CONFIGURATION = "active-directory/configure";
@@ -30,41 +31,38 @@ public class TestAdapterConfiguration extends BaseClass {
     protected static final String AWS_KEY_ID = ApplicationConfiguration.getAwsKeyId();
     protected static final String AWS_SECRET_KEY = ApplicationConfiguration.getAwsSecretKey();
 
-
     @Test
     public void GetAllAdapters(){
         Response response = AdapterConfigurationApis.getAllAdapters();
-        assertThat(response.getStatusCode(),equalTo(HttpStatus.SC_OK));
+        Assert.assertEquals("Invalid Status in Response: ", response.getStatusCode(), HttpStatus.SC_OK);
     }
 
     @Test
     public void GetADAdapterConfiguration(){
         Response response = AdapterConfigurationApis.getAdAdapterConfiguration();
-        assertThat(response.getStatusCode(),equalTo(HttpStatus.SC_OK));
+        Assert.assertEquals("Invalid Status in Response: ", response.getStatusCode(), HttpStatus.SC_OK);
 
     }
     @Test
     public void GetAWSAdapterConfiguration(){
         Response response = AdapterConfigurationApis.getAwsAdapterConfiguration();
-        assertThat(response.getStatusCode(),equalTo(HttpStatus.SC_OK));
+        Assert.assertEquals("Invalid Status in Response: ", response.getStatusCode(), HttpStatus.SC_OK);
     }
+
     @Test
     public void GetAZUREAdapterConfiguration(){
         Response response = AdapterConfigurationApis.getAzureAdapterConfiguration();
-        assertThat(response.getStatusCode(),equalTo(HttpStatus.SC_OK));
-
-
+        Assert.assertEquals("Invalid Status in Response: ", response.getStatusCode(), HttpStatus.SC_OK);
 
     }
-
+    @Ignore
     @Test
     public void PostAWSConfiguration(){
         AwsConfiguration awsConfiguration = new AwsConfiguration(true, AWS_KEY_ID, AWS_SECRET_KEY, "us-east-2", false, "Test", "", true, true, true,true, true, true,true, true, true, true, true, false,true, true,true, true, false);
         Response response = AdapterConfigurationApis.postAwsConfiguration(awsConfiguration);
-        assertThat(response.getStatusCode(),equalTo(HttpStatus.SC_OK));
+        Assert.assertEquals("Invalid Status in Response: ", response.getStatusCode(), HttpStatus.SC_OK);
 
     }
-
 
     @Ignore
     @Test
@@ -84,7 +82,9 @@ public class TestAdapterConfiguration extends BaseClass {
         response = client.execute(request);
 
         int actualStatusCode = response.getStatusLine().getStatusCode();
-        Assert.assertEquals(actualStatusCode, HttpStatus.SC_OK);
+        //Assert.assertEquals(actualStatusCode, HttpStatus.SC_OK);
+        // Assert.assertEquals("Invalid Status in Response: ", response.getStatusCode(), HttpStatus.SC_OK);
+
     }
 
     @Ignore
@@ -105,7 +105,9 @@ public class TestAdapterConfiguration extends BaseClass {
         response = client.execute(request);
 
         int actualStatusCode = response.getStatusLine().getStatusCode();
-        Assert.assertEquals(actualStatusCode, HttpStatus.SC_OK);
+        //Assert.assertEquals(actualStatusCode, HttpStatus.SC_OK);
+        // Assert.assertEquals("Invalid Status in Response: ", response.getStatusCode(), HttpStatus.SC_OK);
+
     }
 
 

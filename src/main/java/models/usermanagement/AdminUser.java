@@ -31,7 +31,11 @@ public class AdminUser {
     @JsonProperty
     private String userType;
 
-    public AdminUser(String emailAddress, String phone, String userName, String password, String passwordConfirm, String roleIds, String firstName, String lastName, String userType) {
+    @JsonProperty
+    private boolean status;
+
+
+    public AdminUser(String emailAddress, String phone, String userName, String password, String passwordConfirm, String roleIds, String firstName, String lastName, String userType, boolean status) {
         this.emailAddress = emailAddress;
         this.phone = phone;
         this.userName = userName;
@@ -41,5 +45,6 @@ public class AdminUser {
         this.firstName = firstName;
         this.lastName = lastName;
         this.userType = userType;
+        this.status = status;
     }
 }
