@@ -1,6 +1,6 @@
 package testcases;
 
-import api.AuditApis;
+import api.AuditLogs;
 import io.restassured.response.Response;
 import net.serenitybdd.junit.runners.SerenityRunner;
 import org.apache.http.HttpStatus;
@@ -14,7 +14,7 @@ public class UserAuditLogsTest extends BaseClass {
 
     @Test
     public void GetUserAudit(){
-        Response response = AuditApis.getUserAudit();
+        Response response = AuditLogs.getUserAudit();
         Assert.assertEquals("Invalid Status in Response: ", response.getStatusCode(), HttpStatus.SC_OK);
 
     }
@@ -22,21 +22,21 @@ public class UserAuditLogsTest extends BaseClass {
     @Test
     public void GetAuditDetail(){
 
-        Response response = AuditApis.getAuditDetail();
+        Response response = AuditLogs.getAuditDetail();
         Assert.assertEquals("Invalid Status in Response: ", response.getStatusCode(), HttpStatus.SC_OK);
     }
 
     @Test
     public void GetAllUserAuditList(){
 
-        Response response = AuditApis.getAllUserAuditList();
+        Response response = AuditLogs.getAllUserAuditList();
         Assert.assertEquals("Invalid Status in Response: ", response.getStatusCode(), HttpStatus.SC_OK);
     }
 
     @Test
     public void GetAllUsersName(){
 
-        Response response = AuditApis.getAllUsersName();
+        Response response = AuditLogs.getAllUsersName();
         Assert.assertEquals("Invalid Status in Response: ", response.getStatusCode(), HttpStatus.SC_OK);
 
     }

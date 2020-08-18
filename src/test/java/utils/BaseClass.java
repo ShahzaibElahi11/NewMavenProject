@@ -115,7 +115,8 @@ public class BaseClass {
     public static String SAVED_DEVICE_QUERY_NAME = "";
     public static String SAVED_USER_QUERY_NAME = "";
     public static String AUDIT_DETAIL_ID = "";
-    public static String Delete_PR_ID = "";
+    public static String DELETE_PR_ID = "";
+    public static String DELETE_ADMIN_USER_ID = "";
 
 
 
@@ -127,11 +128,12 @@ public class BaseClass {
             PR_ID = getIdFromURL("http://inventaserver:9092/policy-routine/?page=0&size=1&sort=dateCreated,desc"); //Update Parameter in Endpoint
             ROLE_ID = getIdFromRolePermissionURL("http://inventaserver:9092/role/getAllRole?page=0&size=1");
             PERMISSION_ID = getIdFromRolePermissionURL("http://inventaserver:9092/permission/getAllPermission?page=0&size=1");
-            ADMIN_USER_ID = getIdFromURL("http://inventaserver:9092/adminUsers/getAllAdminUsers?page=0&size=1");
+            ADMIN_USER_ID = getIdFromURL("http://inventaserver:9092/adminUsers/getAllAdminUsers?page=0&size=1&sort=dateCreated,desc"); // Update Parameter in Endpoint
             SAVED_DEVICE_QUERY_NAME = getNameFromSaveQueryWizardURL("http://inventaserver:9092/saved-query/?type=DEVICE&page=0&size=1");
             SAVED_USER_QUERY_NAME = getNameFromSaveQueryWizardURL("http://inventaserver:9092/saved-query/?type=USER&page=0&size=1");
             AUDIT_DETAIL_ID = getIdFromURL("http://inventaserver:9092/audit/getAllAudit?page=0&size=1");
-            Delete_PR_ID = getIdFromURL("http://inventaserver:9092/policy-routine/?page=0&size=1&sort=dateModified,desc"); //add new endpoint
+            DELETE_PR_ID = getIdFromURL("http://inventaserver:9092/policy-routine/?page=0&size=1&sort=dateModified,desc"); //add new endpoint
+            DELETE_ADMIN_USER_ID = getIdFromURL("http://inventaserver:9092/adminUsers/getAllAdminUsers?page=0&size=1&sort=dateModified,desc"); //add new endpoint
 
             //http://inventaserver:9092/devices/getAllDevices?page=0&size=1&sort=firstFetchTime,desc
 

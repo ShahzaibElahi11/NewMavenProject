@@ -8,7 +8,7 @@ import utils.BaseClass;
 
 import static io.restassured.RestAssured.given;
 
-public class UserApis extends BaseClass {
+public class Users extends BaseClass {
     public static final String USER_ENDPOINT = "/users/";
     public static final String PAGINATION = "?page=0&size=100";
     public static final String ALL_USERS = "getAllUsers";

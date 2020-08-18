@@ -8,7 +8,7 @@ import utils.BaseClass;
 
 import static io.restassured.RestAssured.given;
 
-public class LdapApis extends BaseClass {
+public class Ldap extends BaseClass {
 
     public static final String CONFIG_ENDPOINT = "/config/";
     public static final String CONFIG_TYPE = "?type=ldap";

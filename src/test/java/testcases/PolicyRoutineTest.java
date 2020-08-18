@@ -1,6 +1,6 @@
 package testcases;
 
-import api.PolicyRoutineApis;
+import api.PolicyRoutines;
 import io.restassured.response.Response;
 import models.policyroutine.*;
 import net.serenitybdd.junit.runners.SerenityRunner;
@@ -32,11 +32,11 @@ public class PolicyRoutineTest extends BaseClass {
                 .setAction("RC02")
                 .setProperties(policyRoutineProperties)
                 .build();
-        PolicyRoutine policyRoutine = new PolicyRoutine.Builder()
+       PolicyRoutine policyRoutine = new PolicyRoutine.Builder()
                 .setName("Automation Policy Routine # "+value)
                 .setMainAction(policyRoutineMainAction)
                 .build();
-        Response response = PolicyRoutineApis.postPolicyRoutine(policyRoutine);
+        Response response = PolicyRoutines.postPolicyRoutine(policyRoutine);
         if(response.getStatusCode() == HttpStatus.SC_OK)
             isPreviousTestPass = true;
         Assert.assertEquals("Invalid Status in Response: ", response.getStatusCode(), HttpStatus.SC_OK);
@@ -60,7 +60,7 @@ public class PolicyRoutineTest extends BaseClass {
                 .setName("Update1_Automation Policy Routine # "+value)
                 .setMainAction(policyRoutineMainAction)
                 .build();
-        Response response = PolicyRoutineApis.updatePolicyRoutine(policyRoutine);
+        Response response = PolicyRoutines.updatePolicyRoutine(policyRoutine);
         if(response.getStatusCode() == HttpStatus.SC_OK)
             isPreviousTestPass = true;
         Assert.assertEquals("Invalid Status in Response: ", response.getStatusCode(), HttpStatus.SC_OK);
@@ -72,7 +72,7 @@ public class PolicyRoutineTest extends BaseClass {
     public void testC_DeletePolicyRoutine() {
         Assume.assumeTrue(isPreviousTestPass==true);
         isPreviousTestPass = false;
-        Response response = PolicyRoutineApis.deletePolicyRoutine();
+        Response response = PolicyRoutines.deletePolicyRoutine();
         if(response.getStatusCode() == HttpStatus.SC_OK)
             isPreviousTestPass = true;
         Assert.assertEquals("Invalid Status in Response: ", response.getStatusCode(), HttpStatus.SC_OK);
@@ -82,20 +82,20 @@ public class PolicyRoutineTest extends BaseClass {
     @Test
     public void GetPolicyRoutineAllData() {
 
-        Response response = PolicyRoutineApis.getPolicyRoutineAllData();
+        Response response = PolicyRoutines.getPolicyRoutineAllData();
         Assert.assertEquals("Invalid Status in Response: ", response.getStatusCode(), HttpStatus.SC_OK);
     }
 
 
     @Test
     public void GetPolicyRoutineActions() {
-        Response response = PolicyRoutineApis.getPolicyRoutineActions();
+        Response response = PolicyRoutines.getPolicyRoutineActions();
         Assert.assertEquals("Invalid Status in Response: ", response.getStatusCode(), HttpStatus.SC_OK);
     }
 
     @Test
     public void GetPolicyRoutineDeviceActions() {
-        Response response = PolicyRoutineApis.getPolicyRoutineDeviceActions();
+        Response response = PolicyRoutines.getPolicyRoutineDeviceActions();
         Assert.assertEquals("Invalid Status in Response: ", response.getStatusCode(), HttpStatus.SC_OK);
 
     }
@@ -103,27 +103,27 @@ public class PolicyRoutineTest extends BaseClass {
 
     @Test
     public void GetPolicyRoutineUserActions() {
-        Response response = PolicyRoutineApis.getPolicyRoutineUserActions();
+        Response response = PolicyRoutines.getPolicyRoutineUserActions();
         Assert.assertEquals("Invalid Status in Response: ", response.getStatusCode(), HttpStatus.SC_OK);
 
     }
 
     @Test
     public void GetPolicyRoutineTable(){
-        Response response = PolicyRoutineApis.getPolicyRoutineTable();
+        Response response = PolicyRoutines.getPolicyRoutineTable();
         Assert.assertEquals("Invalid Status in Response: ", response.getStatusCode(), HttpStatus.SC_OK);
     }
 
 
     @Test
     public void GetPolicyRoutineTableWithFilter(){
-        Response response = PolicyRoutineApis.getPolicyRoutineTableWithFilter();
+        Response response = PolicyRoutines.getPolicyRoutineTableWithFilter();
         Assert.assertEquals("Invalid Status in Response: ", response.getStatusCode(), HttpStatus.SC_OK);
     }
 
     @Test
     public void GetPolicyRoutineSummary(){
-        Response response = PolicyRoutineApis.getPolicyRoutineSummary();
+        Response response = PolicyRoutines.getPolicyRoutineSummary();
         Assert.assertEquals("Invalid Status in Response: ", response.getStatusCode(), HttpStatus.SC_OK);
 
     }
@@ -133,7 +133,7 @@ public class PolicyRoutineTest extends BaseClass {
     public void PostEnforcePolicyOnDevice() {
         EnforcePolicyOnDevice enforcePolicyOnDevice = new EnforcePolicyOnDevice("MSEDGEWIN10-5.inventa12.com");
 
-        Response response = PolicyRoutineApis.postEnforcePolicyDevice(enforcePolicyOnDevice);
+        Response response = PolicyRoutines.postEnforcePolicyDevice(enforcePolicyOnDevice);
         Assert.assertEquals("Invalid Status in Response: ", response.getStatusCode(), HttpStatus.SC_OK);
 
     }
@@ -142,20 +142,20 @@ public class PolicyRoutineTest extends BaseClass {
     public void PostEnforcePolicyOnUser() {
 
         EnforcePolicyOnUser enforcePolicyOnUser = new EnforcePolicyOnUser("filyas@netpace.com");
-        Response response = PolicyRoutineApis.postEnforcePolicyUser(enforcePolicyOnUser);
+        Response response = PolicyRoutines.postEnforcePolicyUser(enforcePolicyOnUser);
         Assert.assertEquals("Invalid Status in Response: ", response.getStatusCode(), HttpStatus.SC_OK);
     }
 
     @Test
     public void GetActionsPair(){
-        Response response = PolicyRoutineApis.getActionsPair();
+        Response response = PolicyRoutines.getActionsPair();
         Assert.assertEquals("Invalid Status in Response: ", response.getStatusCode(), HttpStatus.SC_OK);
 
     }
 
     @Test
     public void GetPolicyRoutineById(){
-        Response response = PolicyRoutineApis.getPolicyRoutineById();
+        Response response = PolicyRoutines.getPolicyRoutineById();
         Assert.assertEquals("Invalid Status in Response: ", response.getStatusCode(), HttpStatus.SC_OK);
 
     }

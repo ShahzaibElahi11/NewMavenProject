@@ -9,7 +9,7 @@ import utils.BaseClass;
 
 import static io.restassured.RestAssured.given;
 
-public class PolicyRoutineApis extends BaseClass {
+public class PolicyRoutines extends BaseClass {
 
     public static final String POLICY_ROUTINE = "/policy-routine/";
     public static final String PR_ACTION = "actions";
@@ -108,7 +108,7 @@ public class PolicyRoutineApis extends BaseClass {
         return given()
                 .header("Authorization", "Bearer " + token)
                 .when()
-                .delete(BASE_ENDPOINT_INVENTA + POLICY_ROUTINE + "?ids=" + Delete_PR_ID);
+                .delete(BASE_ENDPOINT_INVENTA + POLICY_ROUTINE + "?ids=" + DELETE_PR_ID);
 
     }
     public static Response postPolicyRoutine(PolicyRoutine policyRoutine) {
@@ -128,7 +128,6 @@ public class PolicyRoutineApis extends BaseClass {
                 .body(policyRoutine)
                 .when()
                 .put(BASE_ENDPOINT_INVENTA + POLICY_ROUTINE + PR_ID);
-        //.put("http://inventaserver:9092/policy-routine/5f3280a5d0017f0adbf665b8");
     }
 }
 

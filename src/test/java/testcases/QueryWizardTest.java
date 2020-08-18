@@ -1,6 +1,6 @@
 package testcases;
 
-import api.QueryWizardApis;
+import api.QueryWizard;
 import io.restassured.response.Response;
 import net.serenitybdd.junit.runners.SerenityRunner;
 import org.apache.commons.codec.binary.Base64;
@@ -26,73 +26,73 @@ public class QueryWizardTest extends BaseClass {
 
     @Test
     public void GetEqualOperator(){
-        Response response = QueryWizardApis.getEqualOperator();
+        Response response = QueryWizard.getEqualOperator();
         Assert.assertEquals("Invalid Status in Response: ", response.getStatusCode(), HttpStatus.SC_OK);
     }
 
     @Test
     public void GetNotEqualOperator(){
-        Response response = QueryWizardApis.getNotEqualOperator();
+        Response response = QueryWizard.getNotEqualOperator();
         Assert.assertEquals("Invalid Status in Response: ", response.getStatusCode(), HttpStatus.SC_OK);
 
     }
 
     @Test
     public void GetExistsOperatorTrue(){
-        Response response = QueryWizardApis.getExistsOperatorTrue();
+        Response response = QueryWizard.getExistsOperatorTrue();
         Assert.assertEquals("Invalid Status in Response: ", response.getStatusCode(), HttpStatus.SC_OK);
 
     }
 
     @Test
     public void GetExistsOperatorFalse() {
-        Response response = QueryWizardApis.getExistsOperatorFalse();
+        Response response = QueryWizard.getExistsOperatorFalse();
         Assert.assertEquals("Invalid Status in Response: ", response.getStatusCode(), HttpStatus.SC_OK);
 
     }
     @Test
     public void GetStartWithOperator(){
-        Response response = QueryWizardApis.getStartWithOperator();
+        Response response = QueryWizard.getStartWithOperator();
         Assert.assertEquals("Invalid Status in Response: ", response.getStatusCode(), HttpStatus.SC_OK);
     }
 
     @Test
     public void GetEndWithOperator(){
-        Response response = QueryWizardApis.getEndWithOperator();
+        Response response = QueryWizard.getEndWithOperator();
         Assert.assertEquals("Invalid Status in Response: ", response.getStatusCode(), HttpStatus.SC_OK);
     }
     @Test
     public void GetInOperator(){
-        Response response = QueryWizardApis.getInOperator();
+        Response response = QueryWizard.getInOperator();
         Assert.assertEquals("Invalid Status in Response: ", response.getStatusCode(), HttpStatus.SC_OK);
     }
 
     @Test
     public void GetContainOperator(){
-        Response response = QueryWizardApis.getContainOperator();
+        Response response = QueryWizard.getContainOperator();
         Assert.assertEquals("Invalid Status in Response: ", response.getStatusCode(), HttpStatus.SC_OK);
     }
     @Test
     public void GetANDOperator(){
-        Response response = QueryWizardApis.getANDOperator();
+        Response response = QueryWizard.getANDOperator();
         Assert.assertEquals("Invalid Status in Response: ", response.getStatusCode(), HttpStatus.SC_OK);
     }
 
     @Test
     public void GetOROperator(){
-        Response response = QueryWizardApis.getOROperator();
+        Response response = QueryWizard.getOROperator();
         Assert.assertEquals("Invalid Status in Response: ", response.getStatusCode(), HttpStatus.SC_OK);
     }
 
     @Test
     public void GetAdapterDetailsQuery(){
-        Response response = QueryWizardApis.getAdapterDetailsQuery();
+        Response response = QueryWizard.getAdapterDetailsQuery();
         Assert.assertEquals("Invalid Status in Response: ", response.getStatusCode(), HttpStatus.SC_OK);
     }
 
     @Test
     public void GetStatementQuery(){
-        Response response = QueryWizardApis.getStatementQuery();
+        Response response = QueryWizard.getStatementQuery();
         Assert.assertEquals("Invalid Status in Response: ", response.getStatusCode(), HttpStatus.SC_OK);
 
     }
@@ -167,46 +167,46 @@ public class QueryWizardTest extends BaseClass {
 
     @Test
     public void GetDeviceSavedQueries(){
-        Response response = QueryWizardApis.getDeviceSavedQueries();
+        Response response = QueryWizard.getDeviceSavedQueries();
         Assert.assertEquals("Invalid Status in Response: ", response.getStatusCode(), HttpStatus.SC_OK);
     }
 
     @Test
     public void GetUserSavedQueries(){
-        Response response = QueryWizardApis.getUserSavedQueries();
+        Response response = QueryWizard.getUserSavedQueries();
         Assert.assertEquals("Invalid Status in Response: ", response.getStatusCode(), HttpStatus.SC_OK);
     }
 
     @Test
     public void GetExecuteDeviceSavedQuery(){
-        Response response = QueryWizardApis.getExecuteDeviceSavedQuery();
+        Response response = QueryWizard.getExecuteDeviceSavedQuery();
         Assert.assertEquals("Invalid Status in Response: ", response.getStatusCode(), HttpStatus.SC_OK);
     }
 
     @Test
     public void GetExecuteUserSavedQuery(){
-        Response response = QueryWizardApis.getExecuteUserSavedQuery();
+        Response response = QueryWizard.getExecuteUserSavedQuery();
         Assert.assertEquals("Invalid Status in Response: ", response.getStatusCode(), HttpStatus.SC_OK);
     }
 
 
     @Test
     public void GetAllSavedQueries(){
-        Response response = QueryWizardApis.getAllSavedQueries();
+        Response response = QueryWizard.getAllSavedQueries();
         Assert.assertEquals("Invalid Status in Response: ", response.getStatusCode(), HttpStatus.SC_OK);
 
     }
 
     @Test
     public void GetAllSavedQueriesNoPaginationDevice(){
-        Response response = QueryWizardApis.getAllSavedQueriesNoPaginationDevice();
+        Response response = QueryWizard.getAllSavedQueriesNoPaginationDevice();
         Assert.assertEquals("Invalid Status in Response: ", response.getStatusCode(), HttpStatus.SC_OK);
 
     }
 
     @Test
     public void GetAllSavedQueriesNoPaginationUser(){
-        Response response = QueryWizardApis.getAllSavedQueriesNoPaginationUser();
+        Response response = QueryWizard.getAllSavedQueriesNoPaginationUser();
         Assert.assertEquals("Invalid Status in Response: ", response.getStatusCode(), HttpStatus.SC_OK);
 
     }
@@ -220,5 +220,77 @@ public class QueryWizardTest extends BaseClass {
     /**
      * new
      */
+
+    @Test
+    public void GetAllAdDeviceFields(){
+        Response response = QueryWizard.getAllAdDeviceFields();
+        Assert.assertEquals("Invalid Status in Response: ", response.getStatusCode(), HttpStatus.SC_OK);
+
+    }
+
+    @Test
+    public void GetAllAwsDeviceFields(){
+        Response response = QueryWizard.getAllAwsDeviceFields();
+        Assert.assertEquals("Invalid Status in Response: ", response.getStatusCode(), HttpStatus.SC_OK);
+
+    }
+    @Test
+    public void GetAllAzureDeviceFields(){
+        Response response = QueryWizard.getAllAzureDeviceFields();
+        Assert.assertEquals("Invalid Status in Response: ", response.getStatusCode(), HttpStatus.SC_OK);
+
+    }
+
+    @Test
+    public void GetAllWmicDeviceFields(){
+        Response response = QueryWizard.getAllWmicDeviceFields();
+        Assert.assertEquals("Invalid Status in Response: ", response.getStatusCode(), HttpStatus.SC_OK);
+
+    }
+
+    @Test
+    public void GetAllAdUserFields(){
+        Response response = QueryWizard.getAllAdUserFields();
+        Assert.assertEquals("Invalid Status in Response: ", response.getStatusCode(), HttpStatus.SC_OK);
+
+    }
+
+    @Test
+    public void GetAllAwsUserFields(){
+        Response response = QueryWizard.getAllAwsUserFields();
+        Assert.assertEquals("Invalid Status in Response: ", response.getStatusCode(), HttpStatus.SC_OK);
+
+    }
+
+    @Test
+    public void GetAllAzureUserFields(){
+        Response response = QueryWizard.getAllAzureUserFields();
+        Assert.assertEquals("Invalid Status in Response: ", response.getStatusCode(), HttpStatus.SC_OK);
+
+    }
+
+    @Test
+    public void GetAzureTypeDeviceFields(){
+        Response response = QueryWizard.getAzureTypeDeviceFields();
+        Assert.assertEquals("Invalid Status in Response: ", response.getStatusCode(), HttpStatus.SC_OK);
+
+    }
+
+    @Test
+    public void GetAwsTypeDeviceFields(){
+        Response response = QueryWizard.getAwsTypeDeviceFields();
+        Assert.assertEquals("Invalid Status in Response: ", response.getStatusCode(), HttpStatus.SC_OK);
+
+    }
+
+    @Test
+    public void GetAdTypeDeviceFields(){
+        Response response = QueryWizard.getAdTypeDeviceFields();
+        Assert.assertEquals("Invalid Status in Response: ", response.getStatusCode(), HttpStatus.SC_OK);
+
+    }
+
+
+
 
 }

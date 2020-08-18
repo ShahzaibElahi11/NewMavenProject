@@ -5,7 +5,7 @@ import io.restassured.response.Response;
 import utils.BaseClass;
 
 import static io.restassured.RestAssured.given;
-public class AuditApis extends BaseClass {
+public class AuditLogs extends BaseClass {
 
     public static final String AUDIT_ENDPOINT = "/audit/";
 

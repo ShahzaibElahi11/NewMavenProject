@@ -9,7 +9,7 @@ import utils.BaseClass;
 
 import static io.restassured.RestAssured.given;
 
-public class UserManagementApis extends BaseClass {
+public class UserManagement extends BaseClass {
     public static final String ROLE_ENDPOINT = "/role/";
     public static final String CREATE_ROLE = "createRole";
     public static final String GET_ALL_ROLE = "getAllRole";
@@ -158,5 +158,22 @@ public class UserManagementApis extends BaseClass {
                 .body(adminUser)
                 .when()
                 .post(BASE_ENDPOINT_INVENTA + ADMIN_USER_ENDPOINT + CREATE_ADMIN_USER);
+    }
+
+    public static Response updateAdminUser(AdminUser adminUser) {
+        return given()
+                .contentType(ContentType.JSON)
+                .header("Authorization", "Bearer " + token)
+                .body(adminUser)
+                .when()
+                .put(BASE_ENDPOINT_INVENTA + ADMIN_USER_ENDPOINT + UPDATE_ADMIN_USER + ADMIN_USER_ID);
+    }
+
+    public static Response deleteAdminUser() {
+        return given()
+                .header("Authorization", "Bearer " + token)
+                .when()
+                .delete(BASE_ENDPOINT_INVENTA + ADMIN_USER_ENDPOINT + DELETE_ADMIN_USER + DELETE_ADMIN_USER_ID);
+
     }
 }

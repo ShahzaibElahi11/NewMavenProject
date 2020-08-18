@@ -8,7 +8,7 @@ import utils.BaseClass;
 
 import static io.restassured.RestAssured.given;
 
-public class DeviceApis extends BaseClass {
+public class Devices extends BaseClass {
 
     public static final String DEVICE_ENDPOINT = "/devices/";
     public static final String DEVICE_ALL_TAGS = "tags/";

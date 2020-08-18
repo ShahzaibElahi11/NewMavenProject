@@ -1,6 +1,6 @@
 package testcases;
 
-import api.AdapterConfigurationApis;
+import api.AdapterConfiguration;
 import io.restassured.response.Response;
 import models.configuration.AwsConfiguration;
 import net.serenitybdd.junit.runners.SerenityRunner;
@@ -33,25 +33,25 @@ public class AdapterConfigurationTest extends BaseClass {
 
     @Test
     public void GetAllAdapters(){
-        Response response = AdapterConfigurationApis.getAllAdapters();
+        Response response = AdapterConfiguration.getAllAdapters();
         Assert.assertEquals("Invalid Status in Response: ", response.getStatusCode(), HttpStatus.SC_OK);
     }
 
     @Test
     public void GetADAdapterConfiguration(){
-        Response response = AdapterConfigurationApis.getAdAdapterConfiguration();
+        Response response = AdapterConfiguration.getAdAdapterConfiguration();
         Assert.assertEquals("Invalid Status in Response: ", response.getStatusCode(), HttpStatus.SC_OK);
 
     }
     @Test
     public void GetAWSAdapterConfiguration(){
-        Response response = AdapterConfigurationApis.getAwsAdapterConfiguration();
+        Response response = AdapterConfiguration.getAwsAdapterConfiguration();
         Assert.assertEquals("Invalid Status in Response: ", response.getStatusCode(), HttpStatus.SC_OK);
     }
 
     @Test
     public void GetAZUREAdapterConfiguration(){
-        Response response = AdapterConfigurationApis.getAzureAdapterConfiguration();
+        Response response = AdapterConfiguration.getAzureAdapterConfiguration();
         Assert.assertEquals("Invalid Status in Response: ", response.getStatusCode(), HttpStatus.SC_OK);
 
     }
@@ -59,7 +59,7 @@ public class AdapterConfigurationTest extends BaseClass {
     @Test
     public void PostAWSConfiguration(){
         AwsConfiguration awsConfiguration = new AwsConfiguration(true, AWS_KEY_ID, AWS_SECRET_KEY, "us-east-2", false, "Test", "", true, true, true,true, true, true,true, true, true, true, true, false,true, true,true, true, false);
-        Response response = AdapterConfigurationApis.postAwsConfiguration(awsConfiguration);
+        Response response = AdapterConfiguration.postAwsConfiguration(awsConfiguration);
         Assert.assertEquals("Invalid Status in Response: ", response.getStatusCode(), HttpStatus.SC_OK);
 
     }

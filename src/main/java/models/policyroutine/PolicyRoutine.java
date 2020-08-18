@@ -32,7 +32,6 @@ public class PolicyRoutine {
 
         private String name;
         private PolicyRoutineMainAction mainAction;
-        ;
 
 
         public Builder setName(String name) {

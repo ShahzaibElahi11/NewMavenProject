@@ -1,6 +1,6 @@
 package testcases;
 
-import api.LdapApis;
+import api.Ldap;
 import io.restassured.response.Response;
 import models.ldap.LdapConfiguration;
 import net.serenitybdd.junit.runners.SerenityRunner;
@@ -32,7 +32,7 @@ public class LDAPTest extends BaseClass {
     public void testA_PostConfigureLDAP() {
         isPreviousTestPass = false;
         LdapConfiguration ldapConfiguration = new LdapConfiguration(LDAP_MACHINE_IP, LDAP_DOMAIN, ROLE_ID);
-        Response response = LdapApis.postLdapConfiguration(ldapConfiguration);
+        Response response = Ldap.postLdapConfiguration(ldapConfiguration);
         if(response.getStatusCode() == HttpStatus.SC_OK)
             isPreviousTestPass = true;
         Assert.assertEquals("Invalid Status in Response: ", response.getStatusCode(), HttpStatus.SC_OK);
@@ -40,7 +40,7 @@ public class LDAPTest extends BaseClass {
 
     @Test
     public void GetLDAPConfiguration() {
-        Response response = LdapApis.getLDAPConfiguration();
+        Response response = Ldap.getLDAPConfiguration();
         Assert.assertEquals("Invalid Status in Response: ", response.getStatusCode(), HttpStatus.SC_OK);
     }
 
@@ -50,7 +50,7 @@ public class LDAPTest extends BaseClass {
         Assume.assumeTrue(isPreviousTestPass==true);
         isPreviousTestPass = false;
         AdLogin adLogin = new AdLogin(AD_USERNAME, AD_PASSWORD);
-        Response response = LdapApis.postAdLogin(adLogin);
+        Response response = Ldap.postAdLogin(adLogin);
         if(response.getStatusCode() == HttpStatus.SC_OK)
             isPreviousTestPass = true;
         Assert.assertEquals("Invalid Status in Response: ", response.getStatusCode(), HttpStatus.SC_OK);

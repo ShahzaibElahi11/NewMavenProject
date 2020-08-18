@@ -1,6 +1,6 @@
 package testcases;
 
-import api.UserApis;
+import api.Users;
 import io.restassured.response.Response;
 
 import net.serenitybdd.junit.runners.SerenityRunner;
@@ -33,45 +33,45 @@ public class UserDetailsTest extends BaseClass {
 
     @Test
     public void GetAllUsers(){
-        Response response = UserApis.getAllUsers();
+        Response response = Users.getAllUsers();
         Assert.assertEquals("Invalid Status in Response: ", response.getStatusCode(), HttpStatus.SC_OK);
 
     }
 
     @Test
     public void GetUserByID(){
-        Response response = UserApis.getUserByID();
+        Response response = Users.getUserByID();
         Assert.assertEquals("Invalid Status in Response: ", response.getStatusCode(), HttpStatus.SC_OK);
     }
 
     @Test
     public void GetUserAdaptersList(){
-        Response response = UserApis.getUserAdaptersList();
+        Response response = Users.getUserAdaptersList();
         Assert.assertEquals("Invalid Status in Response: ", response.getStatusCode(), HttpStatus.SC_OK);
     }
 
     @Test
     public void GetAllUserTags(){
-        Response response = UserApis.getAllUserTags();
+        Response response = Users.getAllUserTags();
         Assert.assertEquals("Invalid Status in Response: ", response.getStatusCode(), HttpStatus.SC_OK);
     }
 
     @Test
     public void GetUserTagById(){
-        Response response = UserApis.getUserTagById();
+        Response response = Users.getUserTagById();
         Assert.assertEquals("Invalid Status in Response: ", response.getStatusCode(), HttpStatus.SC_OK);
     }
 
     @Test
     public void GetUserNoteById(){
-        Response response = UserApis.getUserNoteById();
+        Response response = Users.getUserNoteById();
         Assert.assertEquals("Invalid Status in Response: ", response.getStatusCode(), HttpStatus.SC_OK);
     }
 
     @Test
     public void PostInsertUserTag(){
         UserTag userTag = new UserTag("Automation_User_Tag_Number_"+value+"1", Collections.singletonList(USER_ID));
-        Response response = UserApis.postInsertUserTag(userTag);
+        Response response = Users.postInsertUserTag(userTag);
         Assert.assertEquals("Invalid Status in Response: ", response.getStatusCode(), HttpStatus.SC_OK);
 
     }
@@ -80,7 +80,7 @@ public class UserDetailsTest extends BaseClass {
     public void PostInsertUserNote()throws IOException {
         UserNote userNote = new UserNote("Automation_Notes_#_"+value+"", ""+ USER_ID);
 
-        Response response = UserApis.postInsertUserNote(userNote);
+        Response response = Users.postInsertUserNote(userNote);
         Assert.assertEquals("Invalid Status in Response: ", response.getStatusCode(), HttpStatus.SC_OK);
 
 
@@ -125,7 +125,7 @@ public class UserDetailsTest extends BaseClass {
     @Ignore
     @Test
     public void DeleteUserNoteNew(){
-        Response response = UserApis.deleteUserNote();
+        Response response = Users.deleteUserNote();
         Assert.assertEquals("Invalid Status in Response: ", response.getStatusCode(), HttpStatus.SC_OK);
 
     }
@@ -133,13 +133,13 @@ public class UserDetailsTest extends BaseClass {
     @Test
     public void GetUsersAdapterData(){
 
-        Response response = UserApis.getUsersAdapterData();
+        Response response = Users.getUsersAdapterData();
         Assert.assertEquals("Invalid Status in Response: ", response.getStatusCode(), HttpStatus.SC_OK);
 
     }
     @Test
     public void GetGeneralDetails(){
-        Response response = UserApis.getGeneralDetails();
+        Response response = Users.getGeneralDetails();
         Assert.assertEquals("Invalid Status in Response: ", response.getStatusCode(), HttpStatus.SC_OK);
 
     }

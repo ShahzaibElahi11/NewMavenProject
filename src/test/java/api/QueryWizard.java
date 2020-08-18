@@ -6,7 +6,7 @@ import utils.BaseClass;
 
 import static io.restassured.RestAssured.given;
 
-public class QueryWizardApis extends BaseClass {
+public class QueryWizard extends BaseClass {
 
 
     public static final String QUERY_ENDPOINT = "/query/devices/?query=";
@@ -26,6 +26,12 @@ public class QueryWizardApis extends BaseClass {
 
     public static final String SAVED_QUERY = "/saved-query/";
     public static final String SAVED_QUERY_PAGINATION = "page=0&size=10";
+
+    public static final String ALL_DEVICE_FIELDS = "/query/fields/all/?fieldEntity=devices&field=adapters.adapter_";
+    public static final String ALL_USER_FIELDS = "/query/fields/all/?fieldEntity=users&field=adapters.adapter_";
+
+    public static final String TYPE_DEVICE_FIELDS = "/query/fields/type/?fieldEntity=devices&field=adapters.adapter_";
+
 
 
     public static Response getEqualOperator() {
@@ -167,6 +173,77 @@ public class QueryWizardApis extends BaseClass {
                 .contentType(ContentType.JSON)
                 .header("Authorization", "Bearer " + token)
                 .get(BASE_ENDPOINT_INVENTA + SAVED_QUERY + "?" +SAVED_QUERY_PAGINATION);
+    }
+
+    public static Response getAllAdDeviceFields() {
+        return given()
+                .contentType(ContentType.JSON)
+                .header("Authorization", "Bearer " + token)
+                .get(BASE_ENDPOINT_INVENTA + ALL_DEVICE_FIELDS + "ad");
+    }
+
+    public static Response getAllAwsDeviceFields() {
+        return given()
+                .contentType(ContentType.JSON)
+                .header("Authorization", "Bearer " + token)
+                .get(BASE_ENDPOINT_INVENTA + ALL_DEVICE_FIELDS + "aws");
+    }
+
+
+    public static Response getAllAzureDeviceFields() {
+        return given()
+                .contentType(ContentType.JSON)
+                .header("Authorization", "Bearer " + token)
+                .get(BASE_ENDPOINT_INVENTA + ALL_DEVICE_FIELDS + "azure");
+    }
+
+    public static Response getAllWmicDeviceFields() {
+        return given()
+                .contentType(ContentType.JSON)
+                .header("Authorization", "Bearer " + token)
+                .get(BASE_ENDPOINT_INVENTA + ALL_DEVICE_FIELDS + "wmic");
+    }
+
+    public static Response getAllAdUserFields() {
+        return given()
+                .contentType(ContentType.JSON)
+                .header("Authorization", "Bearer " + token)
+                .get(BASE_ENDPOINT_INVENTA + ALL_USER_FIELDS + "ad");
+    }
+
+    public static Response getAllAwsUserFields() {
+        return given()
+                .contentType(ContentType.JSON)
+                .header("Authorization", "Bearer " + token)
+                .get(BASE_ENDPOINT_INVENTA + ALL_USER_FIELDS + "aws");
+    }
+
+    public static Response getAllAzureUserFields() {
+        return given()
+                .contentType(ContentType.JSON)
+                .header("Authorization", "Bearer " + token)
+                .get(BASE_ENDPOINT_INVENTA + ALL_USER_FIELDS + "azure");
+    }
+
+    public static Response getAzureTypeDeviceFields() {
+        return given()
+                .contentType(ContentType.JSON)
+                .header("Authorization", "Bearer " + token)
+                .get(BASE_ENDPOINT_INVENTA + TYPE_DEVICE_FIELDS + "azure");
+    }
+
+    public static Response getAwsTypeDeviceFields() {
+        return given()
+                .contentType(ContentType.JSON)
+                .header("Authorization", "Bearer " + token)
+                .get(BASE_ENDPOINT_INVENTA + TYPE_DEVICE_FIELDS + "aws");
+    }
+
+    public static Response getAdTypeDeviceFields() {
+        return given()
+                .contentType(ContentType.JSON)
+                .header("Authorization", "Bearer " + token)
+                .get(BASE_ENDPOINT_INVENTA + TYPE_DEVICE_FIELDS + "ad");
     }
 
 }

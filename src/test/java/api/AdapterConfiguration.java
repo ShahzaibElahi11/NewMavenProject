@@ -7,7 +7,7 @@ import utils.BaseClass;
 
 import static io.restassured.RestAssured.given;
 
-public class AdapterConfigurationApis extends BaseClass {
+public class AdapterConfiguration extends BaseClass {
 
     public final static String ADAPTER_ENDPOINT = "/adapters/";
     public final static String ADAPTER_CONFIGURATION = "active-directory/configure/?type=";

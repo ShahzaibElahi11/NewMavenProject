@@ -1,6 +1,6 @@
 package testcases;
 
-import api.DashboardApis;
+import api.Dashboard;
 import io.restassured.response.Response;
 import net.serenitybdd.junit.runners.SerenityRunner;
 import org.apache.http.HttpStatus;
@@ -15,62 +15,62 @@ public class DashboardTest {
     @Test
     public void GetAllAdaptersCount() {
 
-        Response response = DashboardApis.getAllAdaptersCount();
+        Response response = Dashboard.getAllAdaptersCount();
         Assert.assertEquals("Invalid Status in Response: ", response.getStatusCode(), HttpStatus.SC_OK);
     }
     @Test
     public void GetADAdapterCount(){
-        Response response = DashboardApis.getAdAdapterCount();
+        Response response = Dashboard.getAdAdapterCount();
         Assert.assertEquals("Invalid Status in Response: ", response.getStatusCode(), HttpStatus.SC_OK);
     }
     @Test
     public void GetAzureAdapterCount(){
-        Response response = DashboardApis.getAzureAdapterCount();
+        Response response = Dashboard.getAzureAdapterCount();
         Assert.assertEquals("Invalid Status in Response: ", response.getStatusCode(), HttpStatus.SC_OK);
     }
 
     @Test
     public void GetWMICAdapterCount(){
-        Response response = DashboardApis.getWmicAdapterCount();
+        Response response = Dashboard.getWmicAdapterCount();
         Assert.assertEquals("Invalid Status in Response: ", response.getStatusCode(), HttpStatus.SC_OK);
     }
 
     @Test
     public void GetOSDistribution(){
-        Response response = DashboardApis.getOSDistribution();
+        Response response = Dashboard.getOSDistribution();
         Assert.assertEquals("Invalid Status in Response: ", response.getStatusCode(), HttpStatus.SC_OK);
     }
 
     @Test
     public void GetTotalUserCount(){
-        Response response = DashboardApis.getTotalUserCount();
+        Response response = Dashboard.getTotalUserCount();
         Assert.assertEquals("Invalid Status in Response: ", response.getStatusCode(), HttpStatus.SC_OK);
     }
     @Test
     public void GetAzureAssetTypeDistribution(){
-        Response response = DashboardApis.getAzureAssetTypeDistribution();
+        Response response = Dashboard.getAzureAssetTypeDistribution();
         Assert.assertEquals("Invalid Status in Response: ", response.getStatusCode(), HttpStatus.SC_OK);
     }
     @Test
     public void GetADAssetTypeDistribution(){
-        Response response = DashboardApis.getAdAssetTypeDistribution();
+        Response response = Dashboard.getAdAssetTypeDistribution();
         Assert.assertEquals("Invalid Status in Response: ", response.getStatusCode(), HttpStatus.SC_OK);
     }
 
     @Test
     public void GetAWSAssetTypeDistribution(){
-        Response response = DashboardApis.getAwsAssetTypeDistribution();
+        Response response = Dashboard.getAwsAssetTypeDistribution();
         Assert.assertEquals("Invalid Status in Response: ", response.getStatusCode(), HttpStatus.SC_OK);
     }
     @Test
     public void GetWMICAssetTypeDistribution(){
-        Response response = DashboardApis.getWmicAssetTypeDistribution();
+        Response response = Dashboard.getWmicAssetTypeDistribution();
         Assert.assertEquals("Invalid Status in Response: ", response.getStatusCode(), HttpStatus.SC_OK);
     }
 
     @Test
     public void GetCloudVSNonCloud(){
-        Response response = DashboardApis.getCloudVSNonCloud();
+        Response response = Dashboard.getCloudVSNonCloud();
         Assert.assertEquals("Invalid Status in Response: ", response.getStatusCode(), HttpStatus.SC_OK);
 
     }

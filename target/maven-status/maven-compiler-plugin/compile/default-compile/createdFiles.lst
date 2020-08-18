@@ -12,6 +12,7 @@ models\devices\DeviceTag.class
 models\users\UserTag.class
 models\policyroutine\PolicyRoutine$Builder.class
 models\usermanagement\Login.class
+models\usermanagement\AdminUser$Builder.class
 models\policyroutine\EnforcePolicyOnUser.class
 models\ldap\AdLogin.class
 models\usermanagement\AdminUser.class

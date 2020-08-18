@@ -1,6 +1,6 @@
 package testcases;
 
-import api.DeviceApis;
+import api.Devices;
 import io.restassured.response.Response;
 
 import net.serenitybdd.junit.runners.SerenityRunner;
@@ -33,13 +33,13 @@ public class DeviceDetailsTest extends BaseClass {
 
     @Test
     public void GetAllDevices() {
-        Response response = DeviceApis.getAllDevices();
+        Response response = Devices.getAllDevices();
         Assert.assertEquals("Invalid Status in Response: ", response.getStatusCode(), HttpStatus.SC_OK);
     }
 
     @Test
     public void GetDevicesDetailsById(){
-        Response response = DeviceApis.getDevicesDetailsById();
+        Response response = Devices.getDevicesDetailsById();
         Assert.assertEquals("Invalid Status in Response: ", response.getStatusCode(), HttpStatus.SC_OK);
     }
 
@@ -47,94 +47,94 @@ public class DeviceDetailsTest extends BaseClass {
     @Test
     public void GetDeviceAdaptersList(){
 
-        Response response = DeviceApis.getDeviceAdaptersListById();
+        Response response = Devices.getDeviceAdaptersListById();
         Assert.assertEquals("Invalid Status in Response: ", response.getStatusCode(), HttpStatus.SC_OK);
     }
 
     @Test
     public void GetDrivesDetailsById(){
 
-        Response response = DeviceApis.getDrivesDetailsById();
+        Response response = Devices.getDrivesDetailsById();
         Assert.assertEquals("Invalid Status in Response: ", response.getStatusCode(), HttpStatus.SC_OK);
     }
 
     @Test
     public void GetOSPatchesDetailsById(){
-        Response response = DeviceApis.getOSPatchesDetailsById();
+        Response response = Devices.getOSPatchesDetailsById();
         Assert.assertEquals("Invalid Status in Response: ", response.getStatusCode(), HttpStatus.SC_OK);
     }
 
     @Test
     public void GetRunningProcessesDetailsById(){
-        Response response = DeviceApis.getRunningProcessesDetailsById();
+        Response response = Devices.getRunningProcessesDetailsById();
         Assert.assertEquals("Invalid Status in Response: ", response.getStatusCode(), HttpStatus.SC_OK);
     }
 
     @Test
     public void GetInstalledSoftwareDetailsById(){
-        Response response = DeviceApis.getInstalledSoftwareDetailsById();
+        Response response = Devices.getInstalledSoftwareDetailsById();
         Assert.assertEquals("Invalid Status in Response: ", response.getStatusCode(), HttpStatus.SC_OK);
     }
 
     @Test
     public void GetOSDetailsById(){
-        Response response = DeviceApis.getOSDetailsById();
+        Response response = Devices.getOSDetailsById();
         Assert.assertEquals("Invalid Status in Response: ", response.getStatusCode(), HttpStatus.SC_OK);
     }
 
     @Test
     public void GetUserDetailsById(){
-        Response response = DeviceApis.getUserDetailsById();
+        Response response = Devices.getUserDetailsById();
         Assert.assertEquals("Invalid Status in Response: ", response.getStatusCode(), HttpStatus.SC_OK);
     }
 
     @Test
     public void GetNetworkInterfacesDetailsById(){
-        Response response = DeviceApis.getNetworkInterfacesDetailsById();
+        Response response = Devices.getNetworkInterfacesDetailsById();
         Assert.assertEquals("Invalid Status in Response: ", response.getStatusCode(), HttpStatus.SC_OK);
     }
 
     @Test
     public void GetSharedFoldersDetailsById(){
-        Response response = DeviceApis.getSharedFoldersDetailsById();
+        Response response = Devices.getSharedFoldersDetailsById();
         Assert.assertEquals("Invalid Status in Response: ", response.getStatusCode(), HttpStatus.SC_OK);
     }
 
     @Test
     public void GetDeviceNoteDetailsById(){
-        Response response = DeviceApis.getDeviceNoteDetailsById();
+        Response response = Devices.getDeviceNoteDetailsById();
         Assert.assertEquals("Invalid Status in Response: ", response.getStatusCode(), HttpStatus.SC_OK);
     }
 
     @Test
     public void GetDeviceTagDetailsById(){
-        Response response = DeviceApis.getDeviceTagDetailsById();
+        Response response = Devices.getDeviceTagDetailsById();
         Assert.assertEquals("Invalid Status in Response: ", response.getStatusCode(), HttpStatus.SC_OK);
     }
 
     @Test //extra
     public void GetGeneralDetailsById(){
-        Response response = DeviceApis.getGeneralDetailsById();
+        Response response = Devices.getGeneralDetailsById();
         Assert.assertEquals("Invalid Status in Response: ", response.getStatusCode(), HttpStatus.SC_OK);
     }
 
     @Test
     public void GeAdapterDetailsById() throws IOException {
-        Response response = DeviceApis.getAdapterDetailsById();
+        Response response = Devices.getAdapterDetailsById();
         Assert.assertEquals("Invalid Status in Response: ", response.getStatusCode(), HttpStatus.SC_OK);
     }
 
     @Test
     public void PostInsertDeviceTag(){
         DeviceTag deviceTag = new DeviceTag("Automation_Device_Tag_Number_"+value+"1", Collections.singletonList(DEVICE_DETAIL_ID));
-        Response response = DeviceApis.postInsertDeviceTag(deviceTag);
+        Response response = Devices.postInsertDeviceTag(deviceTag);
         Assert.assertEquals("Invalid Status in Response: ", response.getStatusCode(), HttpStatus.SC_OK);
     }
 
     @Test
     public void PostInsertDeviceNote() {
         DeviceNotes deviceNotes = new DeviceNotes("Automation_Notes_#_"+value+"", ""+DEVICE_DETAIL_ID);
-        Response response = DeviceApis.postInsertDeviceNote(deviceNotes);
+        Response response = Devices.postInsertDeviceNote(deviceNotes);
         Assert.assertEquals("Invalid Status in Response: ", response.getStatusCode(), HttpStatus.SC_OK);
     }
 
@@ -144,13 +144,13 @@ public class DeviceDetailsTest extends BaseClass {
     @Test
     public void GetAllTags(){
 
-        Response response = DeviceApis.getAllTags();
+        Response response = Devices.getAllTags();
         Assert.assertEquals("Invalid Status in Response: ", response.getStatusCode(), HttpStatus.SC_OK);
     }
 
     @Test
     public void GetLoadBalancerRulesForDevice(){
-        Response response = DeviceApis.getLoadBalancerRulesForDevice();
+        Response response = Devices.getLoadBalancerRulesForDevice();
         Assert.assertEquals("Invalid Status in Response: ", response.getStatusCode(), HttpStatus.SC_OK);
 
     }
@@ -213,14 +213,14 @@ public class DeviceDetailsTest extends BaseClass {
 
     @Test
     public void GetConnectedHardwareForDevice() {
-        Response response = DeviceApis.getConnectedHardwareForDevice();
+        Response response = Devices.getConnectedHardwareForDevice();
         Assert.assertEquals("Invalid Status in Response: ", response.getStatusCode(), HttpStatus.SC_OK);
     }
 
     @Test
     public void GetUsersForDevice(){
 
-        Response response = DeviceApis.getUsersForDevice();
+        Response response = Devices.getUsersForDevice();
         Assert.assertEquals("Invalid Status in Response: ", response.getStatusCode(), HttpStatus.SC_OK);
 
     }

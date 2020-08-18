@@ -6,7 +6,7 @@ import utils.BaseClass;
 
 import static io.restassured.RestAssured.given;
 
-public class DashboardApis extends BaseClass {
+public class Dashboard extends BaseClass {
 
     public static Response getAllAdaptersCount() {
         return given()
