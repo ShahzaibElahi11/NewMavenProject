@@ -1,6 +1,6 @@
 # Default ignored files
 .idea/
-/target
+/target/
 
 # Compiled class file
 *.class

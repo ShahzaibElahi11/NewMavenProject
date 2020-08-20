@@ -1,6 +1,7 @@
 package testcases;
 
 import api.Devices;
+import com.github.javafaker.Faker;
 import io.restassured.response.Response;
 
 import net.serenitybdd.junit.runners.SerenityRunner;
@@ -126,7 +127,11 @@ public class DeviceDetailsTest extends BaseClass {
 
     @Test
     public void PostInsertDeviceTag(){
+       // DeviceTag deviceTag = new DeviceTag("Automation_Device_Tag_Number_"+value+"1", Collections.singletonList(DEVICE_DETAIL_ID));
+
+
         DeviceTag deviceTag = new DeviceTag("Automation_Device_Tag_Number_"+value+"1", Collections.singletonList(DEVICE_DETAIL_ID));
+
         Response response = Devices.postInsertDeviceTag(deviceTag);
         Assert.assertEquals("Invalid Status in Response: ", response.getStatusCode(), HttpStatus.SC_OK);
     }
@@ -143,7 +148,6 @@ public class DeviceDetailsTest extends BaseClass {
      */
     @Test
     public void GetAllTags(){
-
         Response response = Devices.getAllTags();
         Assert.assertEquals("Invalid Status in Response: ", response.getStatusCode(), HttpStatus.SC_OK);
     }

@@ -2,6 +2,7 @@ package utils;
 
 import com.auth0.jwt.JWT;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.github.javafaker.Faker;
 import org.apache.commons.lang3.RandomStringUtils;
 import org.apache.http.client.methods.CloseableHttpResponse;
 import org.apache.http.impl.client.CloseableHttpClient;
@@ -42,7 +43,16 @@ public class BaseClass {
     static Random rand = new Random();
     protected static final int value = rand.nextInt(5000);
 
-    protected static final String randomString = RandomStringUtils.randomAlphabetic(8);
+    //Fake Class
+    Faker faker = new Faker();
+    protected final  String userName = faker.name().username();
+
+    protected final String firstName = faker.name().firstName();
+    protected final String lastName = faker.name().lastName();
+    protected final String emailAddress = faker.internet().emailAddress();
+    protected final String phoneNumber = faker.phoneNumber().cellPhone();
+    protected final String randomNnumber = String.valueOf(faker.number().randomNumber()); //will use later.
+
 
 
 

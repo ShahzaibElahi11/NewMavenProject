@@ -4,6 +4,7 @@ import api.PolicyRoutines;
 import io.restassured.response.Response;
 import models.policyroutine.*;
 import net.serenitybdd.junit.runners.SerenityRunner;
+import net.thucydides.core.annotations.Title;
 import org.apache.http.HttpStatus;
 import org.junit.Assert;
 import org.junit.Assume;
@@ -22,6 +23,7 @@ public class PolicyRoutineTest extends BaseClass {
 
     //Update Post Method Using Builder Class
     @Test
+    @Title("Create New Policy Routine")
     public void testA_PostCreatePolicyRoutine() {
         isPreviousTestPass = false;
         PolicyRoutineProperties policyRoutineProperties = new PolicyRoutineProperties.Builder()
@@ -45,6 +47,7 @@ public class PolicyRoutineTest extends BaseClass {
 
 
     @Test
+    @Title("Update Policy Routine")
     public void testB_PutPolicyRoutineNew(){
         Assume.assumeTrue(isPreviousTestPass==true);
         isPreviousTestPass = false;
@@ -69,6 +72,7 @@ public class PolicyRoutineTest extends BaseClass {
 
 
     @Test
+    @Title("Delete Policy Routine")
     public void testC_DeletePolicyRoutine() {
         Assume.assumeTrue(isPreviousTestPass==true);
         isPreviousTestPass = false;

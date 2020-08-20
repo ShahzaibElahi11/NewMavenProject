@@ -3,6 +3,7 @@ package testcases;
 import api.UserManagement;
 import io.restassured.response.Response;
 import net.serenitybdd.junit.runners.SerenityRunner;
+import net.thucydides.core.annotations.Title;
 import org.apache.http.HttpStatus;
 import org.apache.http.client.methods.HttpDelete;
 
@@ -41,7 +42,7 @@ public class UserManagementTest extends BaseClass {
 
 
     @Test
-    public  void PostCreateRole(){
+    public void PostCreateRole(){
         Role role = new Role("Automation_Role_"+value+"1", "This is Test Role Created By new Regression Script", true, "Automation Script", Collections.singletonList(PERMISSION_ID));
         Response response = UserManagement.postCreateRole(role);
         Assert.assertEquals("Invalid Status in Response: ", response.getStatusCode(), HttpStatus.SC_OK);
@@ -141,15 +142,16 @@ public class UserManagementTest extends BaseClass {
 
 
     @Test
+    @Title("Create New User in the Application")
     public void testA_PostCreateUser(){
         isPreviousTestPass = false;
 
         AdminUser adminUser = new AdminUser.Builder()
-                .setEmailAddress("1_Automation"+value+"1@gmail.com")
-                .setPhone("000"+value+"333")
-                .setUserName("AutomationUser1"+value+"1")
-                .setFirstName("firstName "+randomString)
-                .setLastName("lastName "+randomString)
+                .setEmailAddress(emailAddress)
+                .setPhone(phoneNumber)
+                .setUserName(userName)
+                .setFirstName(firstName)
+                .setLastName(lastName)
                 .setPassword("password123")
                 .setPasswordConfirm("password123")
                 .setRoleIds(ROLE_ID)
@@ -164,16 +166,17 @@ public class UserManagementTest extends BaseClass {
     }
 
     @Test
+    @Title("Update User Information")
     public void testB_PutUpdateAdminUser(){
         Assume.assumeTrue(isPreviousTestPass==true);
         isPreviousTestPass = false;
         AdminUser adminUser = new AdminUser.Builder()
                 .set_id(ADMIN_USER_ID)
-                .setEmailAddress("UpdateAutomation"+value+"1@gmail.com")
-                .setPhone("000"+value+"333")
-                .setUserName("UpdateUser1"+value+"1")
-                .setFirstName("UpdatefirstName "+randomString)
-                .setLastName("UpdatelastName "+randomString)
+                .setEmailAddress(emailAddress)
+                .setPhone(phoneNumber)
+                .setUserName(userName)
+                .setFirstName(firstName)
+                .setLastName(lastName)
                 .setPassword("password123")
                 .setPasswordConfirm("password123")
                 .setRoleIds(ROLE_ID)
@@ -189,6 +192,7 @@ public class UserManagementTest extends BaseClass {
 
     }
     @Test
+    @Title("Delete User Information")
     public void testC_DeleteAdminUser(){
         Assume.assumeTrue(isPreviousTestPass==true);
         isPreviousTestPass = false;

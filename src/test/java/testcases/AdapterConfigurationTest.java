@@ -110,5 +110,28 @@ public class AdapterConfigurationTest extends BaseClass {
 
     }
 
+    @Test
+    public void GetAwsDiscoverNow(){
+        Response response = AdapterConfiguration.getAwsDiscoverNow();
+        Assert.assertEquals("Invalid Status in Response: ", response.getStatusCode(), HttpStatus.SC_OK);
+    }
+
+    @Test
+    public void GetAzureDiscoverNow(){
+        Response response = AdapterConfiguration.getAzureDiscoverNow();
+        Assert.assertEquals("Invalid Status in Response: ", response.getStatusCode(), HttpStatus.SC_OK);
+    }
+
+    @Test
+    public void GetAdDiscoverNow(){
+        Response response = AdapterConfiguration.getAdDiscoverNow();
+        Assert.assertEquals("Invalid Status in Response: ", response.getStatusCode(), HttpStatus.SC_OK);
+    }
+
+    @Test
+    public void GetAllAdapterDiscoverNow(){
+        Response response = AdapterConfiguration.getAllAdapterDiscoverNow();
+        Assert.assertEquals("Invalid Status in Response: ", response.getStatusCode(), HttpStatus.SC_OK);
+    }
 
 }
