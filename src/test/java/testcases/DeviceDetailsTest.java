@@ -1,10 +1,10 @@
 package testcases;
 
 import api.Devices;
-import com.github.javafaker.Faker;
 import io.restassured.response.Response;
 
 import net.serenitybdd.junit.runners.SerenityRunner;
+import net.thucydides.core.annotations.Title;
 import org.apache.http.HttpStatus;
 import org.apache.http.client.methods.HttpDelete;
 import org.junit.Assert;
@@ -33,111 +33,122 @@ public class DeviceDetailsTest extends BaseClass {
 
 
     @Test
-    public void GetAllDevices() {
+    @Title("Get All Device List")
+    public void getAllDevices() {
         Response response = Devices.getAllDevices();
         Assert.assertEquals("Invalid Status in Response: ", response.getStatusCode(), HttpStatus.SC_OK);
     }
 
     @Test
-    public void GetDevicesDetailsById(){
+    @Title("Get Device Details By Device ID")
+    public void getDevicesDetailsById(){
         Response response = Devices.getDevicesDetailsById();
         Assert.assertEquals("Invalid Status in Response: ", response.getStatusCode(), HttpStatus.SC_OK);
     }
 
 
     @Test
-    public void GetDeviceAdaptersList(){
-
+    @Title("Get Device with Adapters List By Device ID")
+    public void getDeviceAdaptersList(){
         Response response = Devices.getDeviceAdaptersListById();
         Assert.assertEquals("Invalid Status in Response: ", response.getStatusCode(), HttpStatus.SC_OK);
     }
 
     @Test
-    public void GetDrivesDetailsById(){
-
+    @Title("Get Hard Drive Details By Device ID")
+    public void getDrivesDetailsById(){
         Response response = Devices.getDrivesDetailsById();
         Assert.assertEquals("Invalid Status in Response: ", response.getStatusCode(), HttpStatus.SC_OK);
     }
 
     @Test
-    public void GetOSPatchesDetailsById(){
+    @Title("Get Operating System Patches Details By Device ID")
+    public void getOSPatchesDetailsById(){
         Response response = Devices.getOSPatchesDetailsById();
         Assert.assertEquals("Invalid Status in Response: ", response.getStatusCode(), HttpStatus.SC_OK);
     }
 
     @Test
-    public void GetRunningProcessesDetailsById(){
+    @Title("Get Running Processes Details By Device ID")
+    public void getRunningProcessesDetailsById(){
         Response response = Devices.getRunningProcessesDetailsById();
         Assert.assertEquals("Invalid Status in Response: ", response.getStatusCode(), HttpStatus.SC_OK);
     }
 
     @Test
-    public void GetInstalledSoftwareDetailsById(){
+    @Title("Get Installed Software Details By Device ID")
+    public void getInstalledSoftwareDetailsById(){
         Response response = Devices.getInstalledSoftwareDetailsById();
         Assert.assertEquals("Invalid Status in Response: ", response.getStatusCode(), HttpStatus.SC_OK);
     }
 
     @Test
-    public void GetOSDetailsById(){
+    @Title("Get Installed Software Details By Device ID")
+    public void getOSDetailsById(){
         Response response = Devices.getOSDetailsById();
         Assert.assertEquals("Invalid Status in Response: ", response.getStatusCode(), HttpStatus.SC_OK);
     }
 
     @Test
-    public void GetUserDetailsById(){
+    @Title("Get Device User Details By Device ID")
+    public void getUserDetailsById(){
         Response response = Devices.getUserDetailsById();
         Assert.assertEquals("Invalid Status in Response: ", response.getStatusCode(), HttpStatus.SC_OK);
     }
 
     @Test
-    public void GetNetworkInterfacesDetailsById(){
+    @Title("Get Network Interface Details By Device ID")
+    public void getNetworkInterfacesDetailsById(){
         Response response = Devices.getNetworkInterfacesDetailsById();
         Assert.assertEquals("Invalid Status in Response: ", response.getStatusCode(), HttpStatus.SC_OK);
     }
 
     @Test
-    public void GetSharedFoldersDetailsById(){
+    @Title("Get Shared Folders Details By Device ID")
+    public void getSharedFoldersDetailsById(){
         Response response = Devices.getSharedFoldersDetailsById();
         Assert.assertEquals("Invalid Status in Response: ", response.getStatusCode(), HttpStatus.SC_OK);
     }
 
     @Test
-    public void GetDeviceNoteDetailsById(){
+    @Title("Get Device Note By Device ID")
+    public void getDeviceNoteDetailsById(){
         Response response = Devices.getDeviceNoteDetailsById();
         Assert.assertEquals("Invalid Status in Response: ", response.getStatusCode(), HttpStatus.SC_OK);
     }
 
     @Test
-    public void GetDeviceTagDetailsById(){
+    @Title("Get Device Tags By Device ID")
+    public void getDeviceTagDetailsById(){
         Response response = Devices.getDeviceTagDetailsById();
         Assert.assertEquals("Invalid Status in Response: ", response.getStatusCode(), HttpStatus.SC_OK);
     }
 
     @Test //extra
-    public void GetGeneralDetailsById(){
+    @Title("Get General Details By Device ID")
+    public void getGeneralDetailsById(){
         Response response = Devices.getGeneralDetailsById();
         Assert.assertEquals("Invalid Status in Response: ", response.getStatusCode(), HttpStatus.SC_OK);
     }
 
     @Test
-    public void GeAdapterDetailsById() throws IOException {
+    @Title("Get Adapter Details By Device ID")
+    public void geAdapterDetailsById() throws IOException {
         Response response = Devices.getAdapterDetailsById();
         Assert.assertEquals("Invalid Status in Response: ", response.getStatusCode(), HttpStatus.SC_OK);
     }
 
     @Test
-    public void PostInsertDeviceTag(){
-       // DeviceTag deviceTag = new DeviceTag("Automation_Device_Tag_Number_"+value+"1", Collections.singletonList(DEVICE_DETAIL_ID));
-
-
+    @Title("Post Insert Tags on Device")
+    public void postInsertDeviceTag(){
         DeviceTag deviceTag = new DeviceTag("Automation_Device_Tag_Number_"+value+"1", Collections.singletonList(DEVICE_DETAIL_ID));
-
         Response response = Devices.postInsertDeviceTag(deviceTag);
         Assert.assertEquals("Invalid Status in Response: ", response.getStatusCode(), HttpStatus.SC_OK);
     }
 
     @Test
-    public void PostInsertDeviceNote() {
+    @Title("Post Insert Note on Device")
+    public void postInsertDeviceNote() {
         DeviceNotes deviceNotes = new DeviceNotes("Automation_Notes_#_"+value+"", ""+DEVICE_DETAIL_ID);
         Response response = Devices.postInsertDeviceNote(deviceNotes);
         Assert.assertEquals("Invalid Status in Response: ", response.getStatusCode(), HttpStatus.SC_OK);
@@ -147,13 +158,15 @@ public class DeviceDetailsTest extends BaseClass {
      * insert new
      */
     @Test
-    public void GetAllTags(){
+    @Title("Get All Devices Tags")
+    public void getAllTags(){
         Response response = Devices.getAllTags();
         Assert.assertEquals("Invalid Status in Response: ", response.getStatusCode(), HttpStatus.SC_OK);
     }
 
     @Test
-    public void GetLoadBalancerRulesForDevice(){
+    @Title("Get Load Balancer Rules Details By Device ID")
+    public void getLoadBalancerRulesForDevice(){
         Response response = Devices.getLoadBalancerRulesForDevice();
         Assert.assertEquals("Invalid Status in Response: ", response.getStatusCode(), HttpStatus.SC_OK);
 
@@ -161,7 +174,7 @@ public class DeviceDetailsTest extends BaseClass {
 
     @Ignore
     @Test // Not throw exception if tag name not exist.
-    public void DeleteDeviceSingleTag() throws IOException {
+    public void deleteDeviceSingleTag() throws IOException {
 
         HttpDelete delete = new HttpDelete(BASE_ENDPOINT_INVENTA + DEVICE_ENDPOINT + DELETE_SINGLE_TAG + DEVICE_DETAIL_ID +"&tag="+ SINGLE_TAG_NAME)  ;
         delete.setHeader("Authorization", "Bearer " + token);
@@ -174,7 +187,7 @@ public class DeviceDetailsTest extends BaseClass {
 
     @Ignore
     @Test // issue - not complete. also postman issue
-    public void DeleteDeviceBukTag() throws IOException {
+    public void deleteDeviceBukTag() throws IOException {
 
         HttpDelete request = new HttpDelete(BASE_ENDPOINT_INVENTA + DEVICE_ENDPOINT + DELETE_BULK_TAG) ;
         request.setHeader("Authorization", "Bearer " + token);
@@ -192,7 +205,7 @@ public class DeviceDetailsTest extends BaseClass {
     }
     @Ignore
     @Test // Not throw exception if note does not exist.
-    public void DeleteDeviceNote() throws IOException {
+    public void deleteDeviceNote() throws IOException {
 
         HttpDelete delete = new HttpDelete(BASE_ENDPOINT_INVENTA + DEVICE_ENDPOINT + DELETE_NOTE + DEVICE_DETAIL_ID )  ;
         delete.setHeader("Authorization", "Bearer " + token);
@@ -205,7 +218,7 @@ public class DeviceDetailsTest extends BaseClass {
 
     @Ignore
     @Test // Not throw exception if note does not exist.
-    public void DeleteDiscoveredDevice() throws IOException {
+    public void deleteDiscoveredDevice() throws IOException {
 
         HttpDelete delete = new HttpDelete(BASE_ENDPOINT_INVENTA + DEVICE_ENDPOINT + DELETE_DEVICE + DELETE_DEVICE_ID ) ;
         delete.setHeader("Authorization", "Bearer " + token);
@@ -216,13 +229,15 @@ public class DeviceDetailsTest extends BaseClass {
     }
 
     @Test
-    public void GetConnectedHardwareForDevice() {
+    @Title("Get Hardware Details By Device ID")
+    public void getConnectedHardwareForDevice() {
         Response response = Devices.getConnectedHardwareForDevice();
         Assert.assertEquals("Invalid Status in Response: ", response.getStatusCode(), HttpStatus.SC_OK);
     }
 
     @Test
-    public void GetUsersForDevice(){
+    @Title("Get User for Device Details By Device ID")
+    public void getUsersForDevice(){
 
         Response response = Devices.getUsersForDevice();
         Assert.assertEquals("Invalid Status in Response: ", response.getStatusCode(), HttpStatus.SC_OK);

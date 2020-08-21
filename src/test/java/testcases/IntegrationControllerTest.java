@@ -3,6 +3,7 @@ package testcases;
 import io.restassured.http.ContentType;
 import io.restassured.response.Response;
 import net.serenitybdd.junit.runners.SerenityRunner;
+import net.thucydides.core.annotations.Title;
 import org.apache.http.HttpStatus;
 import org.junit.Assert;
 import org.junit.Test;
@@ -19,6 +20,7 @@ public class IntegrationControllerTest extends BaseClass {
 
 
     @Test
+    @Title("Get Check Active MQ Connection")
     public void GetActiveMQConnectivity(){
         Response response = given()
                 .contentType(ContentType.JSON)

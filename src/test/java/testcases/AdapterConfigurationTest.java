@@ -4,6 +4,7 @@ import api.AdapterConfiguration;
 import io.restassured.response.Response;
 import models.configuration.AwsConfiguration;
 import net.serenitybdd.junit.runners.SerenityRunner;
+import net.thucydides.core.annotations.Title;
 import org.apache.commons.codec.binary.Base64;
 import org.apache.http.HttpHeaders;
 import org.apache.http.HttpStatus;
@@ -32,25 +33,29 @@ public class AdapterConfigurationTest extends BaseClass {
     protected static final String AWS_SECRET_KEY = ApplicationConfiguration.getAwsSecretKey();
 
     @Test
-    public void GetAllAdapters(){
+    @Title("Get All Adapters")
+    public void getAllAdapters(){
         Response response = AdapterConfiguration.getAllAdapters();
         Assert.assertEquals("Invalid Status in Response: ", response.getStatusCode(), HttpStatus.SC_OK);
     }
 
     @Test
-    public void GetADAdapterConfiguration(){
+    @Title("Get AD Adapter Configuration")
+    public void getADAdapterConfigurationTest(){
         Response response = AdapterConfiguration.getAdAdapterConfiguration();
         Assert.assertEquals("Invalid Status in Response: ", response.getStatusCode(), HttpStatus.SC_OK);
 
     }
     @Test
-    public void GetAWSAdapterConfiguration(){
+    @Title("Get AWS Adapter Configuration")
+    public void getAWSAdapterConfigurationTest(){
         Response response = AdapterConfiguration.getAwsAdapterConfiguration();
         Assert.assertEquals("Invalid Status in Response: ", response.getStatusCode(), HttpStatus.SC_OK);
     }
 
     @Test
-    public void GetAZUREAdapterConfiguration(){
+    @Title("Get Azure Adapter Configuration")
+    public void getAZUREAdapterConfiguration(){
         Response response = AdapterConfiguration.getAzureAdapterConfiguration();
         Assert.assertEquals("Invalid Status in Response: ", response.getStatusCode(), HttpStatus.SC_OK);
 
@@ -111,24 +116,28 @@ public class AdapterConfigurationTest extends BaseClass {
     }
 
     @Test
-    public void GetAwsDiscoverNow(){
+    @Title("Get AWS Discover Now")
+    public void getAwsDiscoverNow(){
         Response response = AdapterConfiguration.getAwsDiscoverNow();
         Assert.assertEquals("Invalid Status in Response: ", response.getStatusCode(), HttpStatus.SC_OK);
     }
 
     @Test
-    public void GetAzureDiscoverNow(){
+    @Title("Get Azure Discover Now")
+    public void getAzureDiscoverNow(){
         Response response = AdapterConfiguration.getAzureDiscoverNow();
         Assert.assertEquals("Invalid Status in Response: ", response.getStatusCode(), HttpStatus.SC_OK);
     }
 
     @Test
-    public void GetAdDiscoverNow(){
+    @Title("Get AD Discover Now")
+    public void getAdDiscoverNow(){
         Response response = AdapterConfiguration.getAdDiscoverNow();
         Assert.assertEquals("Invalid Status in Response: ", response.getStatusCode(), HttpStatus.SC_OK);
     }
 
     @Test
+    @Title("Get All Adapters Discover Now")
     public void GetAllAdapterDiscoverNow(){
         Response response = AdapterConfiguration.getAllAdapterDiscoverNow();
         Assert.assertEquals("Invalid Status in Response: ", response.getStatusCode(), HttpStatus.SC_OK);

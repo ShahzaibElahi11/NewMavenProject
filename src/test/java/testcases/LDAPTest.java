@@ -4,6 +4,7 @@ import api.Ldap;
 import io.restassured.response.Response;
 import models.ldap.LdapConfiguration;
 import net.serenitybdd.junit.runners.SerenityRunner;
+import net.thucydides.core.annotations.Title;
 import org.apache.http.HttpStatus;
 import models.ldap.AdLogin;
 import org.junit.Assert;
@@ -29,6 +30,7 @@ public class LDAPTest extends BaseClass {
 
 
     @Test
+    @Title("Post LDAP Configuration")
     public void testA_PostConfigureLDAP() {
         isPreviousTestPass = false;
         LdapConfiguration ldapConfiguration = new LdapConfiguration(LDAP_MACHINE_IP, LDAP_DOMAIN, ROLE_ID);
@@ -39,13 +41,15 @@ public class LDAPTest extends BaseClass {
     }
 
     @Test
-    public void GetLDAPConfiguration() {
+    @Title("Get LDAP Configuration")
+    public void getLDAPConfiguration() {
         Response response = Ldap.getLDAPConfiguration();
         Assert.assertEquals("Invalid Status in Response: ", response.getStatusCode(), HttpStatus.SC_OK);
     }
 
 
     @Test
+    @Title("Post AD Login")
     public void testB_PostADLogin() {
         Assume.assumeTrue(isPreviousTestPass==true);
         isPreviousTestPass = false;
