@@ -18,6 +18,7 @@ import utils.BaseClass;
 import java.io.IOException;
 import java.util.Collections;
 
+
 @RunWith(SerenityRunner.class)
 public class DeviceDetailsTest extends BaseClass {
 
@@ -157,7 +158,7 @@ public class DeviceDetailsTest extends BaseClass {
      * insert new
      */
     @Test
-    @Title("Post Azure Adapter Configuration")
+    @Title("Get All Device Tags")
     public void getAllTags(){
         Response response = Devices.getAllTags();
         Assert.assertEquals("Invalid Status in Response: ", response.getStatusCode(), HttpStatus.SC_OK);

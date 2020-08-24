@@ -1,8 +1,13 @@
 package api;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import io.restassured.http.ContentType;
 import io.restassured.response.Response;
 import utils.BaseClass;
+
+import java.io.IOException;
+import java.util.List;
+import java.util.Map;
 
 import static io.restassured.RestAssured.given;
 
@@ -33,6 +38,24 @@ public class QueryWizard extends BaseClass {
     public static final String TYPE_DEVICE_FIELDS = "/query/fields/type/?fieldEntity=devices&field=adapters.adapter_";
 
 
+    public static String getNameFromSaveQueryWizardURL(String url) throws IOException {
+        ObjectMapper mapper = new ObjectMapper(); // just need one
+        String json = readJsonFromUrl(url).toString();
+        Map<String,Object> map = mapper.readValue(json, Map.class);
+        return ((Map)((List)((Map)map.get("data")).get("content")).get(0)).get("name")+"";
+    }
+
+    public static String SAVED_DEVICE_QUERY_NAME = "";
+    public static String SAVED_USER_QUERY_NAME = "";
+
+    static {
+        try {
+            SAVED_DEVICE_QUERY_NAME = getNameFromSaveQueryWizardURL("http://inventaserver:9092/saved-query/?type=DEVICE&page=0&size=1");
+            SAVED_USER_QUERY_NAME = getNameFromSaveQueryWizardURL("http://inventaserver:9092/saved-query/?type=USER&page=0&size=1");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
 
     public static Response getEqualOperator() {
         return given()

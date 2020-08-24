@@ -18,10 +18,8 @@ public class UserManagement extends BaseClass {
     public static final String DELETE_ROLE = "deleteRole?id=";
 
     public static final String PERMISSION_ENDPOINT = "/permission/";
-    public static final String CREATE_PERMISSION = "createPermission";
     public static final String GET_ALL_PERMISSION = "getAllPermission";
     public static final String PERMISSION_DETAILS = "getPermissionDetail?id=";
-    public static final String UPDATE_PERMISSION = "updatePermission?id=";
     public static final String DELETE_PERMISSION  = "deletePermission?id=";
 
     public static final String GET_ALL_MODULES = "getAllModules";

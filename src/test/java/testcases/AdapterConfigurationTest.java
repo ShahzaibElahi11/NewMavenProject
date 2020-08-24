@@ -22,6 +22,7 @@ import utils.BaseClass;
 import java.io.IOException;
 import java.nio.charset.Charset;
 
+import static org.hamcrest.Matchers.*;
 
 @RunWith(SerenityRunner.class)
 public class AdapterConfigurationTest extends BaseClass {
@@ -36,29 +37,46 @@ public class AdapterConfigurationTest extends BaseClass {
     @Title("Get All Adapters")
     public void getAllAdapters(){
         Response response = AdapterConfiguration.getAllAdapters();
-        Assert.assertEquals("Invalid Status in Response: ", response.getStatusCode(), HttpStatus.SC_OK);
+        response.then()
+                .assertThat()
+                .statusCode(HttpStatus.SC_OK)
+                .contentType("application/json")
+                .body("meta.status", equalTo("success"));
+
+                //.extract()   //will work later.
+                //.path(String.format("findAll.id==%d.id", id));
     }
 
     @Test
     @Title("Get AD Adapter Configuration")
-    public void getADAdapterConfigurationTest(){
+    public void getADAdapterConfiguration(){
         Response response = AdapterConfiguration.getAdAdapterConfiguration();
-        Assert.assertEquals("Invalid Status in Response: ", response.getStatusCode(), HttpStatus.SC_OK);
-
+        response.then()
+                .assertThat()
+                .statusCode(HttpStatus.SC_OK)
+                .contentType("application/json")
+                .body("meta.status", equalTo("success"));
     }
     @Test
     @Title("Get AWS Adapter Configuration")
-    public void getAWSAdapterConfigurationTest(){
+    public void getAWSAdapterConfiguration(){
         Response response = AdapterConfiguration.getAwsAdapterConfiguration();
-        Assert.assertEquals("Invalid Status in Response: ", response.getStatusCode(), HttpStatus.SC_OK);
+        response.then()
+                .assertThat()
+                .statusCode(HttpStatus.SC_OK)
+                .contentType("application/json")
+                .body("meta.status", equalTo("success"));
     }
 
     @Test
     @Title("Get Azure Adapter Configuration")
     public void getAZUREAdapterConfiguration(){
         Response response = AdapterConfiguration.getAzureAdapterConfiguration();
-        Assert.assertEquals("Invalid Status in Response: ", response.getStatusCode(), HttpStatus.SC_OK);
-
+        response.then()
+                .assertThat()
+                .statusCode(HttpStatus.SC_OK)
+                .contentType("application/json")
+                .body("meta.status", equalTo("success"));
     }
     @Ignore
     @Test
@@ -122,28 +140,44 @@ public class AdapterConfigurationTest extends BaseClass {
     @Title("Get AWS Discover Now")
     public void getAwsDiscoverNow(){
         Response response = AdapterConfiguration.getAwsDiscoverNow();
-        Assert.assertEquals("Invalid Status in Response: ", response.getStatusCode(), HttpStatus.SC_OK);
+        response.then()
+                .assertThat()
+                .statusCode(HttpStatus.SC_OK)
+                .contentType("application/json")
+                .body("data", equalTo("Triggered Discovery"), "meta.status", equalTo("success"));
     }
 
     @Test
     @Title("Get Azure Discover Now")
     public void getAzureDiscoverNow(){
         Response response = AdapterConfiguration.getAzureDiscoverNow();
-        Assert.assertEquals("Invalid Status in Response: ", response.getStatusCode(), HttpStatus.SC_OK);
+        response.then()
+                .assertThat()
+                .statusCode(HttpStatus.SC_OK)
+                .contentType("application/json")
+                .body("data", equalTo("Triggered Discovery"), "meta.status", equalTo("success"));
     }
 
     @Test
     @Title("Get AD Discover Now")
     public void getAdDiscoverNow(){
         Response response = AdapterConfiguration.getAdDiscoverNow();
-        Assert.assertEquals("Invalid Status in Response: ", response.getStatusCode(), HttpStatus.SC_OK);
+        response.then()
+                .assertThat()
+                .statusCode(HttpStatus.SC_OK)
+                .contentType("application/json")
+                .body("data", equalTo("Triggered Discovery"), "meta.status", equalTo("success"));
     }
 
     @Test
     @Title("Get All Adapters Discover Now")
     public void getAllAdapterDiscoverNow(){
         Response response = AdapterConfiguration.getAllAdapterDiscoverNow();
-        Assert.assertEquals("Invalid Status in Response: ", response.getStatusCode(), HttpStatus.SC_OK);
+        response.then()
+                .assertThat()
+                .statusCode(HttpStatus.SC_OK)
+                .contentType("application/json")
+                .body("data", equalTo("Triggered Discovery"), "meta.status", equalTo("success"));
     }
 
 }

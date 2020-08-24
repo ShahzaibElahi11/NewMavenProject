@@ -3,7 +3,6 @@ package utils;
 import com.auth0.jwt.JWT;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.github.javafaker.Faker;
-import org.apache.commons.lang3.RandomStringUtils;
 import org.apache.http.client.methods.CloseableHttpResponse;
 import org.apache.http.impl.client.CloseableHttpClient;
 import org.json.JSONException;
@@ -19,6 +18,7 @@ import static com.auth0.jwt.algorithms.Algorithm.HMAC512;
 
 public class BaseClass {
 
+    //I will delete later, once all old test case will remove in new project.
     protected CloseableHttpClient client;
     protected CloseableHttpResponse response;
 
@@ -98,6 +98,7 @@ public class BaseClass {
         return ((Map)((List)((Map)map.get("data")).get("content")).get(0)).get("_id")+"";
 
     }
+    //will check later once siraj has fixed.
     public static String getIdFromRolePermissionURL(String url) throws IOException {
         ObjectMapper mapper = new ObjectMapper(); // just need one
         String json = readJsonFromUrl(url).toString();
@@ -107,14 +108,6 @@ public class BaseClass {
         return ((Map)((List)map.get("data")).get(3)).get("_id")+"";
 
     }
-    public static String getNameFromSaveQueryWizardURL(String url) throws IOException {
-        ObjectMapper mapper = new ObjectMapper(); // just need one
-        String json = readJsonFromUrl(url).toString();
-        Map<String,Object> map = mapper.readValue(json, Map.class);
-        //System.out.println(((Map)((List)((Map)map.get("data")).get("content")).get(0)).get("name"));
-
-        return ((Map)((List)((Map)map.get("data")).get("content")).get(0)).get("name")+"";
-    }
 
     public static String DEVICE_DETAIL_ID = "";
     public static String USER_ID = "";
@@ -122,8 +115,6 @@ public class BaseClass {
     public static String ROLE_ID = "";
     public static String PERMISSION_ID = "";
     public static String ADMIN_USER_ID = "";
-    public static String SAVED_DEVICE_QUERY_NAME = "";
-    public static String SAVED_USER_QUERY_NAME = "";
     public static String AUDIT_DETAIL_ID = "";
     public static String DELETE_PR_ID = "";
     public static String DELETE_ADMIN_USER_ID = "";
@@ -139,8 +130,6 @@ public class BaseClass {
             ROLE_ID = getIdFromRolePermissionURL("http://inventaserver:9092/role/getAllRole?page=0&size=1");
             PERMISSION_ID = getIdFromRolePermissionURL("http://inventaserver:9092/permission/getAllPermission?page=0&size=1");
             ADMIN_USER_ID = getIdFromURL("http://inventaserver:9092/adminUsers/getAllAdminUsers?page=0&size=1&sort=dateCreated,desc"); // Update Parameter in Endpoint
-            SAVED_DEVICE_QUERY_NAME = getNameFromSaveQueryWizardURL("http://inventaserver:9092/saved-query/?type=DEVICE&page=0&size=1");
-            SAVED_USER_QUERY_NAME = getNameFromSaveQueryWizardURL("http://inventaserver:9092/saved-query/?type=USER&page=0&size=1");
             AUDIT_DETAIL_ID = getIdFromURL("http://inventaserver:9092/audit/getAllAudit?page=0&size=1");
             DELETE_PR_ID = getIdFromURL("http://inventaserver:9092/policy-routine/?page=0&size=1&sort=dateModified,desc"); //add new endpoint
             DELETE_ADMIN_USER_ID = getIdFromURL("http://inventaserver:9092/adminUsers/getAllAdminUsers?page=0&size=1&sort=dateModified,desc"); //add new endpoint
