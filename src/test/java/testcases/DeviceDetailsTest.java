@@ -132,7 +132,7 @@ public class DeviceDetailsTest extends BaseClass {
 
     @Test
     @Title("Get Adapter Details By Device Id")
-    public void getAdapterDetailsById() throws IOException {
+    public void getAdapterDetailsById(){
         Response response = Devices.getAdapterDetailsById();
         Assert.assertEquals("Invalid Status in Response: ", response.getStatusCode(), HttpStatus.SC_OK);
     }
