@@ -25,31 +25,30 @@ import static junit.framework.TestCase.assertEquals;
 @RunWith(SerenityRunner.class)
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
 public class UserManagementTest extends BaseClass {
+
     public static final String ROLE_ENDPOINT = "/role/";
-
     public static final String DELETE_ROLE = "deleteRole?id=";
-
     public static final String PERMISSION_ENDPOINT = "/permission/";
-
     public static final String DELETE_PERMISSION  = "deletePermission?id=";
 
 
     protected static final String USERNAME = ApplicationConfiguration.getUSERNAME();
     protected static final String PASSWORD = ApplicationConfiguration.getPASSWORD();
-
     public static boolean isPreviousTestPass;
 
 
 
     @Test
-    public void PostCreateRole(){
+    @Title("Post Create Role")
+    public void postCreateRole(){
         Role role = new Role("Automation_Role_"+value+"1", "This is Test Role Created By new Regression Script", true, "Automation Script", Collections.singletonList(PERMISSION_ID));
         Response response = UserManagement.postCreateRole(role);
         Assert.assertEquals("Invalid Status in Response: ", response.getStatusCode(), HttpStatus.SC_OK);
 
     }
     @Test
-    public void GetAllRole() {
+    @Title("Get All Role List")
+    public void getAllRole() {
         Response response = UserManagement.getAllRole();
         Assert.assertEquals("Invalid Status in Response: ", response.getStatusCode(), HttpStatus.SC_OK);
     }
@@ -57,7 +56,8 @@ public class UserManagementTest extends BaseClass {
 
     @Ignore
     @Test
-    public void PutUpdateRole(){
+    @Title("Put Update Role By Id")
+    public void putUpdateRole(){
         Role role = new Role("Update_Automation_Role_"+value+"1", "Updated By Regression new Script", true, "Automation Script", Collections.singletonList(PERMISSION_ID));
         Response response = UserManagement.updateRole(role);
         Assert.assertEquals("Invalid Status in Response: ", response.getStatusCode(), HttpStatus.SC_OK);
@@ -65,14 +65,16 @@ public class UserManagementTest extends BaseClass {
     }
 
     @Test
-    public void GetRoleDetails() {
-
+    @Title("Get Role Details By Id")
+    public void getRoleDetails() {
         Response response = UserManagement.getRoleDetails();
         Assert.assertEquals("Invalid Status in Response: ", response.getStatusCode(), HttpStatus.SC_OK);
     }
+
     @Ignore
     @Test
-    public void DeleteRole() throws IOException {
+    @Title("Delete Role")
+    public void deleteRole() throws IOException {
         //exception: role associate with user
         HttpDelete delete = new HttpDelete(BASE_ENDPOINT_INVENTA + ROLE_ENDPOINT + DELETE_ROLE + "5f2977fde4aa4d358de5ee3f")  ;
         delete.setHeader("Authorization", "Bearer " + token);
@@ -82,22 +84,23 @@ public class UserManagementTest extends BaseClass {
     }
 
     @Test
-    public void GetAllPermission() {
-
+    @Title("Get All Permission")
+    public void getAllPermission() {
         Response response = UserManagement.getAllPermission();
         Assert.assertEquals("Invalid Status in Response: ", response.getStatusCode(), HttpStatus.SC_OK);
     }
 
     @Test
-    public void GetPermissionDetails() {
-
+    @Title("Get Permission Details By Id")
+    public void getPermissionDetails() {
         Response response = UserManagement.getPermissionDetails();
         Assert.assertEquals("Invalid Status in Response: ", response.getStatusCode(), HttpStatus.SC_OK);
     }
 
     @Ignore
     @Test
-    public void DeletePermission() throws IOException {
+    @Title("Get Permission Details By Id")
+    public void deletePermission() throws IOException {
 
         HttpDelete delete = new HttpDelete(BASE_ENDPOINT_INVENTA + PERMISSION_ENDPOINT + DELETE_PERMISSION + "5f22b8856d329947e1949a19")  ;
         delete.setHeader("Authorization", "Bearer " + token);
@@ -107,34 +110,37 @@ public class UserManagementTest extends BaseClass {
     }
 
     @Test
-    public void GetAllModules() {
+    @Title("Get All Modules List")
+    public void getAllModules() {
 
         Response response = UserManagement.getAllModules();
         Assert.assertEquals("Invalid Status in Response: ", response.getStatusCode(), HttpStatus.SC_OK);
     }
 
     @Test
-    public void GetRoleModules() {
+    @Title("Get Role Modules By ADMIN Detail")
+    public void getRoleModules() {
         Response response = UserManagement.getRoleModules();
         Assert.assertEquals("Invalid Status in Response: ", response.getStatusCode(), HttpStatus.SC_OK);
 
     }
     @Test
-    public void GetRolePermission() {
+    @Title("Get Role Permission By Role")
+    public void getRolePermission() {
         Response response = UserManagement.getRolePermission();
         Assert.assertEquals("Invalid Status in Response: ", response.getStatusCode(), HttpStatus.SC_OK);
     }
 
     @Test
-    public void GetUserModules() {
+    @Title("Get User Modules Details By User Id")
+    public void getUserModules() {
         Response response = UserManagement.getUserModules();
         Assert.assertEquals("Invalid Status in Response: ", response.getStatusCode(), HttpStatus.SC_OK);
-
     }
 
-
     @Test
-    public void PostLogin() {
+    @Title("Post Application Login")
+    public void postLogin() {
         Login login = new Login(USERNAME,PASSWORD);
         Response response = UserManagement.postLogin(login);
         Assert.assertEquals("Invalid Status in Response: ", response.getStatusCode(), HttpStatus.SC_OK);
@@ -204,14 +210,16 @@ public class UserManagementTest extends BaseClass {
     }
 
     @Test
-    public void GetAllAdminUser() {
+    @Title("Get All Admin User List")
+    public void getAllAdminUser() {
         Response response = UserManagement.getAllAdminUser();
         Assert.assertEquals("Invalid Status in Response: ", response.getStatusCode(), HttpStatus.SC_OK);
 
     }
 
     @Test
-    public void GetAdminUserDetail() {
+    @Title("Get Admin User Details By Id")
+    public void getAdminUserDetail() {
         Response response = UserManagement.getAdminUserDetail();
         Assert.assertEquals("Invalid Status in Response: ", response.getStatusCode(), HttpStatus.SC_OK);
 
@@ -219,8 +227,8 @@ public class UserManagementTest extends BaseClass {
 
 
     @Test
-    public void GetAllAdminUserName(){
-
+    @Title("Get All Admin User Name")
+    public void getAllAdminUserName(){
         Response response = UserManagement.getAllAdminUserName();
         Assert.assertEquals("Invalid Status in Response: ", response.getStatusCode(), HttpStatus.SC_OK);
 

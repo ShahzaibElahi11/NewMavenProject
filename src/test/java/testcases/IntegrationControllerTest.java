@@ -20,8 +20,8 @@ public class IntegrationControllerTest extends BaseClass {
 
 
     @Test
-    @Title("Get Check Active MQ Connection")
-    public void GetActiveMQConnectivity(){
+    @Title("Get Active MQ Connection")
+    public void getActiveMQConnectivity(){
         Response response = given()
                 .contentType(ContentType.JSON)
                 .header("Authorization", "Bearer " + token)
@@ -29,5 +29,4 @@ public class IntegrationControllerTest extends BaseClass {
         Assert.assertEquals("Invalid Status in Response: ", response.getStatusCode(), HttpStatus.SC_OK);
 
     }
-
 }

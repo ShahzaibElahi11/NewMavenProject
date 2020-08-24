@@ -62,7 +62,8 @@ public class AdapterConfigurationTest extends BaseClass {
     }
     @Ignore
     @Test
-    public void PostAWSConfiguration(){
+    @Title("Post AWS Adapter Configuration")
+    public void postAWSConfiguration(){
         AwsConfiguration awsConfiguration = new AwsConfiguration(true, AWS_KEY_ID, AWS_SECRET_KEY, "us-east-2", false, "Test", "", true, true, true,true, true, true,true, true, true, true, true, false,true, true,true, true, false);
         Response response = AdapterConfiguration.postAwsConfiguration(awsConfiguration);
         Assert.assertEquals("Invalid Status in Response: ", response.getStatusCode(), HttpStatus.SC_OK);
@@ -71,7 +72,8 @@ public class AdapterConfigurationTest extends BaseClass {
 
     @Ignore
     @Test
-    public void PostAzureConfiguration()throws IOException {
+    @Title("Post Azure Adapter Configuration")
+    public void postAzureConfiguration()throws IOException {
 
         HttpPost request = new HttpPost(BASE_ENDPOINT_ADAPTER + ADAPTER_ENDPOINT + ADAPTER_AD_AZURE_CONFIGURATION);
         String auth = new String();
@@ -94,7 +96,8 @@ public class AdapterConfigurationTest extends BaseClass {
 
     @Ignore
     @Test
-    public void PostADConfiguration()throws IOException {
+    @Title("Post AD Adapter Configuration")
+    public void postADConfiguration()throws IOException {
 
         HttpPost request = new HttpPost(BASE_ENDPOINT_ADAPTER + ADAPTER_ENDPOINT + ADAPTER_AD_AZURE_CONFIGURATION);
         String auth = new String();
@@ -138,7 +141,7 @@ public class AdapterConfigurationTest extends BaseClass {
 
     @Test
     @Title("Get All Adapters Discover Now")
-    public void GetAllAdapterDiscoverNow(){
+    public void getAllAdapterDiscoverNow(){
         Response response = AdapterConfiguration.getAllAdapterDiscoverNow();
         Assert.assertEquals("Invalid Status in Response: ", response.getStatusCode(), HttpStatus.SC_OK);
     }

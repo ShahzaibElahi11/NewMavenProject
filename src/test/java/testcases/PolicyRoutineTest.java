@@ -84,21 +84,23 @@ public class PolicyRoutineTest extends BaseClass {
     }
 
     @Test
-    public void GetPolicyRoutineAllData() {
-
+    @Title("Get Display All Policy Routine Data")
+    public void getPolicyRoutineAllData() {
         Response response = PolicyRoutines.getPolicyRoutineAllData();
         Assert.assertEquals("Invalid Status in Response: ", response.getStatusCode(), HttpStatus.SC_OK);
     }
 
 
     @Test
-    public void GetPolicyRoutineActions() {
+    @Title("Get Policy Routine Action")
+    public void getPolicyRoutineActions() {
         Response response = PolicyRoutines.getPolicyRoutineActions();
         Assert.assertEquals("Invalid Status in Response: ", response.getStatusCode(), HttpStatus.SC_OK);
     }
 
     @Test
-    public void GetPolicyRoutineDeviceActions() {
+    @Title("Get Policy Routine Action on Devices")
+    public void getPolicyRoutineDeviceActions() {
         Response response = PolicyRoutines.getPolicyRoutineDeviceActions();
         Assert.assertEquals("Invalid Status in Response: ", response.getStatusCode(), HttpStatus.SC_OK);
 
@@ -106,27 +108,31 @@ public class PolicyRoutineTest extends BaseClass {
 
 
     @Test
-    public void GetPolicyRoutineUserActions() {
+    @Title("Get Policy Routine Action on Users")
+    public void getPolicyRoutineUserActions() {
         Response response = PolicyRoutines.getPolicyRoutineUserActions();
         Assert.assertEquals("Invalid Status in Response: ", response.getStatusCode(), HttpStatus.SC_OK);
 
     }
 
     @Test
-    public void GetPolicyRoutineTable(){
+    @Title("Get Policy Routine Table")
+    public void getPolicyRoutineTable(){
         Response response = PolicyRoutines.getPolicyRoutineTable();
         Assert.assertEquals("Invalid Status in Response: ", response.getStatusCode(), HttpStatus.SC_OK);
     }
 
 
     @Test
-    public void GetPolicyRoutineTableWithFilter(){
+    @Title("Get Policy Routine Table With Filter")
+    public void getPolicyRoutineTableWithFilter(){
         Response response = PolicyRoutines.getPolicyRoutineTableWithFilter();
         Assert.assertEquals("Invalid Status in Response: ", response.getStatusCode(), HttpStatus.SC_OK);
     }
 
     @Test
-    public void GetPolicyRoutineSummary(){
+    @Title("Get Policy Routine Summary")
+    public void getPolicyRoutineSummary(){
         Response response = PolicyRoutines.getPolicyRoutineSummary();
         Assert.assertEquals("Invalid Status in Response: ", response.getStatusCode(), HttpStatus.SC_OK);
 
@@ -134,16 +140,17 @@ public class PolicyRoutineTest extends BaseClass {
 
 
     @Test
-    public void PostEnforcePolicyOnDevice() {
+    @Title("Post Policy Routine Enforce on Devices")
+    public void postEnforcePolicyOnDevice() {
         EnforcePolicyOnDevice enforcePolicyOnDevice = new EnforcePolicyOnDevice("MSEDGEWIN10-5.inventa12.com");
-
         Response response = PolicyRoutines.postEnforcePolicyDevice(enforcePolicyOnDevice);
         Assert.assertEquals("Invalid Status in Response: ", response.getStatusCode(), HttpStatus.SC_OK);
 
     }
 
     @Test
-    public void PostEnforcePolicyOnUser() {
+    @Title("Post Policy Routine Enforce on Users")
+    public void postEnforcePolicyOnUser() {
 
         EnforcePolicyOnUser enforcePolicyOnUser = new EnforcePolicyOnUser("filyas@netpace.com");
         Response response = PolicyRoutines.postEnforcePolicyUser(enforcePolicyOnUser);
@@ -151,14 +158,16 @@ public class PolicyRoutineTest extends BaseClass {
     }
 
     @Test
-    public void GetActionsPair(){
+    @Title("Get Policy Routine Action Pair")
+    public void getActionsPair(){
         Response response = PolicyRoutines.getActionsPair();
         Assert.assertEquals("Invalid Status in Response: ", response.getStatusCode(), HttpStatus.SC_OK);
 
     }
 
     @Test
-    public void GetPolicyRoutineById(){
+    @Title("Get Policy Routine Details By Id")
+    public void getPolicyRoutineById(){
         Response response = PolicyRoutines.getPolicyRoutineById();
         Assert.assertEquals("Invalid Status in Response: ", response.getStatusCode(), HttpStatus.SC_OK);
 

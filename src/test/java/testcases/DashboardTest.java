@@ -67,20 +67,20 @@ public class DashboardTest {
 
     @Test
     @Title("Get Count of AWS Type Assets")
-    public void GetAWSAssetTypeDistribution(){
+    public void getAWSAssetTypeDistribution(){
         Response response = Dashboard.getAwsAssetTypeDistribution();
         Assert.assertEquals("Invalid Status in Response: ", response.getStatusCode(), HttpStatus.SC_OK);
     }
     @Test
     @Title("Get Count of WMIC Type Assets")
-    public void GetWMICAssetTypeDistribution(){
+    public void getWMICAssetTypeDistribution(){
         Response response = Dashboard.getWmicAssetTypeDistribution();
         Assert.assertEquals("Invalid Status in Response: ", response.getStatusCode(), HttpStatus.SC_OK);
     }
 
     @Test
     @Title("Get Count of Cloud VS NonCloud Assets")
-    public void GetCloudVSNonCloud(){
+    public void getCloudVSNonCloud(){
         Response response = Dashboard.getCloudVSNonCloud();
         Assert.assertEquals("Invalid Status in Response: ", response.getStatusCode(), HttpStatus.SC_OK);
 
