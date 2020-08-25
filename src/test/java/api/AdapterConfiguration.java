@@ -39,7 +39,7 @@ public class AdapterConfiguration extends BaseClass {
                 .header("Authorization", "Bearer " + token)
                 .get(BASE_ENDPOINT_ADAPTER + ADAPTER_ENDPOINT + ADAPTER_CONFIGURATION + AWS);
     }
-    public static Response getAzureAdapterConfiguration() {
+    public static Response  getAzureAdapterConfiguration() {
         return given()
                 .contentType(ContentType.JSON)
                 .header("Authorization", "Bearer " + token)

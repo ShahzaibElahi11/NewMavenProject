@@ -16,10 +16,10 @@ import org.junit.runners.MethodSorters;
 import utils.ApplicationConfiguration;
 import utils.BaseClass;
 
+import static org.hamcrest.Matchers.equalTo;
 
 @RunWith(SerenityRunner.class)
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
-
 public class LDAPTest extends BaseClass {
 
     public static boolean isPreviousTestPass;
@@ -41,14 +41,6 @@ public class LDAPTest extends BaseClass {
     }
 
     @Test
-    @Title("Get LDAP Configuration")
-    public void getLDAPConfiguration() {
-        Response response = Ldap.getLDAPConfiguration();
-        Assert.assertEquals("Invalid Status in Response: ", response.getStatusCode(), HttpStatus.SC_OK);
-    }
-
-
-    @Test
     @Title("Post AD Login")
     public void testB_PostADLogin() {
         Assume.assumeTrue(isPreviousTestPass==true);
@@ -59,4 +51,14 @@ public class LDAPTest extends BaseClass {
             isPreviousTestPass = true;
         Assert.assertEquals("Invalid Status in Response: ", response.getStatusCode(), HttpStatus.SC_OK);
     }
+
+    @Test
+    @Title("Get LDAP Configuration")
+    public void testC_getLDAPConfiguration() {
+        Response response = Ldap.getLDAPConfiguration();
+        response.then()
+                .assertThat()
+                .statusCode(HttpStatus.SC_OK)
+                .contentType(equalTo("application/json"))
+                .body("data.role", equalTo(ROLE_ID));    }
 }

@@ -18,6 +18,7 @@ import utils.BaseClass;
 import java.io.IOException;
 import java.util.Collections;
 
+import static org.hamcrest.Matchers.equalTo;
 
 @RunWith(SerenityRunner.class)
 public class DeviceDetailsTest extends BaseClass {
@@ -37,105 +38,165 @@ public class DeviceDetailsTest extends BaseClass {
     @Title("Get All Device List")
     public void getAllDevices() {
         Response response = Devices.getAllDevices();
-        Assert.assertEquals("Invalid Status in Response: ", response.getStatusCode(), HttpStatus.SC_OK);
+        response.then()
+                .assertThat()
+                .statusCode(HttpStatus.SC_OK)
+                .contentType(equalTo("application/json"))
+                .body("data.content[0]._id", equalTo(DEVICE_DETAIL_ID), "meta.status", equalTo("success"));
     }
 
     @Test
     @Title("Get Device Details By Device Id")
     public void getDevicesDetailsById(){
         Response response = Devices.getDevicesDetailsById();
-        Assert.assertEquals("Invalid Status in Response: ", response.getStatusCode(), HttpStatus.SC_OK);
+        response.then()
+                .assertThat()
+                .statusCode(HttpStatus.SC_OK)
+                .contentType(equalTo("application/json"))
+                .body("data._id", equalTo(DEVICE_DETAIL_ID), "meta.status", equalTo("success"));
     }
 
     @Test
     @Title("Get Device with Adapters List By Device Id")
     public void getDeviceAdaptersList(){
         Response response = Devices.getDeviceAdaptersListById();
-        Assert.assertEquals("Invalid Status in Response: ", response.getStatusCode(), HttpStatus.SC_OK);
+        response.then()
+                .assertThat()
+                .statusCode(HttpStatus.SC_OK)
+                .contentType(equalTo("application/json"))
+                .body("meta.status", equalTo("success"));
     }
 
     @Test
     @Title("Get Hard Drive Details By Device Id")
     public void getDrivesDetailsById(){
         Response response = Devices.getDrivesDetailsById();
-        Assert.assertEquals("Invalid Status in Response: ", response.getStatusCode(), HttpStatus.SC_OK);
+        response.then()
+                .assertThat()
+                .statusCode(HttpStatus.SC_OK)
+                .contentType(equalTo("application/json"))
+                .body("meta.status", equalTo("success"));
     }
 
     @Test
     @Title("Get Operating System Patches Details By Device Id")
     public void getOSPatchesDetailsById(){
         Response response = Devices.getOSPatchesDetailsById();
-        Assert.assertEquals("Invalid Status in Response: ", response.getStatusCode(), HttpStatus.SC_OK);
+        response.then()
+                .assertThat()
+                .statusCode(HttpStatus.SC_OK)
+                .contentType(equalTo("application/json"))
+                .body("meta.status", equalTo("success"));
     }
 
     @Test
     @Title("Get Running Processes Details By Device Id")
     public void getRunningProcessesDetailsById(){
         Response response = Devices.getRunningProcessesDetailsById();
-        Assert.assertEquals("Invalid Status in Response: ", response.getStatusCode(), HttpStatus.SC_OK);
+        response.then()
+                .assertThat()
+                .statusCode(HttpStatus.SC_OK)
+                .contentType(equalTo("application/json"))
+                .body("meta.status", equalTo("success"));
     }
 
     @Test
     @Title("Get Installed Software Details By Device Id")
     public void getInstalledSoftwareDetailsById(){
         Response response = Devices.getInstalledSoftwareDetailsById();
-        Assert.assertEquals("Invalid Status in Response: ", response.getStatusCode(), HttpStatus.SC_OK);
+        response.then()
+                .assertThat()
+                .statusCode(HttpStatus.SC_OK)
+                .contentType(equalTo("application/json"))
+                .body("meta.status", equalTo("success"));
     }
 
     @Test
     @Title("Get Installed Software Details By Device Id")
     public void getOSDetailsById(){
         Response response = Devices.getOSDetailsById();
-        Assert.assertEquals("Invalid Status in Response: ", response.getStatusCode(), HttpStatus.SC_OK);
+        response.then()
+                .assertThat()
+                .statusCode(HttpStatus.SC_OK)
+                .contentType(equalTo("application/json"))
+                .body("meta.status", equalTo("success"));
     }
 
     @Test
     @Title("Get Device User Details By Device Id")
     public void getUserDetailsById(){
         Response response = Devices.getUserDetailsById();
-        Assert.assertEquals("Invalid Status in Response: ", response.getStatusCode(), HttpStatus.SC_OK);
+        response.then()
+                .assertThat()
+                .statusCode(HttpStatus.SC_OK)
+                .contentType(equalTo("application/json"))
+                .body("meta.status", equalTo("success"));
     }
 
     @Test
     @Title("Get Network Interface Details By Device Id")
     public void getNetworkInterfacesDetailsById(){
         Response response = Devices.getNetworkInterfacesDetailsById();
-        Assert.assertEquals("Invalid Status in Response: ", response.getStatusCode(), HttpStatus.SC_OK);
+        response.then()
+                .assertThat()
+                .statusCode(HttpStatus.SC_OK)
+                .contentType(equalTo("application/json"))
+                .body("meta.status", equalTo("success"));
     }
 
     @Test
     @Title("Get Shared Folders Details By Device Id")
     public void getSharedFoldersDetailsById(){
         Response response = Devices.getSharedFoldersDetailsById();
-        Assert.assertEquals("Invalid Status in Response: ", response.getStatusCode(), HttpStatus.SC_OK);
+        response.then()
+                .assertThat()
+                .statusCode(HttpStatus.SC_OK)
+                .contentType(equalTo("application/json"))
+                .body("meta.status", equalTo("success"));
     }
 
     @Test
     @Title("Get Device Note By Device Id")
     public void getDeviceNoteDetailsById(){
         Response response = Devices.getDeviceNoteDetailsById();
-        Assert.assertEquals("Invalid Status in Response: ", response.getStatusCode(), HttpStatus.SC_OK);
+        response.then()
+                .assertThat()
+                .statusCode(HttpStatus.SC_OK)
+                .contentType(equalTo("application/json"))
+                .body("meta.status", equalTo("success"));
     }
 
     @Test
     @Title("Get Device Tags By Device Id")
     public void getDeviceTagDetailsById(){
         Response response = Devices.getDeviceTagDetailsById();
-        Assert.assertEquals("Invalid Status in Response: ", response.getStatusCode(), HttpStatus.SC_OK);
+        response.then()
+                .assertThat()
+                .statusCode(HttpStatus.SC_OK)
+                .contentType(equalTo("application/json"))
+                .body("meta.status", equalTo("success"));
     }
 
     @Test //extra
     @Title("Get General Details By Device Id")
     public void getGeneralDetailsById(){
         Response response = Devices.getGeneralDetailsById();
-        Assert.assertEquals("Invalid Status in Response: ", response.getStatusCode(), HttpStatus.SC_OK);
+        response.then()
+                .assertThat()
+                .statusCode(HttpStatus.SC_OK)
+                .contentType(equalTo("application/json"))
+                 .body("data._id", equalTo(DEVICE_DETAIL_ID), "meta.status", equalTo("success"));
     }
 
     @Test
     @Title("Get Adapter Details By Device Id")
     public void getAdapterDetailsById(){
         Response response = Devices.getAdapterDetailsById();
-        Assert.assertEquals("Invalid Status in Response: ", response.getStatusCode(), HttpStatus.SC_OK);
+        response.then()
+                .assertThat()
+                .statusCode(HttpStatus.SC_OK)
+                .contentType(equalTo("application/json"))
+                .body("meta.status", equalTo("success"));
     }
 
     @Test
@@ -161,15 +222,22 @@ public class DeviceDetailsTest extends BaseClass {
     @Title("Get All Device Tags")
     public void getAllTags(){
         Response response = Devices.getAllTags();
-        Assert.assertEquals("Invalid Status in Response: ", response.getStatusCode(), HttpStatus.SC_OK);
+        response.then()
+                .assertThat()
+                .statusCode(HttpStatus.SC_OK)
+                .contentType(equalTo("application/json"))
+                .body("meta.status", equalTo("success"));
     }
 
     @Test
     @Title("Get Load Balancer Rules Details By Device Id")
     public void getLoadBalancerRulesForDevice(){
         Response response = Devices.getLoadBalancerRulesForDevice();
-        Assert.assertEquals("Invalid Status in Response: ", response.getStatusCode(), HttpStatus.SC_OK);
-
+        response.then()
+                .assertThat()
+                .statusCode(HttpStatus.SC_OK)
+                .contentType(equalTo("application/json"))
+                .body("meta.status", equalTo("success"));
     }
 
     @Ignore
@@ -237,7 +305,11 @@ public class DeviceDetailsTest extends BaseClass {
     @Title("Get Hardware Details By Device Id")
     public void getConnectedHardwareForDevice() {
         Response response = Devices.getConnectedHardwareForDevice();
-        Assert.assertEquals("Invalid Status in Response: ", response.getStatusCode(), HttpStatus.SC_OK);
+        response.then()
+                .assertThat()
+                .statusCode(HttpStatus.SC_OK)
+                .contentType(equalTo("application/json"))
+                .body("meta.status", equalTo("success"));
     }
 
     @Test
@@ -245,8 +317,11 @@ public class DeviceDetailsTest extends BaseClass {
     public void getUsersForDevice(){
 
         Response response = Devices.getUsersForDevice();
-        Assert.assertEquals("Invalid Status in Response: ", response.getStatusCode(), HttpStatus.SC_OK);
-
+        response.then()
+                .assertThat()
+                .statusCode(HttpStatus.SC_OK)
+                .contentType(equalTo("application/json"))
+                .body("meta.status", equalTo("success"));
     }
 
 }

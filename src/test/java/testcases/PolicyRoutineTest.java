@@ -14,6 +14,7 @@ import org.junit.runner.RunWith;
 import org.junit.runners.MethodSorters;
 import utils.BaseClass;
 
+import static org.hamcrest.Matchers.equalTo;
 
 @RunWith(SerenityRunner.class)
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
@@ -41,8 +42,12 @@ public class PolicyRoutineTest extends BaseClass {
         Response response = PolicyRoutines.postPolicyRoutine(policyRoutine);
         if(response.getStatusCode() == HttpStatus.SC_OK)
             isPreviousTestPass = true;
-        Assert.assertEquals("Invalid Status in Response: ", response.getStatusCode(), HttpStatus.SC_OK);
-
+        //Assert.assertEquals("Invalid Status in Response: ", response.getStatusCode(), HttpStatus.SC_OK);
+        response.then()
+                .assertThat()
+                .statusCode(HttpStatus.SC_OK)
+                .contentType(equalTo("application/json"))
+                .body("meta.status", equalTo("success"));
     }
 
 
@@ -66,8 +71,12 @@ public class PolicyRoutineTest extends BaseClass {
         Response response = PolicyRoutines.updatePolicyRoutine(policyRoutine);
         if(response.getStatusCode() == HttpStatus.SC_OK)
             isPreviousTestPass = true;
-        Assert.assertEquals("Invalid Status in Response: ", response.getStatusCode(), HttpStatus.SC_OK);
-
+       // Assert.assertEquals("Invalid Status in Response: ", response.getStatusCode(), HttpStatus.SC_OK);
+        response.then()
+                .assertThat()
+                .statusCode(HttpStatus.SC_OK)
+                .contentType(equalTo("application/json"))
+                .body("meta.status", equalTo("success"));
     }
 
 
@@ -87,7 +96,11 @@ public class PolicyRoutineTest extends BaseClass {
     @Title("Get Display All Policy Routine Data")
     public void getPolicyRoutineAllData() {
         Response response = PolicyRoutines.getPolicyRoutineAllData();
-        Assert.assertEquals("Invalid Status in Response: ", response.getStatusCode(), HttpStatus.SC_OK);
+        response.then()
+                .assertThat()
+                .statusCode(HttpStatus.SC_OK)
+                .contentType(equalTo("application/json"))
+                .body("meta.status", equalTo("success"));
     }
 
 
