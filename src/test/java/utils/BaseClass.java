@@ -99,7 +99,7 @@ public class BaseClass {
 
     }
     //will check later once siraj has fixed.
-    public static String getIdFromRolePermissionURL(String url) throws IOException {
+    public static String getIdFromPermissionURL(String url) throws IOException {
         ObjectMapper mapper = new ObjectMapper(); // just need one
         String json = readJsonFromUrl(url).toString();
         Map<String,Object> map = mapper.readValue(json, Map.class);
@@ -118,6 +118,7 @@ public class BaseClass {
     public static String AUDIT_DETAIL_ID = "";
     public static String DELETE_PR_ID = "";
     public static String DELETE_ADMIN_USER_ID = "";
+    public static String USER_AUDIT_ID = "";
 
 
 
@@ -125,14 +126,15 @@ public class BaseClass {
         try {
 
             DEVICE_DETAIL_ID = getIdFromURL("http://inventaserver:9092/devices/getAllDevices?page=0&size=1&sortBy=_id");
-            USER_ID = getIdFromURL("http://inventaserver:9092/users/getAllUsers/?page=0&size=1");
+            USER_ID = getIdFromURL("http://inventaserver:9092/users/getAllUsers/?page=0&size=1&sort=dateCreated,desc");
             PR_ID = getIdFromURL("http://inventaserver:9092/policy-routine/?page=0&size=1&sort=dateCreated,desc"); //Update Parameter in Endpoint
-            ROLE_ID = getIdFromRolePermissionURL("http://inventaserver:9092/role/getAllRole?page=0&size=1");
-            PERMISSION_ID = getIdFromRolePermissionURL("http://inventaserver:9092/permission/getAllPermission?page=0&size=1");
+            ROLE_ID = getIdFromURL("http://inventaserver:9092/role/getAllRole?page=0&size=1&sort=dateCreated,desc");
+            PERMISSION_ID = getIdFromPermissionURL("http://inventaserver:9092/permission/getAllPermission?page=0&size=1");
             ADMIN_USER_ID = getIdFromURL("http://inventaserver:9092/adminUsers/getAllAdminUsers?page=0&size=1&sort=dateCreated,desc"); // Update Parameter in Endpoint
-            AUDIT_DETAIL_ID = getIdFromURL("http://inventaserver:9092/audit/getAllAudit?page=0&size=1");
+            AUDIT_DETAIL_ID = getIdFromURL("http://inventaserver:9092/audit/getAllAudit?page=0&size=1&sort=dateCreated,desc");
             DELETE_PR_ID = getIdFromURL("http://inventaserver:9092/policy-routine/?page=0&size=1&sort=dateModified,desc"); //add new endpoint
             DELETE_ADMIN_USER_ID = getIdFromURL("http://inventaserver:9092/adminUsers/getAllAdminUsers?page=0&size=1&sort=dateModified,desc"); //add new endpoint
+            USER_AUDIT_ID = getIdFromURL("http://inventaserver:9092/audit/getUserAudit?username=admininventa&page=0&size=1"); //add new endpoint
 
             //http://inventaserver:9092/devices/getAllDevices?page=0&size=1&sort=firstFetchTime,desc
 

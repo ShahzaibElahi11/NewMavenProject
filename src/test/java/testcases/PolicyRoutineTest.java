@@ -108,15 +108,22 @@ public class PolicyRoutineTest extends BaseClass {
     @Title("Get Policy Routine Action")
     public void getPolicyRoutineActions() {
         Response response = PolicyRoutines.getPolicyRoutineActions();
-        Assert.assertEquals("Invalid Status in Response: ", response.getStatusCode(), HttpStatus.SC_OK);
+        response.then()
+                .assertThat()
+                .statusCode(HttpStatus.SC_OK)
+                .contentType(equalTo("application/json"))
+                .body("meta.status", equalTo("success"));
     }
 
     @Test
     @Title("Get Policy Routine Action on Devices")
     public void getPolicyRoutineDeviceActions() {
         Response response = PolicyRoutines.getPolicyRoutineDeviceActions();
-        Assert.assertEquals("Invalid Status in Response: ", response.getStatusCode(), HttpStatus.SC_OK);
-
+        response.then()
+                .assertThat()
+                .statusCode(HttpStatus.SC_OK)
+                .contentType(equalTo("application/json"))
+                .body("meta.status", equalTo("success"));
     }
 
 
@@ -124,30 +131,44 @@ public class PolicyRoutineTest extends BaseClass {
     @Title("Get Policy Routine Action on Users")
     public void getPolicyRoutineUserActions() {
         Response response = PolicyRoutines.getPolicyRoutineUserActions();
-        Assert.assertEquals("Invalid Status in Response: ", response.getStatusCode(), HttpStatus.SC_OK);
-
+        response.then()
+                .assertThat()
+                .statusCode(HttpStatus.SC_OK)
+                .contentType(equalTo("application/json"))
+                .body("meta.status", equalTo("success"));
     }
 
     @Test
     @Title("Get Policy Routine Table")
     public void getPolicyRoutineTable(){
         Response response = PolicyRoutines.getPolicyRoutineTable();
-        Assert.assertEquals("Invalid Status in Response: ", response.getStatusCode(), HttpStatus.SC_OK);
-    }
+        response.then()
+                .assertThat()
+                .statusCode(HttpStatus.SC_OK)
+                .contentType(equalTo("application/json"))
+                .body("meta.status", equalTo("success"));    }
 
 
     @Test
     @Title("Get Policy Routine Table With Filter")
     public void getPolicyRoutineTableWithFilter(){
         Response response = PolicyRoutines.getPolicyRoutineTableWithFilter();
-        Assert.assertEquals("Invalid Status in Response: ", response.getStatusCode(), HttpStatus.SC_OK);
+        response.then()
+                .assertThat()
+                .statusCode(HttpStatus.SC_OK)
+                .contentType(equalTo("application/json"))
+                .body("meta.status", equalTo("success"));
     }
 
     @Test
     @Title("Get Policy Routine Summary")
     public void getPolicyRoutineSummary(){
         Response response = PolicyRoutines.getPolicyRoutineSummary();
-        Assert.assertEquals("Invalid Status in Response: ", response.getStatusCode(), HttpStatus.SC_OK);
+        response.then()
+                .assertThat()
+                .statusCode(HttpStatus.SC_OK)
+                .contentType(equalTo("application/json"))
+                .body("data.mainAction.action", equalTo("RC02"), "meta.status", equalTo("success"));
 
     }
 
@@ -174,16 +195,22 @@ public class PolicyRoutineTest extends BaseClass {
     @Title("Get Policy Routine Action Pair")
     public void getActionsPair(){
         Response response = PolicyRoutines.getActionsPair();
-        Assert.assertEquals("Invalid Status in Response: ", response.getStatusCode(), HttpStatus.SC_OK);
-
+        response.then()
+                .assertThat()
+                .statusCode(HttpStatus.SC_OK)
+                .contentType(equalTo("application/json"))
+                .body("meta.status", equalTo("success"));
     }
 
     @Test
     @Title("Get Policy Routine Details By Id")
     public void getPolicyRoutineById(){
         Response response = PolicyRoutines.getPolicyRoutineById();
-        Assert.assertEquals("Invalid Status in Response: ", response.getStatusCode(), HttpStatus.SC_OK);
-
+        response.then()
+                .assertThat()
+                .statusCode(HttpStatus.SC_OK)
+                .contentType(equalTo("application/json"))
+                .body("data._id", equalTo(PR_ID), "meta.status", equalTo("success"));
     }
 
 

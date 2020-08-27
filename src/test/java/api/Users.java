@@ -10,7 +10,7 @@ import static io.restassured.RestAssured.given;
 
 public class Users extends BaseClass {
     public static final String USER_ENDPOINT = "/users/";
-    public static final String PAGINATION = "?page=0&size=100";
+    public static final String PAGINATION = "?page=0&size=1&sort=dateCreated,desc";
     public static final String ALL_USERS = "getAllUsers";
     public static final String USER_DETAIL = "userDetail?_id=";
     public static final String USER_ADAPTER_lIST = "adapters/list?_id=";
@@ -25,7 +25,7 @@ public class Users extends BaseClass {
 
     public static final String DELETE_NOTE = "deleteNote?userId=";
 
-    public static final String SINGLE_TAG_NAME = "Automation_Tag_Number_4536";
+    public static final String SINGLE_TAG_NAME = "Automation_User_Tag_Number_"+value+"1";
 
     public static final String USER_ADAPTER_DATA = "adapter/data?_id=";
     public static final String USER_GENERAL_DETAILS = "general?_id=";
@@ -56,7 +56,7 @@ public class Users extends BaseClass {
         return given()
                 .contentType(ContentType.JSON)
                 .header("Authorization", "Bearer " + token)
-                .get(BASE_ENDPOINT_INVENTA + USER_ENDPOINT + ALL_USERS + PAGINATION);
+                .get(BASE_ENDPOINT_INVENTA + USER_ENDPOINT + ALL_USER_TAGS);
     }
 
     public static Response getUserTagById() {
@@ -115,8 +115,23 @@ public class Users extends BaseClass {
 
     }
 
+    public static Response deleteUserSingleTag() {
+        return given()
+                .header("Authorization", "Bearer " + token)
+                .when()
+                .delete(BASE_ENDPOINT_INVENTA + USER_ENDPOINT + DELETE_SINGLE_TAG + USER_ID +"&tag="+ SINGLE_TAG_NAME);
+
+    }
 
 
+    public static Response deleteBulkUserTags(UserTag deleteUserTag) {
+        return given()
+                .contentType(ContentType.JSON)
+                .header("Authorization", "Bearer " + token)
+                .body(deleteUserTag)
+                .when()
+                .delete(BASE_ENDPOINT_INVENTA + USER_ENDPOINT + DELETE_BULK_TAG);
 
 
+    }
 }

@@ -16,4 +16,8 @@ public class UserTag {
         this.tag = tag;
         this.userIds = userIds;
     }
+    //for delete
+    public UserTag(List<String> userIds) {
+        this.userIds = userIds;
+    }
 }
