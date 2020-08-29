@@ -9,6 +9,7 @@ import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import utils.BaseClass;
+
 import static io.restassured.RestAssured.given;
 
 
@@ -21,7 +22,7 @@ public class IntegrationControllerTest extends BaseClass {
 
     @Test
     @Title("Get Active MQ Connection")
-    public void getActiveMQConnectivity(){
+    public void getActiveMQConnectivity() {
         Response response = given()
                 .contentType(ContentType.JSON)
                 .header("Authorization", "Bearer " + token)

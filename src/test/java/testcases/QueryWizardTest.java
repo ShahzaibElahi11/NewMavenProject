@@ -4,26 +4,15 @@ import api.QueryWizard;
 import io.restassured.response.Response;
 import net.serenitybdd.junit.runners.SerenityRunner;
 import net.thucydides.core.annotations.Title;
-import org.apache.commons.codec.binary.Base64;
-import org.apache.http.HttpHeaders;
 import org.apache.http.HttpStatus;
-import org.apache.http.client.methods.HttpPost;
-import org.apache.http.entity.ContentType;
-import org.apache.http.entity.StringEntity;
 import org.junit.Assert;
 import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import utils.BaseClass;
-import java.io.IOException;
-import java.nio.charset.Charset;
-
-
 
 @RunWith(SerenityRunner.class)
 public class QueryWizardTest extends BaseClass {
-
-    public static final String SAVED_QUERY = "/saved-query/";
 
     @Test
     @Title("Get Query Wizard Equal Operator")
@@ -117,67 +106,26 @@ public class QueryWizardTest extends BaseClass {
     @Ignore
     @Test
     @Title("Post Enforce Save Query on Device")
-    public void postDeviceSaveQuery()throws IOException {
-
-        HttpPost request = new HttpPost(BASE_ENDPOINT_INVENTA + SAVED_QUERY);
-        String auth = new String();
-        byte[] encodedAuth = Base64.encodeBase64(auth.getBytes(Charset.forName("ISO-8859-1")));
-        String authHeader = "Basic " + new String(encodedAuth);
-
-        request.setHeader(HttpHeaders.AUTHORIZATION, authHeader);
-        request.setHeader("Authorization", "Bearer " + token);
-
-        String json = "{\"name\":\"Automation_Device_SaveQuery_#"+value+"\",\"query\": \"(hostName==\\\"inventa-windows\\\")\",\"type\": \"DEVICE\", \"description\": \"Automation_Device_SaveQuery_#"+value+"\"}";
-        request.setEntity(new StringEntity(json, ContentType.APPLICATION_JSON));
-        // Send
-        response = client.execute(request);
-        int actualStatusCode = response.getStatusLine().getStatusCode();
-        Assert.assertEquals(actualStatusCode, 200);
+    public void postDeviceSaveQuery(){
+        //BASE_ENDPOINT_INVENTA + SAVED_QUERY
+        //String json = "{\"name\":\"Automation_Device_SaveQuery_#"+value+"\",\"query\": \"(hostName==\\\"inventa-windows\\\")\",\"type\": \"DEVICE\", \"description\": \"Automation_Device_SaveQuery_#"+value+"\"}";
 
     }
 
     @Ignore
     @Test
     @Title("Post Enforce Save Query on User")
-    public void postUserSaveQuery()throws IOException {
-
-        HttpPost request = new HttpPost(BASE_ENDPOINT_INVENTA + SAVED_QUERY);
-        String auth = new String();
-        byte[] encodedAuth = Base64.encodeBase64(auth.getBytes(Charset.forName("ISO-8859-1")));
-        String authHeader = "Basic " + new String(encodedAuth);
-
-        request.setHeader(HttpHeaders.AUTHORIZATION, authHeader);
-        request.setHeader("Authorization", "Bearer " + token);
-
-        String json = "{\"name\":\"Automation_User_SaveQuery_#"+value+"\",\"query\": \"(common.displayName ==\\\"msiraj\\\")\",\"type\": \"USER\", \"description\": \"Automation_DeviceSaveQuery_#"+value+"\"}";
-
-        request.setEntity(new StringEntity(json, ContentType.APPLICATION_JSON));
-        // Send
-        response = client.execute(request);
-        int actualStatusCode = response.getStatusLine().getStatusCode();
-        Assert.assertEquals(actualStatusCode, 200);
-
+    public void postUserSaveQuery(){
+        //BASE_ENDPOINT_INVENTA + SAVED_QUERY
+        // String json = "{\"name\":\"Automation_User_SaveQuery_#"+value+"\",\"query\": \"(common.displayName ==\\\"msiraj\\\")\",\"type\": \"USER\", \"description\": \"Automation_DeviceSaveQuery_#"+value+"\"}";
     }
 
     @Ignore
     @Test
     @Title("Post Enforce Save Query Overwrite")
-    public void postSaveQueryOverWrite()throws IOException {
-
-        HttpPost request = new HttpPost(BASE_ENDPOINT_INVENTA + SAVED_QUERY);
-        String auth = new String();
-        byte[] encodedAuth = Base64.encodeBase64(auth.getBytes(Charset.forName("ISO-8859-1")));
-        String authHeader = "Basic " + new String(encodedAuth);
-
-        request.setHeader(HttpHeaders.AUTHORIZATION, authHeader);
-        request.setHeader("Authorization", "Bearer " + token);
-
-        String json = "{\"name\":\"Automation_SaveQuery_OverWrite_#" + value + "\",\"query\": \"(hostName==\\\"inventa-windows\\\")\",\"type\": \"DEVICE\", \"description\": \"Over Write Done Automation_SaveQuery_#" + value + "\"}";
-        request.setEntity(new StringEntity(json, ContentType.APPLICATION_JSON));
-        // Send
-        response = client.execute(request);
-        int actualStatusCode = response.getStatusLine().getStatusCode();
-        Assert.assertEquals(actualStatusCode, 200);
+    public void postSaveQueryOverWrite(){
+        //BASE_ENDPOINT_INVENTA + SAVED_QUERY
+        // String json = "{\"name\":\"Automation_SaveQuery_OverWrite_#" + value + "\",\"query\": \"(hostName==\\\"inventa-windows\\\")\",\"type\": \"DEVICE\", \"description\": \"Over Write Done Automation_SaveQuery_#" + value + "\"}";
 
     }
 

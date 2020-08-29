@@ -35,7 +35,7 @@ public class LDAPTest extends BaseClass {
         isPreviousTestPass = false;
         LdapConfiguration ldapConfiguration = new LdapConfiguration(LDAP_MACHINE_IP, LDAP_DOMAIN, ROLE_ID);
         Response response = Ldap.postLdapConfiguration(ldapConfiguration);
-        if(response.getStatusCode() == HttpStatus.SC_OK)
+        if (response.getStatusCode() == HttpStatus.SC_OK)
             isPreviousTestPass = true;
         Assert.assertEquals("Invalid Status in Response: ", response.getStatusCode(), HttpStatus.SC_OK);
     }
@@ -43,13 +43,17 @@ public class LDAPTest extends BaseClass {
     @Test
     @Title("Post AD Login")
     public void testB_PostADLogin() {
-        Assume.assumeTrue(isPreviousTestPass==true);
+        Assume.assumeTrue(isPreviousTestPass == false);
         isPreviousTestPass = false;
         AdLogin adLogin = new AdLogin(AD_USERNAME, AD_PASSWORD);
         Response response = Ldap.postAdLogin(adLogin);
-        if(response.getStatusCode() == HttpStatus.SC_OK)
+        if (response.getStatusCode() == HttpStatus.SC_OK)
             isPreviousTestPass = true;
-        Assert.assertEquals("Invalid Status in Response: ", response.getStatusCode(), HttpStatus.SC_OK);
+        response.then()
+                .assertThat()
+                .statusCode(HttpStatus.SC_OK)
+                .contentType(equalTo("application/json;charset=ISO-8859-1"))
+                .body("username", equalTo("shahzaib1"));
     }
 
     @Test
@@ -60,5 +64,6 @@ public class LDAPTest extends BaseClass {
                 .assertThat()
                 .statusCode(HttpStatus.SC_OK)
                 .contentType(equalTo("application/json"))
-                .body("data.role", equalTo(ROLE_ID));    }
+                .body("data.role", equalTo(ROLE_ID));
+    }
 }

@@ -5,6 +5,7 @@ import io.restassured.response.Response;
 import utils.BaseClass;
 
 import static io.restassured.RestAssured.given;
+
 public class AuditLogs extends BaseClass {
 
     public static final String AUDIT_ENDPOINT = "/audit/";
@@ -14,7 +15,7 @@ public class AuditLogs extends BaseClass {
                 .contentType(ContentType.JSON)
                 .header("Authorization", "Bearer " + token)
                 .get(BASE_ENDPOINT_INVENTA + AUDIT_ENDPOINT + "getUserAudit?username=admininventa&page=0&size=1");
-}
+    }
 
     public static Response getAuditDetail() {
         return given()

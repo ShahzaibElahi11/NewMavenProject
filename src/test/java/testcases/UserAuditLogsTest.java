@@ -16,30 +16,29 @@ public class UserAuditLogsTest extends BaseClass {
 
     @Test
     @Title("Get User Audit Details By UserName")
-    public void getUserAudit(){
+    public void getUserAudit() {
         Response response = AuditLogs.getUserAudit();
         response.then()
                 .assertThat()
                 .statusCode(HttpStatus.SC_OK)
                 .contentType(equalTo("application/json"))
                 .body("meta.status", equalTo("success"));
-                 //.body("data.content[0]._id", equalTo(USER_AUDIT_ID), "meta.status", equalTo("success"));
-
     }
 
     @Test
     @Title("Get User Audit Details By Id")
-    public void getAuditDetail(){
+    public void getAuditDetail() {
         Response response = AuditLogs.getAuditDetail();
         response.then()
                 .assertThat()
                 .statusCode(HttpStatus.SC_OK)
                 .contentType(equalTo("application/json"))
-                .body("data._id", equalTo(AUDIT_DETAIL_ID), "meta.status", equalTo("success"));    }
+                .body("data._id", equalTo(AUDIT_DETAIL_ID), "meta.status", equalTo("success"));
+    }
 
     @Test
     @Title("Get User Audit Details List")
-    public void getAllUserAuditList(){
+    public void getAllUserAuditList() {
         Response response = AuditLogs.getAllUserAuditList();
         response.then()
                 .assertThat()
@@ -51,8 +50,7 @@ public class UserAuditLogsTest extends BaseClass {
 
     @Test
     @Title("Get Username List of User Audit")
-    public void getAllUsersName(){
-
+    public void getAllUsersName() {
         Response response = AuditLogs.getAllUsersName();
         response.then()
                 .assertThat()

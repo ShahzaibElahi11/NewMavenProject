@@ -6,7 +6,6 @@ import io.restassured.response.Response;
 import net.serenitybdd.junit.runners.SerenityRunner;
 import net.thucydides.core.annotations.Title;
 import org.apache.http.HttpStatus;
-import org.apache.http.client.methods.HttpDelete;
 import org.junit.Assert;
 import org.junit.Ignore;
 import org.junit.Test;
@@ -23,17 +22,6 @@ import static org.hamcrest.Matchers.equalTo;
 @RunWith(SerenityRunner.class)
 public class DeviceDetailsTest extends BaseClass {
 
-
-    public static final String DEVICE_ENDPOINT = "/devices/";
-    public static final String DELETE_SINGLE_TAG = "deleteSingleTag?deviceId=";
-    public static final String DELETE_BULK_TAG = "deleteBulkTag";
-    public static final String  DELETE_NOTE = "deleteNote?deviceId=";
-    public static final String SINGLE_TAG_NAME = "Automation_Tag_Number_482";
-    public static final String DELETE_DEVICE = "removeDiscoveredDevice?_id=";
-    //re-think
-    public static final String DELETE_DEVICE_ID = "5f0d7cd312e1364a117ce134";
-
-
     @Test
     @Title("Get All Device List")
     public void getAllDevices() {
@@ -47,7 +35,7 @@ public class DeviceDetailsTest extends BaseClass {
 
     @Test
     @Title("Get Device Details By Device Id")
-    public void getDevicesDetailsById(){
+    public void getDevicesDetailsById() {
         Response response = Devices.getDevicesDetailsById();
         response.then()
                 .assertThat()
@@ -58,7 +46,7 @@ public class DeviceDetailsTest extends BaseClass {
 
     @Test
     @Title("Get Device with Adapters List By Device Id")
-    public void getDeviceAdaptersList(){
+    public void getDeviceAdaptersList() {
         Response response = Devices.getDeviceAdaptersListById();
         response.then()
                 .assertThat()
@@ -69,7 +57,7 @@ public class DeviceDetailsTest extends BaseClass {
 
     @Test
     @Title("Get Hard Drive Details By Device Id")
-    public void getDrivesDetailsById(){
+    public void getDrivesDetailsById() {
         Response response = Devices.getDrivesDetailsById();
         response.then()
                 .assertThat()
@@ -80,7 +68,7 @@ public class DeviceDetailsTest extends BaseClass {
 
     @Test
     @Title("Get Operating System Patches Details By Device Id")
-    public void getOSPatchesDetailsById(){
+    public void getOSPatchesDetailsById() {
         Response response = Devices.getOSPatchesDetailsById();
         response.then()
                 .assertThat()
@@ -91,7 +79,7 @@ public class DeviceDetailsTest extends BaseClass {
 
     @Test
     @Title("Get Running Processes Details By Device Id")
-    public void getRunningProcessesDetailsById(){
+    public void getRunningProcessesDetailsById() {
         Response response = Devices.getRunningProcessesDetailsById();
         response.then()
                 .assertThat()
@@ -102,7 +90,7 @@ public class DeviceDetailsTest extends BaseClass {
 
     @Test
     @Title("Get Installed Software Details By Device Id")
-    public void getInstalledSoftwareDetailsById(){
+    public void getInstalledSoftwareDetailsById() {
         Response response = Devices.getInstalledSoftwareDetailsById();
         response.then()
                 .assertThat()
@@ -113,7 +101,7 @@ public class DeviceDetailsTest extends BaseClass {
 
     @Test
     @Title("Get Installed Software Details By Device Id")
-    public void getOSDetailsById(){
+    public void getOSDetailsById() {
         Response response = Devices.getOSDetailsById();
         response.then()
                 .assertThat()
@@ -124,7 +112,7 @@ public class DeviceDetailsTest extends BaseClass {
 
     @Test
     @Title("Get Device User Details By Device Id")
-    public void getUserDetailsById(){
+    public void getUserDetailsById() {
         Response response = Devices.getUserDetailsById();
         response.then()
                 .assertThat()
@@ -135,7 +123,7 @@ public class DeviceDetailsTest extends BaseClass {
 
     @Test
     @Title("Get Network Interface Details By Device Id")
-    public void getNetworkInterfacesDetailsById(){
+    public void getNetworkInterfacesDetailsById() {
         Response response = Devices.getNetworkInterfacesDetailsById();
         response.then()
                 .assertThat()
@@ -146,7 +134,7 @@ public class DeviceDetailsTest extends BaseClass {
 
     @Test
     @Title("Get Shared Folders Details By Device Id")
-    public void getSharedFoldersDetailsById(){
+    public void getSharedFoldersDetailsById() {
         Response response = Devices.getSharedFoldersDetailsById();
         response.then()
                 .assertThat()
@@ -157,7 +145,7 @@ public class DeviceDetailsTest extends BaseClass {
 
     @Test
     @Title("Get Device Note By Device Id")
-    public void getDeviceNoteDetailsById(){
+    public void getDeviceNoteDetailsById() {
         Response response = Devices.getDeviceNoteDetailsById();
         response.then()
                 .assertThat()
@@ -168,7 +156,7 @@ public class DeviceDetailsTest extends BaseClass {
 
     @Test
     @Title("Get Device Tags By Device Id")
-    public void getDeviceTagDetailsById(){
+    public void getDeviceTagDetailsById() {
         Response response = Devices.getDeviceTagDetailsById();
         response.then()
                 .assertThat()
@@ -179,18 +167,18 @@ public class DeviceDetailsTest extends BaseClass {
 
     @Test //extra
     @Title("Get General Details By Device Id")
-    public void getGeneralDetailsById(){
+    public void getGeneralDetailsById() {
         Response response = Devices.getGeneralDetailsById();
         response.then()
                 .assertThat()
                 .statusCode(HttpStatus.SC_OK)
                 .contentType(equalTo("application/json"))
-                 .body("data._id", equalTo(DEVICE_DETAIL_ID), "meta.status", equalTo("success"));
+                .body("data._id", equalTo(DEVICE_DETAIL_ID), "meta.status", equalTo("success"));
     }
 
     @Test
     @Title("Get Adapter Details By Device Id")
-    public void getAdapterDetailsById(){
+    public void getAdapterDetailsById() {
         Response response = Devices.getAdapterDetailsById();
         response.then()
                 .assertThat()
@@ -201,8 +189,8 @@ public class DeviceDetailsTest extends BaseClass {
 
     @Test
     @Title("Post Insert Tags on Device")
-    public void postInsertDeviceTag(){
-        DeviceTag deviceTag = new DeviceTag("Automation_Device_Tag_Number_"+value+"1", Collections.singletonList(DEVICE_DETAIL_ID));
+    public void postInsertDeviceTag() {
+        DeviceTag deviceTag = new DeviceTag("Automation_Device_Tag_Number_" + value + "1", Collections.singletonList(DEVICE_DETAIL_ID));
         Response response = Devices.postInsertDeviceTag(deviceTag);
         Assert.assertEquals("Invalid Status in Response: ", response.getStatusCode(), HttpStatus.SC_OK);
     }
@@ -210,7 +198,7 @@ public class DeviceDetailsTest extends BaseClass {
     @Test
     @Title("Post Insert Note on Device")
     public void postInsertDeviceNote() {
-        DeviceNotes deviceNotes = new DeviceNotes("Automation_Notes_#_"+value+"", ""+DEVICE_DETAIL_ID);
+        DeviceNotes deviceNotes = new DeviceNotes("Automation_Notes_#_" + value + "", "" + DEVICE_DETAIL_ID);
         Response response = Devices.postInsertDeviceNote(deviceNotes);
         Assert.assertEquals("Invalid Status in Response: ", response.getStatusCode(), HttpStatus.SC_OK);
     }
@@ -220,7 +208,7 @@ public class DeviceDetailsTest extends BaseClass {
      */
     @Test
     @Title("Get All Device Tags")
-    public void getAllTags(){
+    public void getAllTags() {
         Response response = Devices.getAllTags();
         response.then()
                 .assertThat()
@@ -231,7 +219,7 @@ public class DeviceDetailsTest extends BaseClass {
 
     @Test
     @Title("Get Load Balancer Rules Details By Device Id")
-    public void getLoadBalancerRulesForDevice(){
+    public void getLoadBalancerRulesForDevice() {
         Response response = Devices.getLoadBalancerRulesForDevice();
         response.then()
                 .assertThat()
@@ -243,48 +231,26 @@ public class DeviceDetailsTest extends BaseClass {
     @Ignore
     @Test // Not throw exception if tag name not exist.
     @Title("Delete Device Single Tag")
-    public void deleteDeviceSingleTag() throws IOException {
+    public void deleteDeviceSingleTag() {
+        //BASE_ENDPOINT_INVENTA + DEVICE_ENDPOINT + DELETE_SINGLE_TAG + DEVICE_DETAIL_ID +"&tag="+ SINGLE_TAG_NAME;
 
-        HttpDelete delete = new HttpDelete(BASE_ENDPOINT_INVENTA + DEVICE_ENDPOINT + DELETE_SINGLE_TAG + DEVICE_DETAIL_ID +"&tag="+ SINGLE_TAG_NAME)  ;
-        delete.setHeader("Authorization", "Bearer " + token);
-        response = client.execute(delete);
-        int actualStatus = response.getStatusLine().getStatusCode();
-        //assertEquals(actualStatus, 200);
-        //Assert.assertEquals("Invalid Status in Response: ", response.getStatusCode(), HttpStatus.SC_OK);
 
     }
 
     @Ignore
     @Test // issue - not complete. also postman issue
     @Title("Delete Device Bulk Tag")
-    public void deleteDeviceBukTag() throws IOException {
+    public void deleteDeviceBukTag() {
+        //BASE_ENDPOINT_INVENTA + DEVICE_ENDPOINT + DELETE_BULK_TAG
 
-        HttpDelete request = new HttpDelete(BASE_ENDPOINT_INVENTA + DEVICE_ENDPOINT + DELETE_BULK_TAG) ;
-        request.setHeader("Authorization", "Bearer " + token);
-
-        String json = "{ \"userIds\": [\"5ef29cb2c454b418263ff7b5\"] }";
-
-        //request.setEntity(new StringEntity(json, ContentType.APPLICATION_JSON));
-        response = client.execute(request);
-
-
-        int actualStatus = response.getStatusLine().getStatusCode();
-        //assertEquals(actualStatus, 200);
-        //Assert.assertEquals("Invalid Status in Response: ", response.getStatusCode(), HttpStatus.SC_OK);
 
     }
 
     @Ignore
     @Test // Not throw exception if note does not exist.
     @Title("Delete Device Note Tag")
-    public void deleteDeviceNote() throws IOException {
-
-        HttpDelete delete = new HttpDelete(BASE_ENDPOINT_INVENTA + DEVICE_ENDPOINT + DELETE_NOTE + DEVICE_DETAIL_ID )  ;
-        delete.setHeader("Authorization", "Bearer " + token);
-        response = client.execute(delete);
-        int actualStatus = response.getStatusLine().getStatusCode();
-        //assertEquals(actualStatus, 200);
-        //Assert.assertEquals("Invalid Status in Response: ", response.getStatusCode(), HttpStatus.SC_OK);
+    public void deleteDeviceNote() {
+        //BASE_ENDPOINT_INVENTA + DEVICE_ENDPOINT + DELETE_NOTE + DEVICE_DETAIL_ID
 
     }
 
@@ -292,13 +258,7 @@ public class DeviceDetailsTest extends BaseClass {
     @Test // Not throw exception if note does not exist.
     @Title("Delete Discovered Devices")
     public void deleteDiscoveredDevice() throws IOException {
-
-        HttpDelete delete = new HttpDelete(BASE_ENDPOINT_INVENTA + DEVICE_ENDPOINT + DELETE_DEVICE + DELETE_DEVICE_ID ) ;
-        delete.setHeader("Authorization", "Bearer " + token);
-        response = client.execute(delete);
-        int actualStatus = response.getStatusLine().getStatusCode();
-        //assertEquals(actualStatus, 200);
-        //Assert.assertEquals("Invalid Status in Response: ", response.getStatusCode(), HttpStatus.SC_OK);
+        //BASE_ENDPOINT_INVENTA + DEVICE_ENDPOINT + DELETE_DEVICE + DELETE_DEVICE_ID
     }
 
     @Test
@@ -314,7 +274,7 @@ public class DeviceDetailsTest extends BaseClass {
 
     @Test
     @Title("Get User for Device Details By Device Id")
-    public void getUsersForDevice(){
+    public void getUsersForDevice() {
 
         Response response = Devices.getUsersForDevice();
         response.then()

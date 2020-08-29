@@ -20,7 +20,6 @@ public class UserManagement extends BaseClass {
     public static final String PERMISSION_ENDPOINT = "/permission/";
     public static final String GET_ALL_PERMISSION = "getAllPermission";
     public static final String PERMISSION_DETAILS = "getPermissionDetail?id=";
-    public static final String DELETE_PERMISSION  = "deletePermission?id=";
 
     public static final String GET_ALL_MODULES = "getAllModules";
     public static final String GET_ROLE_MODULES = "getRoleModules?role=";
@@ -32,7 +31,7 @@ public class UserManagement extends BaseClass {
     public static final String GET_ALL_ADMIN_USER = "getAllAdminUsers";
     public static final String ADMIN_USER_DETAILS = "getAdminUserDetail?_id=";
     public static final String UPDATE_ADMIN_USER = "updateUser?id=";
-    public static final String DELETE_ADMIN_USER  = "deleteAdminUser?_id=";
+    public static final String DELETE_ADMIN_USER = "deleteAdminUser?_id=";
     public static final String ALL_ADMIN_USERNAME = "getAllUsername";
 
 
@@ -96,7 +95,7 @@ public class UserManagement extends BaseClass {
         return given()
                 .contentType(ContentType.JSON)
                 .header("Authorization", "Bearer " + token)
-                .get(BASE_ENDPOINT_INVENTA + PERMISSION_ENDPOINT + GET_ROLE_PERMISSION +"dashboard&role=ADMIN");
+                .get(BASE_ENDPOINT_INVENTA + PERMISSION_ENDPOINT + GET_ROLE_PERMISSION + "dashboard&role=ADMIN");
     }
 
     public static Response getUserModules() {
@@ -125,7 +124,7 @@ public class UserManagement extends BaseClass {
         return given()
                 .contentType(ContentType.JSON)
                 .header("Authorization", "Bearer " + token)
-                .get(BASE_ENDPOINT_INVENTA + ADMIN_USER_ENDPOINT + ALL_ADMIN_USERNAME );
+                .get(BASE_ENDPOINT_INVENTA + ADMIN_USER_ENDPOINT + ALL_ADMIN_USERNAME);
     }
 
 
@@ -136,7 +135,7 @@ public class UserManagement extends BaseClass {
                 .body(role)
                 .when()
                 .put(BASE_ENDPOINT_INVENTA + ROLE_ENDPOINT + UPDATE_ROLE + ROLE_ID);
-        //
+
 
     }
 
@@ -173,5 +172,12 @@ public class UserManagement extends BaseClass {
                 .when()
                 .delete(BASE_ENDPOINT_INVENTA + ADMIN_USER_ENDPOINT + DELETE_ADMIN_USER + DELETE_ADMIN_USER_ID);
 
+    }
+
+    public static Response deleteRole() {
+        return given()
+                .header("Authorization", "Bearer " + token)
+                .when()
+                .delete(BASE_ENDPOINT_INVENTA + ROLE_ENDPOINT + DELETE_ROLE + DELETE_ROLE_ID);
     }
 }

@@ -28,21 +28,20 @@ public class PolicyRoutineTest extends BaseClass {
     public void testA_PostCreatePolicyRoutine() {
         isPreviousTestPass = false;
         PolicyRoutineProperties policyRoutineProperties = new PolicyRoutineProperties.Builder()
-            .setUsername("test")
-            .setPassword("password123")
-            .build();
+                .setUsername("test")
+                .setPassword("password123")
+                .build();
         PolicyRoutineMainAction policyRoutineMainAction = new PolicyRoutineMainAction.Builder()
                 .setAction("RC02")
                 .setProperties(policyRoutineProperties)
                 .build();
-       PolicyRoutine policyRoutine = new PolicyRoutine.Builder()
-                .setName("Automation Policy Routine # "+value)
+        PolicyRoutine policyRoutine = new PolicyRoutine.Builder()
+                .setName("Automation Policy Routine # " + value)
                 .setMainAction(policyRoutineMainAction)
                 .build();
         Response response = PolicyRoutines.postPolicyRoutine(policyRoutine);
-        if(response.getStatusCode() == HttpStatus.SC_OK)
+        if (response.getStatusCode() == HttpStatus.SC_OK)
             isPreviousTestPass = true;
-        //Assert.assertEquals("Invalid Status in Response: ", response.getStatusCode(), HttpStatus.SC_OK);
         response.then()
                 .assertThat()
                 .statusCode(HttpStatus.SC_OK)
@@ -53,8 +52,8 @@ public class PolicyRoutineTest extends BaseClass {
 
     @Test
     @Title("Update Policy Routine")
-    public void testB_PutPolicyRoutineNew(){
-        Assume.assumeTrue(isPreviousTestPass==true);
+    public void testB_PutPolicyRoutineNew() {
+        Assume.assumeTrue(isPreviousTestPass == true);
         isPreviousTestPass = false;
         PolicyRoutineProperties policyRoutineProperties = new PolicyRoutineProperties.Builder()
                 .setUsername("test")
@@ -65,13 +64,12 @@ public class PolicyRoutineTest extends BaseClass {
                 .setProperties(policyRoutineProperties)
                 .build();
         PolicyRoutine policyRoutine = new PolicyRoutine.Builder()
-                .setName("Update1_Automation Policy Routine # "+value)
+                .setName("Update1_Automation Policy Routine # " + value)
                 .setMainAction(policyRoutineMainAction)
                 .build();
         Response response = PolicyRoutines.updatePolicyRoutine(policyRoutine);
-        if(response.getStatusCode() == HttpStatus.SC_OK)
+        if (response.getStatusCode() == HttpStatus.SC_OK)
             isPreviousTestPass = true;
-       // Assert.assertEquals("Invalid Status in Response: ", response.getStatusCode(), HttpStatus.SC_OK);
         response.then()
                 .assertThat()
                 .statusCode(HttpStatus.SC_OK)
@@ -83,10 +81,10 @@ public class PolicyRoutineTest extends BaseClass {
     @Test
     @Title("Delete Policy Routine")
     public void testC_DeletePolicyRoutine() {
-        Assume.assumeTrue(isPreviousTestPass==true);
+        Assume.assumeTrue(isPreviousTestPass == true);
         isPreviousTestPass = false;
         Response response = PolicyRoutines.deletePolicyRoutine();
-        if(response.getStatusCode() == HttpStatus.SC_OK)
+        if (response.getStatusCode() == HttpStatus.SC_OK)
             isPreviousTestPass = true;
         Assert.assertEquals("Invalid Status in Response: ", response.getStatusCode(), HttpStatus.SC_OK);
 
@@ -140,18 +138,19 @@ public class PolicyRoutineTest extends BaseClass {
 
     @Test
     @Title("Get Policy Routine Table")
-    public void getPolicyRoutineTable(){
+    public void getPolicyRoutineTable() {
         Response response = PolicyRoutines.getPolicyRoutineTable();
         response.then()
                 .assertThat()
                 .statusCode(HttpStatus.SC_OK)
                 .contentType(equalTo("application/json"))
-                .body("meta.status", equalTo("success"));    }
+                .body("meta.status", equalTo("success"));
+    }
 
 
     @Test
     @Title("Get Policy Routine Table With Filter")
-    public void getPolicyRoutineTableWithFilter(){
+    public void getPolicyRoutineTableWithFilter() {
         Response response = PolicyRoutines.getPolicyRoutineTableWithFilter();
         response.then()
                 .assertThat()
@@ -162,7 +161,7 @@ public class PolicyRoutineTest extends BaseClass {
 
     @Test
     @Title("Get Policy Routine Summary")
-    public void getPolicyRoutineSummary(){
+    public void getPolicyRoutineSummary() {
         Response response = PolicyRoutines.getPolicyRoutineSummary();
         response.then()
                 .assertThat()
@@ -193,7 +192,7 @@ public class PolicyRoutineTest extends BaseClass {
 
     @Test
     @Title("Get Policy Routine Action Pair")
-    public void getActionsPair(){
+    public void getActionsPair() {
         Response response = PolicyRoutines.getActionsPair();
         response.then()
                 .assertThat()
@@ -204,7 +203,7 @@ public class PolicyRoutineTest extends BaseClass {
 
     @Test
     @Title("Get Policy Routine Details By Id")
-    public void getPolicyRoutineById(){
+    public void getPolicyRoutineById() {
         Response response = PolicyRoutines.getPolicyRoutineById();
         response.then()
                 .assertThat()

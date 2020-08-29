@@ -25,7 +25,7 @@ public class Users extends BaseClass {
 
     public static final String DELETE_NOTE = "deleteNote?userId=";
 
-    public static final String SINGLE_TAG_NAME = "Automation_User_Tag_Number_"+value+"1";
+    public static final String SINGLE_TAG_NAME = "Automation_User_Tag_Number_" + value + "1";
 
     public static final String USER_ADAPTER_DATA = "adapter/data?_id=";
     public static final String USER_GENERAL_DETAILS = "general?_id=";
@@ -77,7 +77,7 @@ public class Users extends BaseClass {
         return given()
                 .contentType(ContentType.JSON)
                 .header("Authorization", "Bearer " + token)
-                .get(BASE_ENDPOINT_INVENTA + USER_ENDPOINT + USER_ADAPTER_DATA + USER_ID+ "&adapter");
+                .get(BASE_ENDPOINT_INVENTA + USER_ENDPOINT + USER_ADAPTER_DATA + USER_ID + "&adapter");
     }
 
     public static Response getGeneralDetails() {
@@ -119,7 +119,7 @@ public class Users extends BaseClass {
         return given()
                 .header("Authorization", "Bearer " + token)
                 .when()
-                .delete(BASE_ENDPOINT_INVENTA + USER_ENDPOINT + DELETE_SINGLE_TAG + USER_ID +"&tag="+ SINGLE_TAG_NAME);
+                .delete(BASE_ENDPOINT_INVENTA + USER_ENDPOINT + DELETE_SINGLE_TAG + USER_ID + "&tag=" + SINGLE_TAG_NAME);
 
     }
 

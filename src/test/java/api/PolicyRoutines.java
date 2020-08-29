@@ -69,6 +69,7 @@ public class PolicyRoutines extends BaseClass {
                 .header("Authorization", "Bearer " + token)
                 .get(BASE_ENDPOINT_INVENTA + POLICY_ROUTINE + "summary/" + PR_ID);
     }
+
     public static Response postEnforcePolicyDevice(EnforcePolicyOnDevice enforcePolicyOnDevice) {
         return given()
                 .contentType(ContentType.JSON)
@@ -86,7 +87,6 @@ public class PolicyRoutines extends BaseClass {
                 .when()
                 .post(BASE_ENDPOINT_INVENTA + POLICY_ROUTINE + "enforce/" + USER_ID + "/users/");
     }
-
 
 
     public static Response getActionsPair() {
@@ -111,6 +111,7 @@ public class PolicyRoutines extends BaseClass {
                 .delete(BASE_ENDPOINT_INVENTA + POLICY_ROUTINE + "?ids=" + DELETE_PR_ID);
 
     }
+
     public static Response postPolicyRoutine(PolicyRoutine policyRoutine) {
         return given()
                 .contentType(ContentType.JSON)

@@ -18,12 +18,11 @@ public class AdapterConfiguration extends BaseClass {
     public final static String AZURE = "azure";
 
 
-
-    public static Response getAllAdapters(){
+    public static Response getAllAdapters() {
         return given()
                 .contentType(ContentType.JSON)
                 .header("Authorization", "Bearer " + token)
-                .get(BASE_ENDPOINT_ADAPTER + ADAPTER_ENDPOINT );
+                .get(BASE_ENDPOINT_ADAPTER + ADAPTER_ENDPOINT);
     }
 
     public static Response getAdAdapterConfiguration() {
@@ -39,7 +38,8 @@ public class AdapterConfiguration extends BaseClass {
                 .header("Authorization", "Bearer " + token)
                 .get(BASE_ENDPOINT_ADAPTER + ADAPTER_ENDPOINT + ADAPTER_CONFIGURATION + AWS);
     }
-    public static Response  getAzureAdapterConfiguration() {
+
+    public static Response getAzureAdapterConfiguration() {
         return given()
                 .contentType(ContentType.JSON)
                 .header("Authorization", "Bearer " + token)
@@ -56,14 +56,14 @@ public class AdapterConfiguration extends BaseClass {
 
     }
 
-    public static Response getAwsDiscoverNow(){
+    public static Response getAwsDiscoverNow() {
         return given()
                 .contentType(ContentType.JSON)
                 .header("Authorization", "Bearer " + token)
                 .get(BASE_ENDPOINT_ADAPTER + ADAPTER_ENDPOINT + DISCOVER + AWS);
     }
 
-    public static Response getAzureDiscoverNow(){
+    public static Response getAzureDiscoverNow() {
         return given()
                 .contentType(ContentType.JSON)
                 .header("Authorization", "Bearer " + token)
@@ -71,14 +71,14 @@ public class AdapterConfiguration extends BaseClass {
     }
 
 
-    public static Response getAdDiscoverNow(){
+    public static Response getAdDiscoverNow() {
         return given()
                 .contentType(ContentType.JSON)
                 .header("Authorization", "Bearer " + token)
                 .get(BASE_ENDPOINT_ADAPTER + ADAPTER_ENDPOINT + DISCOVER + AD);
     }
 
-    public static Response getAllAdapterDiscoverNow(){
+    public static Response getAllAdapterDiscoverNow() {
         return given()
                 .contentType(ContentType.JSON)
                 .header("Authorization", "Bearer " + token)

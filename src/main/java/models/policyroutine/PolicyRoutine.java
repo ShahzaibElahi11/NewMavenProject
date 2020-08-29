@@ -20,13 +20,14 @@ public class PolicyRoutine {
     }
 
     // default constructor required by Jackson
-        public PolicyRoutine() {
+    public PolicyRoutine() {
     }
 
     public PolicyRoutine(String name, PolicyRoutineMainAction mainAction) {
         this.name = name;
         this.mainAction = mainAction;
     }
+
     //Add Builder Class
     public static class Builder {
 
@@ -45,7 +46,7 @@ public class PolicyRoutine {
         }
 
 
-        public PolicyRoutine build(){
+        public PolicyRoutine build() {
             return new PolicyRoutine(name, mainAction);
         }
     }

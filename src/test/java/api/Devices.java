@@ -105,6 +105,7 @@ public class Devices extends BaseClass {
                 .get(BASE_ENDPOINT_INVENTA + "/devices/getDeviceNote?deviceId=" + DEVICE_DETAIL_ID);
 
     }
+
     public static Response getDeviceTagDetailsById() {
         return given()
                 .contentType(ContentType.JSON)
@@ -112,6 +113,7 @@ public class Devices extends BaseClass {
                 .get(BASE_ENDPOINT_INVENTA + "/devices/getDeviceTag?deviceId=" + DEVICE_DETAIL_ID);
 
     }
+
     public static Response getGeneralDetailsById() {
         return given()
                 .contentType(ContentType.JSON)
@@ -119,6 +121,7 @@ public class Devices extends BaseClass {
                 .get(BASE_ENDPOINT_INVENTA + "/devices/general?_id=" + DEVICE_DETAIL_ID);
 
     }
+
     public static Response getAdapterDetailsById() {
         return given()
                 .contentType(ContentType.JSON)

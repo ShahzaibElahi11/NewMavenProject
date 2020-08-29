@@ -21,7 +21,8 @@ public class PolicyRoutineMainAction {
     }
 
     // default constructor required by Jackson
-    public PolicyRoutineMainAction() { }
+    public PolicyRoutineMainAction() {
+    }
 
     public PolicyRoutineMainAction(String action, PolicyRoutineProperties properties) {
         this.action = action;
@@ -43,11 +44,11 @@ public class PolicyRoutineMainAction {
 
         }
 
-        public PolicyRoutineMainAction build(){
+        public PolicyRoutineMainAction build() {
             return new PolicyRoutineMainAction(action, properties);
-    }
+        }
 
     }
 
-    }
+}
 

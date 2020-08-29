@@ -81,7 +81,8 @@ public class AdminUser {
         return _id;
     }
 
-    public AdminUser() { }
+    public AdminUser() {
+    }
 
 
     public AdminUser(String emailAddress, String phone, String userName, String password, String passwordConfirm, String roleIds, String firstName, String lastName, String userType, boolean status, String _id) {
