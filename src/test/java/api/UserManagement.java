@@ -5,11 +5,11 @@ import io.restassured.response.Response;
 import models.usermanagement.AdminUser;
 import models.usermanagement.Login;
 import models.usermanagement.Role;
-import utils.BaseClass;
+import utils.BaseTest;
 
 import static io.restassured.RestAssured.given;
 
-public class UserManagement extends BaseClass {
+public class UserManagement extends BaseTest {
     public static final String ROLE_ENDPOINT = "/role/";
     public static final String CREATE_ROLE = "createRole";
     public static final String GET_ALL_ROLE = "getAllRole";

@@ -2,35 +2,47 @@ package api;
 
 import io.restassured.http.ContentType;
 import io.restassured.response.Response;
-import utils.BaseClass;
+import utils.ApplicationConfiguration;
+import utils.BaseTest;
 
 import static io.restassured.RestAssured.given;
 
-public class Dashboard extends BaseClass {
+public class Dashboard extends BaseTest {
 
-    public static Response getAllAdaptersCount() {
+    protected static final String DASHBOARD_ENDPOINT = ApplicationConfiguration.getDashboardEndpoint();
+    protected static final String CONNECTOR_PARAM = ApplicationConfiguration.getConnectorParam();
+    protected static final String OS_DISTRIBUTION = ApplicationConfiguration.getOsDistribution();
+    protected static final String USER_COUNT = ApplicationConfiguration.getUserCount();
+    protected static final String ASSETS_TYPE_DISTRIBUTION = ApplicationConfiguration.getAssetsTypeDistribution();
+    protected static final String CLOUD_VS_NON_CLOUD = ApplicationConfiguration.getCloudVsNonCloud();
+    protected static final String WMIC = ApplicationConfiguration.getWMIC();
+
+    //will continue
+
+
+    public static Response getAllConnectorCount() {
         return given()
                 .contentType(ContentType.JSON)
                 .header("Authorization", "Bearer " + token)
-                .get(BASE_ENDPOINT_INVENTA + "/query/adapters/count/devices/");
+                .get(BASE_ENDPOINT_INVENTA + DASHBOARD_ENDPOINT);
 
     }
 
-    public static Response getAdAdapterCount() {
+    public static Response getAdConnectorCount() {
         return given()
                 .contentType(ContentType.JSON)
                 .header("Authorization", "Bearer " + token)
-                .get(BASE_ENDPOINT_INVENTA + "/query/adapters/count/devices/?adapter=adapter_ad");
+                .get(BASE_ENDPOINT_INVENTA + DASHBOARD_ENDPOINT + CONNECTOR_PARAM + "ad");
     }
 
-    public static Response getAzureAdapterCount() {
+    public static Response getAzureConnectorCount() {
         return given()
                 .contentType(ContentType.JSON)
                 .header("Authorization", "Bearer " + token)
                 .get(BASE_ENDPOINT_INVENTA + "/query/adapters/count/devices/?adapter=adapter_azure");
     }
 
-    public static Response getWmicAdapterCount() {
+    public static Response getWmicConnectorCount() {
         return given()
                 .contentType(ContentType.JSON)
                 .header("Authorization", "Bearer " + token)
@@ -42,14 +54,14 @@ public class Dashboard extends BaseClass {
         return given()
                 .contentType(ContentType.JSON)
                 .header("Authorization", "Bearer " + token)
-                .get(BASE_ENDPOINT_INVENTA + "/query/dist/?field=common.operatingSystem.type");
+                .get(BASE_ENDPOINT_INVENTA + OS_DISTRIBUTION);
     }
 
     public static Response getTotalUserCount() {
         return given()
                 .contentType(ContentType.JSON)
                 .header("Authorization", "Bearer " + token)
-                .get(BASE_ENDPOINT_INVENTA + "/query/count/users/");
+                .get(BASE_ENDPOINT_INVENTA + USER_COUNT);
 
     }
 
@@ -87,6 +99,6 @@ public class Dashboard extends BaseClass {
         return given()
                 .contentType(ContentType.JSON)
                 .header("Authorization", "Bearer " + token)
-                .get(BASE_ENDPOINT_INVENTA + "/query/pie/?field=adapterProperties&match=CLOUD%20PROVIDER");
+                .get(BASE_ENDPOINT_INVENTA + CLOUD_VS_NON_CLOUD);
     }
 }

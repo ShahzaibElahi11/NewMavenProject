@@ -3,47 +3,47 @@ package api;
 import io.restassured.http.ContentType;
 import io.restassured.response.Response;
 import models.configuration.AwsConfiguration;
-import utils.BaseClass;
+import utils.ApplicationConfiguration;
+import utils.BaseTest;
 
 import static io.restassured.RestAssured.given;
 
-public class AdapterConfiguration extends BaseClass {
+public class ConnectorConfiguration extends BaseTest {
 
-    public final static String ADAPTER_ENDPOINT = "/adapters/";
-    public final static String ADAPTER_CONFIGURATION = "active-directory/configure/?type=";
-    public final static String ADAPTER_AD_AZURE_CONFIGURATION = "active-directory/configure";
-    public final static String DISCOVER = "discover/";
-    public final static String AWS = "aws";
-    public final static String AD = "ad";
-    public final static String AZURE = "azure";
+    protected static final String CONNECTOR_ENDPOINT = ApplicationConfiguration.getConnectorEndpoint();
+    protected static final String CONNECTOR_CONFIGURATION = ApplicationConfiguration.getConnectorConfiguration();
+    protected static final String DISCOVER = ApplicationConfiguration.getDISCOVER();
+    protected static final String AWS = ApplicationConfiguration.getAWS();
+    protected static final String AD = ApplicationConfiguration.getAD();
+    protected static final String AZURE = ApplicationConfiguration.getAZURE();
 
 
-    public static Response getAllAdapters() {
+    public static Response getAllConnector() {
         return given()
                 .contentType(ContentType.JSON)
                 .header("Authorization", "Bearer " + token)
-                .get(BASE_ENDPOINT_ADAPTER + ADAPTER_ENDPOINT);
+                .get(BASE_ENDPOINT_CONNECTOR + CONNECTOR_ENDPOINT);
     }
 
-    public static Response getAdAdapterConfiguration() {
+    public static Response getAdConnectorConfiguration() {
         return given()
                 .contentType(ContentType.JSON)
                 .header("Authorization", "Bearer " + token)
-                .get(BASE_ENDPOINT_ADAPTER + ADAPTER_ENDPOINT + ADAPTER_CONFIGURATION + AD);
+                .get(BASE_ENDPOINT_CONNECTOR + CONNECTOR_ENDPOINT + CONNECTOR_CONFIGURATION + AD);
     }
 
-    public static Response getAwsAdapterConfiguration() {
+    public static Response getAwsConnectorConfiguration() {
         return given()
                 .contentType(ContentType.JSON)
                 .header("Authorization", "Bearer " + token)
-                .get(BASE_ENDPOINT_ADAPTER + ADAPTER_ENDPOINT + ADAPTER_CONFIGURATION + AWS);
+                .get(BASE_ENDPOINT_CONNECTOR + CONNECTOR_ENDPOINT + CONNECTOR_CONFIGURATION + AWS);
     }
 
-    public static Response getAzureAdapterConfiguration() {
+    public static Response getAzureConnectorConfiguration() {
         return given()
                 .contentType(ContentType.JSON)
                 .header("Authorization", "Bearer " + token)
-                .get(BASE_ENDPOINT_ADAPTER + ADAPTER_ENDPOINT + ADAPTER_CONFIGURATION + AZURE);
+                .get(BASE_ENDPOINT_CONNECTOR + CONNECTOR_ENDPOINT + CONNECTOR_CONFIGURATION + AZURE);
     }
 
     public static Response postAwsConfiguration(AwsConfiguration awsConfiguration) {
@@ -52,7 +52,7 @@ public class AdapterConfiguration extends BaseClass {
                 .header("Authorization", "Bearer " + token)
                 .body(awsConfiguration)
                 .when()
-                .post(BASE_ENDPOINT_ADAPTER + "/aws/configure");
+                .post(BASE_ENDPOINT_CONNECTOR + "/aws/configure");
 
     }
 
@@ -60,14 +60,14 @@ public class AdapterConfiguration extends BaseClass {
         return given()
                 .contentType(ContentType.JSON)
                 .header("Authorization", "Bearer " + token)
-                .get(BASE_ENDPOINT_ADAPTER + ADAPTER_ENDPOINT + DISCOVER + AWS);
+                .get(BASE_ENDPOINT_CONNECTOR + CONNECTOR_ENDPOINT + DISCOVER + AWS);
     }
 
     public static Response getAzureDiscoverNow() {
         return given()
                 .contentType(ContentType.JSON)
                 .header("Authorization", "Bearer " + token)
-                .get(BASE_ENDPOINT_ADAPTER + ADAPTER_ENDPOINT + DISCOVER + AZURE);
+                .get(BASE_ENDPOINT_CONNECTOR + CONNECTOR_ENDPOINT + DISCOVER + AZURE);
     }
 
 
@@ -75,13 +75,13 @@ public class AdapterConfiguration extends BaseClass {
         return given()
                 .contentType(ContentType.JSON)
                 .header("Authorization", "Bearer " + token)
-                .get(BASE_ENDPOINT_ADAPTER + ADAPTER_ENDPOINT + DISCOVER + AD);
+                .get(BASE_ENDPOINT_CONNECTOR + CONNECTOR_ENDPOINT + DISCOVER + AD);
     }
 
-    public static Response getAllAdapterDiscoverNow() {
+    public static Response getAllConnectorDiscoverNow() {
         return given()
                 .contentType(ContentType.JSON)
                 .header("Authorization", "Bearer " + token)
-                .get(BASE_ENDPOINT_ADAPTER + ADAPTER_ENDPOINT + DISCOVER);
+                .get(BASE_ENDPOINT_CONNECTOR + CONNECTOR_ENDPOINT + DISCOVER);
     }
 }

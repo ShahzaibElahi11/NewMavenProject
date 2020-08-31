@@ -3,7 +3,7 @@ package api;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import io.restassured.http.ContentType;
 import io.restassured.response.Response;
-import utils.BaseClass;
+import utils.BaseTest;
 
 import java.io.IOException;
 import java.util.List;
@@ -11,7 +11,7 @@ import java.util.Map;
 
 import static io.restassured.RestAssured.given;
 
-public class QueryWizard extends BaseClass {
+public class QueryWizard extends BaseTest {
 
 
     public static final String QUERY_ENDPOINT = "/query/devices/?query=";
@@ -133,7 +133,7 @@ public class QueryWizard extends BaseClass {
     }
 
 
-    public static Response getAdapterDetailsQuery() {
+    public static Response getConnectorDetailsQuery() {
         return given()
                 .contentType(ContentType.JSON)
                 .header("Authorization", "Bearer " + token)

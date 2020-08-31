@@ -10,7 +10,7 @@ import models.users.UserTag;
 import org.junit.*;
 import org.junit.runner.RunWith;
 import org.junit.runners.MethodSorters;
-import utils.BaseClass;
+import utils.BaseTest;
 
 import java.util.Collections;
 
@@ -18,7 +18,7 @@ import static org.hamcrest.Matchers.equalTo;
 
 @RunWith(SerenityRunner.class)
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
-public class UserDetailsTest extends BaseClass {
+public class UserDetailsTest extends BaseTest {
 
     public static boolean isPreviousTestPass;
 
@@ -45,9 +45,9 @@ public class UserDetailsTest extends BaseClass {
     }
 
     @Test
-    @Title("Get Discovered User Adapters List")
-    public void getUserAdaptersList() {
-        Response response = Users.getUserAdaptersList();
+    @Title("Get Discovered User Connector List")
+    public void getUserConnectorsList() {
+        Response response = Users.getUserConnectorsList();
         response.then()
                 .assertThat()
                 .statusCode(HttpStatus.SC_OK)
@@ -150,9 +150,9 @@ public class UserDetailsTest extends BaseClass {
     }
 
     @Test
-    @Title("Get Users Adapter Data of Discovered User")
-    public void getUsersAdapterData() {
-        Response response = Users.getUsersAdapterData();
+    @Title("Get Users Connector Data of Discovered User")
+    public void getUsersConnectorData() {
+        Response response = Users.getUsersConnectorData();
         response.then()
                 .assertThat()
                 .statusCode(HttpStatus.SC_OK)

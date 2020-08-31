@@ -14,13 +14,13 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.MethodSorters;
 import utils.ApplicationConfiguration;
-import utils.BaseClass;
+import utils.BaseTest;
 
 import static org.hamcrest.Matchers.equalTo;
 
 @RunWith(SerenityRunner.class)
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
-public class LDAPTest extends BaseClass {
+public class LDAPTest extends BaseTest {
 
     public static boolean isPreviousTestPass;
     protected static final String LDAP_MACHINE_IP = ApplicationConfiguration.getLdapMachineIp();

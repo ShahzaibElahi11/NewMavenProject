@@ -7,12 +7,12 @@ import net.thucydides.core.annotations.Title;
 import org.apache.http.HttpStatus;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import utils.BaseClass;
+import utils.BaseTest;
 
 import static org.hamcrest.Matchers.equalTo;
 
 @RunWith(SerenityRunner.class)
-public class UserAuditLogsTest extends BaseClass {
+public class UserAuditLogsTest extends BaseTest {
 
     @Test
     @Title("Get User Audit Details By UserName")

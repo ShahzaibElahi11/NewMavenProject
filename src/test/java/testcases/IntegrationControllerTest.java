@@ -8,13 +8,13 @@ import org.apache.http.HttpStatus;
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import utils.BaseClass;
+import utils.BaseTest;
 
 import static io.restassured.RestAssured.given;
 
 
 @RunWith(SerenityRunner.class)
-public class IntegrationControllerTest extends BaseClass {
+public class IntegrationControllerTest extends BaseTest {
 
     public static final String DOCKER_ENDPOINT = "/docker/";
     public static final String ACTIVE_MQ = "activemq";

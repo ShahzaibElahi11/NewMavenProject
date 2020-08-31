@@ -2,7 +2,6 @@ package utils;
 
 import com.auth0.jwt.JWT;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.github.javafaker.Faker;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -14,10 +13,10 @@ import java.util.*;
 
 import static com.auth0.jwt.algorithms.Algorithm.HMAC512;
 
-public class BaseClass {
+public class BaseTest {
 
     protected static final String BASE_ENDPOINT_INVENTA = ApplicationConfiguration.getBaseURL_InventaService();
-    protected static final String BASE_ENDPOINT_ADAPTER = ApplicationConfiguration.getBaseURL_AdapterService();
+    protected static final String BASE_ENDPOINT_CONNECTOR = ApplicationConfiguration.getBaseURL_ConnectorService();
 
     //For Token
     public static final String SUBJECT = ApplicationConfiguration.getSubject();
@@ -35,17 +34,6 @@ public class BaseClass {
      */
     static Random rand = new Random();
     protected static final int value = rand.nextInt(5000);
-
-    //Fake Class
-    Faker faker = new Faker();
-    protected final String userName = faker.name().username();
-
-    protected final String firstName = faker.name().firstName();
-    protected final String lastName = faker.name().lastName();
-    protected final String emailAddress = faker.internet().emailAddress();
-    protected final String phoneNumber = faker.phoneNumber().cellPhone();
-    protected final String randomNnumber = String.valueOf(faker.number().randomNumber()); //will use later.
-
 
     /**
      * ID Extraction Implementation

@@ -4,11 +4,11 @@ import io.restassured.http.ContentType;
 import io.restassured.response.Response;
 import models.devices.DeviceNotes;
 import models.devices.DeviceTag;
-import utils.BaseClass;
+import utils.BaseTest;
 
 import static io.restassured.RestAssured.given;
 
-public class Devices extends BaseClass {
+public class Devices extends BaseTest {
 
     public static final String DEVICE_ENDPOINT = "/devices/";
     public static final String DEVICE_ALL_TAGS = "tags/";
@@ -32,7 +32,7 @@ public class Devices extends BaseClass {
                 .get(BASE_ENDPOINT_INVENTA + "/devices/deviceDetail?_id=" + DEVICE_DETAIL_ID);
     }
 
-    public static Response getDeviceAdaptersListById() {
+    public static Response getDeviceConnectorsListById() {
         return given()
                 .contentType(ContentType.JSON)
                 .header("Authorization", "Bearer " + token)
@@ -122,7 +122,7 @@ public class Devices extends BaseClass {
 
     }
 
-    public static Response getAdapterDetailsById() {
+    public static Response getConnectorDetailsById() {
         return given()
                 .contentType(ContentType.JSON)
                 .header("Authorization", "Bearer " + token)

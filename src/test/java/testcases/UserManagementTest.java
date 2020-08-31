@@ -1,6 +1,7 @@
 package testcases;
 
 import api.UserManagement;
+import com.github.javafaker.Faker;
 import io.restassured.response.Response;
 import net.serenitybdd.junit.runners.SerenityRunner;
 import net.thucydides.core.annotations.Title;
@@ -14,7 +15,7 @@ import org.junit.*;
 import org.junit.runner.RunWith;
 import org.junit.runners.MethodSorters;
 import utils.ApplicationConfiguration;
-import utils.BaseClass;
+import utils.BaseTest;
 
 import java.util.Collections;
 
@@ -22,7 +23,17 @@ import static org.hamcrest.Matchers.equalTo;
 
 @RunWith(SerenityRunner.class)
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
-public class UserManagementTest extends BaseClass {
+public class UserManagementTest extends BaseTest {
+
+    //Fake Class
+    Faker faker = new Faker();
+    protected final String userName = faker.name().username();
+
+    protected final String firstName = faker.name().firstName();
+    protected final String lastName = faker.name().lastName();
+    protected final String emailAddress = faker.internet().emailAddress();
+    protected final String phoneNumber = faker.phoneNumber().cellPhone();
+    protected final String randomNnumber = String.valueOf(faker.number().randomNumber()); //will use later.
 
     protected static final String USERNAME = ApplicationConfiguration.getUSERNAME();
     protected static final String PASSWORD = ApplicationConfiguration.getPASSWORD();

@@ -19,9 +19,9 @@ public class DashboardTest {
     List adapterName = new ArrayList();
 
     @Test
-    @Title("Get All Adapters Count")
-    public void getAllAdaptersCount() {
-        Response response = Dashboard.getAllAdaptersCount();
+    @Title("Get All Connectors Count")
+    public void getAllConnectorsCount() {
+        Response response = Dashboard.getAllConnectorCount();
         response.then()
                 .assertThat()
                 .statusCode(HttpStatus.SC_OK)
@@ -31,9 +31,9 @@ public class DashboardTest {
     }
 
     @Test
-    @Title("Get AD Adapter Count")
-    public void getADAdapterCount() {
-        Response response = Dashboard.getAdAdapterCount();
+    @Title("Get AD Connector Count")
+    public void getADConnectorCount() {
+        Response response = Dashboard.getAdConnectorCount();
         adapterName.add("adapter_ad");
         response.then()
                 .assertThat()
@@ -54,9 +54,9 @@ public class DashboardTest {
     }
 
     @Test
-    @Title("Get Azure Adapter Count")
-    public void getAzureAdapterCount() {
-        Response response = Dashboard.getAzureAdapterCount();
+    @Title("Get Azure Connector Count")
+    public void getAzureConnectorCount() {
+        Response response = Dashboard.getAzureConnectorCount();
         adapterName.add("adapter_azure");
         response.then()
                 .assertThat()
@@ -66,9 +66,9 @@ public class DashboardTest {
     }
 
     @Test
-    @Title("Get WMIC Adapter Count")
-    public void getWMICAdapterCount() {
-        Response response = Dashboard.getWmicAdapterCount();
+    @Title("Get WMIC Connector Count")
+    public void getWMICConnectorCount() {
+        Response response = Dashboard.getWmicConnectorCount();
         //List adapterName = Collections.singletonList("adapter_wmic");
         adapterName.add("adapter_wmic");
         response.then()

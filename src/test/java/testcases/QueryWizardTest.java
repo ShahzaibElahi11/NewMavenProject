@@ -9,10 +9,10 @@ import org.junit.Assert;
 import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import utils.BaseClass;
+import utils.BaseTest;
 
 @RunWith(SerenityRunner.class)
-public class QueryWizardTest extends BaseClass {
+public class QueryWizardTest extends BaseTest {
 
     @Test
     @Title("Get Query Wizard Equal Operator")
@@ -85,9 +85,9 @@ public class QueryWizardTest extends BaseClass {
     }
 
     @Test
-    @Title("Get Query Wizard Adapter Details Query")
-    public void getAdapterDetailsQuery(){
-        Response response = QueryWizard.getAdapterDetailsQuery();
+    @Title("Get Query Wizard Connector Details Query")
+    public void getConnectorDetailsQuery(){
+        Response response = QueryWizard.getConnectorDetailsQuery();
         Assert.assertEquals("Invalid Status in Response: ", response.getStatusCode(), HttpStatus.SC_OK);
     }
 

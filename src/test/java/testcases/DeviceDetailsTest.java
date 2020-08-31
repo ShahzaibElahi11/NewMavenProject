@@ -12,7 +12,7 @@ import org.junit.Test;
 import models.devices.DeviceNotes;
 import models.devices.DeviceTag;
 import org.junit.runner.RunWith;
-import utils.BaseClass;
+import utils.BaseTest;
 
 import java.io.IOException;
 import java.util.Collections;
@@ -20,7 +20,7 @@ import java.util.Collections;
 import static org.hamcrest.Matchers.equalTo;
 
 @RunWith(SerenityRunner.class)
-public class DeviceDetailsTest extends BaseClass {
+public class DeviceDetailsTest extends BaseTest {
 
     @Test
     @Title("Get All Device List")
@@ -45,9 +45,9 @@ public class DeviceDetailsTest extends BaseClass {
     }
 
     @Test
-    @Title("Get Device with Adapters List By Device Id")
-    public void getDeviceAdaptersList() {
-        Response response = Devices.getDeviceAdaptersListById();
+    @Title("Get Device with Connectors List By Device Id")
+    public void getDeviceConnectorsList() {
+        Response response = Devices.getDeviceConnectorsListById();
         response.then()
                 .assertThat()
                 .statusCode(HttpStatus.SC_OK)
@@ -177,9 +177,9 @@ public class DeviceDetailsTest extends BaseClass {
     }
 
     @Test
-    @Title("Get Adapter Details By Device Id")
-    public void getAdapterDetailsById() {
-        Response response = Devices.getAdapterDetailsById();
+    @Title("Get Connector Details By Device Id")
+    public void getConnectorDetailsById() {
+        Response response = Devices.getConnectorDetailsById();
         response.then()
                 .assertThat()
                 .statusCode(HttpStatus.SC_OK)

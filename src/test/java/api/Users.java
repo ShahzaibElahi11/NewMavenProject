@@ -4,11 +4,11 @@ import io.restassured.http.ContentType;
 import io.restassured.response.Response;
 import models.users.UserNote;
 import models.users.UserTag;
-import utils.BaseClass;
+import utils.BaseTest;
 
 import static io.restassured.RestAssured.given;
 
-public class Users extends BaseClass {
+public class Users extends BaseTest {
     public static final String USER_ENDPOINT = "/users/";
     public static final String PAGINATION = "?page=0&size=1&sort=dateCreated,desc";
     public static final String ALL_USERS = "getAllUsers";
@@ -45,7 +45,7 @@ public class Users extends BaseClass {
                 .get(BASE_ENDPOINT_INVENTA + USER_ENDPOINT + USER_DETAIL + USER_ID);
     }
 
-    public static Response getUserAdaptersList() {
+    public static Response getUserConnectorsList() {
         return given()
                 .contentType(ContentType.JSON)
                 .header("Authorization", "Bearer " + token)
@@ -73,7 +73,7 @@ public class Users extends BaseClass {
                 .get(BASE_ENDPOINT_INVENTA + USER_ENDPOINT + USER_NOTE + USER_ID);
     }
 
-    public static Response getUsersAdapterData() {
+    public static Response getUsersConnectorData() {
         return given()
                 .contentType(ContentType.JSON)
                 .header("Authorization", "Bearer " + token)

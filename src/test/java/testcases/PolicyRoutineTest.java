@@ -12,13 +12,13 @@ import org.junit.FixMethodOrder;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.MethodSorters;
-import utils.BaseClass;
+import utils.BaseTest;
 
 import static org.hamcrest.Matchers.equalTo;
 
 @RunWith(SerenityRunner.class)
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
-public class PolicyRoutineTest extends BaseClass {
+public class PolicyRoutineTest extends BaseTest {
 
     public static boolean isPreviousTestPass;
 

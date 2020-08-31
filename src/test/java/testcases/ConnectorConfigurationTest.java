@@ -1,6 +1,6 @@
 package testcases;
 
-import api.AdapterConfiguration;
+import api.ConnectorConfiguration;
 import io.restassured.response.Response;
 import models.configuration.AwsConfiguration;
 import net.serenitybdd.junit.runners.SerenityRunner;
@@ -11,20 +11,20 @@ import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import utils.ApplicationConfiguration;
-import utils.BaseClass;
+import utils.BaseTest;
 
 import static org.hamcrest.Matchers.*;
 
 @RunWith(SerenityRunner.class)
-public class AdapterConfigurationTest extends BaseClass {
+public class ConnectorConfigurationTest extends BaseTest {
 
     protected static final String AWS_KEY_ID = ApplicationConfiguration.getAwsKeyId();
     protected static final String AWS_SECRET_KEY = ApplicationConfiguration.getAwsSecretKey();
 
     @Test
-    @Title("Get All Adapters")
-    public void getAllAdapters() {
-        Response response = AdapterConfiguration.getAllAdapters();
+    @Title("Get All Connectors")
+    public void getAllConnectors() {
+        Response response = ConnectorConfiguration.getAllConnector();
         response.then()
                 .assertThat()
                 .statusCode(HttpStatus.SC_OK)
@@ -34,9 +34,9 @@ public class AdapterConfigurationTest extends BaseClass {
     }
 
     @Test
-    @Title("Get AD Adapter Configuration")
-    public void getADAdapterConfiguration() {
-        Response response = AdapterConfiguration.getAdAdapterConfiguration();
+    @Title("Get AD Connector Configuration")
+    public void getADConnectorConfiguration() {
+        Response response = ConnectorConfiguration.getAdConnectorConfiguration();
         response.then()
                 .assertThat()
                 .statusCode(HttpStatus.SC_OK)
@@ -45,9 +45,9 @@ public class AdapterConfigurationTest extends BaseClass {
     }
 
     @Test
-    @Title("Get AWS Adapter Configuration")
-    public void getAWSAdapterConfiguration() {
-        Response response = AdapterConfiguration.getAwsAdapterConfiguration();
+    @Title("Get AWS Connector Configuration")
+    public void getAWSConnectorConfiguration() {
+        Response response = ConnectorConfiguration.getAwsConnectorConfiguration();
         response.then()
                 .assertThat()
                 .statusCode(HttpStatus.SC_OK)
@@ -56,9 +56,9 @@ public class AdapterConfigurationTest extends BaseClass {
     }
 
     @Test
-    @Title("Get Azure Adapter Configuration")
-    public void getAZUREAdapterConfiguration() {
-        Response response = AdapterConfiguration.getAzureAdapterConfiguration();
+    @Title("Get Azure Connector Configuration")
+    public void getAzureConnectorConfiguration() {
+        Response response = ConnectorConfiguration.getAzureConnectorConfiguration();
         response.then()
                 .assertThat()
                 .statusCode(HttpStatus.SC_OK)
@@ -68,17 +68,17 @@ public class AdapterConfigurationTest extends BaseClass {
 
     @Ignore
     @Test
-    @Title("Post AWS Adapter Configuration")
+    @Title("Post AWS Connector Configuration")
     public void postAWSConfiguration() {
         AwsConfiguration awsConfiguration = new AwsConfiguration(true, AWS_KEY_ID, AWS_SECRET_KEY, "us-east-2", false, "Test", "", true, true, true, true, true, true, true, true, true, true, true, false, true, true, true, true, false);
-        Response response = AdapterConfiguration.postAwsConfiguration(awsConfiguration);
+        Response response = ConnectorConfiguration.postAwsConfiguration(awsConfiguration);
         Assert.assertEquals("Invalid Status in Response: ", response.getStatusCode(), HttpStatus.SC_OK);
 
     }
 
     @Ignore
     @Test
-    @Title("Post Azure Adapter Configuration")
+    @Title("Post Azure Connector Configuration")
     public void postAzureConfiguration() {
         //BASE_ENDPOINT_ADAPTER + ADAPTER_ENDPOINT + ADAPTER_AD_AZURE_CONFIGURATION
 
@@ -86,7 +86,7 @@ public class AdapterConfigurationTest extends BaseClass {
 
     @Ignore
     @Test
-    @Title("Post AD Adapter Configuration")
+    @Title("Post AD Connector Configuration")
     public void postADConfiguration() {
         //BASE_ENDPOINT_ADAPTER + ADAPTER_ENDPOINT + ADAPTER_AD_AZURE_CONFIGURATION
 
@@ -95,7 +95,7 @@ public class AdapterConfigurationTest extends BaseClass {
     @Test
     @Title("Get AWS Discover Now")
     public void getAwsDiscoverNow() {
-        Response response = AdapterConfiguration.getAwsDiscoverNow();
+        Response response = ConnectorConfiguration.getAwsDiscoverNow();
         response.then()
                 .assertThat()
                 .statusCode(HttpStatus.SC_OK)
@@ -106,7 +106,7 @@ public class AdapterConfigurationTest extends BaseClass {
     @Test
     @Title("Get Azure Discover Now")
     public void getAzureDiscoverNow() {
-        Response response = AdapterConfiguration.getAzureDiscoverNow();
+        Response response = ConnectorConfiguration.getAzureDiscoverNow();
         response.then()
                 .assertThat()
                 .statusCode(HttpStatus.SC_OK)
@@ -117,7 +117,7 @@ public class AdapterConfigurationTest extends BaseClass {
     @Test
     @Title("Get AD Discover Now")
     public void getAdDiscoverNow() {
-        Response response = AdapterConfiguration.getAdDiscoverNow();
+        Response response = ConnectorConfiguration.getAdDiscoverNow();
         response.then()
                 .assertThat()
                 .statusCode(HttpStatus.SC_OK)
@@ -126,9 +126,9 @@ public class AdapterConfigurationTest extends BaseClass {
     }
 
     @Test
-    @Title("Get All Adapters Discover Now")
-    public void getAllAdapterDiscoverNow() {
-        Response response = AdapterConfiguration.getAllAdapterDiscoverNow();
+    @Title("Get All Connector Discover Now")
+    public void getAllConnectorDiscoverNow() {
+        Response response = ConnectorConfiguration.getAllConnectorDiscoverNow();
         response.then()
                 .assertThat()
                 .statusCode(HttpStatus.SC_OK)

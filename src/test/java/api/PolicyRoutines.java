@@ -5,11 +5,11 @@ import io.restassured.response.Response;
 import models.policyroutine.EnforcePolicyOnDevice;
 import models.policyroutine.EnforcePolicyOnUser;
 import models.policyroutine.PolicyRoutine;
-import utils.BaseClass;
+import utils.BaseTest;
 
 import static io.restassured.RestAssured.given;
 
-public class PolicyRoutines extends BaseClass {
+public class PolicyRoutines extends BaseTest {
 
     public static final String POLICY_ROUTINE = "/policy-routine/";
     public static final String PR_ACTION = "actions";
