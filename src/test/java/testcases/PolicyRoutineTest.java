@@ -26,17 +26,6 @@ public class PolicyRoutineTest extends BaseTest {
 
     public static boolean isPreviousTestPass;
 
-    public static String PR_ID;
-    public static int value = BaseAPI.value;
-
-    static {
-        try {
-            PR_ID = getIdFromURL("http://inventaserver:9092/policy-routine/?page=0&size=1&sort=dateCreated,desc");
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
-
     //Update Post Method Using Builder Class
     @Test
     @Title("Create New Policy Routine")

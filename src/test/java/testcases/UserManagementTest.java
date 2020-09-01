@@ -43,23 +43,6 @@ public class UserManagementTest extends BaseTest {
     protected static final String PASSWORD = ApplicationConfiguration.getPASSWORD();
     public static boolean isPreviousTestPass;
 
-    public static String ROLE_ID;
-    public static String ADMIN_USER_ID;
-    public static String PERMISSION_ID;
-
-    static {
-        try {
-            ROLE_ID = getIdFromURL("http://inventaserver:9092/role/getAllRole?page=0&size=1&sort=dateCreated,desc");
-            ADMIN_USER_ID = getIdFromURL("http://inventaserver:9092/adminUsers/getAllAdminUsers?page=0&size=1&sort=dateCreated,desc");
-            PERMISSION_ID = getIdFromPermissionURL("http://inventaserver:9092/permission/getAllPermission");
-
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
-
-    public static int value = BaseAPI.value;
-
     @Test
     @Title("Get All Permission")
     public void getAllPermission() {

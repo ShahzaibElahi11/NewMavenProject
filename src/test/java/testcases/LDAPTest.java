@@ -31,15 +31,6 @@ public class LDAPTest extends BaseTest {
     protected static final String AD_USERNAME = ApplicationConfiguration.getAdUsername();
     protected static final String AD_PASSWORD = ApplicationConfiguration.getAdPassword();
 
-    public static String ROLE_ID;
-
-    static {
-        try {
-            ROLE_ID = getIdFromURL("http://inventaserver:9092/role/getAllRole?page=0&size=1&sort=dateCreated,desc");
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
 
     @Test
     @Title("Post LDAP Configuration")

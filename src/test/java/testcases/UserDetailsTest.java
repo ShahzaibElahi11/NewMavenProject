@@ -24,17 +24,6 @@ import static utils.BaseAPI.getIdFromURL;
 public class UserDetailsTest extends BaseTest {
 
     public static boolean isPreviousTestPass;
-    public static String USER_ID;
-
-    static {
-        try {
-            USER_ID = getIdFromURL("http://inventaserver:9092/users/getAllUsers/?page=0&size=1&sort=dateCreated,desc");
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
-
-    public static int value = BaseAPI.value;
 
     @Test
     @Title("Get Discovered User List")
