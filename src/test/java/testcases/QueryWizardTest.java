@@ -150,6 +150,7 @@ public class QueryWizardTest extends BaseTest {
         Assert.assertEquals("Invalid Status in Response: ", response.getStatusCode(), HttpStatus.SC_OK);
     }
 
+    @Ignore
     @Test
     @Title("Get Execute Saved Queries on Users")
     public void getExecuteUserSavedQuery(){
