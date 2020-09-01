@@ -12,15 +12,30 @@ import org.junit.FixMethodOrder;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.MethodSorters;
+import utils.BaseAPI;
 import utils.BaseTest;
 
+import java.io.IOException;
+
 import static org.hamcrest.Matchers.equalTo;
+import static utils.BaseAPI.getIdFromURL;
 
 @RunWith(SerenityRunner.class)
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
 public class PolicyRoutineTest extends BaseTest {
 
     public static boolean isPreviousTestPass;
+
+    public static String PR_ID;
+    public static int value = BaseAPI.value;
+
+    static {
+        try {
+            PR_ID = getIdFromURL("http://inventaserver:9092/policy-routine/?page=0&size=1&sort=dateCreated,desc");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
 
     //Update Post Method Using Builder Class
     @Test

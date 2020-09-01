@@ -4,31 +4,14 @@ import io.restassured.http.ContentType;
 import io.restassured.response.Response;
 import models.users.UserNote;
 import models.users.UserTag;
-import utils.BaseTest;
+import utils.BaseAPI;
 
+import static constants.Constants.*;
 import static io.restassured.RestAssured.given;
 
-public class Users extends BaseTest {
-    public static final String USER_ENDPOINT = "/users/";
-    public static final String PAGINATION = "?page=0&size=1&sort=dateCreated,desc";
-    public static final String ALL_USERS = "getAllUsers";
-    public static final String USER_DETAIL = "userDetail?_id=";
-    public static final String USER_ADAPTER_lIST = "adapters/list?_id=";
-    public static final String ALL_USER_TAGS = "tags/";
-    public static final String USER_TAG = "getUserTag?userId=";
-    public static final String USER_NOTE = "getUserNote?userId=";
-
-    public static final String INSERT_NOTE = "insertNote";
-    public static final String INSERT_TAG = "insertTag";
-    public static final String DELETE_SINGLE_TAG = "deleteSingleTag/?userId=";
-    public static final String DELETE_BULK_TAG = "deleteBulkTag";
-
-    public static final String DELETE_NOTE = "deleteNote?userId=";
+public class Users extends BaseAPI {
 
     public static final String SINGLE_TAG_NAME = "Automation_User_Tag_Number_" + value + "1";
-
-    public static final String USER_ADAPTER_DATA = "adapter/data?_id=";
-    public static final String USER_GENERAL_DETAILS = "general?_id=";
 
 
     public static Response getAllUsers() {
@@ -49,14 +32,14 @@ public class Users extends BaseTest {
         return given()
                 .contentType(ContentType.JSON)
                 .header("Authorization", "Bearer " + token)
-                .get(BASE_ENDPOINT_INVENTA + USER_ENDPOINT + USER_ADAPTER_lIST + USER_ID);
+                .get(BASE_ENDPOINT_INVENTA + USER_ENDPOINT + CONNECTOR_LIST_BY_ID + USER_ID);
     }
 
     public static Response getAllUserTags() {
         return given()
                 .contentType(ContentType.JSON)
                 .header("Authorization", "Bearer " + token)
-                .get(BASE_ENDPOINT_INVENTA + USER_ENDPOINT + ALL_USER_TAGS);
+                .get(BASE_ENDPOINT_INVENTA + USER_ENDPOINT + ALL_TAGS);
     }
 
     public static Response getUserTagById() {
@@ -77,14 +60,14 @@ public class Users extends BaseTest {
         return given()
                 .contentType(ContentType.JSON)
                 .header("Authorization", "Bearer " + token)
-                .get(BASE_ENDPOINT_INVENTA + USER_ENDPOINT + USER_ADAPTER_DATA + USER_ID + "&adapter");
+                .get(BASE_ENDPOINT_INVENTA + USER_ENDPOINT + CONNECTOR_DATA + USER_ID + "&adapter");
     }
 
     public static Response getGeneralDetails() {
         return given()
                 .contentType(ContentType.JSON)
                 .header("Authorization", "Bearer " + token)
-                .get(BASE_ENDPOINT_INVENTA + USER_ENDPOINT + USER_GENERAL_DETAILS + USER_ID);
+                .get(BASE_ENDPOINT_INVENTA + USER_ENDPOINT + GENERAL_DETAILS + USER_ID);
     }
 
     public static Response postInsertUserNote(UserNote userNote) {

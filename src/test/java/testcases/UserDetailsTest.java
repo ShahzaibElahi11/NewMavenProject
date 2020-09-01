@@ -10,17 +10,31 @@ import models.users.UserTag;
 import org.junit.*;
 import org.junit.runner.RunWith;
 import org.junit.runners.MethodSorters;
+import utils.BaseAPI;
 import utils.BaseTest;
 
+import java.io.IOException;
 import java.util.Collections;
 
 import static org.hamcrest.Matchers.equalTo;
+import static utils.BaseAPI.getIdFromURL;
 
 @RunWith(SerenityRunner.class)
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
 public class UserDetailsTest extends BaseTest {
 
     public static boolean isPreviousTestPass;
+    public static String USER_ID;
+
+    static {
+        try {
+            USER_ID = getIdFromURL("http://inventaserver:9092/users/getAllUsers/?page=0&size=1&sort=dateCreated,desc");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public static int value = BaseAPI.value;
 
     @Test
     @Title("Get Discovered User List")

@@ -7,6 +7,7 @@ import net.thucydides.core.annotations.Title;
 import org.apache.http.HttpStatus;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import utils.BaseTest;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -14,7 +15,7 @@ import java.util.List;
 import static org.hamcrest.Matchers.*;
 
 @RunWith(SerenityRunner.class)
-public class DashboardTest {
+public class DashboardTest extends BaseTest {
 
     List adapterName = new ArrayList();
 

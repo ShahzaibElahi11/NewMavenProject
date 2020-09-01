@@ -1,7 +1,6 @@
 **API Testing Framework**
 
 This Framework is designed for Backend Testing of Webservices using Java with RestAssured and Serenity utilizing Maven as dependency management tool. 
-Data Driven Test strategy is used to design and execute tests.
 
 **Technology Stack**
 
@@ -20,8 +19,9 @@ Data Driven Test strategy is used to design and execute tests.
 
 models: This directory contains all the response pojos of each json placeholder endpoint
 api: This package contains methods
-testcases: This package contains Test cases 
+testcases: This package contains Test Cases 
 util: This package contains Utility Classes
+constant: This package contains Constant Class
 
 **Installation**
 
@@ -34,8 +34,6 @@ If the build is successful. All the required dependencies are installed successf
 **Execute Tests**
 
 Run the following command in Terminal to execute tests.
-
-`$ mvn clean test`
 
 `$ mvn clean verify`
 

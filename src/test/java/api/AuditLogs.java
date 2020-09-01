@@ -2,19 +2,12 @@ package api;
 
 import io.restassured.http.ContentType;
 import io.restassured.response.Response;
-import utils.ApplicationConfiguration;
-import utils.BaseTest;
+import utils.BaseAPI;
 
+import static constants.Constants.*;
 import static io.restassured.RestAssured.given;
 
-public class AuditLogs extends BaseTest {
-
-   protected static final String AUDIT_ENDPOINT = ApplicationConfiguration.getAuditEndpoint();
-    protected static final String USER_AUDIT = ApplicationConfiguration.getUserAudit();
-    protected static final String AUDIT_DETAIL = ApplicationConfiguration.getAuditDetail();
-    protected static final String ALL_USER_AUDIT_LIST = ApplicationConfiguration.getAllUserAuditList();
-    protected static final String ALL_USER_NAME = ApplicationConfiguration.getAllUserName();
-
+public class AuditLogs extends BaseAPI {
 
     public static Response getUserAudit() {
         return given()

@@ -5,39 +5,12 @@ import io.restassured.response.Response;
 import models.usermanagement.AdminUser;
 import models.usermanagement.Login;
 import models.usermanagement.Role;
-import utils.BaseTest;
+import utils.BaseAPI;
 
+import static constants.Constants.*;
 import static io.restassured.RestAssured.given;
 
-public class UserManagement extends BaseTest {
-    public static final String ROLE_ENDPOINT = "/role/";
-    public static final String CREATE_ROLE = "createRole";
-    public static final String GET_ALL_ROLE = "getAllRole";
-    public static final String ROLE_DETAILS = "getRoleDetail?id=";
-    public static final String UPDATE_ROLE = "updateRole?id=";
-    public static final String DELETE_ROLE = "deleteRole?id=";
-
-    public static final String PERMISSION_ENDPOINT = "/permission/";
-    public static final String GET_ALL_PERMISSION = "getAllPermission";
-    public static final String PERMISSION_DETAILS = "getPermissionDetail?id=";
-
-    public static final String GET_ALL_MODULES = "getAllModules";
-    public static final String GET_ROLE_MODULES = "getRoleModules?role=";
-    public static final String GET_ROLE_PERMISSION = "getRolePermission?module=";
-    public static final String GET_USER_MODULES = "getUserModules?userId=";
-
-    public final static String ADMIN_USER_ENDPOINT = "/adminUsers/";
-    public static final String CREATE_ADMIN_USER = "createUser";
-    public static final String GET_ALL_ADMIN_USER = "getAllAdminUsers";
-    public static final String ADMIN_USER_DETAILS = "getAdminUserDetail?_id=";
-    public static final String UPDATE_ADMIN_USER = "updateUser?id=";
-    public static final String DELETE_ADMIN_USER = "deleteAdminUser?_id=";
-    public static final String ALL_ADMIN_USERNAME = "getAllUsername";
-
-
-    public final static String LOGIN = "/login";
-    public static final String PAGINATION_PARAMETER = "?page=0&size=100";
-
+public class UserManagement extends BaseAPI {
 
     public static Response postCreateRole(Role role) {
         return given()

@@ -4,16 +4,12 @@ import io.restassured.http.ContentType;
 import io.restassured.response.Response;
 import models.ldap.AdLogin;
 import models.ldap.LdapConfiguration;
-import utils.BaseTest;
+import utils.BaseAPI;
 
+import static constants.Constants.*;
 import static io.restassured.RestAssured.given;
 
-public class Ldap extends BaseTest {
-
-    public static final String CONFIG_ENDPOINT = "/config/";
-    public static final String CONFIG_TYPE = "?type=ldap";
-    public static final String AD_LOGIN = "/ad/login/";
-
+public class Ldap extends BaseAPI {
 
     public static Response postLdapConfiguration(LdapConfiguration ldapConfiguration) {
         return given()

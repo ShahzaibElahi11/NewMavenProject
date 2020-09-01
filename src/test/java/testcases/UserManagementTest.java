@@ -15,11 +15,15 @@ import org.junit.*;
 import org.junit.runner.RunWith;
 import org.junit.runners.MethodSorters;
 import utils.ApplicationConfiguration;
+import utils.BaseAPI;
 import utils.BaseTest;
 
+import java.io.IOException;
 import java.util.Collections;
 
 import static org.hamcrest.Matchers.equalTo;
+import static utils.BaseAPI.getIdFromPermissionURL;
+import static utils.BaseAPI.getIdFromURL;
 
 @RunWith(SerenityRunner.class)
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
@@ -38,6 +42,23 @@ public class UserManagementTest extends BaseTest {
     protected static final String USERNAME = ApplicationConfiguration.getUSERNAME();
     protected static final String PASSWORD = ApplicationConfiguration.getPASSWORD();
     public static boolean isPreviousTestPass;
+
+    public static String ROLE_ID;
+    public static String ADMIN_USER_ID;
+    public static String PERMISSION_ID;
+
+    static {
+        try {
+            ROLE_ID = getIdFromURL("http://inventaserver:9092/role/getAllRole?page=0&size=1&sort=dateCreated,desc");
+            ADMIN_USER_ID = getIdFromURL("http://inventaserver:9092/adminUsers/getAllAdminUsers?page=0&size=1&sort=dateCreated,desc");
+            PERMISSION_ID = getIdFromPermissionURL("http://inventaserver:9092/permission/getAllPermission");
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public static int value = BaseAPI.value;
 
     @Test
     @Title("Get All Permission")

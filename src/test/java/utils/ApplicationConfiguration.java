@@ -22,28 +22,6 @@ public class ApplicationConfiguration {
     private static final String AWS_KEY_ID = DefaultConfiguration.getProperty("accessKeyId");
     private static final String AWS_SECRET_KEY = DefaultConfiguration.getProperty("accessKeySecret");
 
-    private static final String AUDIT_ENDPOINT = DefaultConfiguration.getProperty("auditEndpoint");
-    private static final String USER_AUDIT = DefaultConfiguration.getProperty("getUserAudit");
-    private static final String AUDIT_DETAIL = DefaultConfiguration.getProperty("getAuditDetail");
-    private static final String ALL_USER_AUDIT_LIST = DefaultConfiguration.getProperty("getAllUserAuditList");
-    private static final String ALL_USER_NAME = DefaultConfiguration.getProperty("getAllUsersName");
-
-    private static final String CONNECTOR_ENDPOINT = DefaultConfiguration.getProperty("connectorEndpoint");
-    private static final String CONNECTOR_CONFIGURATION = DefaultConfiguration.getProperty("connectorConfiguration");
-    private static final String DISCOVER =DefaultConfiguration.getProperty("discover");
-    private static final String AWS = DefaultConfiguration.getProperty("aws");
-    private static final String AD = DefaultConfiguration.getProperty("ad");
-    private static final String AZURE = DefaultConfiguration.getProperty("azure");
-
-    private static final String DASHBOARD_ENDPOINT = DefaultConfiguration.getProperty("dashboardEndpoint");
-    private static final String CONNECTOR_PARAM = DefaultConfiguration.getProperty("connectorQueryParam");
-    private static final String OS_DISTRIBUTION = DefaultConfiguration.getProperty("operatingSystemDistribution");
-    private static final String USER_COUNT = DefaultConfiguration.getProperty("userCount");
-    private static final String ASSETS_TYPE_DISTRIBUTION = DefaultConfiguration.getProperty("assetsTypeDistribution");
-    private static final String CLOUD_VS_NON_CLOUD = DefaultConfiguration.getProperty("cloudVsNonCloud");
-    private static final String WMIC = DefaultConfiguration.getProperty("wmic");
-
-
 
     public static String getBaseURL_InventaService() {
         return baseURL_InventaService;
@@ -92,39 +70,7 @@ public class ApplicationConfiguration {
         return AWS_SECRET_KEY;
     }
 
-    public static String getAuditEndpoint() { return AUDIT_ENDPOINT; }
 
-    public static String getUserAudit() { return USER_AUDIT; }
 
-    public static String getAuditDetail() { return AUDIT_DETAIL; }
 
-    public static String getAllUserAuditList() { return ALL_USER_AUDIT_LIST; }
-
-    public static String getAllUserName() { return ALL_USER_NAME; }
-
-    public static String getConnectorEndpoint() { return CONNECTOR_ENDPOINT; }
-
-    public static String getConnectorConfiguration() { return CONNECTOR_CONFIGURATION; }
-
-    public static String getDISCOVER() { return DISCOVER; }
-
-    public static String getAWS() { return AWS; }
-
-    public static String getAD() { return AD; }
-
-    public static String getAZURE() { return AZURE; }
-
-    public static String getDashboardEndpoint() { return DASHBOARD_ENDPOINT; }
-
-    public static String getConnectorParam() { return CONNECTOR_PARAM; }
-
-    public static String getOsDistribution() { return OS_DISTRIBUTION; }
-
-    public static String getUserCount() { return USER_COUNT; }
-
-    public static String getAssetsTypeDistribution() { return ASSETS_TYPE_DISTRIBUTION; }
-
-    public static String getCloudVsNonCloud() { return CLOUD_VS_NON_CLOUD; }
-
-    public static String getWMIC() { return WMIC; }
 }

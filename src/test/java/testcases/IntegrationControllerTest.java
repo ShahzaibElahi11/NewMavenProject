@@ -8,17 +8,18 @@ import org.apache.http.HttpStatus;
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import utils.BaseTest;
+import utils.BaseAPI;
 
 import static io.restassured.RestAssured.given;
 
 
 @RunWith(SerenityRunner.class)
-public class IntegrationControllerTest extends BaseTest {
+public class IntegrationControllerTest extends BaseAPI {
+
+    //will work later
 
     public static final String DOCKER_ENDPOINT = "/docker/";
     public static final String ACTIVE_MQ = "activemq";
-
 
     @Test
     @Title("Get Active MQ Connection")

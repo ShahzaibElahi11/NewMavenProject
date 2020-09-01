@@ -12,15 +12,29 @@ import org.junit.Test;
 import models.devices.DeviceNotes;
 import models.devices.DeviceTag;
 import org.junit.runner.RunWith;
+import utils.BaseAPI;
 import utils.BaseTest;
 
 import java.io.IOException;
 import java.util.Collections;
 
 import static org.hamcrest.Matchers.equalTo;
+import static utils.BaseAPI.getIdFromURL;
 
 @RunWith(SerenityRunner.class)
 public class DeviceDetailsTest extends BaseTest {
+
+    public static String DEVICE_DETAIL_ID;
+
+    static {
+        try {
+            DEVICE_DETAIL_ID = getIdFromURL("http://inventaserver:9092/devices/getAllDevices?page=0&size=1&sortBy=_id");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public static int value = BaseAPI.value;
 
     @Test
     @Title("Get All Device List")

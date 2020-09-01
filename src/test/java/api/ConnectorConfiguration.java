@@ -3,20 +3,12 @@ package api;
 import io.restassured.http.ContentType;
 import io.restassured.response.Response;
 import models.configuration.AwsConfiguration;
-import utils.ApplicationConfiguration;
-import utils.BaseTest;
+import utils.BaseAPI;
 
+import static constants.Constants.*;
 import static io.restassured.RestAssured.given;
 
-public class ConnectorConfiguration extends BaseTest {
-
-    protected static final String CONNECTOR_ENDPOINT = ApplicationConfiguration.getConnectorEndpoint();
-    protected static final String CONNECTOR_CONFIGURATION = ApplicationConfiguration.getConnectorConfiguration();
-    protected static final String DISCOVER = ApplicationConfiguration.getDISCOVER();
-    protected static final String AWS = ApplicationConfiguration.getAWS();
-    protected static final String AD = ApplicationConfiguration.getAD();
-    protected static final String AZURE = ApplicationConfiguration.getAZURE();
-
+public class ConnectorConfiguration extends BaseAPI {
 
     public static Response getAllConnector() {
         return given()

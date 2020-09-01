@@ -16,7 +16,10 @@ import org.junit.runners.MethodSorters;
 import utils.ApplicationConfiguration;
 import utils.BaseTest;
 
+import java.io.IOException;
+
 import static org.hamcrest.Matchers.equalTo;
+import static utils.BaseAPI.getIdFromURL;
 
 @RunWith(SerenityRunner.class)
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
@@ -28,6 +31,15 @@ public class LDAPTest extends BaseTest {
     protected static final String AD_USERNAME = ApplicationConfiguration.getAdUsername();
     protected static final String AD_PASSWORD = ApplicationConfiguration.getAdPassword();
 
+    public static String ROLE_ID;
+
+    static {
+        try {
+            ROLE_ID = getIdFromURL("http://inventaserver:9092/role/getAllRole?page=0&size=1&sort=dateCreated,desc");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
 
     @Test
     @Title("Post LDAP Configuration")
