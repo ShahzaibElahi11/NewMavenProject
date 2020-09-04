@@ -18,6 +18,8 @@ public class Constants{
 
     public static final String CONNECTOR_ENDPOINT = "/adapters/";
     public static final String CONNECTOR_CONFIGURATION = "active-directory/configure/?type=";
+    public static final String CONNECTOR_CONFIGURATION_INSTANCE = "instance/list?source=";
+
     public static final String DISCOVER = "discover/";
 
     /**
@@ -31,8 +33,11 @@ public class Constants{
     public static final String CLOUD_VS_NON_CLOUD = "/query/pie/?field=adapterProperties&match=CLOUD%20PROVIDER";
     public static final String WMIC = "wmic";
     public static final String AWS = "aws";
-    public static final String AD = "ad";
     public static final String AZURE = "azure";
+    public static final String AD = "ad";
+    public static final String ACTIVE_DIRECTORY = "ACTIVE_DIRECTORY";
+    public static final String AWS_ENDPOINT = "AWS";
+
 
 
     /**
@@ -154,5 +159,9 @@ public class Constants{
     /**
      * Integration Controller Constants
      */
+
+    public static final String DOCKER_ENDPOINT = "/docker/";
+    public static final String ACTIVE_MQ = "activemq";
+
 
 }

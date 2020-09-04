@@ -1,102 +1,172 @@
 package testcases;
 
-import api.QueryWizard;
-import io.restassured.response.Response;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import net.serenitybdd.junit.runners.SerenityRunner;
 import net.thucydides.core.annotations.Title;
-import org.apache.http.HttpStatus;
-import org.junit.Assert;
 import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import utils.BaseTest;
 
+import java.io.IOException;
+import java.util.List;
+import java.util.Map;
+
+import static constants.Constants.*;
+import static io.restassured.RestAssured.given;
+
 @RunWith(SerenityRunner.class)
 public class QueryWizardTest extends BaseTest {
+
+    public static String SAVED_DEVICE_QUERY_NAME = "";
+    public static String SAVED_USER_QUERY_NAME = "";
+
+
+    public static String getNameFromSaveQueryWizardURL(String url) throws IOException {
+        ObjectMapper mapper = new ObjectMapper(); // just need one
+        String json = readJsonFromUrl(url).toString();
+        Map<String, Object> map = mapper.readValue(json, Map.class);
+        return ((Map) ((List) ((Map) map.get("data")).get("content")).get(0)).get("name") + "";
+    }
+
+
+    static {
+        try {
+            SAVED_DEVICE_QUERY_NAME = getNameFromSaveQueryWizardURL("http://inventaserver:9092/saved-query/?type=DEVICE&page=0&size=1");
+            //SAVED_USER_QUERY_NAME = getNameFromSaveQueryWizardURL("http://inventaserver:9092/saved-query/?type=USER&page=0&size=1");
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
 
     @Test
     @Title("Get Query Wizard Equal Operator")
     public void getEqualOperator(){
-        Response response = QueryWizard.getEqualOperator();
-        Assert.assertEquals("Invalid Status in Response: ", response.getStatusCode(), HttpStatus.SC_OK);
+        given().
+                spec(requestSpec).
+                when().
+                get(QUERY_ENDPOINT + EQUAL_OPERATOR).
+                then().
+                spec(responseSpec);
     }
 
     @Test
     @Title("Get Query Wizard Not Equal Operator")
     public void getNotEqualOperator(){
-        Response response = QueryWizard.getNotEqualOperator();
-        Assert.assertEquals("Invalid Status in Response: ", response.getStatusCode(), HttpStatus.SC_OK);
-
+        given().
+                spec(requestSpec).
+                when().
+                get(QUERY_ENDPOINT + NOT_EQUAL_OPERATOR).
+                then().
+                spec(responseSpec);
     }
 
     @Test
     @Title("Get Query Wizard Exists Operator with True Condition")
     public void getExistsOperatorTrue(){
-        Response response = QueryWizard.getExistsOperatorTrue();
-        Assert.assertEquals("Invalid Status in Response: ", response.getStatusCode(), HttpStatus.SC_OK);
-
+        given().
+                spec(requestSpec).
+                when().
+                get(QUERY_ENDPOINT + EXIST_OPERATOR_TRUE).
+                then().
+                spec(responseSpec);
     }
 
     @Test
     @Title("Get Query Wizard Exists Operator with False Condition")
     public void getExistsOperatorFalse() {
-        Response response = QueryWizard.getExistsOperatorFalse();
-        Assert.assertEquals("Invalid Status in Response: ", response.getStatusCode(), HttpStatus.SC_OK);
-
+        given().
+                spec(requestSpec).
+                when().
+                get(QUERY_ENDPOINT + EXIST_OPERATOR_FALSE).
+                then().
+                spec(responseSpec);
     }
     @Test
     @Title("Get Query Wizard Starts With Operator")
     public void getStartWithOperator(){
-        Response response = QueryWizard.getStartWithOperator();
-        Assert.assertEquals("Invalid Status in Response: ", response.getStatusCode(), HttpStatus.SC_OK);
+        given().
+                spec(requestSpec).
+                when().
+                get(QUERY_ENDPOINT + START_WITH_OPERATOR).
+                then().
+                spec(responseSpec);
     }
 
     @Test
     @Title("Get Query Wizard End With Operator")
     public void getEndWithOperator(){
-        Response response = QueryWizard.getEndWithOperator();
-        Assert.assertEquals("Invalid Status in Response: ", response.getStatusCode(), HttpStatus.SC_OK);
+        given().
+                spec(requestSpec).
+                when().
+                get(QUERY_ENDPOINT + END_WITH_OPERATOR).
+                then().
+                spec(responseSpec);
     }
     @Test
     @Title("Get Query Wizard IN Operator")
     public void getInOperator(){
-        Response response = QueryWizard.getInOperator();
-        Assert.assertEquals("Invalid Status in Response: ", response.getStatusCode(), HttpStatus.SC_OK);
+        given().
+                spec(requestSpec).
+                when().
+                get(DEVICE_ENDPOINT + QUERY_ENDPOINT + IN_OPERATOR).
+                then().
+                spec(responseSpec);
     }
 
     @Test
     @Title("Get Query Wizard Contain Operator")
     public void getContainOperator(){
-        Response response = QueryWizard.getContainOperator();
-        Assert.assertEquals("Invalid Status in Response: ", response.getStatusCode(), HttpStatus.SC_OK);
+        given().
+                spec(requestSpec).
+                when().
+                get(QUERY_ENDPOINT + CONTAIN_OPERATOR).
+                then().
+                spec(responseSpec);
     }
     @Test
     @Title("Get Query Wizard AND Operator")
     public void getANDOperator(){
-        Response response = QueryWizard.getANDOperator();
-        Assert.assertEquals("Invalid Status in Response: ", response.getStatusCode(), HttpStatus.SC_OK);
+        given().
+                spec(requestSpec).
+                when().
+                get(QUERY_ENDPOINT + AND_OPERATOR).
+                then().
+                spec(responseSpec);
     }
 
     @Test
     @Title("Get Query Wizard OR Operator")
     public void getOROperator(){
-        Response response = QueryWizard.getOROperator();
-        Assert.assertEquals("Invalid Status in Response: ", response.getStatusCode(), HttpStatus.SC_OK);
+        given().
+                spec(requestSpec).
+                when().
+                get(QUERY_ENDPOINT + OR_OPERATOR).
+                then().
+                spec(responseSpec);
     }
 
     @Test
     @Title("Get Query Wizard Connector Details Query")
     public void getConnectorDetailsQuery(){
-        Response response = QueryWizard.getConnectorDetailsQuery();
-        Assert.assertEquals("Invalid Status in Response: ", response.getStatusCode(), HttpStatus.SC_OK);
+        given().
+                spec(requestSpec).
+                when().
+                get(QUERY_ENDPOINT + DETAIL_QUERY).
+                then().
+                spec(responseSpec);
     }
 
     @Test
     @Title("Get Query Wizard Statement Query")
     public void getStatementQuery(){
-        Response response = QueryWizard.getStatementQuery();
-        Assert.assertEquals("Invalid Status in Response: ", response.getStatusCode(), HttpStatus.SC_OK);
-
+        given().
+                spec(requestSpec).
+                when().
+                get(QUERY_ENDPOINT + STATEMENT_QUERY).
+                then().
+                spec(responseSpec);
     }
 
     /**
@@ -132,55 +202,80 @@ public class QueryWizardTest extends BaseTest {
     @Test
     @Title("Get Device Saved Queries")
     public void getDeviceSavedQueries(){
-        Response response = QueryWizard.getDeviceSavedQueries();
-        Assert.assertEquals("Invalid Status in Response: ", response.getStatusCode(), HttpStatus.SC_OK);
+        given().
+                spec(requestSpec).
+                when().
+                get(SAVED_QUERY + "?type=DEVICE&" + SAVED_QUERY_PAGINATION).
+                then().
+                spec(responseSpec);
     }
 
     @Test
     @Title("Get User Saved Queries")
     public void getUserSavedQueries(){
-        Response response = QueryWizard.getUserSavedQueries();
-        Assert.assertEquals("Invalid Status in Response: ", response.getStatusCode(), HttpStatus.SC_OK);
+        given().
+                spec(requestSpec).
+                when().
+                get(SAVED_QUERY + "?type=USER&" + SAVED_QUERY_PAGINATION).
+                then().
+                spec(responseSpec);
     }
 
     @Test
     @Title("Get Execute Saved Queries on Devices")
     public void getExecuteDeviceSavedQuery(){
-        Response response = QueryWizard.getExecuteDeviceSavedQuery();
-        Assert.assertEquals("Invalid Status in Response: ", response.getStatusCode(), HttpStatus.SC_OK);
+        given().
+                spec(requestSpec).
+                when().
+                get(SAVED_QUERY + "execute/device/" + SAVED_DEVICE_QUERY_NAME).
+                then().
+                spec(responseSpec);
     }
 
     @Ignore
     @Test
     @Title("Get Execute Saved Queries on Users")
     public void getExecuteUserSavedQuery(){
-        Response response = QueryWizard.getExecuteUserSavedQuery();
-        Assert.assertEquals("Invalid Status in Response: ", response.getStatusCode(), HttpStatus.SC_OK);
+        given().
+                spec(requestSpec).
+                when().
+                get(SAVED_QUERY + "execute/user/" + SAVED_USER_QUERY_NAME).
+                then().
+                spec(responseSpec);
     }
 
 
     @Test
     @Title("Get All Saved Queries")
     public void getAllSavedQueries(){
-        Response response = QueryWizard.getAllSavedQueries();
-        Assert.assertEquals("Invalid Status in Response: ", response.getStatusCode(), HttpStatus.SC_OK);
-
+        given().
+                spec(requestSpec).
+                when().
+                get(SAVED_QUERY + "?" + SAVED_QUERY_PAGINATION).
+                then().
+                spec(responseSpec);
     }
 
     @Test
     @Title("Get All Device Saved Queries Without Pagination")
     public void getAllSavedQueriesNoPaginationDevice(){
-        Response response = QueryWizard.getAllSavedQueriesNoPaginationDevice();
-        Assert.assertEquals("Invalid Status in Response: ", response.getStatusCode(), HttpStatus.SC_OK);
-
+        given().
+                spec(requestSpec).
+                when().
+                get(SAVED_QUERY + "?unpaged&type=DEVICE").
+                then().
+                spec(responseSpec);
     }
 
     @Test
     @Title("Get All User Saved Queries Without Pagination")
     public void getAllSavedQueriesNoPaginationUser(){
-        Response response = QueryWizard.getAllSavedQueriesNoPaginationUser();
-        Assert.assertEquals("Invalid Status in Response: ", response.getStatusCode(), HttpStatus.SC_OK);
-
+        given().
+                spec(requestSpec).
+                when().
+                get(SAVED_QUERY + "?unpaged&type=USER").
+                then().
+                spec(responseSpec);
     }
 
 
@@ -196,80 +291,110 @@ public class QueryWizardTest extends BaseTest {
     @Test
     @Title("Get Query Wizard All AD Device Fields")
     public void getAllAdDeviceFields(){
-        Response response = QueryWizard.getAllAdDeviceFields();
-        Assert.assertEquals("Invalid Status in Response: ", response.getStatusCode(), HttpStatus.SC_OK);
-
+        given().
+                spec(requestSpec).
+                when().
+                get(ALL_DEVICE_FIELDS + AD).
+                then().
+                spec(responseSpec);
     }
 
     @Test
     @Title("Get Query Wizard All AWS Device Fields")
     public void getAllAwsDeviceFields(){
-        Response response = QueryWizard.getAllAwsDeviceFields();
-        Assert.assertEquals("Invalid Status in Response: ", response.getStatusCode(), HttpStatus.SC_OK);
-
+        given().
+                spec(requestSpec).
+                when().
+                get(  ALL_DEVICE_FIELDS + AWS).
+                then().
+                spec(responseSpec);
     }
     @Test
     @Title("Get Query Wizard All Azure Device Fields")
     public void getAllAzureDeviceFields(){
-        Response response = QueryWizard.getAllAzureDeviceFields();
-        Assert.assertEquals("Invalid Status in Response: ", response.getStatusCode(), HttpStatus.SC_OK);
-
+        given().
+                spec(requestSpec).
+                when().
+                get(ALL_DEVICE_FIELDS + AZURE).
+                then().
+                spec(responseSpec);
     }
 
     @Test
     @Title("Get Query Wizard All Wmic Device Fields")
     public void getAllWmicDeviceFields(){
-        Response response = QueryWizard.getAllWmicDeviceFields();
-        Assert.assertEquals("Invalid Status in Response: ", response.getStatusCode(), HttpStatus.SC_OK);
-
+        given().
+                spec(requestSpec).
+                when().
+                get(ALL_DEVICE_FIELDS + WMIC).
+                then().
+                spec(responseSpec);
     }
 
     @Test
     @Title("Get Query Wizard All AD User Fields")
     public void getAllAdUserFields(){
-        Response response = QueryWizard.getAllAdUserFields();
-        Assert.assertEquals("Invalid Status in Response: ", response.getStatusCode(), HttpStatus.SC_OK);
-
+        given().
+                spec(requestSpec).
+                when().
+                get( ALL_USER_FIELDS + AD).
+                then().
+                spec(responseSpec);
     }
 
     @Test
     @Title("Get Query Wizard All AWS User Fields")
     public void getAllAwsUserFields(){
-        Response response = QueryWizard.getAllAwsUserFields();
-        Assert.assertEquals("Invalid Status in Response: ", response.getStatusCode(), HttpStatus.SC_OK);
-
+        given().
+                spec(requestSpec).
+                when().
+                get(ALL_USER_FIELDS + AWS).
+                then().
+                spec(responseSpec);
     }
 
     @Test
     @Title("Get Query Wizard All Azure User Fields")
     public void getAllAzureUserFields(){
-        Response response = QueryWizard.getAllAzureUserFields();
-        Assert.assertEquals("Invalid Status in Response: ", response.getStatusCode(), HttpStatus.SC_OK);
-
+        given().
+                spec(requestSpec).
+                when().
+                get(ALL_USER_FIELDS + AZURE).
+                then().
+                spec(responseSpec);
     }
 
     @Test
     @Title("Get Query Wizard Azure Type Fields For Devices")
     public void getAzureTypeDeviceFields(){
-        Response response = QueryWizard.getAzureTypeDeviceFields();
-        Assert.assertEquals("Invalid Status in Response: ", response.getStatusCode(), HttpStatus.SC_OK);
-
+        given().
+                spec(requestSpec).
+                when().
+                get(TYPE_DEVICE_FIELDS + AZURE).
+                then().
+                spec(responseSpec);
     }
 
     @Test
     @Title("Get Query Wizard Aws Type Fields For Devices")
     public void getAwsTypeDeviceFields(){
-        Response response = QueryWizard.getAwsTypeDeviceFields();
-        Assert.assertEquals("Invalid Status in Response: ", response.getStatusCode(), HttpStatus.SC_OK);
-
+        given().
+                spec(requestSpec).
+                when().
+                get(TYPE_DEVICE_FIELDS + AWS).
+                then().
+                spec(responseSpec);
     }
 
     @Test
     @Title("Get Query Wizard Aws Type Fields For Devices")
     public void getAdTypeDeviceFields(){
-        Response response = QueryWizard.getAdTypeDeviceFields();
-        Assert.assertEquals("Invalid Status in Response: ", response.getStatusCode(), HttpStatus.SC_OK);
-
+        given().
+                spec(requestSpec).
+                when().
+                get(TYPE_DEVICE_FIELDS + AD).
+                then().
+                spec(responseSpec);
     }
 
 

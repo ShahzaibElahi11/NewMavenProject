@@ -2,9 +2,10 @@ package utils;
 
 public class ApplicationConfiguration {
 
+    private static final String inventaBaseURL = DefaultConfiguration.getProperty("inventaBaseURL");
 
-    private static final String baseURL_InventaService = DefaultConfiguration.getProperty("baseURL_InventaService");
-    private static final String baseURL_ConnectorService = DefaultConfiguration.getProperty("baseURL_ConnectorService");
+    private static final String inventaServicePort = DefaultConfiguration.getProperty("inventaServicePort");
+    private static final String connectorServicePort = DefaultConfiguration.getProperty("connectorServicePort");
 
     private static final String secretKey = DefaultConfiguration.getProperty("secretKey");
     private static final String expirationTime = DefaultConfiguration.getProperty("expirationTime");
@@ -23,12 +24,16 @@ public class ApplicationConfiguration {
     private static final String AWS_SECRET_KEY = DefaultConfiguration.getProperty("accessKeySecret");
 
 
-    public static String getBaseURL_InventaService() {
-        return baseURL_InventaService;
+    public static String getInventaBaseURL() {
+        return inventaBaseURL;
     }
 
-    public static String getBaseURL_ConnectorService() {
-        return baseURL_ConnectorService;
+    public static String getInventaServicePort() {
+        return inventaServicePort;
+    }
+
+    public static String getConnectorServicePort() {
+        return connectorServicePort;
     }
 
     public static String getSecretKey() {

@@ -1,14 +1,10 @@
 package testcases;
 
-import api.Ldap;
-import io.restassured.response.Response;
 import models.ldap.LdapConfiguration;
 import net.serenitybdd.junit.runners.SerenityRunner;
 import net.thucydides.core.annotations.Title;
 import org.apache.http.HttpStatus;
 import models.ldap.AdLogin;
-import org.junit.Assert;
-import org.junit.Assume;
 import org.junit.FixMethodOrder;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -16,10 +12,10 @@ import org.junit.runners.MethodSorters;
 import utils.ApplicationConfiguration;
 import utils.BaseTest;
 
-import java.io.IOException;
 
+import static constants.Constants.*;
+import static io.restassured.RestAssured.given;
 import static org.hamcrest.Matchers.equalTo;
-import static utils.BaseAPI.getIdFromURL;
 
 @RunWith(SerenityRunner.class)
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
@@ -35,38 +31,53 @@ public class LDAPTest extends BaseTest {
     @Test
     @Title("Post LDAP Configuration")
     public void testA_PostConfigureLDAP() {
-        isPreviousTestPass = false;
         LdapConfiguration ldapConfiguration = new LdapConfiguration(LDAP_MACHINE_IP, LDAP_DOMAIN, ROLE_ID);
-        Response response = Ldap.postLdapConfiguration(ldapConfiguration);
-        if (response.getStatusCode() == HttpStatus.SC_OK)
-            isPreviousTestPass = true;
-        Assert.assertEquals("Invalid Status in Response: ", response.getStatusCode(), HttpStatus.SC_OK);
+        given().
+                spec(requestSpec).
+                and().
+                body(ldapConfiguration).
+                when().
+                post(CONFIG_ENDPOINT).
+                then().
+                assertThat().
+                statusCode(HttpStatus.SC_OK);
     }
+
 
     @Test
     @Title("Post AD Login")
     public void testB_PostADLogin() {
-        Assume.assumeTrue(isPreviousTestPass == false);
-        isPreviousTestPass = false;
         AdLogin adLogin = new AdLogin(AD_USERNAME, AD_PASSWORD);
-        Response response = Ldap.postAdLogin(adLogin);
-        if (response.getStatusCode() == HttpStatus.SC_OK)
-            isPreviousTestPass = true;
-        response.then()
-                .assertThat()
-                .statusCode(HttpStatus.SC_OK)
-                .contentType(equalTo("application/json;charset=ISO-8859-1"))
-                .body("username", equalTo("shahzaib1"));
+        given().
+                spec(requestSpec).
+                and().
+                body(adLogin).
+                when().
+                post(AD_LOGIN).
+                then().
+                assertThat().
+                statusCode(HttpStatus.SC_OK);
+
+
+
     }
 
     @Test
     @Title("Get LDAP Configuration")
     public void testC_getLDAPConfiguration() {
-        Response response = Ldap.getLDAPConfiguration();
-        response.then()
-                .assertThat()
-                .statusCode(HttpStatus.SC_OK)
-                .contentType(equalTo("application/json"))
-                .body("data.role", equalTo(ROLE_ID));
+        given().
+                spec(requestSpec).
+                when().
+                get(CONFIG_ENDPOINT + CONFIG_TYPE).
+                then().
+                spec(responseSpec).
+                and().
+                body("data.role", equalTo(ROLE_ID));
+
     }
+
+
+    //I will implement on assume test Strategy
+
 }
+

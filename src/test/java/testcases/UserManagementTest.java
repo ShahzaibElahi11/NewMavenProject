@@ -1,6 +1,5 @@
 package testcases;
 
-import api.UserManagement;
 import com.github.javafaker.Faker;
 import io.restassured.response.Response;
 import net.serenitybdd.junit.runners.SerenityRunner;
@@ -15,15 +14,14 @@ import org.junit.*;
 import org.junit.runner.RunWith;
 import org.junit.runners.MethodSorters;
 import utils.ApplicationConfiguration;
-import utils.BaseAPI;
 import utils.BaseTest;
 
-import java.io.IOException;
 import java.util.Collections;
 
+import static constants.Constants.*;
+import static io.restassured.RestAssured.given;
 import static org.hamcrest.Matchers.equalTo;
-import static utils.BaseAPI.getIdFromPermissionURL;
-import static utils.BaseAPI.getIdFromURL;
+
 
 @RunWith(SerenityRunner.class)
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
@@ -46,80 +44,83 @@ public class UserManagementTest extends BaseTest {
     @Test
     @Title("Get All Permission")
     public void getAllPermission() {
-        Response response = UserManagement.getAllPermission();
-        response.then()
-                .assertThat()
-                .statusCode(HttpStatus.SC_OK)
-                .contentType(equalTo("application/json"))
-                .body("meta.status", equalTo("success"));
+        given().
+                spec(requestSpec).
+                when().
+                get(PERMISSION_ENDPOINT + GET_ALL_PERMISSION).
+                then().
+                spec(responseSpec);
     }
 
     @Test
     @Title("Get Permission Details By Id")
     public void getPermissionDetails() {
-        Response response = UserManagement.getPermissionDetails();
-        response.then()
-                .assertThat()
-                .statusCode(HttpStatus.SC_OK)
-                .contentType(equalTo("application/json"))
-                .body("meta.status", equalTo("success"));
+        given().
+                spec(requestSpec).
+                when().
+                get(PERMISSION_ENDPOINT + PERMISSION_DETAILS + PERMISSION_ID).
+                then().
+                spec(responseSpec);
     }
 
     @Test
     @Title("Get All Modules List")
     public void getAllModules() {
-
-        Response response = UserManagement.getAllModules();
-        response.then()
-                .assertThat()
-                .statusCode(HttpStatus.SC_OK)
-                .contentType(equalTo("application/json"))
-                .body("meta.status", equalTo("success"));
+        given().
+                spec(requestSpec).
+                when().
+                get(PERMISSION_ENDPOINT + GET_ALL_MODULES).
+                then().
+                spec(responseSpec);
     }
 
     @Test
     @Title("Get Role Modules By ADMIN Detail")
     public void getRoleModules() {
-        Response response = UserManagement.getRoleModules();
-        response.then()
-                .assertThat()
-                .statusCode(HttpStatus.SC_OK)
-                .contentType(equalTo("application/json"))
-                .body("meta.status", equalTo("success"));
+        given().
+                spec(requestSpec).
+                when().
+                get(PERMISSION_ENDPOINT + GET_ROLE_MODULES + "ADMIN").
+                then().
+                spec(responseSpec);
     }
 
     @Test
     @Title("Get Role Permission By Role")
     public void getRolePermission() {
-        Response response = UserManagement.getRolePermission();
-        response.then()
-                .assertThat()
-                .statusCode(HttpStatus.SC_OK)
-                .contentType(equalTo("application/json"))
-                .body("meta.status", equalTo("success"));
+        given().
+                spec(requestSpec).
+                when().
+                get(PERMISSION_ENDPOINT + GET_ROLE_PERMISSION + "dashboard&role=ADMIN").
+                then().
+                spec(responseSpec);
     }
 
     @Test
     @Title("Get User Modules Details By User Id")
     public void getUserModules() {
-        Response response = UserManagement.getUserModules();
-        response.then()
-                .assertThat()
-                .statusCode(HttpStatus.SC_OK)
-                .contentType(equalTo("application/json"))
-                .body("meta.status", equalTo("success"));
+        given().
+                spec(requestSpec).
+                when().
+                get(PERMISSION_ENDPOINT + GET_USER_MODULES + ADMIN_USER_ID).
+                then().
+                spec(responseSpec);
     }
 
     @Test
     @Title("Post Application Login")
     public void postLogin() {
         Login login = new Login(USERNAME, PASSWORD);
-        Response response = UserManagement.postLogin(login);
-        response.then()
-                .assertThat()
-                .statusCode(HttpStatus.SC_OK)
-                .contentType(equalTo("application/json;charset=ISO-8859-1"))
-                .body("username", equalTo("admininventa"));
+        given().
+                spec(requestSpec).
+                and().
+                body(login).
+                when().
+                post("/login").
+                then().
+                assertThat().
+                body("username", equalTo("admininventa")).
+                statusCode(HttpStatus.SC_OK);
     }
 
     @Test
@@ -138,11 +139,18 @@ public class UserManagementTest extends BaseTest {
                 .setUserType("OPERATOR")
                 .setStatus(true)
                 .build();
-        Response response = UserManagement.postCreateUser(adminUser);
+
+        Response response = given().
+                spec(requestSpec).
+                and().
+                body(adminUser).
+                when().
+                post(ADMIN_USER_ENDPOINT + CREATE_ADMIN_USER);
         if (response.getStatusCode() == HttpStatus.SC_OK)
             isPreviousTestPass = true;
-        Assert.assertEquals("Invalid Status in Response: ", response.getStatusCode(), HttpStatus.SC_OK);
-
+        response.
+                then().
+                spec(responseSpec);
     }
 
     @Test
@@ -164,10 +172,18 @@ public class UserManagementTest extends BaseTest {
                 .setStatus(true)
                 .build();
 
-        Response response = UserManagement.updateAdminUser(adminUser);
+        Response response = given().
+                spec(requestSpec).
+                and().
+                body(adminUser).
+                when().
+                put(ADMIN_USER_ENDPOINT + UPDATE_ADMIN_USER + ADMIN_USER_ID);
         if (response.getStatusCode() == HttpStatus.SC_OK)
             isPreviousTestPass = true;
-        Assert.assertEquals("Invalid Status in Response: ", response.getStatusCode(), HttpStatus.SC_OK);
+        response.
+                then().
+                spec(responseSpec);
+
     }
 
     @Test
@@ -175,47 +191,58 @@ public class UserManagementTest extends BaseTest {
     public void testC_getAdminUserDetail() {
         Assume.assumeTrue(isPreviousTestPass == true);
         isPreviousTestPass = false;
-        Response response = UserManagement.getAdminUserDetail();
+        Response response = given().
+                spec(requestSpec).
+                when().
+                get(ADMIN_USER_ENDPOINT + ADMIN_USER_DETAILS + ADMIN_USER_ID);
         if (response.getStatusCode() == HttpStatus.SC_OK)
             isPreviousTestPass = true;
-        response.then()
-                .assertThat()
-                .statusCode(HttpStatus.SC_OK)
-                .contentType(equalTo("application/json"))
-                .body("data._id", equalTo(ADMIN_USER_ID), "meta.status", equalTo("success"));
+        response.
+                then().
+                spec(responseSpec).
+                body("data._id", equalTo(ADMIN_USER_ID));
     }
 
     @Test
     @Title("Delete User Information")
     public void testD_DeleteAdminUser() {
-        Assume.assumeTrue(isPreviousTestPass == true);
-        isPreviousTestPass = false;
-        Response response = UserManagement.deleteAdminUser();
-        if (response.getStatusCode() == HttpStatus.SC_OK)
-            isPreviousTestPass = true;
-        Assert.assertEquals("Invalid Status in Response: ", response.getStatusCode(), HttpStatus.SC_OK);
+//        Assume.assumeTrue(isPreviousTestPass == false);
+//        isPreviousTestPass = false;
+        //Response response =
+                given().
+                spec(requestSpec).
+                when().
+                delete(ADMIN_USER_ENDPOINT + DELETE_ADMIN_USER + DELETE_ADMIN_USER_ID).
+                then().
+                assertThat().
+                statusCode(HttpStatus.SC_OK);
+
     }
 
     @Test
     @Title("Get All Admin User List")
     public void testE_getAllAdminUser() {
-        Response response = UserManagement.getAllAdminUser();
-        response.then()
-                .assertThat()
-                .statusCode(HttpStatus.SC_OK)
-                .contentType(equalTo("application/json"))
-                .body("data.content[0].userName", equalTo("admininventa"), "meta.status", equalTo("success"));
+        given().
+                spec(requestSpec).
+                when().
+                get(ADMIN_USER_ENDPOINT + GET_ALL_ADMIN_USER + PAGINATION_PARAMETER).
+                then().
+                spec(responseSpec).
+                and().
+                body("data.content[0].userName", equalTo("admininventa"));
     }
 
     @Test
     @Title("Get All Admin User Name")
     public void testF_getAllAdminUserName() {
-        Response response = UserManagement.getAllAdminUserName();
-        response.then()
-                .assertThat()
-                .statusCode(HttpStatus.SC_OK)
-                .contentType(equalTo("application/json"))
-                .body("data.username[0]", equalTo("admininventa"), "meta.status", equalTo("success"));
+        given().
+                spec(requestSpec).
+                when().
+                get(ADMIN_USER_ENDPOINT + ALL_ADMIN_USERNAME).
+                then().
+                spec(responseSpec).
+                and().
+                body("data.username[0]", equalTo("admininventa"));
     }
 
     @Test
@@ -223,10 +250,18 @@ public class UserManagementTest extends BaseTest {
     public void testG_postCreateRole() {
         isPreviousTestPass = false;
         Role role = new Role("Automation_Role_" + value + "1", "This is Test Role Created By new Regression Script", true, "Automation Script", Collections.singletonList(PERMISSION_ID));
-        Response response = UserManagement.postCreateRole(role);
+        Response response = given().
+                spec(requestSpec).
+                and().
+                body(role).
+                when().
+                post(ROLE_ENDPOINT + CREATE_ROLE);
+
         if (response.getStatusCode() == HttpStatus.SC_OK)
             isPreviousTestPass = true;
-        Assert.assertEquals("Invalid Status in Response: ", response.getStatusCode(), HttpStatus.SC_OK);
+        response.
+                then().
+                spec(responseSpec);
     }
 
     @Test
@@ -234,14 +269,18 @@ public class UserManagementTest extends BaseTest {
     public void testH_getRoleDetails() {
         Assume.assumeTrue(isPreviousTestPass == true);
         isPreviousTestPass = false;
-        Response response = UserManagement.getRoleDetails();
+        Response response = given().
+                spec(requestSpec).
+                when().
+                get(ROLE_ENDPOINT + ROLE_DETAILS + ROLE_ID);
         if (response.getStatusCode() == HttpStatus.SC_OK)
             isPreviousTestPass = true;
-        response.then()
-                .assertThat()
-                .statusCode(HttpStatus.SC_OK)
-                .contentType(equalTo("application/json"))
-                .body("data._id", equalTo(ROLE_ID), "meta.status", equalTo("success"));
+        response.
+                then().
+                spec(responseSpec).
+                and().
+                body("data._id", equalTo(ROLE_ID));
+
     }
 
     @Test
@@ -250,11 +289,17 @@ public class UserManagementTest extends BaseTest {
         Assume.assumeTrue(isPreviousTestPass == true);
         isPreviousTestPass = false;
         Role role = new Role("Update_Automation_Role_" + value + "1", "Updated By Regression new Script", true, "Automation Script", Collections.singletonList(PERMISSION_ID), ROLE_ID);
-        Response response = UserManagement.updateRole(role);
+        Response response = given().
+                spec(requestSpec).
+                and().
+                body(role).
+                when().
+                put(ROLE_ENDPOINT + UPDATE_ROLE + ROLE_ID);
         if (response.getStatusCode() == HttpStatus.SC_OK)
             isPreviousTestPass = true;
-        Assert.assertEquals("Invalid Status in Response: ", response.getStatusCode(), HttpStatus.SC_OK);
-
+        response.
+                then().
+                spec(responseSpec);
     }
 
     @Test
@@ -262,26 +307,31 @@ public class UserManagementTest extends BaseTest {
     public void testJ_deleteRole() {
         Assume.assumeTrue(isPreviousTestPass == true);
         isPreviousTestPass = false;
-        Response response = UserManagement.deleteRole();
+        Response response = given().
+                spec(requestSpec).
+                when().
+                delete(ROLE_ENDPOINT + DELETE_ROLE + DELETE_ROLE_ID);
+
         if (response.getStatusCode() == HttpStatus.SC_OK)
             isPreviousTestPass = true;
-        response.then()
-                .assertThat()
-                .statusCode(HttpStatus.SC_OK)
-                .contentType(equalTo("application/json"))
-                .body("data.message", equalTo("Delete Success"), "meta.status", equalTo("success"));
+        response.
+                then().
+                assertThat().
+                statusCode(HttpStatus.SC_OK);
+//                and().
+//                body("data.message", equalTo("Delete Success"));
 
     }
 
     @Test
     @Title("Get All Role List")
     public void testK_getAllRole() {
-        Response response = UserManagement.getAllRole();
-        response.then()
-                .assertThat()
-                .statusCode(HttpStatus.SC_OK)
-                .contentType(equalTo("application/json"))
-                .body("meta.status", equalTo("success"));
+        given().
+                spec(requestSpec).
+                when().
+                get(ROLE_ENDPOINT + GET_ALL_ROLE).
+                then().
+                spec(responseSpec);
     }
 
 

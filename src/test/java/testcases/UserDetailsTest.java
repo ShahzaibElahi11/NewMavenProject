@@ -10,14 +10,12 @@ import models.users.UserTag;
 import org.junit.*;
 import org.junit.runner.RunWith;
 import org.junit.runners.MethodSorters;
-import utils.BaseAPI;
 import utils.BaseTest;
-
-import java.io.IOException;
 import java.util.Collections;
 
+import static constants.Constants.*;
+import static io.restassured.RestAssured.given;
 import static org.hamcrest.Matchers.equalTo;
-import static utils.BaseAPI.getIdFromURL;
 
 @RunWith(SerenityRunner.class)
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
@@ -28,45 +26,49 @@ public class UserDetailsTest extends BaseTest {
     @Test
     @Title("Get Discovered User List")
     public void getAllUsers() {
-        Response response = Users.getAllUsers();
-        response.then()
-                .assertThat()
-                .statusCode(HttpStatus.SC_OK)
-                .contentType(equalTo("application/json"))
-                .body("data.content[0]._id", equalTo(USER_ID), "meta.status", equalTo("success"));
+        given().
+                spec(requestSpec).
+                when().
+                get( USER_ENDPOINT + ALL_USERS + PAGINATION).
+                then().
+                spec(responseSpec).
+                and().
+                body("data.content[0]._id", equalTo(USER_ID));
     }
 
     @Test
     @Title("Get Discovered User Detail By  Id")
     public void getUserByID() {
-        Response response = Users.getUserByID();
-        response.then()
-                .assertThat()
-                .statusCode(HttpStatus.SC_OK)
-                .contentType(equalTo("application/json"))
-                .body("data._id", equalTo(USER_ID), "meta.status", equalTo("success"));
+        given().
+                spec(requestSpec).
+                when().
+                get(USER_ENDPOINT + USER_DETAIL + USER_ID).
+                then().
+                spec(responseSpec).
+                and().
+                body("data._id", equalTo(USER_ID));
     }
 
     @Test
     @Title("Get Discovered User Connector List")
     public void getUserConnectorsList() {
-        Response response = Users.getUserConnectorsList();
-        response.then()
-                .assertThat()
-                .statusCode(HttpStatus.SC_OK)
-                .contentType(equalTo("application/json"))
-                .body("meta.status", equalTo("success"));
+        given().
+                spec(requestSpec).
+                when().
+                get(USER_ENDPOINT + CONNECTOR_LIST_BY_ID + USER_ID).
+                then().
+                spec(responseSpec);
     }
 
     @Test
     @Title("Get Discovered User Tags")
     public void getAllUserTags() {
-        Response response = Users.getAllUserTags();
-        response.then()
-                .assertThat()
-                .statusCode(HttpStatus.SC_OK)
-                .contentType(equalTo("application/json"))
-                .body("meta.status", equalTo("success"));
+        given().
+                spec(requestSpec).
+                when().
+                get(USER_ENDPOINT + ALL_TAGS).
+                then().
+                spec(responseSpec);
     }
 
     @Test
@@ -74,11 +76,17 @@ public class UserDetailsTest extends BaseTest {
     public void testA_postInsertUserTag() {
         isPreviousTestPass = false;
         UserTag userTag = new UserTag("Automation_User_Tag_Number_" + value + "1", Collections.singletonList(USER_ID));
-        Response response = Users.postInsertUserTag(userTag);
+        Response response = given().
+                spec(requestSpec).
+                and().
+                body(userTag).
+                when().
+                post(USER_ENDPOINT + INSERT_TAG);
         if (response.getStatusCode() == HttpStatus.SC_OK)
             isPreviousTestPass = true;
-        Assert.assertEquals("Invalid Status in Response: ", response.getStatusCode(), HttpStatus.SC_OK);
-
+        response.
+                then().
+                spec(responseSpec);
     }
 
     @Test
@@ -86,14 +94,20 @@ public class UserDetailsTest extends BaseTest {
     public void testB_getUserTagById() {
         Assume.assumeTrue(isPreviousTestPass == true);
         isPreviousTestPass = false;
-        Response response = Users.getUserTagById();
+        //Response response = Users.getUserTagById();
+      Response response = (Response) given().
+                spec(requestSpec).
+                when().
+                get(USER_ENDPOINT + USER_TAG + USER_ID).
+                then().
+                spec(responseSpec);
         if (response.getStatusCode() == HttpStatus.SC_OK)
             isPreviousTestPass = true;
-        response.then()
-                .assertThat()
-                .statusCode(HttpStatus.SC_OK)
-                .contentType(equalTo("application/json"))
-                .body("data.tags[0]", equalTo("Automation_User_Tag_Number_" + value + "1"), "meta.status", equalTo("success"));
+        response.
+                then().
+                spec(responseSpec).
+                and()
+                .body("data.tags[0]", equalTo("Automation_User_Tag_Number_" + value + "1"));
     }
 
     @Test // Not throw exception if tag name not exist.
@@ -155,23 +169,25 @@ public class UserDetailsTest extends BaseTest {
     @Test
     @Title("Get Users Connector Data of Discovered User")
     public void getUsersConnectorData() {
-        Response response = Users.getUsersConnectorData();
-        response.then()
-                .assertThat()
-                .statusCode(HttpStatus.SC_OK)
-                .contentType(equalTo("application/json"))
-                .body("meta.status", equalTo("success"));
+        given().
+                spec(requestSpec).
+                when().
+                get(USER_ENDPOINT + CONNECTOR_DATA + USER_ID + "&adapter").
+                then().
+                spec(responseSpec);
     }
 
     @Test
     @Title("Get General Details By Id of Discovered User")
     public void getGeneralDetails() {
-        Response response = Users.getGeneralDetails();
-        response.then()
-                .assertThat()
-                .statusCode(HttpStatus.SC_OK)
-                .contentType(equalTo("application/json"))
-                .body("data._id", equalTo(USER_ID), "meta.status", equalTo("success"));
+        given().
+                spec(requestSpec).
+                when().
+                get(USER_ENDPOINT + GENERAL_DETAILS + USER_ID).
+                then().
+                spec(responseSpec).
+                and().
+                body("data._id", equalTo(USER_ID));
     }
 
 }

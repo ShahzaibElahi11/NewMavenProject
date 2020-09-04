@@ -1,18 +1,17 @@
 package testcases;
 
-import api.ConnectorConfiguration;
-import io.restassured.response.Response;
 import models.configuration.AwsConfiguration;
 import net.serenitybdd.junit.runners.SerenityRunner;
 import net.thucydides.core.annotations.Title;
 import org.apache.http.HttpStatus;
-import org.junit.Assert;
 import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import utils.ApplicationConfiguration;
 import utils.BaseTest;
 
+import static constants.Constants.*;
+import static io.restassured.RestAssured.given;
 import static org.hamcrest.Matchers.*;
 
 @RunWith(SerenityRunner.class)
@@ -24,55 +23,61 @@ public class ConnectorConfigurationTest extends BaseTest {
     @Test
     @Title("Get All Connectors")
     public void getAllConnectors() {
-        Response response = ConnectorConfiguration.getAllConnector();
-        response.then()
-                .assertThat()
-                .statusCode(HttpStatus.SC_OK)
-                .contentType("application/json")
-                .body("meta.status", equalTo("success"));
-
+        given().
+                spec(requestSpecForConnector).
+                when().
+                get(CONNECTOR_ENDPOINT).
+                then().
+                spec(responseSpec);
     }
 
     @Test
     @Title("Get AD Connector Configuration")
     public void getADConnectorConfiguration() {
-        Response response = ConnectorConfiguration.getAdConnectorConfiguration();
-        response.then()
-                .assertThat()
-                .statusCode(HttpStatus.SC_OK)
-                .contentType("application/json")
-                .body("meta.status", equalTo("success"));
+        given().
+                spec(requestSpecForConnector).
+                when().
+                get(CONNECTOR_ENDPOINT + CONNECTOR_CONFIGURATION_INSTANCE + ACTIVE_DIRECTORY).
+                then().
+                spec(responseSpec);
     }
 
     @Test
     @Title("Get AWS Connector Configuration")
     public void getAWSConnectorConfiguration() {
-        Response response = ConnectorConfiguration.getAwsConnectorConfiguration();
-        response.then()
-                .assertThat()
-                .statusCode(HttpStatus.SC_OK)
-                .contentType("application/json")
-                .body("meta.status", equalTo("success"));
+        given().
+                spec(requestSpecForConnector).
+                when().
+                get(CONNECTOR_ENDPOINT + CONNECTOR_CONFIGURATION_INSTANCE + AWS_ENDPOINT).
+                then().
+                spec(responseSpec);
     }
 
     @Test
     @Title("Get Azure Connector Configuration")
     public void getAzureConnectorConfiguration() {
-        Response response = ConnectorConfiguration.getAzureConnectorConfiguration();
-        response.then()
-                .assertThat()
-                .statusCode(HttpStatus.SC_OK)
-                .contentType("application/json")
-                .body("meta.status", equalTo("success"));
+        given().
+                spec(requestSpecForConnector).
+                when().
+                get(CONNECTOR_ENDPOINT + CONNECTOR_CONFIGURATION + AZURE).
+                then().
+                spec(responseSpec);
     }
 
     @Ignore
     @Test
     @Title("Post AWS Connector Configuration")
     public void postAWSConfiguration() {
-        AwsConfiguration awsConfiguration = new AwsConfiguration(true, AWS_KEY_ID, AWS_SECRET_KEY, "us-east-2", false, "Test", "", true, true, true, true, true, true, true, true, true, true, true, false, true, true, true, true, false);
-        Response response = ConnectorConfiguration.postAwsConfiguration(awsConfiguration);
-        Assert.assertEquals("Invalid Status in Response: ", response.getStatusCode(), HttpStatus.SC_OK);
+        AwsConfiguration awsConfiguration = new AwsConfiguration(true, AWS_KEY_ID, AWS_SECRET_KEY, "us-east-3", false, "Test", "", true, true, true, true, true, true, true, true, true, true, true, false, true, true, true, true, false);
+        given().
+                spec(requestSpecForConnector).
+                and().
+                body(awsConfiguration).
+                when().
+                post("/aws/configure").
+                then().
+                assertThat().
+                statusCode(HttpStatus.SC_OK);
 
     }
 
@@ -95,45 +100,56 @@ public class ConnectorConfigurationTest extends BaseTest {
     @Test
     @Title("Get AWS Discover Now")
     public void getAwsDiscoverNow() {
-        Response response = ConnectorConfiguration.getAwsDiscoverNow();
-        response.then()
-                .assertThat()
-                .statusCode(HttpStatus.SC_OK)
-                .contentType("application/json")
-                .body("data", equalTo("Triggered Discovery"), "meta.status", equalTo("success"));
+        given().
+                spec(requestSpecForConnector).
+                when().
+                get(CONNECTOR_ENDPOINT + DISCOVER + AWS).
+                then().
+                spec(responseSpec).
+                and().
+                body("data", equalTo("Triggered Discovery"));
     }
 
     @Test
     @Title("Get Azure Discover Now")
     public void getAzureDiscoverNow() {
-        Response response = ConnectorConfiguration.getAzureDiscoverNow();
-        response.then()
-                .assertThat()
-                .statusCode(HttpStatus.SC_OK)
-                .contentType("application/json")
-                .body("data", equalTo("Triggered Discovery"), "meta.status", equalTo("success"));
+        given().
+                spec(requestSpecForConnector).
+                when().
+                get(CONNECTOR_ENDPOINT + DISCOVER + AZURE).
+                then().
+                spec(responseSpec).
+                and().
+                body("data", equalTo("Triggered Discovery"));
     }
 
     @Test
     @Title("Get AD Discover Now")
     public void getAdDiscoverNow() {
-        Response response = ConnectorConfiguration.getAdDiscoverNow();
-        response.then()
-                .assertThat()
-                .statusCode(HttpStatus.SC_OK)
-                .contentType("application/json")
-                .body("data", equalTo("Triggered Discovery"), "meta.status", equalTo("success"));
+        given().
+                spec(requestSpecForConnector).
+                when().
+                get(CONNECTOR_ENDPOINT + DISCOVER + AD).
+                then().
+                spec(responseSpec).
+                and().
+                body("data", equalTo("Triggered Discovery"));
     }
 
     @Test
     @Title("Get All Connector Discover Now")
     public void getAllConnectorDiscoverNow() {
-        Response response = ConnectorConfiguration.getAllConnectorDiscoverNow();
-        response.then()
-                .assertThat()
-                .statusCode(HttpStatus.SC_OK)
-                .contentType("application/json")
-                .body("data", equalTo("Triggered Discovery"), "meta.status", equalTo("success"));
+        given().
+                spec(requestSpecForConnector).
+                when().
+                get(CONNECTOR_ENDPOINT + DISCOVER).
+                then().
+                spec(responseSpec).
+                and().
+                body("data", equalTo("Triggered Discovery"));
     }
+
+    //I will CrowedStrike and VM Ware endpoints.
+
 
 }

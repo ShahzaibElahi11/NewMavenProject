@@ -12,13 +12,12 @@ import org.junit.FixMethodOrder;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.MethodSorters;
-import utils.BaseAPI;
 import utils.BaseTest;
 
-import java.io.IOException;
 
+import static constants.Constants.*;
+import static io.restassured.RestAssured.given;
 import static org.hamcrest.Matchers.equalTo;
-import static utils.BaseAPI.getIdFromURL;
 
 @RunWith(SerenityRunner.class)
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
@@ -97,81 +96,83 @@ public class PolicyRoutineTest extends BaseTest {
     @Test
     @Title("Get Display All Policy Routine Data")
     public void getPolicyRoutineAllData() {
-        Response response = PolicyRoutines.getPolicyRoutineAllData();
-        response.then()
-                .assertThat()
-                .statusCode(HttpStatus.SC_OK)
-                .contentType(equalTo("application/json"))
-                .body("meta.status", equalTo("success"));
+        given().
+                spec(requestSpec).
+                when().
+                get(POLICY_ROUTINE).
+                then().
+                spec(responseSpec);
     }
 
 
     @Test
     @Title("Get Policy Routine Action")
     public void getPolicyRoutineActions() {
-        Response response = PolicyRoutines.getPolicyRoutineActions();
-        response.then()
-                .assertThat()
-                .statusCode(HttpStatus.SC_OK)
-                .contentType(equalTo("application/json"))
-                .body("meta.status", equalTo("success"));
+        given().
+                spec(requestSpec).
+                when().
+                get(POLICY_ROUTINE + PR_ACTION).
+                then().
+                spec(responseSpec);
     }
 
     @Test
     @Title("Get Policy Routine Action on Devices")
     public void getPolicyRoutineDeviceActions() {
-        Response response = PolicyRoutines.getPolicyRoutineDeviceActions();
-        response.then()
-                .assertThat()
-                .statusCode(HttpStatus.SC_OK)
-                .contentType(equalTo("application/json"))
-                .body("meta.status", equalTo("success"));
+        given().
+                spec(requestSpec).
+                when().
+                get(POLICY_ROUTINE + PR_ACTION + "/devices").
+                then().
+                spec(responseSpec);
     }
 
 
     @Test
     @Title("Get Policy Routine Action on Users")
     public void getPolicyRoutineUserActions() {
-        Response response = PolicyRoutines.getPolicyRoutineUserActions();
-        response.then()
-                .assertThat()
-                .statusCode(HttpStatus.SC_OK)
-                .contentType(equalTo("application/json"))
-                .body("meta.status", equalTo("success"));
+        given().
+                spec(requestSpec).
+                when().
+                get(POLICY_ROUTINE + PR_ACTION + "/users").
+                then().
+                spec(responseSpec);
     }
 
     @Test
     @Title("Get Policy Routine Table")
     public void getPolicyRoutineTable() {
-        Response response = PolicyRoutines.getPolicyRoutineTable();
-        response.then()
-                .assertThat()
-                .statusCode(HttpStatus.SC_OK)
-                .contentType(equalTo("application/json"))
-                .body("meta.status", equalTo("success"));
+        given().
+                spec(requestSpec).
+                when().
+                get(POLICY_ROUTINE + PR_TABLE).
+                then().
+                spec(responseSpec);
     }
 
 
     @Test
     @Title("Get Policy Routine Table With Filter")
     public void getPolicyRoutineTableWithFilter() {
-        Response response = PolicyRoutines.getPolicyRoutineTableWithFilter();
-        response.then()
-                .assertThat()
-                .statusCode(HttpStatus.SC_OK)
-                .contentType(equalTo("application/json"))
-                .body("meta.status", equalTo("success"));
+        given().
+                spec(requestSpec).
+                when().
+                get(POLICY_ROUTINE + PR_TABLE + "&filter=" + PR_FILTER_NAME).
+                then().
+                spec(responseSpec);
     }
 
     @Test
     @Title("Get Policy Routine Summary")
     public void getPolicyRoutineSummary() {
-        Response response = PolicyRoutines.getPolicyRoutineSummary();
-        response.then()
-                .assertThat()
-                .statusCode(HttpStatus.SC_OK)
-                .contentType(equalTo("application/json"))
-                .body("data.mainAction.action", equalTo("RC02"), "meta.status", equalTo("success"));
+        given().
+                spec(requestSpec).
+                when().
+                get(POLICY_ROUTINE + "summary/" + PR_ID).
+                then().
+                spec(responseSpec).
+                and().
+                body("data.mainAction.action", equalTo("RC02"));
 
     }
 
@@ -180,8 +181,15 @@ public class PolicyRoutineTest extends BaseTest {
     @Title("Post Policy Routine Enforce on Devices")
     public void postEnforcePolicyOnDevice() {
         EnforcePolicyOnDevice enforcePolicyOnDevice = new EnforcePolicyOnDevice("MSEDGEWIN10-5.inventa12.com");
-        Response response = PolicyRoutines.postEnforcePolicyDevice(enforcePolicyOnDevice);
-        Assert.assertEquals("Invalid Status in Response: ", response.getStatusCode(), HttpStatus.SC_OK);
+        given().
+                spec(requestSpec).
+                and().
+                body(enforcePolicyOnDevice).
+                when().
+                post(POLICY_ROUTINE + "enforce/" + DEVICE_DETAIL_ID + "/devices/").
+                then().
+                assertThat().
+                statusCode(HttpStatus.SC_OK);
 
     }
 
@@ -191,29 +199,39 @@ public class PolicyRoutineTest extends BaseTest {
 
         EnforcePolicyOnUser enforcePolicyOnUser = new EnforcePolicyOnUser("filyas@netpace.com");
         Response response = PolicyRoutines.postEnforcePolicyUser(enforcePolicyOnUser);
-        Assert.assertEquals("Invalid Status in Response: ", response.getStatusCode(), HttpStatus.SC_OK);
+        given().
+                spec(requestSpec).
+                and().
+                body(enforcePolicyOnUser).
+                when().
+                post(POLICY_ROUTINE + "enforce/" + USER_ID + "/users/").
+                then().
+                assertThat().
+                statusCode(HttpStatus.SC_OK);
     }
 
     @Test
     @Title("Get Policy Routine Action Pair")
     public void getActionsPair() {
-        Response response = PolicyRoutines.getActionsPair();
-        response.then()
-                .assertThat()
-                .statusCode(HttpStatus.SC_OK)
-                .contentType(equalTo("application/json"))
-                .body("meta.status", equalTo("success"));
+        given().
+                spec(requestSpec).
+                when().
+                get(POLICY_ROUTINE + PR_ACTION + "/pair").
+                then().
+                spec(responseSpec);
     }
 
     @Test
     @Title("Get Policy Routine Details By Id")
     public void getPolicyRoutineById() {
-        Response response = PolicyRoutines.getPolicyRoutineById();
-        response.then()
-                .assertThat()
-                .statusCode(HttpStatus.SC_OK)
-                .contentType(equalTo("application/json"))
-                .body("data._id", equalTo(PR_ID), "meta.status", equalTo("success"));
+        given().
+                spec(requestSpec).
+                when().
+                get(POLICY_ROUTINE + PR_ID).
+                then().
+                spec(responseSpec).
+                and().
+                body("data._id", equalTo(PR_ID));
     }
 
 
