@@ -2,7 +2,6 @@ package utils;
 
 import com.auth0.jwt.JWT;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import io.restassured.authentication.AuthenticationScheme;
 import io.restassured.builder.RequestSpecBuilder;
 import io.restassured.builder.ResponseSpecBuilder;
 import io.restassured.http.ContentType;
@@ -23,10 +22,6 @@ import static com.auth0.jwt.algorithms.Algorithm.HMAC512;
 import static org.hamcrest.Matchers.equalTo;
 
 public class BaseTest {
-
-    //temporary endpoint
-    protected static final String BASE_ENDPOINT_INVENTA = "http://inventaserver:9092";
-
 
     protected static final String BASE_ENDPOINT = ApplicationConfiguration.getInventaBaseURL();
     protected static final int INVENTA_PORT = Integer.parseInt(ApplicationConfiguration.getInventaServicePort());
@@ -150,14 +145,13 @@ public class BaseTest {
     public static RequestSpecification requestSpecForConnector;
 
     @BeforeClass
-    public static void createRequestSpecificationForConnector() throws IOException {
+    public static void createRequestSpecificationForConnector() {
 
         requestSpecForConnector = new RequestSpecBuilder()
                 .setBaseUri(BASE_ENDPOINT)
                 .setPort(CONNECTOR_PORT)
                 .setContentType(ContentType.JSON)
-           //     .addHeader("Authorization", "Bearer " + token)
-                    //.setAuth("Authorization", "Bearer " + token)
+                .addHeader("Authorization", "Bearer " + token)
                 .build();
     }
 

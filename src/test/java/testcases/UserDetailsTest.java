@@ -1,6 +1,5 @@
 package testcases;
 
-import api.Users;
 import io.restassured.response.Response;
 import net.serenitybdd.junit.runners.SerenityRunner;
 import net.thucydides.core.annotations.Title;
@@ -11,15 +10,18 @@ import org.junit.*;
 import org.junit.runner.RunWith;
 import org.junit.runners.MethodSorters;
 import utils.BaseTest;
+
 import java.util.Collections;
 
 import static constants.Constants.*;
 import static io.restassured.RestAssured.given;
-import static org.hamcrest.Matchers.equalTo;
+import static org.hamcrest.Matchers.*;
 
 @RunWith(SerenityRunner.class)
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
 public class UserDetailsTest extends BaseTest {
+    public static final String SINGLE_TAG_NAME = "Automation_User_Tag_Number_" + value + "1";
+
 
     public static boolean isPreviousTestPass;
 
@@ -29,7 +31,7 @@ public class UserDetailsTest extends BaseTest {
         given().
                 spec(requestSpec).
                 when().
-                get( USER_ENDPOINT + ALL_USERS + PAGINATION).
+                get(USER_ENDPOINT + ALL_USERS + PAGINATION).
                 then().
                 spec(responseSpec).
                 and().
@@ -86,7 +88,8 @@ public class UserDetailsTest extends BaseTest {
             isPreviousTestPass = true;
         response.
                 then().
-                spec(responseSpec);
+                assertThat().
+                statusCode(HttpStatus.SC_OK);
     }
 
     @Test
@@ -94,13 +97,10 @@ public class UserDetailsTest extends BaseTest {
     public void testB_getUserTagById() {
         Assume.assumeTrue(isPreviousTestPass == true);
         isPreviousTestPass = false;
-        //Response response = Users.getUserTagById();
-      Response response = (Response) given().
+        Response response = given().
                 spec(requestSpec).
                 when().
-                get(USER_ENDPOINT + USER_TAG + USER_ID).
-                then().
-                spec(responseSpec);
+                get(USER_ENDPOINT + USER_TAG + USER_ID);
         if (response.getStatusCode() == HttpStatus.SC_OK)
             isPreviousTestPass = true;
         response.
@@ -115,10 +115,16 @@ public class UserDetailsTest extends BaseTest {
     public void testC_deleteUserSingleTag() {
         Assume.assumeTrue(isPreviousTestPass == true);
         isPreviousTestPass = false;
-        Response response = Users.deleteUserSingleTag();
+        Response response = given().
+                spec(requestSpec).
+                when().
+                delete(USER_ENDPOINT + DELETE_SINGLE_TAG + USER_ID + "&tag=" + SINGLE_TAG_NAME);
         if (response.getStatusCode() == HttpStatus.SC_OK)
             isPreviousTestPass = true;
-        Assert.assertEquals("Invalid Status in Response: ", response.getStatusCode(), HttpStatus.SC_OK);
+        response.
+                then().
+                assertThat().
+                statusCode(HttpStatus.SC_OK);
 
     }
 
@@ -126,8 +132,16 @@ public class UserDetailsTest extends BaseTest {
     @Title("Delete Bulk Tags of Discovered User")
     public void testD_deleteUserBukTag() {
         UserTag deleteUserTag = new UserTag(Collections.singletonList(USER_ID));
-        Response response = Users.deleteBulkUserTags(deleteUserTag);
-        Assert.assertEquals("Invalid Status in Response: ", response.getStatusCode(), HttpStatus.SC_OK);
+        given().
+                spec(requestSpec).
+                and().
+                body(deleteUserTag).
+                when().
+                delete(USER_ENDPOINT + DELETE_BULK_TAG).
+                then().
+                spec(responseSpec).
+                and().
+                body("data.message", equalTo("Delete tag success"));
 
     }
 
@@ -136,10 +150,18 @@ public class UserDetailsTest extends BaseTest {
     public void testE_postInsertUserNote() {
         isPreviousTestPass = false;
         UserNote userNote = new UserNote("Automation_Notes_#_" + value + "2", "" + USER_ID);
-        Response response = Users.postInsertUserNote(userNote);
+        Response response = given().
+                spec(requestSpec).
+                and().
+                body(userNote).
+                when().
+                post(USER_ENDPOINT + INSERT_NOTE);
         if (response.getStatusCode() == HttpStatus.SC_OK)
             isPreviousTestPass = true;
-        Assert.assertEquals("Invalid Status in Response: ", response.getStatusCode(), HttpStatus.SC_OK);
+        response.
+                then().
+                assertThat().
+                statusCode(HttpStatus.SC_OK);
 
     }
 
@@ -148,22 +170,29 @@ public class UserDetailsTest extends BaseTest {
     public void testF_getUserNoteById() {
         Assume.assumeTrue(isPreviousTestPass == true);
         isPreviousTestPass = false;
-        Response response = Users.getUserNoteById();
+        Response response = given().
+                spec(requestSpec).
+                when().
+                get(USER_ENDPOINT + USER_NOTE + USER_ID);
         if (response.getStatusCode() == HttpStatus.SC_OK)
             isPreviousTestPass = true;
-        response.then()
-                .assertThat()
-                .statusCode(HttpStatus.SC_OK)
-                .contentType(equalTo("application/json"))
-                .body("data.note", equalTo("Automation_Notes_#_" + value + "2"), "meta.status", equalTo("success"));
+        response.
+                then().
+                spec(responseSpec).
+                and()
+                .body("data.note", equalTo("Automation_Notes_#_" + value + "2"));
     }
 
     @Test
     @Title("Delete Note of Discovered User")
     public void testG_deleteUserNote() {
-        Response response = Users.deleteUserNote();
-        Assert.assertEquals("Invalid Status in Response: ", response.getStatusCode(), HttpStatus.SC_OK);
-
+        given().
+                spec(requestSpec).
+                when().
+                delete(USER_ENDPOINT + DELETE_NOTE + USER_ID).
+                then().
+                assertThat().
+                statusCode(HttpStatus.SC_OK);
     }
 
     @Test

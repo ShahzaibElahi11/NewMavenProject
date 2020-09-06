@@ -1,15 +1,11 @@
 package testcases;
 
-import api.PolicyRoutines;
 import io.restassured.response.Response;
 import models.policyroutine.*;
 import net.serenitybdd.junit.runners.SerenityRunner;
 import net.thucydides.core.annotations.Title;
 import org.apache.http.HttpStatus;
-import org.junit.Assert;
-import org.junit.Assume;
-import org.junit.FixMethodOrder;
-import org.junit.Test;
+import org.junit.*;
 import org.junit.runner.RunWith;
 import org.junit.runners.MethodSorters;
 import utils.BaseTest;
@@ -42,13 +38,19 @@ public class PolicyRoutineTest extends BaseTest {
                 .setName("Automation Policy Routine # " + value)
                 .setMainAction(policyRoutineMainAction)
                 .build();
-        Response response = PolicyRoutines.postPolicyRoutine(policyRoutine);
+
+        Response response = given().
+                spec(requestSpec).
+                and().
+                body(policyRoutine).
+                when().
+                post(POLICY_ROUTINE);
+
         if (response.getStatusCode() == HttpStatus.SC_OK)
             isPreviousTestPass = true;
-        response.then()
-                .assertThat()
-                .statusCode(HttpStatus.SC_OK)
-                .contentType(equalTo("application/json"))
+        response.then().
+                spec(responseSpec).
+                and()
                 .body("meta.status", equalTo("success"));
     }
 
@@ -70,27 +72,38 @@ public class PolicyRoutineTest extends BaseTest {
                 .setName("Update1_Automation Policy Routine # " + value)
                 .setMainAction(policyRoutineMainAction)
                 .build();
-        Response response = PolicyRoutines.updatePolicyRoutine(policyRoutine);
+        Response response = given().
+                spec(requestSpec).
+                and().
+                body(policyRoutine).
+                when().
+                put(POLICY_ROUTINE + PR_ID);
         if (response.getStatusCode() == HttpStatus.SC_OK)
             isPreviousTestPass = true;
-        response.then()
-                .assertThat()
-                .statusCode(HttpStatus.SC_OK)
-                .contentType(equalTo("application/json"))
-                .body("meta.status", equalTo("success"));
+        response.then().
+                spec(responseSpec).
+                and().
+                body("meta.status", equalTo("success"));
     }
 
 
+    @Ignore
     @Test
     @Title("Delete Policy Routine")
     public void testC_DeletePolicyRoutine() {
         Assume.assumeTrue(isPreviousTestPass == true);
         isPreviousTestPass = false;
-        Response response = PolicyRoutines.deletePolicyRoutine();
+        Response response = given().
+                spec(requestSpec).
+                when().
+                delete( POLICY_ROUTINE + "?ids=" + DELETE_PR_ID);
         if (response.getStatusCode() == HttpStatus.SC_OK)
             isPreviousTestPass = true;
-        Assert.assertEquals("Invalid Status in Response: ", response.getStatusCode(), HttpStatus.SC_OK);
 
+        response.
+                then().
+                assertThat().
+                statusCode(HttpStatus.SC_OK);
     }
 
     @Test
@@ -103,7 +116,6 @@ public class PolicyRoutineTest extends BaseTest {
                 then().
                 spec(responseSpec);
     }
-
 
     @Test
     @Title("Get Policy Routine Action")
@@ -173,7 +185,6 @@ public class PolicyRoutineTest extends BaseTest {
                 spec(responseSpec).
                 and().
                 body("data.mainAction.action", equalTo("RC02"));
-
     }
 
 
@@ -190,15 +201,12 @@ public class PolicyRoutineTest extends BaseTest {
                 then().
                 assertThat().
                 statusCode(HttpStatus.SC_OK);
-
     }
 
     @Test
     @Title("Post Policy Routine Enforce on Users")
     public void postEnforcePolicyOnUser() {
-
         EnforcePolicyOnUser enforcePolicyOnUser = new EnforcePolicyOnUser("filyas@netpace.com");
-        Response response = PolicyRoutines.postEnforcePolicyUser(enforcePolicyOnUser);
         given().
                 spec(requestSpec).
                 and().

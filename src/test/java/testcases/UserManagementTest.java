@@ -206,9 +206,6 @@ public class UserManagementTest extends BaseTest {
     @Test
     @Title("Delete User Information")
     public void testD_DeleteAdminUser() {
-//        Assume.assumeTrue(isPreviousTestPass == false);
-//        isPreviousTestPass = false;
-        //Response response =
                 given().
                 spec(requestSpec).
                 when().
