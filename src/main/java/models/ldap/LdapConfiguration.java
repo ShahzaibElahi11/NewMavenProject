@@ -1,7 +1,9 @@
 package models.ldap;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import lombok.AllArgsConstructor;
 
+@AllArgsConstructor
 public class LdapConfiguration {
 
     @JsonProperty("ldap.url")
@@ -13,9 +15,4 @@ public class LdapConfiguration {
     @JsonProperty("ldap.role")
     private String role;
 
-    public LdapConfiguration(String url, String domain, String role) {
-        this.url = url;
-        this.domain = domain;
-        this.role = role;
-    }
 }

@@ -1,8 +1,9 @@
 package models.configuration;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import lombok.AllArgsConstructor;
 
-
+@AllArgsConstructor
 public class AwsConfiguration {
 
 
@@ -81,32 +82,6 @@ public class AwsConfiguration {
     @JsonProperty("aws.disableFetchingFromPrimaryAccount")
     private boolean disableFetchingFromPrimaryAccount;
 
-    public AwsConfiguration(boolean configured, String accessKeyId, String accessKeySecret, String region, boolean allRegionEnabled, String accountTag, String roleArns, boolean enableLoadBalancer, boolean enableNatGateways, boolean enableInternetGateways, boolean enableS3Buckets, boolean enableWorkspaces, boolean enableLambdaFunctions, boolean enableRoute53Assets, boolean enableIamUsers, boolean enableRdsInstances, boolean enableEcsContainerInstances, boolean enableEc2AttachedIamRoles, boolean discoverOnlyPoweredOnEc2Instances, boolean enableIamUsersServices, boolean resolveLoadBalancerIp, boolean enableLoadBalancerTargets, boolean correlateEcsContainerInstancesWithEc2Instances, boolean disableFetchingFromPrimaryAccount) {
-        this.configured = configured;
-        this.accessKeyId = accessKeyId;
-        this.accessKeySecret = accessKeySecret;
-        this.region = region;
-        this.allRegionEnabled = allRegionEnabled;
-        this.accountTag = accountTag;
-        this.roleArns = roleArns;
-        this.enableLoadBalancer = enableLoadBalancer;
-        this.enableNatGateways = enableNatGateways;
-        this.enableInternetGateways = enableInternetGateways;
-        this.enableS3Buckets = enableS3Buckets;
-        this.enableWorkspaces = enableWorkspaces;
-        this.enableLambdaFunctions = enableLambdaFunctions;
-        this.enableRoute53Assets = enableRoute53Assets;
-        this.enableIamUsers = enableIamUsers;
-        this.enableRdsInstances = enableRdsInstances;
-        this.enableEcsContainerInstances = enableEcsContainerInstances;
-        this.enableEc2AttachedIamRoles = enableEc2AttachedIamRoles;
-        this.discoverOnlyPoweredOnEc2Instances = discoverOnlyPoweredOnEc2Instances;
-        this.enableIamUsersServices = enableIamUsersServices;
-        this.resolveLoadBalancerIp = resolveLoadBalancerIp;
-        this.enableLoadBalancerTargets = enableLoadBalancerTargets;
-        this.correlateEcsContainerInstancesWithEc2Instances = correlateEcsContainerInstancesWithEc2Instances;
-        this.disableFetchingFromPrimaryAccount = disableFetchingFromPrimaryAccount;
-    }
 
 
 }

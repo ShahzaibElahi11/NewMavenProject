@@ -1,9 +1,11 @@
 package models.usermanagement;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import lombok.AllArgsConstructor;
 
 import java.util.List;
 
+@AllArgsConstructor
 public class Role {
 
     @JsonProperty
@@ -24,6 +26,7 @@ public class Role {
     @JsonProperty
     private String _id;
 
+    //For Post Method
     public Role(String title, String description, boolean status, String createdBy, List<String> permissionIds) {
         this.title = title;
         this.description = description;
@@ -32,13 +35,4 @@ public class Role {
         this.permissionIds = permissionIds;
     }
 
-    //for update
-    public Role(String title, String description, boolean status, String createdBy, List<String> permissionIds, String _id) {
-        this.title = title;
-        this.description = description;
-        this.status = status;
-        this.createdBy = createdBy;
-        this.permissionIds = permissionIds;
-        this._id = _id;
-    }
 }

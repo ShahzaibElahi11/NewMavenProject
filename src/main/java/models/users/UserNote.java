@@ -1,7 +1,9 @@
 package models.users;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import lombok.AllArgsConstructor;
 
+@AllArgsConstructor
 public class UserNote {
 
     @JsonProperty
@@ -10,8 +12,4 @@ public class UserNote {
     @JsonProperty
     private String userId;
 
-    public UserNote(String note, String userId) {
-        this.note = note;
-        this.userId = userId;
-    }
 }

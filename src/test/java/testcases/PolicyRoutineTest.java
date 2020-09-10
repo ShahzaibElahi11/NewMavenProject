@@ -21,23 +21,14 @@ public class PolicyRoutineTest extends BaseTest {
 
     public static boolean isPreviousTestPass;
 
-    //Update Post Method Using Builder Class
-    @Test
+        @Test
     @Title("Create New Policy Routine")
     public void testA_PostCreatePolicyRoutine() {
         isPreviousTestPass = false;
-        PolicyRoutineProperties policyRoutineProperties = new PolicyRoutineProperties.Builder()
-                .setUsername("test")
-                .setPassword("password123")
-                .build();
-        PolicyRoutineMainAction policyRoutineMainAction = new PolicyRoutineMainAction.Builder()
-                .setAction("RC02")
-                .setProperties(policyRoutineProperties)
-                .build();
-        PolicyRoutine policyRoutine = new PolicyRoutine.Builder()
-                .setName("Automation Policy Routine # " + value)
-                .setMainAction(policyRoutineMainAction)
-                .build();
+
+        PolicyRoutineProperties policyRoutineProperties = PolicyRoutineProperties.builder().username("test1").password("password123").build();
+        PolicyRoutineMainAction policyRoutineMainAction = PolicyRoutineMainAction.builder().action("RC02").properties(policyRoutineProperties).build();
+        PolicyRoutine policyRoutine = PolicyRoutine.builder().name("Automation Policy Routine # " + value).mainAction(policyRoutineMainAction).build();
 
         Response response = given().
                 spec(requestSpec).
@@ -60,18 +51,11 @@ public class PolicyRoutineTest extends BaseTest {
     public void testB_PutPolicyRoutineNew() {
         Assume.assumeTrue(isPreviousTestPass == true);
         isPreviousTestPass = false;
-        PolicyRoutineProperties policyRoutineProperties = new PolicyRoutineProperties.Builder()
-                .setUsername("test")
-                .setPassword("password123")
-                .build();
-        PolicyRoutineMainAction policyRoutineMainAction = new PolicyRoutineMainAction.Builder()
-                .setAction("RC02")
-                .setProperties(policyRoutineProperties)
-                .build();
-        PolicyRoutine policyRoutine = new PolicyRoutine.Builder()
-                .setName("Update1_Automation Policy Routine # " + value)
-                .setMainAction(policyRoutineMainAction)
-                .build();
+
+        PolicyRoutineProperties policyRoutineProperties = PolicyRoutineProperties.builder().username("test1").password("password123").build();
+        PolicyRoutineMainAction policyRoutineMainAction = PolicyRoutineMainAction.builder().action("RC02").properties(policyRoutineProperties).build();
+        PolicyRoutine policyRoutine = PolicyRoutine.builder().name("Update1_Automation Policy Routine # " + value).mainAction(policyRoutineMainAction).build();
+
         Response response = given().
                 spec(requestSpec).
                 and().
@@ -96,7 +80,7 @@ public class PolicyRoutineTest extends BaseTest {
         Response response = given().
                 spec(requestSpec).
                 when().
-                delete( POLICY_ROUTINE + "?ids=" + DELETE_PR_ID);
+                delete(POLICY_ROUTINE + "?ids=" + DELETE_PR_ID);
         if (response.getStatusCode() == HttpStatus.SC_OK)
             isPreviousTestPass = true;
 

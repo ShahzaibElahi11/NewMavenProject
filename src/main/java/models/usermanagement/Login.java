@@ -1,7 +1,9 @@
 package models.usermanagement;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import lombok.AllArgsConstructor;
 
+@AllArgsConstructor
 public class Login {
     @JsonProperty
     private String username;
@@ -9,8 +11,4 @@ public class Login {
     @JsonProperty
     private String password;
 
-    public Login(String username, String password) {
-        this.username = username;
-        this.password = password;
-    }
 }

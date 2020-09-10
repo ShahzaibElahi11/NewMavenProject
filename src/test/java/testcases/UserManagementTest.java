@@ -16,6 +16,7 @@ import org.junit.runners.MethodSorters;
 import utils.ApplicationConfiguration;
 import utils.BaseTest;
 
+import java.io.IOException;
 import java.util.Collections;
 
 import static constants.Constants.*;
@@ -26,6 +27,7 @@ import static org.hamcrest.Matchers.equalTo;
 @RunWith(SerenityRunner.class)
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
 public class UserManagementTest extends BaseTest {
+
 
     //Fake Class
     Faker faker = new Faker();
@@ -127,18 +129,19 @@ public class UserManagementTest extends BaseTest {
     @Title("Create New User in the Application")
     public void testA_PostCreateUser() {
         isPreviousTestPass = false;
-        AdminUser adminUser = new AdminUser.Builder()
-                .setEmailAddress(emailAddress)
-                .setPhone(phoneNumber)
-                .setUserName(userName)
-                .setFirstName(firstName)
-                .setLastName(lastName)
-                .setPassword("password123")
-                .setPasswordConfirm("password123")
-                .setRoleIds(ROLE_ID)
-                .setUserType("OPERATOR")
-                .setStatus(true)
+        AdminUser adminUser =  AdminUser.builder()
+                .emailAddress(emailAddress)
+                .phone(phoneNumber)
+                .userName(userName)
+                .firstName(firstName)
+                .lastName(lastName)
+                .password("password123")
+                .passwordConfirm("password123")
+                .roleIds(ROLE_ID)
+                .userType("OPERATOR")
+                .status(true)
                 .build();
+
 
         Response response = given().
                 spec(requestSpec).
@@ -158,18 +161,18 @@ public class UserManagementTest extends BaseTest {
     public void testB_PutUpdateAdminUser() {
         Assume.assumeTrue(isPreviousTestPass == true);
         isPreviousTestPass = false;
-        AdminUser adminUser = new AdminUser.Builder()
-                .set_id(ADMIN_USER_ID)
-                .setEmailAddress(emailAddress)
-                .setPhone(phoneNumber)
-                .setUserName(userName)
-                .setFirstName(firstName)
-                .setLastName(lastName)
-                .setPassword("password123")
-                .setPasswordConfirm("password123")
-                .setRoleIds(ROLE_ID)
-                .setUserType("OPERATOR")
-                .setStatus(true)
+        AdminUser adminUser = AdminUser.builder()
+                ._id(ADMIN_USER_ID)
+                .emailAddress(emailAddress)
+                .phone(phoneNumber)
+                .userName(userName)
+                .firstName("Update "+firstName)
+                .lastName(lastName)
+                .password("password123")
+                .passwordConfirm("password123")
+                .roleIds(ROLE_ID)
+                .userType("OPERATOR")
+                .status(true)
                 .build();
 
         Response response = given().

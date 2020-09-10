@@ -1,7 +1,9 @@
 package models.ldap;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import lombok.AllArgsConstructor;
 
+@AllArgsConstructor
 public class AdLogin {
 
     @JsonProperty
@@ -10,9 +12,4 @@ public class AdLogin {
     @JsonProperty
     private String password;
 
-
-    public AdLogin(String username, String password) {
-        this.username = username;
-        this.password = password;
-    }
 }

@@ -1,9 +1,13 @@
 package models.users;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+import lombok.RequiredArgsConstructor;
 
 import java.util.List;
-
+@AllArgsConstructor
 public class UserTag {
 
     @JsonProperty
@@ -12,11 +16,8 @@ public class UserTag {
     @JsonProperty
     private List<String> userIds;
 
-    public UserTag(String tag, List<String> userIds) {
-        this.tag = tag;
-        this.userIds = userIds;
-    }
-    //for delete
+
+    //for Delete Method
     public UserTag(List<String> userIds) {
         this.userIds = userIds;
     }
