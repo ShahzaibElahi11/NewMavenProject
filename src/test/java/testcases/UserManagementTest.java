@@ -206,6 +206,7 @@ public class UserManagementTest extends BaseTest {
                 body("data._id", equalTo(ADMIN_USER_ID));
     }
 
+    @Ignore
     @Test
     @Title("Delete User Information")
     public void testD_DeleteAdminUser() {
@@ -301,7 +302,7 @@ public class UserManagementTest extends BaseTest {
                 then().
                 spec(responseSpec);
     }
-
+    @Ignore
     @Test
     @Title("Delete Role")
     public void testJ_deleteRole() {
