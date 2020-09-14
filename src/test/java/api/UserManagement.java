@@ -7,6 +7,8 @@ import models.usermanagement.Login;
 import models.usermanagement.Role;
 import utils.BaseAPI;
 
+import java.io.IOException;
+
 import static constants.Constants.*;
 import static io.restassured.RestAssured.given;
 
@@ -101,13 +103,16 @@ public class UserManagement extends BaseAPI {
     }
 
 
-    public static Response updateRole(Role role) {
+    public static Response updateRole(Role role) throws IOException {
+        String CURRENT_ROLE_ID = "";
+
+        CURRENT_ROLE_ID = getIdFromURL("http://inventaserver:9092/role/getAllRole?page=0&size=1&sort=dateCreated,desc");
         return given()
                 .contentType(ContentType.JSON)
                 .header("Authorization", "Bearer " + token)
                 .body(role)
                 .when()
-                .put(BASE_ENDPOINT_INVENTA + ROLE_ENDPOINT + UPDATE_ROLE + ROLE_ID);
+                .put(BASE_ENDPOINT_INVENTA + ROLE_ENDPOINT + UPDATE_ROLE + CURRENT_ROLE_ID);
 
 
     }
@@ -130,27 +135,37 @@ public class UserManagement extends BaseAPI {
                 .post(BASE_ENDPOINT_INVENTA + ADMIN_USER_ENDPOINT + CREATE_ADMIN_USER);
     }
 
-    public static Response updateAdminUser(AdminUser adminUser) {
+    public static Response updateAdminUser(AdminUser adminUser) throws IOException {
+        String CURRENT_ADMIN_USER_ID = "";
+
+        CURRENT_ADMIN_USER_ID = getIdFromURL("http://inventaserver:9092/adminUsers/getAllAdminUsers?page=0&size=1&sort=dateCreated,desc");
         return given()
                 .contentType(ContentType.JSON)
                 .header("Authorization", "Bearer " + token)
                 .body(adminUser)
                 .when()
-                .put(BASE_ENDPOINT_INVENTA + ADMIN_USER_ENDPOINT + UPDATE_ADMIN_USER + ADMIN_USER_ID);
+                .put(BASE_ENDPOINT_INVENTA + ADMIN_USER_ENDPOINT + UPDATE_ADMIN_USER + CURRENT_ADMIN_USER_ID);
     }
 
-    public static Response deleteAdminUser() {
+    public static Response deleteAdminUser() throws IOException {
+        String CURRENT_DELETE_ADMIN_USER_ID = "";
+
+        CURRENT_DELETE_ADMIN_USER_ID = getIdFromURL("http://inventaserver:9092/adminUsers/getAllAdminUsers?page=0&size=1&sort=dateModified,desc");
         return given()
                 .header("Authorization", "Bearer " + token)
                 .when()
-                .delete(BASE_ENDPOINT_INVENTA + ADMIN_USER_ENDPOINT + DELETE_ADMIN_USER + DELETE_ADMIN_USER_ID);
+                .delete(BASE_ENDPOINT_INVENTA + ADMIN_USER_ENDPOINT + DELETE_ADMIN_USER + CURRENT_DELETE_ADMIN_USER_ID);
 
     }
 
-    public static Response deleteRole() {
+    public static Response deleteRole() throws IOException {
+        String CURRENT_DELETE_ROLE_ID = "";
+
+        CURRENT_DELETE_ROLE_ID = getIdFromURL("http://inventaserver:9092/role/getAllRole?page=0&size=1&sort=dateModified,desc");
+
         return given()
                 .header("Authorization", "Bearer " + token)
                 .when()
-                .delete(BASE_ENDPOINT_INVENTA + ROLE_ENDPOINT + DELETE_ROLE + DELETE_ROLE_ID);
+                .delete(BASE_ENDPOINT_INVENTA + ROLE_ENDPOINT + DELETE_ROLE + CURRENT_DELETE_ROLE_ID);
     }
 }

@@ -16,6 +16,8 @@ public class BaseTest {
     public static String USER_ID;
     public static String ADMIN_USER_ID;
     public static String PERMISSION_ID;
+    public static String ADMIN_ROLE_ID = "";
+
 
     static {
         try {
@@ -25,6 +27,8 @@ public class BaseTest {
             USER_ID = getIdFromURL("http://inventaserver:9092/users/getAllUsers/?page=0&size=1&sort=dateCreated,desc");
             ADMIN_USER_ID = getIdFromURL("http://inventaserver:9092/adminUsers/getAllAdminUsers?page=0&size=1&sort=dateCreated,desc");
             PERMISSION_ID = getIdFromPermissionURL("http://inventaserver:9092/permission/getAllPermission");
+            ADMIN_ROLE_ID = getIdFromURL("http://inventaserver:9092/role/getAllRole?page=0&size=1");
+
 
         } catch (IOException e) {
             e.printStackTrace();

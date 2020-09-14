@@ -134,7 +134,7 @@ public class UserManagementTest extends BaseTest {
                 .setLastName(lastName)
                 .setPassword("password123")
                 .setPasswordConfirm("password123")
-                .setRoleIds(ROLE_ID)
+                .setRoleIds(ADMIN_ROLE_ID)
                 .setUserType("OPERATOR")
                 .setStatus(true)
                 .build();
@@ -147,11 +147,16 @@ public class UserManagementTest extends BaseTest {
 
     @Test
     @Title("Update User Information")
-    public void testB_PutUpdateAdminUser() {
+    public void testB_PutUpdateAdminUser() throws IOException {
+
+        String CURRENT_ADMIN_USER_ID = "";
+
+        CURRENT_ADMIN_USER_ID = getIdFromURL("http://inventaserver:9092/adminUsers/getAllAdminUsers?page=0&size=1&sort=dateCreated,desc");
+
         Assume.assumeTrue(isPreviousTestPass == true);
         isPreviousTestPass = false;
         AdminUser adminUser = new AdminUser.Builder()
-                .set_id(ADMIN_USER_ID)
+                .set_id(CURRENT_ADMIN_USER_ID)
                 .setEmailAddress(emailAddress)
                 .setPhone(phoneNumber)
                 .setUserName(userName)
@@ -159,7 +164,7 @@ public class UserManagementTest extends BaseTest {
                 .setLastName(lastName)
                 .setPassword("password123")
                 .setPasswordConfirm("password123")
-                .setRoleIds(ROLE_ID)
+                .setRoleIds(ADMIN_ROLE_ID)
                 .setUserType("OPERATOR")
                 .setStatus(true)
                 .build();
@@ -187,7 +192,7 @@ public class UserManagementTest extends BaseTest {
 
     @Test
     @Title("Delete User Information")
-    public void testD_DeleteAdminUser() {
+    public void testD_DeleteAdminUser() throws IOException {
         Assume.assumeTrue(isPreviousTestPass == true);
         isPreviousTestPass = false;
         Response response = UserManagement.deleteAdminUser();
@@ -246,10 +251,14 @@ public class UserManagementTest extends BaseTest {
 
     @Test
     @Title("Put Update Role By Id")
-    public void testI_putUpdateRole() {
+    public void testI_putUpdateRole() throws IOException {
+
+        String CURRENT_ROLE_ID = "";
+
+        CURRENT_ROLE_ID = getIdFromURL("http://inventaserver:9092/role/getAllRole?page=0&size=1&sort=dateCreated,desc");
         Assume.assumeTrue(isPreviousTestPass == true);
         isPreviousTestPass = false;
-        Role role = new Role("Update_Automation_Role_" + value + "1", "Updated By Regression new Script", true, "Automation Script", Collections.singletonList(PERMISSION_ID), ROLE_ID);
+        Role role = new Role("Update_Automation_Role_" + value + "1", "Updated By Regression new Script", true, "Automation Script", Collections.singletonList(PERMISSION_ID), CURRENT_ROLE_ID);
         Response response = UserManagement.updateRole(role);
         if (response.getStatusCode() == HttpStatus.SC_OK)
             isPreviousTestPass = true;
@@ -259,7 +268,7 @@ public class UserManagementTest extends BaseTest {
 
     @Test
     @Title("Delete Role")
-    public void testJ_deleteRole() {
+    public void testJ_deleteRole() throws IOException {
         Assume.assumeTrue(isPreviousTestPass == true);
         isPreviousTestPass = false;
         Response response = UserManagement.deleteRole();
