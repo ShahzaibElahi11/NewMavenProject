@@ -171,7 +171,7 @@ public class PolicyRoutineTest extends BaseTest {
                 .assertThat()
                 .statusCode(HttpStatus.SC_OK)
                 .contentType(equalTo("application/json"))
-                .body("data.mainAction.action", equalTo("RC02"), "meta.status", equalTo("success"));
+                .body("meta.status", equalTo("success"));
 
     }
 
