@@ -11,6 +11,8 @@ import org.junit.runners.MethodSorters;
 import utils.BaseTest;
 
 
+import java.io.IOException;
+
 import static constants.Constants.*;
 import static io.restassured.RestAssured.given;
 import static org.hamcrest.Matchers.equalTo;
@@ -48,7 +50,10 @@ public class PolicyRoutineTest extends BaseTest {
 
     @Test
     @Title("Update Policy Routine")
-    public void testB_PutPolicyRoutineNew() {
+    public void testB_PutPolicyRoutineNew() throws IOException {
+        String CURRENT_PR_ID = "";
+        CURRENT_PR_ID = getIdFromURL("http://inventaserver:9092/policy-routine/?page=0&size=1&sort=dateCreated,desc");
+
         Assume.assumeTrue(isPreviousTestPass == true);
         isPreviousTestPass = false;
 
@@ -61,7 +66,7 @@ public class PolicyRoutineTest extends BaseTest {
                 and().
                 body(policyRoutine).
                 when().
-                put(POLICY_ROUTINE + PR_ID);
+                put(POLICY_ROUTINE + CURRENT_PR_ID);
         if (response.getStatusCode() == HttpStatus.SC_OK)
             isPreviousTestPass = true;
         response.then().
@@ -71,16 +76,18 @@ public class PolicyRoutineTest extends BaseTest {
     }
 
 
-    @Ignore
     @Test
     @Title("Delete Policy Routine")
-    public void testC_DeletePolicyRoutine() {
+    public void testC_DeletePolicyRoutine() throws IOException {
+        String CURRENT_PR_DELETE_ID = "";
+        CURRENT_PR_DELETE_ID = getIdFromURL("http://inventaserver:9092/policy-routine/?page=0&size=1&sort=dateModified,desc");
+
         Assume.assumeTrue(isPreviousTestPass == true);
         isPreviousTestPass = false;
         Response response = given().
                 spec(requestSpec).
                 when().
-                delete(POLICY_ROUTINE + "?ids=" + DELETE_PR_ID);
+                delete(POLICY_ROUTINE + "?ids=" + CURRENT_PR_DELETE_ID);
         if (response.getStatusCode() == HttpStatus.SC_OK)
             isPreviousTestPass = true;
 
@@ -166,9 +173,7 @@ public class PolicyRoutineTest extends BaseTest {
                 when().
                 get(POLICY_ROUTINE + "summary/" + PR_ID).
                 then().
-                spec(responseSpec).
-                and().
-                body("data.mainAction.action", equalTo("RC02"));
+                spec(responseSpec);
     }
 
 

@@ -137,7 +137,7 @@ public class UserManagementTest extends BaseTest {
                 .lastName(lastName)
                 .password("password123")
                 .passwordConfirm("password123")
-                .roleIds(ROLE_ID)
+                .roleIds(ADMIN_ROLE_ID)
                 .userType("OPERATOR")
                 .status(true)
                 .build();
@@ -158,11 +158,14 @@ public class UserManagementTest extends BaseTest {
 
     @Test
     @Title("Update User Information")
-    public void testB_PutUpdateAdminUser() {
+    public void testB_PutUpdateAdminUser() throws IOException {
+        String CURRENT_ADMIN_USER_ID = "";
+        CURRENT_ADMIN_USER_ID = getIdFromURL("http://inventaserver:9092/adminUsers/getAllAdminUsers?page=0&size=1&sort=dateCreated,desc");
+
         Assume.assumeTrue(isPreviousTestPass == true);
         isPreviousTestPass = false;
         AdminUser adminUser = AdminUser.builder()
-                ._id(ADMIN_USER_ID)
+                ._id(CURRENT_ADMIN_USER_ID)
                 .emailAddress(emailAddress)
                 .phone(phoneNumber)
                 .userName(userName)
@@ -170,7 +173,7 @@ public class UserManagementTest extends BaseTest {
                 .lastName(lastName)
                 .password("password123")
                 .passwordConfirm("password123")
-                .roleIds(ROLE_ID)
+                .roleIds(ADMIN_ROLE_ID)
                 .userType("OPERATOR")
                 .status(true)
                 .build();
@@ -180,7 +183,7 @@ public class UserManagementTest extends BaseTest {
                 and().
                 body(adminUser).
                 when().
-                put(ADMIN_USER_ENDPOINT + UPDATE_ADMIN_USER + ADMIN_USER_ID);
+                put(ADMIN_USER_ENDPOINT + UPDATE_ADMIN_USER + CURRENT_ADMIN_USER_ID);
         if (response.getStatusCode() == HttpStatus.SC_OK)
             isPreviousTestPass = true;
         response.
@@ -206,14 +209,16 @@ public class UserManagementTest extends BaseTest {
                 body("data._id", equalTo(ADMIN_USER_ID));
     }
 
-    @Ignore
     @Test
     @Title("Delete User Information")
-    public void testD_DeleteAdminUser() {
+    public void testD_DeleteAdminUser() throws IOException {
+        String CURRENT_DELETE_ADMIN_USER_ID  = "";
+        CURRENT_DELETE_ADMIN_USER_ID = getIdFromURL("http://inventaserver:9092/adminUsers/getAllAdminUsers?page=0&size=1&sort=dateModified,desc");
+
                 given().
                 spec(requestSpec).
                 when().
-                delete(ADMIN_USER_ENDPOINT + DELETE_ADMIN_USER + DELETE_ADMIN_USER_ID).
+                delete(ADMIN_USER_ENDPOINT + DELETE_ADMIN_USER + CURRENT_DELETE_ADMIN_USER_ID).
                 then().
                 assertThat().
                 statusCode(HttpStatus.SC_OK);
@@ -286,32 +291,37 @@ public class UserManagementTest extends BaseTest {
 
     @Test
     @Title("Put Update Role By Id")
-    public void testI_putUpdateRole() {
+    public void testI_putUpdateRole() throws IOException {
+        String CURRENT_ROLE_ID = "";
+        CURRENT_ROLE_ID = getIdFromURL("http://inventaserver:9092/role/getAllRole?page=0&size=1&sort=dateCreated,desc");
+
         Assume.assumeTrue(isPreviousTestPass == true);
         isPreviousTestPass = false;
-        Role role = new Role("Update_Automation_Role_" + value + "1", "Updated By Regression new Script", true, "Automation Script", Collections.singletonList(PERMISSION_ID), ROLE_ID);
+        Role role = new Role("Update_Automation_Role_" + value + "1", "Updated By Regression new Script", true, "Automation Script", Collections.singletonList(PERMISSION_ID), CURRENT_ROLE_ID);
         Response response = given().
                 spec(requestSpec).
                 and().
                 body(role).
                 when().
-                put(ROLE_ENDPOINT + UPDATE_ROLE + ROLE_ID);
+                put(ROLE_ENDPOINT + UPDATE_ROLE + CURRENT_ROLE_ID);
         if (response.getStatusCode() == HttpStatus.SC_OK)
             isPreviousTestPass = true;
         response.
                 then().
                 spec(responseSpec);
     }
-    @Ignore
     @Test
     @Title("Delete Role")
-    public void testJ_deleteRole() {
+    public void testJ_deleteRole() throws IOException {
+        String CURRENT_DELETE_ROLE_ID = "";
+        CURRENT_DELETE_ROLE_ID = getIdFromURL("http://inventaserver:9092/role/getAllRole?page=0&size=1&sort=dateModified,desc");
+
         Assume.assumeTrue(isPreviousTestPass == true);
         isPreviousTestPass = false;
         Response response = given().
                 spec(requestSpec).
                 when().
-                delete(ROLE_ENDPOINT + DELETE_ROLE + DELETE_ROLE_ID);
+                delete(ROLE_ENDPOINT + DELETE_ROLE + CURRENT_DELETE_ROLE_ID);
 
         if (response.getStatusCode() == HttpStatus.SC_OK)
             isPreviousTestPass = true;

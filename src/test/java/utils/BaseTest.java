@@ -103,10 +103,8 @@ public class BaseTest {
     public static String ADMIN_USER_ID = "";
     public static String AUDIT_DETAIL_ID = "";
     public static String DELETE_PR_ID = "";
-    public static String DELETE_ADMIN_USER_ID = "";
     public static String USER_AUDIT_ID = "";
-    public static String DELETE_ROLE_ID = "";
-
+    public static String ADMIN_ROLE_ID = "";
     static {
         try {
 
@@ -118,9 +116,8 @@ public class BaseTest {
             ADMIN_USER_ID = getIdFromURL("http://inventaserver:9092/adminUsers/getAllAdminUsers?page=0&size=1&sort=dateCreated,desc"); // Update Parameter in Endpoint
             AUDIT_DETAIL_ID = getIdFromURL("http://inventaserver:9092/audit/getAllAudit?page=0&size=1&sort=dateCreated,desc");
             DELETE_PR_ID = getIdFromURL("http://inventaserver:9092/policy-routine/?page=0&size=1&sort=dateModified,desc"); //add new endpoint
-            DELETE_ADMIN_USER_ID = getIdFromURL("http://inventaserver:9092/adminUsers/getAllAdminUsers?page=0&size=1&sort=dateModified,desc"); //add new endpoint
             USER_AUDIT_ID = getIdFromURL("http://inventaserver:9092/audit/getUserAudit?username=admininventa&page=0&size=1"); //add new endpoint
-            DELETE_ROLE_ID = getIdFromURL("http://inventaserver:9092/role/getAllRole?page=0&size=1&sort=dateModified,desc");
+            ADMIN_ROLE_ID = getIdFromURL("http://inventaserver:9092/role/getAllRole?page=0&size=1");
 
             //http://inventaserver:9092/devices/getAllDevices?page=0&size=1&sort=firstFetchTime,desc
 
