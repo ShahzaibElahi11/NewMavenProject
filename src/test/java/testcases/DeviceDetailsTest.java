@@ -2,7 +2,6 @@ package testcases;
 
 import net.serenitybdd.junit.runners.SerenityRunner;
 import net.thucydides.core.annotations.Title;
-import org.apache.http.HttpStatus;
 import org.junit.Ignore;
 import org.junit.Test;
 import models.devices.DeviceNotes;
@@ -16,9 +15,35 @@ import java.util.Collections;
 import static constants.Constants.*;
 import static io.restassured.RestAssured.given;
 import static org.hamcrest.Matchers.equalTo;
+import static org.apache.http.HttpStatus.*;
 
 @RunWith(SerenityRunner.class)
 public class DeviceDetailsTest extends BaseTest {
+
+    public static String CROWDSTRIKE_DEVICE_ID = "";
+    public static String AZURE_CONTAINER_DEVICE_ID = "";
+    public static String AZURE_LOADBALANCER_DEVICE_ID = "";
+    public static String AZURE_PRIVATE_DNS_ZONE_DEVICE_ID = "";
+    public static String AZURE_PUBLIC_DNS_ZONE_DEVICE_ID = "";
+    public static String AZURE_APPLICATION_GATEWAY_DEVICE_ID = "";
+    public static String AZURE_NETWORK_SECURITY_GROUP_DEVICE_ID = "";
+
+    static {
+        try {
+            CROWDSTRIKE_DEVICE_ID = getIdFromURL("http://inventaserver:9092/query/devices/?query=((adapters.adapter_crowdstrike.status%20==%20exists(true))and(adapters.adapter_crowdstrike.hostname%20==%20%22TESTBENCH%22))");
+            //http://inventaserver:9092/query/devices/?size=1&query=(adapters.adapter_crowdstrike==exists(true))&sort=_id,desc
+            AZURE_CONTAINER_DEVICE_ID = getIdFromURL("http://inventaserver:9092/query/devices/?query=(adapters.adapter_azure.Container%20Instance::Status%20==%20exists(true))&page=0&size=1");
+            AZURE_LOADBALANCER_DEVICE_ID = getIdFromURL("http://inventaserver:9092/query/devices/?query=(adapters.adapter_azure.Load%20Balancer::Type%20==%20exists(true))&page=0&size=1");
+            AZURE_PRIVATE_DNS_ZONE_DEVICE_ID = getIdFromURL("http://inventaserver:9092/query/devices/?query=(adapters.adapter_azure.Private%20DNS%20Zones::Id%20==%20exists(true))&page=0&size=1");
+            AZURE_PUBLIC_DNS_ZONE_DEVICE_ID = getIdFromURL("http://inventaserver:9092/query/devices/?query=(adapters.adapter_azure.Public%20DNS%20Zones::Type%20==%20exists(true))&page=0&size=1");
+            AZURE_APPLICATION_GATEWAY_DEVICE_ID = getIdFromURL("http://inventaserver:9092/query/devices/?query=(common.hostName%20==%20%22AppGwPubIP%22)&page=0&size=1");
+            AZURE_NETWORK_SECURITY_GROUP_DEVICE_ID = getIdFromURL("http://inventaserver:9092/query/devices/?query=(adapters.adapter_azure.Network%20Security%20Group::Type%20==%20exists(true))&page=0&size=1");
+
+            //http://inventaserver:9092/devices/getAllDevices?page=0&size=1&sort=firstFetchTime,desc
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
 
     @Test
     @Title("Get All Device List")
@@ -204,7 +229,7 @@ public class DeviceDetailsTest extends BaseTest {
                 post(DEVICE_ENDPOINT + INSERT_TAG).
                 then().
                 assertThat().
-                statusCode(HttpStatus.SC_OK);
+                statusCode(SC_OK);
     }
 
     @Test
@@ -219,7 +244,7 @@ public class DeviceDetailsTest extends BaseTest {
                 post(DEVICE_ENDPOINT + INSERT_NOTE).
                 then().
                 assertThat().
-                statusCode(HttpStatus.SC_OK);
+                statusCode(SC_OK);
     }
 
     @Test
@@ -299,4 +324,186 @@ public class DeviceDetailsTest extends BaseTest {
                 spec(responseSpec);
     }
 
+    /**
+     * Adapter Wise Test Cases
+     */
+
+    @Test
+    @Title("Get CrowdStrike Incident Details By Device Id")
+    public void getCrowdStrikeIncident() {
+        given().
+                spec(requestSpec).
+                when().
+                get(DEVICE_ENDPOINT + CROWDSTRIKE_INCIDENTS + CROWDSTRIKE_DEVICE_ID).
+                then().
+                spec(responseSpec);
+    }
+
+    @Test
+    @Title("Get CrowdStrike Sensor Update Policy Details By Device Id")
+    public void getCrowdStrikeSensorUpdatePolicy() {
+        given().
+                spec(requestSpec).
+                when().
+                get(DEVICE_ENDPOINT + CROWDSTRIKE_SENSOR_UPDATE_POLICY + CROWDSTRIKE_DEVICE_ID).
+                then().
+                spec(responseSpec);
+    }
+    @Test
+    @Title("Get CrowdStrike Prevention Policies Details By Device Id")
+    public void getCrowdStrikePreventionPolicies() {
+        given().
+                spec(requestSpec).
+                when().
+                get(DEVICE_ENDPOINT + CROWDSTRIKE_PREVENTION_POLICIES + CROWDSTRIKE_DEVICE_ID).
+                then().
+                spec(responseSpec);
+    }
+
+    @Test
+    @Title("Get Azure Container Protocol Details By Device Id")
+    public void getAzureContainerProtocolDetails() {
+        given().
+                spec(requestSpec).
+                when().
+                get(DEVICE_ENDPOINT + CONTAINER_PROTOCOLS + AZURE_CONTAINER_DEVICE_ID).
+                then().
+                spec(responseSpec);
+    }
+    @Test
+    @Title("Get Azure Container Port Details By Device Id")
+    public void getAzureContainerPortDetails() {
+        given().
+                spec(requestSpec).
+                when().
+                get(DEVICE_ENDPOINT + CONTAINER_PORTS + AZURE_CONTAINER_DEVICE_ID).
+                then().
+                spec(responseSpec);
+    }
+
+    @Test
+    @Title("Get Azure Container In-Depth Details By Device Id")
+    public void getAzureContainerInDepthDetails() {
+        given().
+                spec(requestSpec).
+                when().
+                get(DEVICE_ENDPOINT + CONTAINER_INDEPTH + AZURE_CONTAINER_DEVICE_ID).
+                then().
+                spec(responseSpec);
+    }
+    @Test
+    @Title("Get Azure Container Tag Details By Device Id")
+    public void getAzureContainerTagsDetails() {
+        given().
+                spec(requestSpec).
+                when().
+                get(DEVICE_ENDPOINT + ASSETS_TAGS + AZURE_CONTAINER_DEVICE_ID).
+                then().
+                spec(responseSpec);
+    }
+
+    @Test
+    @Title("Get Azure Load Balancer Rule Details By Device Id")
+    public void getAzureLoadBalancerRuleDetails() {
+        given().
+                spec(requestSpec).
+                when().
+                get(DEVICE_ENDPOINT + LOAD_BALANCER_RULES + AZURE_LOADBALANCER_DEVICE_ID).
+                then().
+                spec(responseSpec);
+    }
+    @Test
+    @Title("Get Azure Backend Pool Details By Device Id")
+    public void getAzureBackendPoolDetails() {
+        given().
+                spec(requestSpec).
+                when().
+                get(DEVICE_ENDPOINT + BACKEND_POOL + AZURE_LOADBALANCER_DEVICE_ID).
+                then().
+                spec(responseSpec);
+    }
+    @Test
+    @Title("Get Azure Private Host Zone Details By Device Id")
+    public void getAzurePrivateHostZoneDetails() {
+        given().
+                spec(requestSpec).
+                when().
+                get(DEVICE_ENDPOINT + HOST_ZONE + AZURE_PRIVATE_DNS_ZONE_DEVICE_ID).
+                then().
+                spec(responseSpec);
+    }
+
+    @Test
+    @Title("Get Azure Public Host Zone Details By Device Id")
+    public void getAzurePublicHostZoneDetails() {
+        given().
+                spec(requestSpec).
+                when().
+                get(DEVICE_ENDPOINT + HOST_ZONE + AZURE_PUBLIC_DNS_ZONE_DEVICE_ID).
+                then().
+                spec(responseSpec);
+    }
+
+    @Test
+    @Title("Get Azure Application Gateway Health Probe Details By Device Id")
+    public void getAzureApplicationGatewayHealthProbeDetails() {
+        given().
+                spec(requestSpec).
+                when().
+                get(DEVICE_ENDPOINT + HEALTH_PROBE + AZURE_APPLICATION_GATEWAY_DEVICE_ID).
+                then().
+                spec(responseSpec);
+    }
+
+    @Test
+    @Title("Get Azure Application Gateway HTTP Setting Details By Device Id")
+    public void getAzureApplicationGatewayHttpSettingDetails() {
+        given().
+                spec(requestSpec).
+                when().
+                get(DEVICE_ENDPOINT + HTTP_SETTING + AZURE_APPLICATION_GATEWAY_DEVICE_ID).
+                then().
+                spec(responseSpec);
+    }
+    @Test
+    @Title("Get Azure Application Gateway Rules Details By Device Id")
+    public void getAzureApplicationGatewayRulesDetails() {
+        given().
+                spec(requestSpec).
+                when().
+                get(DEVICE_ENDPOINT + GATEWAY_RULES + AZURE_APPLICATION_GATEWAY_DEVICE_ID).
+                then().
+                spec(responseSpec);
+    }
+    @Test
+    @Title("Get Azure Network Security Group Firewall In Bound Rules Details By Device Id")
+    public void getAzureNSGFirewallInBoundRulesDetails() {
+        given().
+                spec(requestSpec).
+                when().
+                get(DEVICE_ENDPOINT + FIREWALL_RULES + AZURE_NETWORK_SECURITY_GROUP_DEVICE_ID + "&direction=Inbound").
+                then().
+                spec(responseSpec);
+    }
+    @Test
+    @Title("Get Azure Network Security Group Firewall Out Bound Rules Details By Device Id")
+    public void getAzureNSGFirewallOutBoundRulesDetails() {
+        given().
+                spec(requestSpec).
+                when().
+                get(DEVICE_ENDPOINT + FIREWALL_RULES + AZURE_NETWORK_SECURITY_GROUP_DEVICE_ID + "&direction=Outbound").
+                then().
+                spec(responseSpec);
+    }
+
+    @Test
+    @Title("Get Azure Network Security Group Connected Hardware Details By Device Id")
+    public void getAzureNSGConnectedHardwareDetails() {
+        given().
+                spec(requestSpec).
+                when().
+                get(DEVICE_ENDPOINT + CONNECTED_HARDWARE + AZURE_NETWORK_SECURITY_GROUP_DEVICE_ID ).
+                then().
+                spec(responseSpec);
+    }
 }

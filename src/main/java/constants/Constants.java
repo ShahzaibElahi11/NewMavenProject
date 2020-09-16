@@ -37,7 +37,28 @@ public class Constants{
     public static final String AD = "ad";
     public static final String ACTIVE_DIRECTORY = "ACTIVE_DIRECTORY";
     public static final String AWS_ENDPOINT = "AWS";
+    public static final String AZURE_ENDPOINT = "AZURE";
+    public static final String CROWDSTRIKE = "crowdstrike";
+    public static final String SHODAN = "shodan";
+    public static final String VMWARE_ESXI = "VMWARE_ESXI";
 
+    //will implement current date logic
+    public static final String ASSETS_BY_MONTH_DATE = "/query/assets/devices/discovery?startDate=Jul-01-2020&endDate=Sep-16-2020";
+    public static final String USER_BY_MONTH_DATE = "/query/assets/users/discovery?startDate=Jul-01-2020&endDate=Sep-16-2020";
+
+    public static final String TOTAL_WINDOWS_ASSETS = "/query/donut/totalAssets?field=common.operatingSystem.type&match=WINDOWS&type=VIRTUAL_MACHINE";
+    public static final String TOTAL_LINUX_ASSETS = "/query/donut/totalAssets?field=common.operatingSystem.type&match=LINUX&type=VIRTUAL_MACHINE";
+    public static final String TOTAL_CLOUD_ASSETS = "/query/donut/totalAssets?field=adapterProperties&match=CLOUD%20PROVIDER";
+
+    public static final String TOTAL_MISSING_EDR_ASSETS = "/query/donut/missingEdr";
+    public static final String TOTAL_ASSETS_DISTRIBUTION = "/query/chart/dist?field=common.source&topCount=6";
+
+    public static final String TOTAL_CLOUD_DEVICE_TYPE_ASSETS = "/query/chart/dist?field=common.source&topCount=6";
+    public static final String USER_DISTRIBUTION = "/query/chart/user/dist?topCount=6&field=common.source";
+
+    public static final String CPU_HEALTH = "/query/healthCheck?check=CPU";
+    public static final String MEMORY_HEALTH = "/query/healthCheck?check=MEMORY";
+    public static final String DISCOVERY_HEALTH = "/query/healthCheck?check=DISCOVERY";
 
 
     /**
@@ -62,8 +83,50 @@ public class Constants{
     public static final String INSERT_NOTE = "insertNote";
     public static final String INSERT_TAG = "insertTag";
     public static final String ALL_TAGS = "tags/";
-    public static final String LOAD_BALANCER_RULE = "loadbalancer-rules?_id=";
-    public static final String DEVICE_HARDWARE = "hardware/connected?_id=";
+    public static final String LOAD_BALANCER_RULE = "loadbalancer-rules?_id=";  //will remove this test case later
+    public static final String DEVICE_HARDWARE = "hardware/connected?_id="; //will remove this test case later
+
+    //http://inventaserver:9092/devices/getCommonMenu?deviceId=5f5b5a7217bb352246d6b68a
+    //http://inventaserver:9092/permission/getUserPermission?userId=5f60dfe75af94a27e29cfe97&module=asset
+    //http://inventaserver:9092/policy-routine/set/device/5f5b5a7217bb352246d6b68a
+    //http://inventaserver:9092/devices/summary?_id=5f5b5a7217bb352246d6b68a
+
+    public static final String CROWDSTRIKE_INCIDENTS = "incidents?_id=";
+    public static final String CROWDSTRIKE_SENSOR_UPDATE_POLICY = "sensorUpdatePolicy?_id=";
+    public static final String CROWDSTRIKE_PREVENTION_POLICIES = "preventionPolicies?_id=";
+
+
+    // Container
+    public static final String CONTAINER_PROTOCOLS = "protocols?_id=";
+    public static final String CONTAINER_PORTS = "ports?_id=";
+    public static final String CONTAINER_INDEPTH = "containers?_id=";
+    public static final String ASSETS_TAGS = "asset/tags?_id=";
+    // http://inventaserver:9092/devices/users?_id=5f60b4002e438a0e11cd3448
+
+    //Load Balancer
+    public static final String LOAD_BALANCER_RULES = "loadbalancer-rules?_id=";
+    public static final String BACKEND_POOL = "backendPool?_id=";
+
+    //Public - Private DNS ZONE
+    public static final String HOST_ZONE = "hostedZones?_id=";
+
+    //Application Gateway
+    public static final String HEALTH_PROBE = "healthProbe?_id=";
+    public static final String HTTP_SETTING = "httpsSettings?_id=";
+    public static final String GATEWAY_RULES = "applicationGatewayRules?_id=";
+
+    //Network Security Group
+    public static final String FIREWALL_RULES = "firewallRules?_id=";
+    public static final String CONNECTED_HARDWARE = "hardware/connected?_id=";
+
+    /*
+    Remaining Azure Type Assets
+    Storage Account
+    Traffic Manager Profile
+    Virtual Machine
+    Virtual Network
+     */
+
 
     /**
      * LDAP Constants

@@ -105,7 +105,6 @@ public class DashboardTest extends BaseTest {
                 get(ASSETS_TYPE_DISTRIBUTION + AZURE).
                 then().
                 spec(responseSpec);
-
     }
 
     @Test
@@ -128,7 +127,6 @@ public class DashboardTest extends BaseTest {
                 get(ASSETS_TYPE_DISTRIBUTION + AWS).
                 then().
                 spec(responseSpec);
-
     }
 
     @Test
@@ -140,8 +138,6 @@ public class DashboardTest extends BaseTest {
                 get(ASSETS_TYPE_DISTRIBUTION + WMIC).
                 then().
                 spec(responseSpec);
-
-
     }
 
     @Test
@@ -153,8 +149,132 @@ public class DashboardTest extends BaseTest {
                 get(CLOUD_VS_NON_CLOUD).
                 then().
                 spec(responseSpec);
+    }
+//new dashboard test cases
 
+    @Test
+    @Title("Get Assets By Month and Date")
+    public void getAssetsByMonthDate() {
+        given().
+                spec(requestSpec).
+                when().
+                get(ASSETS_BY_MONTH_DATE).
+                then().
+                spec(responseSpec);
     }
 
+    @Test
+    @Title("Get User By Month and Date")
+    public void getUserByMonthDate() {
+        given().
+                spec(requestSpec).
+                when().
+                get(USER_BY_MONTH_DATE).
+                then().
+                spec(responseSpec);
+    }
+
+    @Test
+    @Title("Get Total WINDOWS Assets")
+    public void getTotalWindowsAssets() {
+        given().
+                spec(requestSpec).
+                when().
+                get(TOTAL_WINDOWS_ASSETS).
+                then().
+                spec(responseSpec);
+    }
+
+    @Test
+    @Title("Get Total LINUX Assets")
+    public void getTotalLinuxAssets() {
+        given().
+                spec(requestSpec).
+                when().
+                get(TOTAL_LINUX_ASSETS).
+                then().
+                spec(responseSpec);
+    }
+
+    @Test
+    @Title("Get Total Cloud Assets")
+    public void getTotalCloudAssets() {
+        given().
+                spec(requestSpec).
+                when().
+                get(TOTAL_CLOUD_ASSETS).
+                then().spec(responseSpec);
+    }
+
+    @Test
+    @Title("Get Total Missing EDR")
+    public void getTotalMissingEdr() {
+        given().
+                spec(requestSpec).
+                when().
+                get(TOTAL_MISSING_EDR_ASSETS).
+                then().spec(responseSpec);
+    }
+
+    @Test
+    @Title("Get Total Assets Distribution")
+    public void getTotalAssetsDistribution() {
+        given().
+                spec(requestSpec).
+                when().
+                get(TOTAL_ASSETS_DISTRIBUTION).
+                then().spec(responseSpec);
+    }
+
+
+    @Test
+    @Title("Get Total Cloud Device Type Assets")
+    public void getTotalCloudDeviceTypeAssets() {
+        given().
+                spec(requestSpec).
+                when().
+                get(TOTAL_CLOUD_DEVICE_TYPE_ASSETS).
+                then().spec(responseSpec);
+    }
+
+    @Test
+    @Title("Get User Distribution")
+    public void getUserDistribution() {
+        given().
+                spec(requestSpec).
+                when().
+                get(USER_DISTRIBUTION).
+                then().spec(responseSpec);
+    }
+
+    @Test
+    @Title("Get Check CPU Health")
+    public void getCpuHealth() {
+        given().
+                spec(requestSpec).
+                when().
+                get(CPU_HEALTH).
+                then().spec(responseSpec);
+    }
+
+    @Test
+    @Title("Get Check Memory Health")
+    public void getMemoryHealth() {
+        given().
+                spec(requestSpec).
+                when().
+                get(MEMORY_HEALTH).
+                then().spec(responseSpec);
+    }
+
+    @Test
+    @Title("Get Check Discovery Health")
+    public void getDiscoveryHealth() {
+        given().
+                spec(requestSpec).
+                when().
+                get(DISCOVERY_HEALTH).
+                then().spec(responseSpec);
+    }
 
 }

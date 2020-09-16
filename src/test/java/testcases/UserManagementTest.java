@@ -4,8 +4,6 @@ import com.github.javafaker.Faker;
 import io.restassured.response.Response;
 import net.serenitybdd.junit.runners.SerenityRunner;
 import net.thucydides.core.annotations.Title;
-import org.apache.http.HttpStatus;
-
 import models.usermanagement.AdminUser;
 import models.usermanagement.Login;
 import models.usermanagement.Role;
@@ -22,6 +20,7 @@ import java.util.Collections;
 import static constants.Constants.*;
 import static io.restassured.RestAssured.given;
 import static org.hamcrest.Matchers.equalTo;
+import static org.apache.http.HttpStatus.*;
 
 
 @RunWith(SerenityRunner.class)
@@ -122,7 +121,7 @@ public class UserManagementTest extends BaseTest {
                 then().
                 assertThat().
                 body("username", equalTo("admininventa")).
-                statusCode(HttpStatus.SC_OK);
+                statusCode(SC_OK);
     }
 
     @Test
@@ -149,7 +148,7 @@ public class UserManagementTest extends BaseTest {
                 body(adminUser).
                 when().
                 post(ADMIN_USER_ENDPOINT + CREATE_ADMIN_USER);
-        if (response.getStatusCode() == HttpStatus.SC_OK)
+        if (response.getStatusCode() == SC_OK)
             isPreviousTestPass = true;
         response.
                 then().
@@ -184,7 +183,7 @@ public class UserManagementTest extends BaseTest {
                 body(adminUser).
                 when().
                 put(ADMIN_USER_ENDPOINT + UPDATE_ADMIN_USER + CURRENT_ADMIN_USER_ID);
-        if (response.getStatusCode() == HttpStatus.SC_OK)
+        if (response.getStatusCode() == SC_OK)
             isPreviousTestPass = true;
         response.
                 then().
@@ -201,7 +200,7 @@ public class UserManagementTest extends BaseTest {
                 spec(requestSpec).
                 when().
                 get(ADMIN_USER_ENDPOINT + ADMIN_USER_DETAILS + ADMIN_USER_ID);
-        if (response.getStatusCode() == HttpStatus.SC_OK)
+        if (response.getStatusCode() == SC_OK)
             isPreviousTestPass = true;
         response.
                 then().
@@ -221,7 +220,7 @@ public class UserManagementTest extends BaseTest {
                 delete(ADMIN_USER_ENDPOINT + DELETE_ADMIN_USER + CURRENT_DELETE_ADMIN_USER_ID).
                 then().
                 assertThat().
-                statusCode(HttpStatus.SC_OK);
+                statusCode(SC_OK);
 
     }
 
@@ -263,7 +262,7 @@ public class UserManagementTest extends BaseTest {
                 when().
                 post(ROLE_ENDPOINT + CREATE_ROLE);
 
-        if (response.getStatusCode() == HttpStatus.SC_OK)
+        if (response.getStatusCode() == SC_OK)
             isPreviousTestPass = true;
         response.
                 then().
@@ -279,7 +278,7 @@ public class UserManagementTest extends BaseTest {
                 spec(requestSpec).
                 when().
                 get(ROLE_ENDPOINT + ROLE_DETAILS + ROLE_ID);
-        if (response.getStatusCode() == HttpStatus.SC_OK)
+        if (response.getStatusCode() == SC_OK)
             isPreviousTestPass = true;
         response.
                 then().
@@ -304,7 +303,7 @@ public class UserManagementTest extends BaseTest {
                 body(role).
                 when().
                 put(ROLE_ENDPOINT + UPDATE_ROLE + CURRENT_ROLE_ID);
-        if (response.getStatusCode() == HttpStatus.SC_OK)
+        if (response.getStatusCode() == SC_OK)
             isPreviousTestPass = true;
         response.
                 then().
@@ -323,12 +322,12 @@ public class UserManagementTest extends BaseTest {
                 when().
                 delete(ROLE_ENDPOINT + DELETE_ROLE + CURRENT_DELETE_ROLE_ID);
 
-        if (response.getStatusCode() == HttpStatus.SC_OK)
+        if (response.getStatusCode() == SC_OK)
             isPreviousTestPass = true;
         response.
                 then().
                 assertThat().
-                statusCode(HttpStatus.SC_OK);
+                statusCode(SC_OK);
 //                and().
 //                body("data.message", equalTo("Delete Success"));
 

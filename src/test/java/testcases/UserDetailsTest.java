@@ -3,7 +3,6 @@ package testcases;
 import io.restassured.response.Response;
 import net.serenitybdd.junit.runners.SerenityRunner;
 import net.thucydides.core.annotations.Title;
-import org.apache.http.HttpStatus;
 import models.users.UserNote;
 import models.users.UserTag;
 import org.junit.*;
@@ -16,6 +15,7 @@ import java.util.Collections;
 import static constants.Constants.*;
 import static io.restassured.RestAssured.given;
 import static org.hamcrest.Matchers.*;
+import static org.apache.http.HttpStatus.*;
 
 @RunWith(SerenityRunner.class)
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
@@ -84,12 +84,12 @@ public class UserDetailsTest extends BaseTest {
                 body(userTag).
                 when().
                 post(USER_ENDPOINT + INSERT_TAG);
-        if (response.getStatusCode() == HttpStatus.SC_OK)
+        if (response.getStatusCode() == SC_OK)
             isPreviousTestPass = true;
         response.
                 then().
                 assertThat().
-                statusCode(HttpStatus.SC_OK);
+                statusCode(SC_OK);
     }
 
     @Test
@@ -101,7 +101,7 @@ public class UserDetailsTest extends BaseTest {
                 spec(requestSpec).
                 when().
                 get(USER_ENDPOINT + USER_TAG + USER_ID);
-        if (response.getStatusCode() == HttpStatus.SC_OK)
+        if (response.getStatusCode() == SC_OK)
             isPreviousTestPass = true;
         response.
                 then().
@@ -119,12 +119,12 @@ public class UserDetailsTest extends BaseTest {
                 spec(requestSpec).
                 when().
                 delete(USER_ENDPOINT + DELETE_SINGLE_TAG + USER_ID + "&tag=" + SINGLE_TAG_NAME);
-        if (response.getStatusCode() == HttpStatus.SC_OK)
+        if (response.getStatusCode() == SC_OK)
             isPreviousTestPass = true;
         response.
                 then().
                 assertThat().
-                statusCode(HttpStatus.SC_OK);
+                statusCode(SC_OK);
 
     }
 
@@ -156,12 +156,12 @@ public class UserDetailsTest extends BaseTest {
                 body(userNote).
                 when().
                 post(USER_ENDPOINT + INSERT_NOTE);
-        if (response.getStatusCode() == HttpStatus.SC_OK)
+        if (response.getStatusCode() == SC_OK)
             isPreviousTestPass = true;
         response.
                 then().
                 assertThat().
-                statusCode(HttpStatus.SC_OK);
+                statusCode(SC_OK);
 
     }
 
@@ -174,7 +174,7 @@ public class UserDetailsTest extends BaseTest {
                 spec(requestSpec).
                 when().
                 get(USER_ENDPOINT + USER_NOTE + USER_ID);
-        if (response.getStatusCode() == HttpStatus.SC_OK)
+        if (response.getStatusCode() == SC_OK)
             isPreviousTestPass = true;
         response.
                 then().
@@ -192,7 +192,7 @@ public class UserDetailsTest extends BaseTest {
                 delete(USER_ENDPOINT + DELETE_NOTE + USER_ID).
                 then().
                 assertThat().
-                statusCode(HttpStatus.SC_OK);
+                statusCode(SC_OK);
     }
 
     @Test

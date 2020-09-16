@@ -3,7 +3,6 @@ package testcases;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import net.serenitybdd.junit.runners.SerenityRunner;
 import net.thucydides.core.annotations.Title;
-import org.apache.http.HttpStatus;
 import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;

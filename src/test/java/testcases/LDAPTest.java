@@ -3,7 +3,6 @@ package testcases;
 import models.ldap.LdapConfiguration;
 import net.serenitybdd.junit.runners.SerenityRunner;
 import net.thucydides.core.annotations.Title;
-import org.apache.http.HttpStatus;
 import models.ldap.AdLogin;
 import org.junit.FixMethodOrder;
 import org.junit.Test;
@@ -16,6 +15,7 @@ import utils.BaseTest;
 import static constants.Constants.*;
 import static io.restassured.RestAssured.given;
 import static org.hamcrest.Matchers.equalTo;
+import static org.apache.http.HttpStatus.*;
 
 @RunWith(SerenityRunner.class)
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
@@ -40,7 +40,7 @@ public class LDAPTest extends BaseTest {
                 post(CONFIG_ENDPOINT).
                 then().
                 assertThat().
-                statusCode(HttpStatus.SC_OK);
+                statusCode(SC_OK);
     }
 
 
@@ -56,7 +56,7 @@ public class LDAPTest extends BaseTest {
                 post(AD_LOGIN).
                 then().
                 assertThat().
-                statusCode(HttpStatus.SC_OK);
+                statusCode(SC_OK);
 
 
 

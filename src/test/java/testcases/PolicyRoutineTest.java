@@ -4,7 +4,6 @@ import io.restassured.response.Response;
 import models.policyroutine.*;
 import net.serenitybdd.junit.runners.SerenityRunner;
 import net.thucydides.core.annotations.Title;
-import org.apache.http.HttpStatus;
 import org.junit.*;
 import org.junit.runner.RunWith;
 import org.junit.runners.MethodSorters;
@@ -16,6 +15,8 @@ import java.io.IOException;
 import static constants.Constants.*;
 import static io.restassured.RestAssured.given;
 import static org.hamcrest.Matchers.equalTo;
+import static org.apache.http.HttpStatus.*;
+
 
 @RunWith(SerenityRunner.class)
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
@@ -39,7 +40,7 @@ public class PolicyRoutineTest extends BaseTest {
                 when().
                 post(POLICY_ROUTINE);
 
-        if (response.getStatusCode() == HttpStatus.SC_OK)
+        if (response.getStatusCode() == SC_OK)
             isPreviousTestPass = true;
         response.then().
                 spec(responseSpec).
@@ -67,7 +68,7 @@ public class PolicyRoutineTest extends BaseTest {
                 body(policyRoutine).
                 when().
                 put(POLICY_ROUTINE + CURRENT_PR_ID);
-        if (response.getStatusCode() == HttpStatus.SC_OK)
+        if (response.getStatusCode() == SC_OK)
             isPreviousTestPass = true;
         response.then().
                 spec(responseSpec).
@@ -88,13 +89,13 @@ public class PolicyRoutineTest extends BaseTest {
                 spec(requestSpec).
                 when().
                 delete(POLICY_ROUTINE + "?ids=" + CURRENT_PR_DELETE_ID);
-        if (response.getStatusCode() == HttpStatus.SC_OK)
+        if (response.getStatusCode() == SC_OK)
             isPreviousTestPass = true;
 
         response.
                 then().
                 assertThat().
-                statusCode(HttpStatus.SC_OK);
+                statusCode(SC_OK);
     }
 
     @Test
@@ -189,7 +190,7 @@ public class PolicyRoutineTest extends BaseTest {
                 post(POLICY_ROUTINE + "enforce/" + DEVICE_DETAIL_ID + "/devices/").
                 then().
                 assertThat().
-                statusCode(HttpStatus.SC_OK);
+                statusCode(SC_OK);
     }
 
     @Test
@@ -204,7 +205,7 @@ public class PolicyRoutineTest extends BaseTest {
                 post(POLICY_ROUTINE + "enforce/" + USER_ID + "/users/").
                 then().
                 assertThat().
-                statusCode(HttpStatus.SC_OK);
+                statusCode(SC_OK);
     }
 
     @Test

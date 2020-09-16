@@ -3,7 +3,6 @@ package testcases;
 import models.configuration.AwsConfiguration;
 import net.serenitybdd.junit.runners.SerenityRunner;
 import net.thucydides.core.annotations.Title;
-import org.apache.http.HttpStatus;
 import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -13,6 +12,7 @@ import utils.BaseTest;
 import static constants.Constants.*;
 import static io.restassured.RestAssured.given;
 import static org.hamcrest.Matchers.*;
+import static org.apache.http.HttpStatus.*;
 
 @RunWith(SerenityRunner.class)
 public class ConnectorConfigurationTest extends BaseTest {
@@ -59,7 +59,7 @@ public class ConnectorConfigurationTest extends BaseTest {
         given().
                 spec(requestSpecForConnector).
                 when().
-                get(CONNECTOR_ENDPOINT + CONNECTOR_CONFIGURATION + AZURE).
+                get(CONNECTOR_ENDPOINT + CONNECTOR_CONFIGURATION_INSTANCE + AZURE_ENDPOINT).
                 then().
                 spec(responseSpec);
     }
@@ -77,7 +77,7 @@ public class ConnectorConfigurationTest extends BaseTest {
                 post("/aws/configure").
                 then().
                 assertThat().
-                statusCode(HttpStatus.SC_OK);
+                statusCode(SC_OK);
 
     }
 
@@ -149,7 +149,77 @@ public class ConnectorConfigurationTest extends BaseTest {
                 body("data", equalTo("Triggered Discovery"));
     }
 
-    //I will CrowedStrike and VM Ware endpoints.
+    @Test
+    @Title("Get CrowdStrike Connector Configuration")
+    public void getCrowdStrikeConnectorConfiguration() {
+        given().
+                spec(requestSpecForConnector).
+                when().
+                get(CONNECTOR_ENDPOINT + CONNECTOR_CONFIGURATION + CROWDSTRIKE).
+                then().
+                spec(responseSpec);
+    }
+
+    @Test
+    @Title("Get CrowdStrike Discover Now")
+    public void getCrowdStrikeDiscoverNow() {
+        given().
+                spec(requestSpecForConnector).
+                when().
+                get(CONNECTOR_ENDPOINT + DISCOVER + CROWDSTRIKE).
+                then().
+                spec(responseSpec).
+                and().
+                body("data", equalTo("Triggered Discovery"));
+    }
+
+    @Test
+    @Title("Get Shodan Connector Configuration")
+    public void getShodanConnectorConfiguration() {
+        given().
+                spec(requestSpecForConnector).
+                when().
+                get(CONNECTOR_ENDPOINT + CONNECTOR_CONFIGURATION + SHODAN).
+                then().
+                spec(responseSpec);
+    }
+
+    @Test
+    @Title("Get Shodan Discover Now")
+    public void getShodanDiscoverNow() {
+        given().
+                spec(requestSpecForConnector).
+                when().
+                get(CONNECTOR_ENDPOINT + DISCOVER + SHODAN).
+                then().
+                spec(responseSpec).
+                and().
+                body("data", equalTo("Triggered Discovery"));
+    }
+
+    @Test
+    @Title("Get VMware ESXi Connector Configuration")
+    public void getVmwareEsxiConnectorConfiguration() {
+        given().
+                spec(requestSpecForConnector).
+                when().
+                get(CONNECTOR_ENDPOINT + CONNECTOR_CONFIGURATION + VMWARE_ESXI).
+                then().
+                spec(responseSpec);
+    }
+
+    @Test
+    @Title("Get VMware ESXi Discover Now")
+    public void getVmwareEsxiDiscoverNow() {
+        given().
+                spec(requestSpecForConnector).
+                when().
+                get(CONNECTOR_ENDPOINT + DISCOVER + "vmware").
+                then().
+                spec(responseSpec).
+                and().
+                body("data", equalTo("Triggered Discovery"));
+    }
 
 
 }
