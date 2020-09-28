@@ -56,7 +56,7 @@ public class PolicyRoutineTest extends BaseTest {
 
     @Test
     @Title("Update Policy Routine")
-    public void testB_PutPolicyRoutineNew() {
+    public void testB_PutPolicyRoutineNew() throws IOException {
         Assume.assumeTrue(isPreviousTestPass == true);
         isPreviousTestPass = false;
         PolicyRoutineProperties policyRoutineProperties = new PolicyRoutineProperties.Builder()
@@ -84,7 +84,7 @@ public class PolicyRoutineTest extends BaseTest {
 
     @Test
     @Title("Delete Policy Routine")
-    public void testC_DeletePolicyRoutine() {
+    public void testC_DeletePolicyRoutine() throws IOException {
         Assume.assumeTrue(isPreviousTestPass == true);
         isPreviousTestPass = false;
         Response response = PolicyRoutines.deletePolicyRoutine();
@@ -165,7 +165,7 @@ public class PolicyRoutineTest extends BaseTest {
 
     @Test
     @Title("Get Policy Routine Summary")
-    public void getPolicyRoutineSummary() {
+    public void getPolicyRoutineSummary() throws IOException {
         Response response = PolicyRoutines.getPolicyRoutineSummary();
         response.then()
                 .assertThat()
@@ -207,13 +207,12 @@ public class PolicyRoutineTest extends BaseTest {
 
     @Test
     @Title("Get Policy Routine Details By Id")
-    public void getPolicyRoutineById() {
+    public void getPolicyRoutineById() throws IOException {
         Response response = PolicyRoutines.getPolicyRoutineById();
         response.then()
                 .assertThat()
                 .statusCode(HttpStatus.SC_OK)
-                .contentType(equalTo("application/json"))
-                .body("data._id", equalTo(PR_ID), "meta.status", equalTo("success"));
+                .contentType(equalTo("application/json"));
     }
 
 
