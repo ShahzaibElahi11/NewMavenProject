@@ -255,7 +255,8 @@ public class Constants{
     public static final String AZURE_IP_ADDRESS_QUERY = "http://inventaserver:9092/query/devices/?query=(adapters.adapter_azure.Public%20IP%20Address::Type%20==%20exists(true))&page=0&size=1";
 
 
-    public static final String GET_ROLE_ID = "http://inventaserver:9092/role/getAllRole?page=0&size=1&sort=dateCreated,desc";
+    public static final String GET_ROLE_ID = "http://inventaserver:9092/role/getAllRole?page=0&size=1";
+    public static final String PUT_ROLE_ID = "http://inventaserver:9092/role/getAllRole?page=0&size=1&sort=dateCreated,desc";
     public static final String DELETE_ROLE_ID = "http://inventaserver:9092/role/getAllRole?page=0&size=1&sort=dateModified,desc";
     public static final String GET_ROLE_ID_FOR_USER = "http://inventaserver:9092/role/getAllRole?page=0&size=1";
     public static final String GET_POLICY_ROUTINE_ID = "http://inventaserver:9092/policy-routine/?page=0&size=1&sort=dateCreated,desc";

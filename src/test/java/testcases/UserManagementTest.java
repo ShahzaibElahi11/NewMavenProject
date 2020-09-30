@@ -310,7 +310,7 @@ public class UserManagementTest extends BaseTest {
         String currentRoleId;
         String permissionId;
 
-        currentRoleId = getIdFromURL(GET_ROLE_ID);
+        currentRoleId = getIdFromURL(PUT_ROLE_ID);
         permissionId = getIdFromPermissionURL(GET_PERMISSION_ID);
 
         Assume.assumeTrue(isPreviousTestPass == true);
