@@ -10,6 +10,7 @@ import org.junit.runner.RunWith;
 import org.junit.runners.MethodSorters;
 import utils.BaseTest;
 
+import java.io.IOException;
 import java.util.Collections;
 
 import static constants.Constants.*;
@@ -21,11 +22,19 @@ import static org.apache.http.HttpStatus.*;
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
 public class UserDetailsTest extends BaseTest {
     public static final String SINGLE_TAG_NAME = "Automation_User_Tag_Number_" + value + "1";
-
-
     public static boolean isPreviousTestPass;
 
-    @Test
+    public static String USER_ID = "";
+    static {
+        try {
+            USER_ID = getIdFromURL(GET_USER_ID);
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+        @Test
     @Title("Get Discovered User List")
     public void getAllUsers() {
         given().

@@ -12,6 +12,8 @@ import utils.ApplicationConfiguration;
 import utils.BaseTest;
 
 
+import java.io.IOException;
+
 import static constants.Constants.*;
 import static io.restassured.RestAssured.given;
 import static org.hamcrest.Matchers.equalTo;
@@ -30,8 +32,10 @@ public class LDAPTest extends BaseTest {
 
     @Test
     @Title("Post LDAP Configuration")
-    public void testA_PostConfigureLDAP() {
-        LdapConfiguration ldapConfiguration = new LdapConfiguration(LDAP_MACHINE_IP, LDAP_DOMAIN, ROLE_ID);
+    public void testA_PostConfigureLDAP() throws IOException {
+        String roleId;
+        roleId = getIdFromURL(GET_ROLE_ID);
+        LdapConfiguration ldapConfiguration = new LdapConfiguration(LDAP_MACHINE_IP, LDAP_DOMAIN, roleId);
         given().
                 spec(requestSpec).
                 and().
@@ -64,7 +68,9 @@ public class LDAPTest extends BaseTest {
 
     @Test
     @Title("Get LDAP Configuration")
-    public void testC_getLDAPConfiguration() {
+    public void testC_getLDAPConfiguration() throws IOException {
+        String roleId;
+        roleId = getIdFromURL(GET_ROLE_ID);
         given().
                 spec(requestSpec).
                 when().
@@ -72,7 +78,7 @@ public class LDAPTest extends BaseTest {
                 then().
                 spec(responseSpec).
                 and().
-                body("data.role", equalTo(ROLE_ID));
+                body("data.role", equalTo(roleId));
 
     }
 

@@ -6,6 +6,8 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import utils.BaseTest;
 
+import java.io.IOException;
+
 import static constants.Constants.*;
 import static io.restassured.RestAssured.given;
 import static org.hamcrest.Matchers.equalTo;
@@ -26,11 +28,13 @@ public class UserAuditLogsTest extends BaseTest {
 
     @Test
     @Title("Get User Audit Details By Id")
-    public void getAuditDetail() {
+    public void getAuditDetail() throws IOException {
+        String auditId;
+        auditId = getIdFromURL(GET_AUDIT_ID);
         given().
                 spec(requestSpec).
                 when().
-                get(AUDIT_ENDPOINT + AUDIT_DETAIL + AUDIT_DETAIL_ID).
+                get(AUDIT_ENDPOINT + AUDIT_DETAIL + auditId).
                 then().
                 spec(responseSpec);
     }

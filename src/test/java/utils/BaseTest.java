@@ -95,34 +95,6 @@ public class BaseTest {
 
     }
 
-    public static String DEVICE_DETAIL_ID = "";
-    public static String USER_ID = "";
-    public static String PR_ID = "";
-    public static String ROLE_ID = "";
-    public static String PERMISSION_ID = "";
-    public static String ADMIN_USER_ID = "";
-    public static String AUDIT_DETAIL_ID = "";
-    public static String USER_AUDIT_ID = "";
-    public static String ADMIN_ROLE_ID = "";
-
-    static {
-        try {
-
-            DEVICE_DETAIL_ID = getIdFromURL("http://inventaserver:9092/devices/getAllDevices?page=0&size=1&sortBy=_id");
-            USER_ID = getIdFromURL("http://inventaserver:9092/users/getAllUsers/?page=0&size=1&sort=dateCreated,desc");
-            PR_ID = getIdFromURL("http://inventaserver:9092/policy-routine/?page=0&size=1&sort=dateCreated,desc"); //Update Parameter in Endpoint
-            ROLE_ID = getIdFromURL("http://inventaserver:9092/role/getAllRole?page=0&size=1&sort=dateCreated,desc");
-            PERMISSION_ID = getIdFromPermissionURL("http://inventaserver:9092/permission/getAllPermission");
-            ADMIN_USER_ID = getIdFromURL("http://inventaserver:9092/adminUsers/getAllAdminUsers?page=0&size=1&sort=dateCreated,desc"); // Update Parameter in Endpoint
-            AUDIT_DETAIL_ID = getIdFromURL("http://inventaserver:9092/audit/getAllAudit?page=0&size=1&sort=dateCreated,desc");
-            USER_AUDIT_ID = getIdFromURL("http://inventaserver:9092/audit/getUserAudit?username=admininventa&page=0&size=1"); //add new endpoint
-            ADMIN_ROLE_ID = getIdFromURL("http://inventaserver:9092/role/getAllRole?page=0&size=1");
-
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
-
     public static RequestSpecification requestSpec;
 
     @BeforeClass

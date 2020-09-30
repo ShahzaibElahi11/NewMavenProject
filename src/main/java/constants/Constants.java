@@ -51,9 +51,9 @@ public class Constants{
     public static final String TOTAL_CLOUD_ASSETS = "/query/donut/totalAssets?field=adapterProperties&match=CLOUD%20PROVIDER";
 
     public static final String TOTAL_MISSING_EDR_ASSETS = "/query/donut/missingEdr";
-    public static final String TOTAL_ASSETS_DISTRIBUTION = "/query/chart/dist?field=common.source&topCount=6";
+    public static final String TOTAL_ASSETS_DISTRIBUTION = "/query/chart/dist?field=common.source&topCount=100";
 
-    public static final String TOTAL_CLOUD_DEVICE_TYPE_ASSETS = "/query/chart/dist?field=common.source&topCount=6";
+    public static final String TOTAL_CLOUD_DEVICE_TYPE_ASSETS = "/query/chart/dist?field=type&topCount=100";
     public static final String USER_DISTRIBUTION = "/query/chart/user/dist?topCount=6&field=common.source";
 
     public static final String CPU_HEALTH = "/query/healthCheck?check=CPU";
@@ -68,12 +68,12 @@ public class Constants{
     public static final String GET_ALL_DEVICES = "getAllDevices?page=0&size=10";
     public static final String DEVICES_DETAILS = "deviceDetail?_id=";
     public static final String CONNECTOR_LIST_BY_ID = "adapters/list?_id=";
-    public static final String DRIVE_DETAILS = "drives?_id=";
+    public static final String DRIVE_DETAILS = "drives?_id="; //will remove this test case later
     public static final String OS_PATCHES = "os/patches/installed?_id=";
     public static final String RUNNING_PROCESSES = "processes/running?_id=";
     public static final String INSTALLED_SOFTWARE = "software/installed?_id=";
-    public static final String OS_INFO = "os/info?_id=";
-    public static final String USER_DETAILS_BY_ID = "users?_id=";
+    public static final String OS_INFO = "os/info?_id=";  //will remove this test case later
+    public static final String USER_DETAILS_BY_ID = "users?_id="; //will remove this test case later
     public static final String NETWORK_INTERFACE = "network/interfaces?_id=";
     public static final String SHARED_FOLDER = "shared/folders?_id=";
     public static final String DEVICE_NOTE = "getDeviceNote?deviceId=";
@@ -89,43 +89,59 @@ public class Constants{
     //http://inventaserver:9092/devices/getCommonMenu?deviceId=5f5b5a7217bb352246d6b68a
     //http://inventaserver:9092/permission/getUserPermission?userId=5f60dfe75af94a27e29cfe97&module=asset
     //http://inventaserver:9092/policy-routine/set/device/5f5b5a7217bb352246d6b68a
-    //http://inventaserver:9092/devices/summary?_id=5f5b5a7217bb352246d6b68a
 
     public static final String CROWDSTRIKE_INCIDENTS = "incidents?_id=";
     public static final String CROWDSTRIKE_SENSOR_UPDATE_POLICY = "sensorUpdatePolicy?_id=";
     public static final String CROWDSTRIKE_PREVENTION_POLICIES = "preventionPolicies?_id=";
 
 
-    // Container
+    //1 Container - complete
     public static final String CONTAINER_PROTOCOLS = "protocols?_id=";
     public static final String CONTAINER_PORTS = "ports?_id=";
-    public static final String CONTAINER_INDEPTH = "containers?_id=";
-    public static final String ASSETS_TAGS = "asset/tags?_id=";
-    // http://inventaserver:9092/devices/users?_id=5f60b4002e438a0e11cd3448
+    public static final String CONTAINER_INDEPTH = "containers?_id="; //will change
 
-    //Load Balancer
+    //2 Load Balancer - complete
     public static final String LOAD_BALANCER_RULES = "loadbalancer-rules?_id=";
     public static final String BACKEND_POOL = "backendPool?_id=";
 
-    //Public - Private DNS ZONE
+    //3 and 4 Public and Private DNS ZONE - complete
     public static final String HOST_ZONE = "hostedZones?_id=";
 
-    //Application Gateway
+    //5 Application Gateway - complete
     public static final String HEALTH_PROBE = "healthProbe?_id=";
     public static final String HTTP_SETTING = "httpsSettings?_id=";
     public static final String GATEWAY_RULES = "applicationGatewayRules?_id=";
 
-    //Network Security Group
+    //6 Network Security Group - complete
     public static final String FIREWALL_RULES = "firewallRules?_id=";
     public static final String CONNECTED_HARDWARE = "hardware/connected?_id=";
 
-    /*
-    Remaining Azure Type Assets
-    Storage Account
-    Traffic Manager Profile
-    Virtual Machine
-    Virtual Network
-     */
+    //7 Storage Account - complete
+    public static final String TABLE = "tables?_id=";
+    public static final String QUEUES = "queues?_id=";
+    public static final String FILE_SHARES = "fileShares?_id=";
+    public static final String CONTAINERS = "containers?_id=";
+
+
+    //8 Traffic Manager - remaining
+    public static final String TRAFFIC_MANAGER_RULES = "trafficManagerRules?_id=";
+    public static final String SUBNET = "subnets?_id=";
+
+    // 9 Virtual Machine - completed
+    public static final String SUMMARY = "summary?_id=";
+    public static final String OS_INFORMATION = "os/info?_id=";
+    public static final String CPU_INFO = "cpu?_id=";
+    public static final String HARD_DRIVE_DETAIL = "drives?_id=";
+    public static final String LOCAL_USER_DETAIL = "users?_id=";
+    public static final String NETWORK_INTERFACES = "network/interfaces?_id=";
+    public static final String INSTALLED_AGENTS = "installedAgents?_id="; //Extensions
+    public static final String ASSET_TAGS = "asset/tags?_id=";
+
+    //10 Virtual Network - completed
+    public static final String CONNECTED_DEVICE = "connectedDevices?_id=";
+
+    //11 IP Address - completed
+
 
 
     /**
@@ -225,6 +241,32 @@ public class Constants{
 
     public static final String DOCKER_ENDPOINT = "/docker/";
     public static final String ACTIVE_MQ = "activemq";
+
+    public static final String CROWDSTRIKE_QUERY = "http://inventaserver:9092/query/devices/?query=((adapters.adapter_crowdstrike.status%20==%20exists(true))and(adapters.adapter_crowdstrike.hostname%20==%20%22TESTBENCH%22))";
+    public static final String AZURE_CONTAINER_QUERY = "http://inventaserver:9092/query/devices/?query=(adapters.adapter_azure.Container%20Instance::Status%20==%20exists(true))&page=0&size=1";
+    public static final String AZURE_LOADBALANCER_QUERY = "http://inventaserver:9092/query/devices/?query=(adapters.adapter_azure.Load%20Balancer::Type%20==%20exists(true))&page=0&size=1";
+    public static final String AZURE_PRIVATE_DNS_ZONE_QUERY = "http://inventaserver:9092/query/devices/?query=(adapters.adapter_azure.Private%20DNS%20Zones::Id%20==%20exists(true))&page=0&size=1";
+    public static final String AZURE_PUBLIC_DNS_ZONE_QUERY = "http://inventaserver:9092/query/devices/?query=(adapters.adapter_azure.Public%20DNS%20Zones::Type%20==%20exists(true))&page=0&size=1";
+    public static final String AZURE_APPLICATION_GATEWAY_QUERY = "http://inventaserver:9092/query/devices/?query=(common.hostName%20==%20%22AppGwPubIP%22)&page=0&size=1";
+    public static final String AZURE_NETWORK_SECURITY_GROUP_QUERY = "http://inventaserver:9092/query/devices/?query=(adapters.adapter_azure.Network%20Security%20Group::Type%20==%20exists(true))&page=0&size=1";
+    public static final String AZURE_STORAGE_ACCOUNT_QUERY = "http://inventaserver:9092/query/devices/?query=(adapters.adapter_azure.Type%20==%20%22Storage%20Account%22)&page=0&size=1";
+    public static final String AZURE_VIRTUAL_MACHINE_QUERY = "http://inventaserver:9092/query/devices/?query=(adapters.adapter_azure.Virtual%20Machine::Status%20==%20exists(true))&page=0&size=1";
+    public static final String AZURE_VIRTUAL_NETWORK_QUERY = "http://inventaserver:9092/query/devices/?query=(adapters.adapter_azure.Virtual%20Network::Type%20==%20exists(true))&page=0&size=1";
+    public static final String AZURE_IP_ADDRESS_QUERY = "http://inventaserver:9092/query/devices/?query=(adapters.adapter_azure.Public%20IP%20Address::Type%20==%20exists(true))&page=0&size=1";
+
+
+    public static final String GET_ROLE_ID = "http://inventaserver:9092/role/getAllRole?page=0&size=1&sort=dateCreated,desc";
+    public static final String DELETE_ROLE_ID = "http://inventaserver:9092/role/getAllRole?page=0&size=1&sort=dateModified,desc";
+    public static final String GET_ROLE_ID_FOR_USER = "http://inventaserver:9092/role/getAllRole?page=0&size=1";
+    public static final String GET_POLICY_ROUTINE_ID = "http://inventaserver:9092/policy-routine/?page=0&size=1&sort=dateCreated,desc";
+    public static final String PUT_POLICY_ROUTINE_ID = "http://inventaserver:9092/policy-routine/?page=0&size=1&sort=dateCreated,desc";
+    public static final String DELETE_POLICY_ROUTINE_ID = "http://inventaserver:9092/policy-routine/?page=0&size=1&sort=dateModified,desc";
+    public static final String GET_DEVICE_ID = "http://inventaserver:9092/devices/getAllDevices?page=0&size=1&sortBy=_id";
+    public static final String GET_USER_ID = "http://inventaserver:9092/users/getAllUsers/?page=0&size=1&sort=dateCreated,desc";
+    public static final String GET_AUDIT_ID = "http://inventaserver:9092/audit/getAllAudit?page=0&size=1&sort=dateCreated,desc";
+    public static final String GET_PERMISSION_ID = "http://inventaserver:9092/permission/getAllPermission";
+    public static final String GET_ADMIN_USER_ID = "http://inventaserver:9092/adminUsers/getAllAdminUsers?page=0&size=1&sort=dateCreated,desc";
+    public static final String DELETE_ADMIN_USER_ID = "http://inventaserver:9092/adminUsers/getAllAdminUsers?page=0&size=1&sort=dateModified,desc";
 
 
 }

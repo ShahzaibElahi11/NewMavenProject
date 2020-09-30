@@ -20,28 +20,14 @@ import static org.apache.http.HttpStatus.*;
 @RunWith(SerenityRunner.class)
 public class DeviceDetailsTest extends BaseTest {
 
-    public static String CROWDSTRIKE_DEVICE_ID = "";
-    public static String AZURE_CONTAINER_DEVICE_ID = "";
-    public static String AZURE_LOADBALANCER_DEVICE_ID = "";
-    public static String AZURE_PRIVATE_DNS_ZONE_DEVICE_ID = "";
-    public static String AZURE_PUBLIC_DNS_ZONE_DEVICE_ID = "";
-    public static String AZURE_APPLICATION_GATEWAY_DEVICE_ID = "";
-    public static String AZURE_NETWORK_SECURITY_GROUP_DEVICE_ID = "";
+    public static String DEVICE_DETAIL_ID = "";
 
+    // rethink
     static {
         try {
-            CROWDSTRIKE_DEVICE_ID = getIdFromURL("http://inventaserver:9092/query/devices/?query=((adapters.adapter_crowdstrike.status%20==%20exists(true))and(adapters.adapter_crowdstrike.hostname%20==%20%22TESTBENCH%22))");
-            //http://inventaserver:9092/query/devices/?size=1&query=(adapters.adapter_crowdstrike==exists(true))&sort=_id,desc
-            AZURE_CONTAINER_DEVICE_ID = getIdFromURL("http://inventaserver:9092/query/devices/?query=(adapters.adapter_azure.Container%20Instance::Status%20==%20exists(true))&page=0&size=1");
-            AZURE_LOADBALANCER_DEVICE_ID = getIdFromURL("http://inventaserver:9092/query/devices/?query=(adapters.adapter_azure.Load%20Balancer::Type%20==%20exists(true))&page=0&size=1");
-            AZURE_PRIVATE_DNS_ZONE_DEVICE_ID = getIdFromURL("http://inventaserver:9092/query/devices/?query=(adapters.adapter_azure.Private%20DNS%20Zones::Id%20==%20exists(true))&page=0&size=1");
-            AZURE_PUBLIC_DNS_ZONE_DEVICE_ID = getIdFromURL("http://inventaserver:9092/query/devices/?query=(adapters.adapter_azure.Public%20DNS%20Zones::Type%20==%20exists(true))&page=0&size=1");
-            AZURE_APPLICATION_GATEWAY_DEVICE_ID = getIdFromURL("http://inventaserver:9092/query/devices/?query=(common.hostName%20==%20%22AppGwPubIP%22)&page=0&size=1");
-            AZURE_NETWORK_SECURITY_GROUP_DEVICE_ID = getIdFromURL("http://inventaserver:9092/query/devices/?query=(adapters.adapter_azure.Network%20Security%20Group::Type%20==%20exists(true))&page=0&size=1");
-
-            //http://inventaserver:9092/devices/getAllDevices?page=0&size=1&sort=firstFetchTime,desc
-        } catch (IOException e) {
-            e.printStackTrace();
+            DEVICE_DETAIL_ID = getIdFromURL("http://inventaserver:9092/devices/getAllDevices?page=0&size=1&sortBy=_id");
+        } catch (IOException ex) {
+            ex.printStackTrace();
         }
     }
 
@@ -330,180 +316,788 @@ public class DeviceDetailsTest extends BaseTest {
 
     @Test
     @Title("Get CrowdStrike Incident Details By Device Id")
-    public void getCrowdStrikeIncident() {
+    public void getCrowdStrikeIncident() throws IOException {
+        String crowdStrikeDeviceId;
+        crowdStrikeDeviceId = getIdFromURL(CROWDSTRIKE_QUERY);
+
         given().
                 spec(requestSpec).
                 when().
-                get(DEVICE_ENDPOINT + CROWDSTRIKE_INCIDENTS + CROWDSTRIKE_DEVICE_ID).
+                get(DEVICE_ENDPOINT + CROWDSTRIKE_INCIDENTS + crowdStrikeDeviceId).
                 then().
                 spec(responseSpec);
     }
 
     @Test
     @Title("Get CrowdStrike Sensor Update Policy Details By Device Id")
-    public void getCrowdStrikeSensorUpdatePolicy() {
+    public void getCrowdStrikeSensorUpdatePolicy() throws IOException {
+        String crowdStrikeDeviceId;
+        crowdStrikeDeviceId = getIdFromURL(CROWDSTRIKE_QUERY);
         given().
                 spec(requestSpec).
                 when().
-                get(DEVICE_ENDPOINT + CROWDSTRIKE_SENSOR_UPDATE_POLICY + CROWDSTRIKE_DEVICE_ID).
+                get(DEVICE_ENDPOINT + CROWDSTRIKE_SENSOR_UPDATE_POLICY + crowdStrikeDeviceId).
                 then().
                 spec(responseSpec);
     }
+
     @Test
     @Title("Get CrowdStrike Prevention Policies Details By Device Id")
-    public void getCrowdStrikePreventionPolicies() {
+    public void getCrowdStrikePreventionPolicies() throws IOException {
+        String crowdStrikeDeviceId;
+        crowdStrikeDeviceId = getIdFromURL(CROWDSTRIKE_QUERY);
         given().
                 spec(requestSpec).
                 when().
-                get(DEVICE_ENDPOINT + CROWDSTRIKE_PREVENTION_POLICIES + CROWDSTRIKE_DEVICE_ID).
+                get(DEVICE_ENDPOINT + CROWDSTRIKE_PREVENTION_POLICIES + crowdStrikeDeviceId).
+                then().
+                spec(responseSpec);
+    }
+
+    @Test
+    @Title("Get Azure Container Summary Details By Device Id")
+    public void getAzureContainerSummaryDetails() throws IOException {
+        String azureContainerDeviceId;
+        azureContainerDeviceId = getIdFromURL(AZURE_CONTAINER_QUERY);
+        given().
+                spec(requestSpec).
+                when().
+                get(DEVICE_ENDPOINT + SUMMARY + azureContainerDeviceId).
+                then().
+                spec(responseSpec);
+    }
+
+    @Test
+    @Title("Get Azure Container Local User Details By Device Id")
+    public void getAzureContainerUserDetails() throws IOException {
+        String azureContainerDeviceId;
+        azureContainerDeviceId = getIdFromURL(AZURE_CONTAINER_QUERY);
+        given().
+                spec(requestSpec).
+                when().
+                get(DEVICE_ENDPOINT + LOCAL_USER_DETAIL + azureContainerDeviceId).
                 then().
                 spec(responseSpec);
     }
 
     @Test
     @Title("Get Azure Container Protocol Details By Device Id")
-    public void getAzureContainerProtocolDetails() {
+    public void getAzureContainerProtocolDetails() throws IOException {
+        String azureContainerDeviceId;
+        azureContainerDeviceId = getIdFromURL(AZURE_CONTAINER_QUERY);
         given().
                 spec(requestSpec).
                 when().
-                get(DEVICE_ENDPOINT + CONTAINER_PROTOCOLS + AZURE_CONTAINER_DEVICE_ID).
+                get(DEVICE_ENDPOINT + CONTAINER_PROTOCOLS + azureContainerDeviceId).
                 then().
                 spec(responseSpec);
     }
+
     @Test
     @Title("Get Azure Container Port Details By Device Id")
-    public void getAzureContainerPortDetails() {
+    public void getAzureContainerPortDetails() throws IOException {
+        String azureContainerDeviceId;
+        azureContainerDeviceId = getIdFromURL(AZURE_CONTAINER_QUERY);
         given().
                 spec(requestSpec).
                 when().
-                get(DEVICE_ENDPOINT + CONTAINER_PORTS + AZURE_CONTAINER_DEVICE_ID).
+                get(DEVICE_ENDPOINT + CONTAINER_PORTS + azureContainerDeviceId).
                 then().
                 spec(responseSpec);
     }
 
     @Test
     @Title("Get Azure Container In-Depth Details By Device Id")
-    public void getAzureContainerInDepthDetails() {
+    public void getAzureContainerInDepthDetails() throws IOException {
+        String azureContainerDeviceId;
+        azureContainerDeviceId = getIdFromURL(AZURE_CONTAINER_QUERY);
         given().
                 spec(requestSpec).
                 when().
-                get(DEVICE_ENDPOINT + CONTAINER_INDEPTH + AZURE_CONTAINER_DEVICE_ID).
+                get(DEVICE_ENDPOINT + CONTAINER_INDEPTH + azureContainerDeviceId).
                 then().
                 spec(responseSpec);
     }
+
     @Test
-    @Title("Get Azure Container Tag Details By Device Id")
-    public void getAzureContainerTagsDetails() {
+    @Title("Get Azure Container Asset Tags Details By Device Id")
+    public void getAzureContainerTagsDetails() throws IOException {
+        String azureContainerDeviceId;
+        azureContainerDeviceId = getIdFromURL(AZURE_CONTAINER_QUERY);
         given().
                 spec(requestSpec).
                 when().
-                get(DEVICE_ENDPOINT + ASSETS_TAGS + AZURE_CONTAINER_DEVICE_ID).
+                get(DEVICE_ENDPOINT + ASSET_TAGS + azureContainerDeviceId).
+                then().
+                spec(responseSpec);
+    }
+
+    @Test
+    @Title("Get Azure Load Balancer Summary Details By Device Id")
+    public void getAzureLoadBalancerSummaryDetails() throws IOException {
+        String azureLoadBalancerDeviceId;
+        azureLoadBalancerDeviceId = getIdFromURL(AZURE_LOADBALANCER_QUERY);
+        given().
+                spec(requestSpec).
+                when().
+                get(DEVICE_ENDPOINT + SUMMARY + azureLoadBalancerDeviceId).
+                then().
+                spec(responseSpec);
+    }
+
+    @Test
+    @Title("Get Azure Load Balancer Local User Details By Device Id")
+    public void getAzureLoadBalancerUserDetails() throws IOException {
+        String azureLoadBalancerDeviceId;
+        azureLoadBalancerDeviceId = getIdFromURL(AZURE_LOADBALANCER_QUERY);
+        given().
+                spec(requestSpec).
+                when().
+                get(DEVICE_ENDPOINT + LOCAL_USER_DETAIL + azureLoadBalancerDeviceId).
                 then().
                 spec(responseSpec);
     }
 
     @Test
     @Title("Get Azure Load Balancer Rule Details By Device Id")
-    public void getAzureLoadBalancerRuleDetails() {
+    public void getAzureLoadBalancerRuleDetails() throws IOException {
+        String azureLoadBalancerDeviceId;
+        azureLoadBalancerDeviceId = getIdFromURL(AZURE_LOADBALANCER_QUERY);
         given().
                 spec(requestSpec).
                 when().
-                get(DEVICE_ENDPOINT + LOAD_BALANCER_RULES + AZURE_LOADBALANCER_DEVICE_ID).
+                get(DEVICE_ENDPOINT + LOAD_BALANCER_RULES + azureLoadBalancerDeviceId).
                 then().
                 spec(responseSpec);
     }
+
     @Test
-    @Title("Get Azure Backend Pool Details By Device Id")
-    public void getAzureBackendPoolDetails() {
+    @Title("Get Azure Load Balancer Backend Pool Details By Device Id")
+    public void getAzureLoadBalancerBackendPoolDetails() throws IOException {
+        String azureLoadBalancerDeviceId;
+        azureLoadBalancerDeviceId = getIdFromURL(AZURE_LOADBALANCER_QUERY);
         given().
                 spec(requestSpec).
                 when().
-                get(DEVICE_ENDPOINT + BACKEND_POOL + AZURE_LOADBALANCER_DEVICE_ID).
+                get(DEVICE_ENDPOINT + BACKEND_POOL + azureLoadBalancerDeviceId).
                 then().
                 spec(responseSpec);
     }
+
+    @Test
+    @Title("Get Azure Load Balancer Asset Tags Details By Device Id")
+    public void getAzureLoadBalancerAssetTagsDetails() throws IOException {
+        String azureLoadBalancerDeviceId;
+        azureLoadBalancerDeviceId = getIdFromURL(AZURE_LOADBALANCER_QUERY);
+        given().
+                spec(requestSpec).
+                when().
+                get(DEVICE_ENDPOINT + ASSET_TAGS + azureLoadBalancerDeviceId).
+                then().
+                spec(responseSpec);
+    }
+
+
+    @Test
+    @Title("Get Azure Private Host Summary Details By Device Id")
+    public void getAzurePrivateHostSummaryDetails() throws IOException {
+        String azurePrivateHostDeviceId;
+        azurePrivateHostDeviceId = getIdFromURL(AZURE_PRIVATE_DNS_ZONE_QUERY);
+        given().
+                spec(requestSpec).
+                when().
+                get(DEVICE_ENDPOINT + SUMMARY + azurePrivateHostDeviceId).
+                then().
+                spec(responseSpec);
+    }
+
+    @Test
+    @Title("Get Azure Private Host Local User Details By Device Id")
+    public void getAzurePrivateHostUserDetails() throws IOException {
+        String azurePrivateHostDeviceId;
+        azurePrivateHostDeviceId = getIdFromURL(AZURE_PRIVATE_DNS_ZONE_QUERY);
+        given().
+                spec(requestSpec).
+                when().
+                get(DEVICE_ENDPOINT + LOCAL_USER_DETAIL + azurePrivateHostDeviceId).
+                then().
+                spec(responseSpec);
+    }
+
     @Test
     @Title("Get Azure Private Host Zone Details By Device Id")
-    public void getAzurePrivateHostZoneDetails() {
+    public void getAzurePrivateHostZoneDetails() throws IOException {
+        String azurePrivateHostDeviceId;
+        azurePrivateHostDeviceId = getIdFromURL(AZURE_PRIVATE_DNS_ZONE_QUERY);
         given().
                 spec(requestSpec).
                 when().
-                get(DEVICE_ENDPOINT + HOST_ZONE + AZURE_PRIVATE_DNS_ZONE_DEVICE_ID).
+                get(DEVICE_ENDPOINT + HOST_ZONE + azurePrivateHostDeviceId).
+                then().
+                spec(responseSpec);
+    }
+
+    @Test
+    @Title("Get Azure Private Host Asset Tags Details By Device Id")
+    public void getAzurePrivateHostAssetTagsDetails() throws IOException {
+        String azurePrivateHostDeviceId;
+        azurePrivateHostDeviceId = getIdFromURL(AZURE_PRIVATE_DNS_ZONE_QUERY);
+        given().
+                spec(requestSpec).
+                when().
+                get(DEVICE_ENDPOINT + ASSET_TAGS + azurePrivateHostDeviceId).
+                then().
+                spec(responseSpec);
+    }
+
+    @Test
+    @Title("Get Azure Public Host Summary Details By Device Id")
+    public void getAzurePublicHostSummaryDetails() throws IOException {
+        String azurePublicHostDeviceId;
+        azurePublicHostDeviceId = getIdFromURL(AZURE_PUBLIC_DNS_ZONE_QUERY);
+        given().
+                spec(requestSpec).
+                when().
+                get(DEVICE_ENDPOINT + SUMMARY + azurePublicHostDeviceId).
+                then().
+                spec(responseSpec);
+    }
+    @Test
+    @Title("Get Azure Public Host Local User Details By Device Id")
+    public void getAzurePublicHostUserDetails() throws IOException {
+        String azurePublicHostDeviceId;
+        azurePublicHostDeviceId = getIdFromURL(AZURE_PUBLIC_DNS_ZONE_QUERY);
+        given().
+                spec(requestSpec).
+                when().
+                get(DEVICE_ENDPOINT + LOCAL_USER_DETAIL + azurePublicHostDeviceId).
                 then().
                 spec(responseSpec);
     }
 
     @Test
     @Title("Get Azure Public Host Zone Details By Device Id")
-    public void getAzurePublicHostZoneDetails() {
+    public void getAzurePublicHostZoneDetails() throws IOException {
+        String azurePublicHostDeviceId;
+        azurePublicHostDeviceId = getIdFromURL(AZURE_PUBLIC_DNS_ZONE_QUERY);
         given().
                 spec(requestSpec).
                 when().
-                get(DEVICE_ENDPOINT + HOST_ZONE + AZURE_PUBLIC_DNS_ZONE_DEVICE_ID).
+                get(DEVICE_ENDPOINT + HOST_ZONE + azurePublicHostDeviceId).
+                then().
+                spec(responseSpec);
+    }
+
+    @Test
+    @Title("Get Azure Public Host Asset Tags Details By Device Id")
+    public void getAzurePublicHostAssetTagsDetails() throws IOException {
+        String azurePublicHostDeviceId;
+        azurePublicHostDeviceId = getIdFromURL(AZURE_PUBLIC_DNS_ZONE_QUERY);
+        given().
+                spec(requestSpec).
+                when().
+                get(DEVICE_ENDPOINT + ASSET_TAGS + azurePublicHostDeviceId).
+                then().
+                spec(responseSpec);
+    }
+
+    @Test
+    @Title("Get Azure Application Gateway Summary Details By Device Id")
+    public void getAzureApplicationGatewaySummaryDetails() throws IOException {
+        String azureApplicationGatewayDeviceId;
+        azureApplicationGatewayDeviceId = getIdFromURL(AZURE_APPLICATION_GATEWAY_QUERY);
+        given().
+                spec(requestSpec).
+                when().
+                get(DEVICE_ENDPOINT + SUMMARY + azureApplicationGatewayDeviceId).
+                then().
+                spec(responseSpec);
+    }
+
+    @Test
+    @Title("Get Azure Application Gateway Local User Details By Device Id")
+    public void getAzureApplicationGatewayUserDetails() throws IOException {
+        String azureApplicationGatewayDeviceId;
+        azureApplicationGatewayDeviceId = getIdFromURL(AZURE_APPLICATION_GATEWAY_QUERY);
+        given().
+                spec(requestSpec).
+                when().
+                get(DEVICE_ENDPOINT + LOCAL_USER_DETAIL + azureApplicationGatewayDeviceId).
+                then().
+                spec(responseSpec);
+    }
+
+    @Test
+    @Title("Get Azure Application Gateway Backend Pool Details By Device Id")
+    public void getAzureApplicationGatewayBackendPoolDetails() throws IOException {
+        String azureApplicationGatewayDeviceId;
+        azureApplicationGatewayDeviceId = getIdFromURL(AZURE_APPLICATION_GATEWAY_QUERY);
+        given().
+                spec(requestSpec).
+                when().
+                get(DEVICE_ENDPOINT + BACKEND_POOL + azureApplicationGatewayDeviceId).
                 then().
                 spec(responseSpec);
     }
 
     @Test
     @Title("Get Azure Application Gateway Health Probe Details By Device Id")
-    public void getAzureApplicationGatewayHealthProbeDetails() {
+    public void getAzureApplicationGatewayHealthProbeDetails() throws IOException {
+        String azureApplicationGatewayDeviceId;
+        azureApplicationGatewayDeviceId = getIdFromURL(AZURE_APPLICATION_GATEWAY_QUERY);
         given().
                 spec(requestSpec).
                 when().
-                get(DEVICE_ENDPOINT + HEALTH_PROBE + AZURE_APPLICATION_GATEWAY_DEVICE_ID).
+                get(DEVICE_ENDPOINT + HEALTH_PROBE + azureApplicationGatewayDeviceId).
                 then().
                 spec(responseSpec);
     }
 
     @Test
     @Title("Get Azure Application Gateway HTTP Setting Details By Device Id")
-    public void getAzureApplicationGatewayHttpSettingDetails() {
+    public void getAzureApplicationGatewayHttpSettingDetails() throws IOException {
+        String azureApplicationGatewayDeviceId;
+        azureApplicationGatewayDeviceId = getIdFromURL(AZURE_APPLICATION_GATEWAY_QUERY);
         given().
                 spec(requestSpec).
                 when().
-                get(DEVICE_ENDPOINT + HTTP_SETTING + AZURE_APPLICATION_GATEWAY_DEVICE_ID).
+                get(DEVICE_ENDPOINT + HTTP_SETTING + azureApplicationGatewayDeviceId).
                 then().
                 spec(responseSpec);
     }
+
     @Test
     @Title("Get Azure Application Gateway Rules Details By Device Id")
-    public void getAzureApplicationGatewayRulesDetails() {
+    public void getAzureApplicationGatewayRulesDetails() throws IOException {
+        String azureApplicationGatewayDeviceId;
+        azureApplicationGatewayDeviceId = getIdFromURL(AZURE_APPLICATION_GATEWAY_QUERY);
         given().
                 spec(requestSpec).
                 when().
-                get(DEVICE_ENDPOINT + GATEWAY_RULES + AZURE_APPLICATION_GATEWAY_DEVICE_ID).
+                get(DEVICE_ENDPOINT + GATEWAY_RULES + azureApplicationGatewayDeviceId).
                 then().
                 spec(responseSpec);
     }
+
+    @Test
+    @Title("Get Azure Application Gateway Asset Tag Details By Device Id")
+    public void getAzureApplicationGatewaAssetTagsDetails() throws IOException {
+        String azureApplicationGatewayDeviceId;
+        azureApplicationGatewayDeviceId = getIdFromURL(AZURE_APPLICATION_GATEWAY_QUERY);
+        given().
+                spec(requestSpec).
+                when().
+                get(DEVICE_ENDPOINT + ASSET_TAGS + azureApplicationGatewayDeviceId).
+                then().
+                spec(responseSpec);
+    }
+
+    @Test
+    @Title("Get Azure Network Security Group Summary Details By Device Id")
+    public void getAzureNSGSummaryDetails() throws IOException {
+        String azureNsgDeviceId;
+        azureNsgDeviceId = getIdFromURL(AZURE_NETWORK_SECURITY_GROUP_QUERY);
+        given().
+                spec(requestSpec).
+                when().
+                get(DEVICE_ENDPOINT + SUMMARY + azureNsgDeviceId).
+                then().
+                spec(responseSpec);
+    }
+
+    @Test
+    @Title("Get Azure Network Security Local User Details By Device Id")
+    public void getAzureNSGUserDetails() throws IOException {
+        String azureNsgDeviceId;
+        azureNsgDeviceId = getIdFromURL(AZURE_NETWORK_SECURITY_GROUP_QUERY);
+        given().
+                spec(requestSpec).
+                when().
+                get(DEVICE_ENDPOINT + LOCAL_USER_DETAIL + azureNsgDeviceId).
+                then().
+                spec(responseSpec);
+    }
+
+    @Test
+    @Title("Get Azure Network Security Asset Tags Details By Device Id")
+    public void getAzureNSGAssetTagDetails() throws IOException {
+        String azureNsgDeviceId;
+        azureNsgDeviceId = getIdFromURL(AZURE_NETWORK_SECURITY_GROUP_QUERY);
+        given().
+                spec(requestSpec).
+                when().
+                get(DEVICE_ENDPOINT + ASSET_TAGS + azureNsgDeviceId).
+                then().
+                spec(responseSpec);
+    }
+
+
     @Test
     @Title("Get Azure Network Security Group Firewall In Bound Rules Details By Device Id")
-    public void getAzureNSGFirewallInBoundRulesDetails() {
+    public void getAzureNSGFirewallInBoundRulesDetails() throws IOException {
+        String azureNsgDeviceId;
+        azureNsgDeviceId = getIdFromURL(AZURE_NETWORK_SECURITY_GROUP_QUERY);
         given().
                 spec(requestSpec).
                 when().
-                get(DEVICE_ENDPOINT + FIREWALL_RULES + AZURE_NETWORK_SECURITY_GROUP_DEVICE_ID + "&direction=Inbound").
+                get(DEVICE_ENDPOINT + FIREWALL_RULES + azureNsgDeviceId + "&direction=Inbound").
                 then().
                 spec(responseSpec);
     }
+
     @Test
     @Title("Get Azure Network Security Group Firewall Out Bound Rules Details By Device Id")
-    public void getAzureNSGFirewallOutBoundRulesDetails() {
+    public void getAzureNSGFirewallOutBoundRulesDetails() throws IOException {
+        String azureNsgDeviceId;
+        azureNsgDeviceId = getIdFromURL(AZURE_NETWORK_SECURITY_GROUP_QUERY);
         given().
                 spec(requestSpec).
                 when().
-                get(DEVICE_ENDPOINT + FIREWALL_RULES + AZURE_NETWORK_SECURITY_GROUP_DEVICE_ID + "&direction=Outbound").
+                get(DEVICE_ENDPOINT + FIREWALL_RULES + azureNsgDeviceId + "&direction=Outbound").
                 then().
                 spec(responseSpec);
     }
 
     @Test
     @Title("Get Azure Network Security Group Connected Hardware Details By Device Id")
-    public void getAzureNSGConnectedHardwareDetails() {
+    public void getAzureNSGConnectedHardwareDetails() throws IOException {
+        String azureNsgDeviceId;
+        azureNsgDeviceId = getIdFromURL(AZURE_NETWORK_SECURITY_GROUP_QUERY);
         given().
                 spec(requestSpec).
                 when().
-                get(DEVICE_ENDPOINT + CONNECTED_HARDWARE + AZURE_NETWORK_SECURITY_GROUP_DEVICE_ID ).
+                get(DEVICE_ENDPOINT + CONNECTED_HARDWARE + azureNsgDeviceId).
                 then().
                 spec(responseSpec);
     }
+
+    @Test
+    @Title("Get Azure Storage Account Summary Details By Device Id")
+    public void getAzureStorageAccountSummaryDetails() throws IOException {
+        String azureStorageAccountDeviceId;
+        azureStorageAccountDeviceId = getIdFromURL(AZURE_STORAGE_ACCOUNT_QUERY);
+        given().
+                spec(requestSpec).
+                when().
+                get(DEVICE_ENDPOINT + SUMMARY + azureStorageAccountDeviceId).
+                then().
+                spec(responseSpec);
+    }
+
+    @Test
+    @Title("Get Azure Storage Account Local User Details By Device Id")
+    public void getAzureStorageAccountUserDetails() throws IOException {
+        String azureStorageAccountDeviceId;
+        azureStorageAccountDeviceId = getIdFromURL(AZURE_STORAGE_ACCOUNT_QUERY);
+        given().
+                spec(requestSpec).
+                when().
+                get(DEVICE_ENDPOINT + LOCAL_USER_DETAIL + azureStorageAccountDeviceId).
+                then().
+                spec(responseSpec);
+    }
+
+    @Test
+    @Title("Get Azure Storage Account Asset Tags Details By Device Id")
+    public void getAzureStorageAccountAssetTagsDetails() throws IOException {
+        String azureStorageAccountDeviceId;
+        azureStorageAccountDeviceId = getIdFromURL(AZURE_STORAGE_ACCOUNT_QUERY);
+        given().
+                spec(requestSpec).
+                when().
+                get(DEVICE_ENDPOINT + ASSET_TAGS + azureStorageAccountDeviceId).
+                then().
+                spec(responseSpec);
+
+    }
+
+
+    @Test
+    @Title("Get Azure Storage Account Table Details By Device Id")
+    public void getAzureStorageAccountTableDetails() throws IOException {
+        String azureStorageAccountDeviceId;
+        azureStorageAccountDeviceId = getIdFromURL(AZURE_STORAGE_ACCOUNT_QUERY);
+        given().
+                spec(requestSpec).
+                when().
+                get(DEVICE_ENDPOINT + TABLE + azureStorageAccountDeviceId).
+                then().
+                spec(responseSpec);
+    }
+
+    @Test
+    @Title("Get Azure Storage Queues Details By Device Id")
+    public void getAzureStorageAccountQueuesDetails() throws IOException {
+        String azureStorageAccountDeviceId;
+        azureStorageAccountDeviceId = getIdFromURL(AZURE_STORAGE_ACCOUNT_QUERY);
+        given().
+                spec(requestSpec).
+                when().
+                get(DEVICE_ENDPOINT + QUEUES + azureStorageAccountDeviceId).
+                then().
+                spec(responseSpec);
+    }
+
+    @Test
+    @Title("Get Azure Storage File Share Details By Device Id")
+    public void getAzureStorageAccountFileShareDetails() throws IOException {
+        String azureStorageAccountDeviceId;
+        azureStorageAccountDeviceId = getIdFromURL(AZURE_STORAGE_ACCOUNT_QUERY);
+        given().
+                spec(requestSpec).
+                when().
+                get(DEVICE_ENDPOINT + FILE_SHARES + azureStorageAccountDeviceId).
+                then().
+                spec(responseSpec);
+    }
+
+    @Test
+    @Title("Get Azure Storage Container Details By Device Id")
+    public void getAzureStorageAccountContainerDetails() throws IOException {
+        String azureStorageAccountDeviceId;
+        azureStorageAccountDeviceId = getIdFromURL(AZURE_STORAGE_ACCOUNT_QUERY);
+        given().
+                spec(requestSpec).
+                when().
+                get(DEVICE_ENDPOINT + CONTAINERS + azureStorageAccountDeviceId).
+                then().
+                spec(responseSpec);
+    }
+
+    @Test
+    @Title("Get Azure Virtual Machine Summary Details By Device Id")
+    public void getAzureVirtualMachineSummaryDetails() throws IOException {
+        String azureVirtualMachineDeviceId;
+        azureVirtualMachineDeviceId = getIdFromURL(AZURE_VIRTUAL_MACHINE_QUERY);
+        given().
+                spec(requestSpec).
+                when().
+                get(DEVICE_ENDPOINT + SUMMARY + azureVirtualMachineDeviceId).
+                then().
+                spec(responseSpec);
+    }
+
+
+    @Test
+    @Title("Get Azure Virtual Machine Operating System Details By Device Id")
+    public void getAzureVirtualMachineOperatingSystemDetails() throws IOException {
+        String azureVirtualMachineDeviceId;
+        azureVirtualMachineDeviceId = getIdFromURL(AZURE_VIRTUAL_MACHINE_QUERY);
+        given().
+                spec(requestSpec).
+                when().
+                get(DEVICE_ENDPOINT + OS_INFORMATION + azureVirtualMachineDeviceId).
+                then().
+                spec(responseSpec);
+    }
+
+    @Test
+    @Title("Get Azure Virtual Machine CPU Details By Device Id")
+    public void getAzureVirtualMachineCpuDetails() throws IOException {
+        String azureVirtualMachineDeviceId;
+        azureVirtualMachineDeviceId = getIdFromURL(AZURE_VIRTUAL_MACHINE_QUERY);
+        given().
+                spec(requestSpec).
+                when().
+                get(DEVICE_ENDPOINT + CPU_INFO + azureVirtualMachineDeviceId).
+                then().
+                spec(responseSpec);
+    }
+
+    @Test
+    @Title("Get Azure Virtual Machine Hard Drive Details By Device Id")
+    public void getAzureVirtualMachineHardDriveDetails() throws IOException {
+        String azureVirtualMachineDeviceId;
+        azureVirtualMachineDeviceId = getIdFromURL(AZURE_VIRTUAL_MACHINE_QUERY);
+        given().
+                spec(requestSpec).
+                when().
+                get(DEVICE_ENDPOINT + HARD_DRIVE_DETAIL + azureVirtualMachineDeviceId).
+                then().
+                spec(responseSpec);
+    }
+
+    @Test
+    @Title("Get Azure Virtual Machine User Details By Device Id")
+    public void getAzureVirtualMachineUserDetails() throws IOException {
+        String azureVirtualMachineDeviceId;
+        azureVirtualMachineDeviceId = getIdFromURL(AZURE_VIRTUAL_MACHINE_QUERY);
+        given().
+                spec(requestSpec).
+                when().
+                get(DEVICE_ENDPOINT + LOCAL_USER_DETAIL + azureVirtualMachineDeviceId).
+                then().
+                spec(responseSpec);
+    }
+
+    @Test
+    @Title("Get Azure Virtual Machine Network Interfaces Details By Device Id")
+    public void getAzureVirtualMachineNetworkInterfacesDetails() throws IOException {
+        String azureVirtualMachineDeviceId;
+        azureVirtualMachineDeviceId = getIdFromURL(AZURE_VIRTUAL_MACHINE_QUERY);
+        given().
+                spec(requestSpec).
+                when().
+                get(DEVICE_ENDPOINT + NETWORK_INTERFACES + azureVirtualMachineDeviceId).
+                then().
+                spec(responseSpec);
+    }
+
+    @Test
+    @Title("Get Azure Virtual Machine Inbound Firewall Rules Details By Device Id")
+    public void getAzureVirtualMachineInboundFirewallRulesDetails() throws IOException {
+        String azureVirtualMachineDeviceId;
+        azureVirtualMachineDeviceId = getIdFromURL(AZURE_VIRTUAL_MACHINE_QUERY);
+        given().
+                spec(requestSpec).
+                when().
+                get(DEVICE_ENDPOINT + FIREWALL_RULES + azureVirtualMachineDeviceId + "&direction=Inbound").
+                then().
+                spec(responseSpec);
+    }
+
+    @Test
+    @Title("Get Azure Virtual Machine Outbound Firewall Rules Details By Device Id")
+    public void getAzureVirtualMachineOutboundFirewallRulesDetails() throws IOException {
+        String azureVirtualMachineDeviceId;
+        azureVirtualMachineDeviceId = getIdFromURL(AZURE_VIRTUAL_MACHINE_QUERY);
+        given().
+                spec(requestSpec).
+                when().
+                get(DEVICE_ENDPOINT + FIREWALL_RULES + azureVirtualMachineDeviceId + "&direction=Outbound").
+                then().
+                spec(responseSpec);
+    }
+
+    @Test
+    @Title("Get Azure Virtual Machine Installed Agents Details By Device Id")
+    public void getAzureVirtualMachineInstalledAgentsDetails() throws IOException {
+        String azureVirtualMachineDeviceId;
+        azureVirtualMachineDeviceId = getIdFromURL(AZURE_VIRTUAL_MACHINE_QUERY);
+        given().
+                spec(requestSpec).
+                when().
+                get(DEVICE_ENDPOINT + INSTALLED_AGENTS + azureVirtualMachineDeviceId).
+                then().
+                spec(responseSpec);
+    }
+
+    @Test
+    @Title("Get Azure Virtual Machine Asset Tags Details By Device Id")
+    public void getAzureVirtualMachineAssetTagsDetails() throws IOException {
+        String azureVirtualMachineDeviceId;
+        azureVirtualMachineDeviceId = getIdFromURL(AZURE_VIRTUAL_MACHINE_QUERY);
+        given().
+                spec(requestSpec).
+                when().
+                get(DEVICE_ENDPOINT + ASSET_TAGS + azureVirtualMachineDeviceId).
+                then().
+                spec(responseSpec);
+    }
+
+    @Test
+    @Title("Get Azure Virtual Network Summary Details By Device Id")
+    public void getAzureVirtualNetworkSummaryDetails() throws IOException {
+        String azureVirtualNetworkDeviceId;
+        azureVirtualNetworkDeviceId = getIdFromURL(AZURE_VIRTUAL_NETWORK_QUERY);
+        given().
+                spec(requestSpec).
+                when().
+                get(DEVICE_ENDPOINT + SUMMARY + azureVirtualNetworkDeviceId).
+                then().
+                spec(responseSpec);
+    }
+
+    @Test
+    @Title("Get Azure Virtual Network User Details By Device Id")
+    public void getAzureVirtualNetworkUserDetails() throws IOException {
+        String azureVirtualNetworkDeviceId;
+        azureVirtualNetworkDeviceId = getIdFromURL(AZURE_VIRTUAL_NETWORK_QUERY);
+        given().
+                spec(requestSpec).
+                when().
+                get(DEVICE_ENDPOINT + LOCAL_USER_DETAIL + azureVirtualNetworkDeviceId).
+                then().
+                spec(responseSpec);
+    }
+
+    @Test
+    @Title("Get Azure Virtual Network Subnet Details By Device Id")
+    public void getAzureVirtualNetworkSubnetDetails() throws IOException {
+        String azureVirtualNetworkDeviceId;
+        azureVirtualNetworkDeviceId = getIdFromURL(AZURE_VIRTUAL_NETWORK_QUERY);
+        given().
+                spec(requestSpec).
+                when().
+                get(DEVICE_ENDPOINT + SUBNET + azureVirtualNetworkDeviceId).
+                then().
+                spec(responseSpec);
+    }
+
+    @Test
+    @Title("Get Azure Virtual Network Connected Device Details By Device Id")
+    public void getAzureVirtualNetworkConnectedDeviceDetails() throws IOException {
+        String azureVirtualNetworkDeviceId;
+        azureVirtualNetworkDeviceId = getIdFromURL(AZURE_VIRTUAL_NETWORK_QUERY);
+        given().
+                spec(requestSpec).
+                when().
+                get(DEVICE_ENDPOINT + CONNECTED_DEVICE + azureVirtualNetworkDeviceId).
+                then().
+                spec(responseSpec);
+    }
+
+    @Test
+    @Title("Get Azure Virtual Network Asset Tags Details By Device Id")
+    public void getAzureVirtualNetworkAssetTagsDetails() throws IOException {
+        String azureVirtualNetworkDeviceId;
+        azureVirtualNetworkDeviceId = getIdFromURL(AZURE_VIRTUAL_NETWORK_QUERY);
+        given().
+                spec(requestSpec).
+                when().
+                get(DEVICE_ENDPOINT + ASSET_TAGS + azureVirtualNetworkDeviceId).
+                then().
+                spec(responseSpec);
+    }
+
+    @Test
+    @Title("Get Azure IP Address Summary Details By Device Id")
+    public void getAzureIpAddressSummaryDetails() throws IOException {
+        String azureIpAddressDeviceId;
+        azureIpAddressDeviceId = getIdFromURL(AZURE_IP_ADDRESS_QUERY);
+        given().
+                spec(requestSpec).
+                when().
+                get(DEVICE_ENDPOINT + SUMMARY + azureIpAddressDeviceId).
+                then().
+                spec(responseSpec);
+    }
+
+    @Test
+    @Title("Get Azure IP Address Local User Details By Device Id")
+    public void getAzureIpAddressUserDetails() throws IOException {
+        String azureIpAddressDeviceId;
+        azureIpAddressDeviceId = getIdFromURL(AZURE_IP_ADDRESS_QUERY);
+        given().
+                spec(requestSpec).
+                when().
+                get(DEVICE_ENDPOINT + LOCAL_USER_DETAIL + azureIpAddressDeviceId).
+                then().
+                spec(responseSpec);
+    }
+
+    @Test
+    @Title("Get Azure IP Address Asset Tags Details By Device Id")
+    public void getAzureIpAddressAssetTagsDetails() throws IOException {
+        String azureIpAddressDeviceId;
+        azureIpAddressDeviceId = getIdFromURL(AZURE_IP_ADDRESS_QUERY);
+        given().
+                spec(requestSpec).
+                when().
+                get(DEVICE_ENDPOINT + ASSET_TAGS + azureIpAddressDeviceId).
+                then().
+                spec(responseSpec);
+    }
+
+
 }

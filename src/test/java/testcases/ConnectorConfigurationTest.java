@@ -81,21 +81,6 @@ public class ConnectorConfigurationTest extends BaseTest {
 
     }
 
-    @Ignore
-    @Test
-    @Title("Post Azure Connector Configuration")
-    public void postAzureConfiguration() {
-        //BASE_ENDPOINT_ADAPTER + ADAPTER_ENDPOINT + ADAPTER_AD_AZURE_CONFIGURATION
-
-    }
-
-    @Ignore
-    @Test
-    @Title("Post AD Connector Configuration")
-    public void postADConfiguration() {
-        //BASE_ENDPOINT_ADAPTER + ADAPTER_ENDPOINT + ADAPTER_AD_AZURE_CONFIGURATION
-
-    }
 
     @Test
     @Title("Get AWS Discover Now")

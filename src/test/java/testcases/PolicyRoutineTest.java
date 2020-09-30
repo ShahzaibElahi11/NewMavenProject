@@ -52,8 +52,8 @@ public class PolicyRoutineTest extends BaseTest {
     @Test
     @Title("Update Policy Routine")
     public void testB_PutPolicyRoutineNew() throws IOException {
-        String CURRENT_PR_ID = "";
-        CURRENT_PR_ID = getIdFromURL("http://inventaserver:9092/policy-routine/?page=0&size=1&sort=dateCreated,desc");
+        String currentPolicyRoutineId = "";
+        currentPolicyRoutineId = getIdFromURL(PUT_POLICY_ROUTINE_ID);
 
         Assume.assumeTrue(isPreviousTestPass == true);
         isPreviousTestPass = false;
@@ -67,7 +67,7 @@ public class PolicyRoutineTest extends BaseTest {
                 and().
                 body(policyRoutine).
                 when().
-                put(POLICY_ROUTINE + CURRENT_PR_ID);
+                put(POLICY_ROUTINE + currentPolicyRoutineId);
         if (response.getStatusCode() == SC_OK)
             isPreviousTestPass = true;
         response.then().
@@ -80,15 +80,15 @@ public class PolicyRoutineTest extends BaseTest {
     @Test
     @Title("Delete Policy Routine")
     public void testC_DeletePolicyRoutine() throws IOException {
-        String CURRENT_PR_DELETE_ID = "";
-        CURRENT_PR_DELETE_ID = getIdFromURL("http://inventaserver:9092/policy-routine/?page=0&size=1&sort=dateModified,desc");
+        String policyRoutineDeleteId = "";
+        policyRoutineDeleteId = getIdFromURL(DELETE_POLICY_ROUTINE_ID);
 
         Assume.assumeTrue(isPreviousTestPass == true);
         isPreviousTestPass = false;
         Response response = given().
                 spec(requestSpec).
                 when().
-                delete(POLICY_ROUTINE + "?ids=" + CURRENT_PR_DELETE_ID);
+                delete(POLICY_ROUTINE + "?ids=" + policyRoutineDeleteId);
         if (response.getStatusCode() == SC_OK)
             isPreviousTestPass = true;
 
@@ -168,11 +168,13 @@ public class PolicyRoutineTest extends BaseTest {
 
     @Test
     @Title("Get Policy Routine Summary")
-    public void getPolicyRoutineSummary() {
+    public void getPolicyRoutineSummary() throws IOException {
+         String policyRoutineId;
+        policyRoutineId = getIdFromURL(GET_POLICY_ROUTINE_ID);
         given().
                 spec(requestSpec).
                 when().
-                get(POLICY_ROUTINE + "summary/" + PR_ID).
+                get(POLICY_ROUTINE + "summary/" + policyRoutineId).
                 then().
                 spec(responseSpec);
     }
@@ -180,14 +182,16 @@ public class PolicyRoutineTest extends BaseTest {
 
     @Test
     @Title("Post Policy Routine Enforce on Devices")
-    public void postEnforcePolicyOnDevice() {
+    public void postEnforcePolicyOnDevice() throws IOException {
+        String deviceId;
+        deviceId = getIdFromURL(GET_DEVICE_ID);
         EnforcePolicyOnDevice enforcePolicyOnDevice = new EnforcePolicyOnDevice("MSEDGEWIN10-5.inventa12.com");
         given().
                 spec(requestSpec).
                 and().
                 body(enforcePolicyOnDevice).
                 when().
-                post(POLICY_ROUTINE + "enforce/" + DEVICE_DETAIL_ID + "/devices/").
+                post(POLICY_ROUTINE + "enforce/" + deviceId + "/devices/").
                 then().
                 assertThat().
                 statusCode(SC_OK);
@@ -195,14 +199,16 @@ public class PolicyRoutineTest extends BaseTest {
 
     @Test
     @Title("Post Policy Routine Enforce on Users")
-    public void postEnforcePolicyOnUser() {
+    public void postEnforcePolicyOnUser() throws IOException {
+        String userId;
+        userId = getIdFromURL(GET_USER_ID);
         EnforcePolicyOnUser enforcePolicyOnUser = new EnforcePolicyOnUser("filyas@netpace.com");
         given().
                 spec(requestSpec).
                 and().
                 body(enforcePolicyOnUser).
                 when().
-                post(POLICY_ROUTINE + "enforce/" + USER_ID + "/users/").
+                post(POLICY_ROUTINE + "enforce/" + userId + "/users/").
                 then().
                 assertThat().
                 statusCode(SC_OK);
@@ -221,15 +227,17 @@ public class PolicyRoutineTest extends BaseTest {
 
     @Test
     @Title("Get Policy Routine Details By Id")
-    public void getPolicyRoutineById() {
+    public void getPolicyRoutineById() throws IOException {
+        String policyRoutineId;
+        policyRoutineId = getIdFromURL(GET_POLICY_ROUTINE_ID);
         given().
                 spec(requestSpec).
                 when().
-                get(POLICY_ROUTINE + PR_ID).
+                get(POLICY_ROUTINE + policyRoutineId).
                 then().
                 spec(responseSpec).
                 and().
-                body("data._id", equalTo(PR_ID));
+                body("data._id", equalTo(policyRoutineId));
     }
 
 
