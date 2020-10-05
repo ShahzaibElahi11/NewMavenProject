@@ -562,6 +562,7 @@ public class DeviceDetailsTest extends BaseTest {
                 then().
                 spec(responseSpec);
     }
+
     @Test
     @Title("Get Azure Public Host Local User Details By Device Id")
     public void getAzurePublicHostUserDetails() throws IOException {
@@ -1099,5 +1100,857 @@ public class DeviceDetailsTest extends BaseTest {
                 spec(responseSpec);
     }
 
+    @Test
+    @Title("Get Azure Traffic Manager Summary Details By Device Id")
+    public void getAzureTrafficManagerSummaryDetails() throws IOException {
+        String azureTrafficManagerDeviceId;
+        azureTrafficManagerDeviceId = getIdFromURL(AZURE_TRAFFIC_MANAGER_QUERY);
+        given().
+                spec(requestSpec).
+                when().
+                get(DEVICE_ENDPOINT + SUMMARY + azureTrafficManagerDeviceId).
+                then().
+                spec(responseSpec);
+    }
+
+    @Test
+    @Title("Get Azure Traffic Manager Local User Details By Device Id")
+    public void getAzureTrafficManagerUserDetails() throws IOException {
+        String azureTrafficManagerDeviceId;
+        azureTrafficManagerDeviceId = getIdFromURL(AZURE_TRAFFIC_MANAGER_QUERY);
+        given().
+                spec(requestSpec).
+                when().
+                get(DEVICE_ENDPOINT + LOCAL_USER_DETAIL + azureTrafficManagerDeviceId).
+                then().
+                spec(responseSpec);
+    }
+
+    @Test
+    @Title("Get Azure Traffic Manager Rules Details By Device Id")
+    public void getAzureTrafficManagerRulesDetails() throws IOException {
+        String azureTrafficManagerDeviceId;
+        azureTrafficManagerDeviceId = getIdFromURL(AZURE_TRAFFIC_MANAGER_QUERY);
+        given().
+                spec(requestSpec).
+                when().
+                get(DEVICE_ENDPOINT + TRAFFIC_MANAGER_RULES + azureTrafficManagerDeviceId).
+                then().
+                spec(responseSpec);
+    }
+
+    @Test
+    @Title("Get Azure Traffic Manager Asset Tags Details By Device Id")
+    public void getAzureTrafficManagerAssetTagssDetails() throws IOException {
+        String azureTrafficManagerDeviceId;
+        azureTrafficManagerDeviceId = getIdFromURL(AZURE_TRAFFIC_MANAGER_QUERY);
+        given().
+                spec(requestSpec).
+                when().
+                get(DEVICE_ENDPOINT + ASSET_TAGS + azureTrafficManagerDeviceId).
+                then().
+                spec(responseSpec);
+    }
+
+
+    @Test
+    @Title("Get AWS Container Summary Details By Device Id")
+    public void getAwsContainerSummaryDetails() throws IOException {
+        String awsContainerDeviceId;
+        awsContainerDeviceId = getIdFromURL(AWS_CONTAINER_QUERY);
+        given().
+                spec(requestSpec).
+                when().
+                get(DEVICE_ENDPOINT + SUMMARY + awsContainerDeviceId).
+                then().
+                spec(responseSpec);
+    }
+
+    @Test
+    @Title("Get AWS Container Network Interface Details By Device Id")
+    public void getAwsContainerNetworkInterfaceDetails() throws IOException {
+        String awsContainerDeviceId;
+        awsContainerDeviceId = getIdFromURL(AWS_CONTAINER_QUERY);
+        given().
+                spec(requestSpec).
+                when().
+                get(DEVICE_ENDPOINT + NETWORK_INTERFACES + awsContainerDeviceId).
+                then().
+                spec(responseSpec);
+    }
+
+
+    @Test
+    @Title("Get AWS Database Instance Summary Details By Device Id")
+    public void getAwsDatabaseInstanceSummaryDetails() throws IOException {
+        String awsDatabaseInstanceDeviceId;
+        awsDatabaseInstanceDeviceId = getIdFromURL(AWS_CONTAINER_QUERY);
+        given().
+                spec(requestSpec).
+                when().
+                get(DEVICE_ENDPOINT + SUMMARY + awsDatabaseInstanceDeviceId).
+                then().
+                spec(responseSpec);
+    }
+
+    @Test
+    @Title("Get AWS Database Instance Inbound Firewall Rule Details By Device Id")
+    public void getAwsDatabaseInstanceInboundFirewallRuleDetails() throws IOException {
+        String awsDatabaseInstanceDeviceId;
+        awsDatabaseInstanceDeviceId = getIdFromURL(AWS_DATABASE_INSTANCE_QUERY);
+        given().
+                spec(requestSpec).
+                when().
+                get(DEVICE_ENDPOINT + FIREWALL_RULES + awsDatabaseInstanceDeviceId + "&direction=Inbound").
+                then().
+                spec(responseSpec);
+    }
+
+
+    @Test
+    @Title("Get AWS Database Instance Outbound Firewall Rule Details By Device Id")
+    public void getAwsDatabaseInstanceOutboundFirewallRuleDetails() throws IOException {
+        String awsDatabaseInstanceDeviceId;
+        awsDatabaseInstanceDeviceId = getIdFromURL(AWS_DATABASE_INSTANCE_QUERY);
+        given().
+                spec(requestSpec).
+                when().
+                get(DEVICE_ENDPOINT + FIREWALL_RULES + awsDatabaseInstanceDeviceId + "&direction=Outbound").
+                then().
+                spec(responseSpec);
+    }
+
+    @Test
+    @Title("Get AWS Database Instance Attachment Details By Device Id")
+    public void getAwsDatabaseInstanceAttachmentsDetails() throws IOException {
+        String awsDatabaseInstanceDeviceId;
+        awsDatabaseInstanceDeviceId = getIdFromURL(AWS_DATABASE_INSTANCE_QUERY);
+        given().
+                spec(requestSpec).
+                when().
+                get(DEVICE_ENDPOINT + ATTACHMENTS + awsDatabaseInstanceDeviceId).
+                then().
+                spec(responseSpec);
+    }
+
+    @Test
+    @Title("Get AWS Database Instance Subnet Group Details By Device Id")
+    public void getAwsDatabaseInstanceSubnetGroupDetails() throws IOException {
+        String awsDatabaseInstanceDeviceId;
+        awsDatabaseInstanceDeviceId = getIdFromURL(AWS_DATABASE_INSTANCE_QUERY);
+        given().
+                spec(requestSpec).
+                when().
+                get(DEVICE_ENDPOINT + SUBNET_GROUP + awsDatabaseInstanceDeviceId).
+                then().
+                spec(responseSpec);
+    }
+
+    @Test
+    @Title("Get AWS Internet Gateway Summary Details By Device Id")
+    public void getAwsInternetGatewaySummaryDetails() throws IOException {
+        String awsInternetGatewayDeviceId;
+        awsInternetGatewayDeviceId = getIdFromURL(AWS_INTERNET_GATEWAY_QUERY);
+        given().
+                spec(requestSpec).
+                when().
+                get(DEVICE_ENDPOINT + SUMMARY + awsInternetGatewayDeviceId).
+                then().
+                spec(responseSpec);
+    }
+
+    @Test
+    @Title("Get AWS Internet Gateway Asset Tag Details By Device Id")
+    public void getAwsInternetGatewayAssetTagDetails() throws IOException {
+        String awsInternetGatewayDeviceId;
+        awsInternetGatewayDeviceId = getIdFromURL(AWS_INTERNET_GATEWAY_QUERY);
+        given().
+                spec(requestSpec).
+                when().
+                get(DEVICE_ENDPOINT + ASSET_TAGS + awsInternetGatewayDeviceId).
+                then().
+                spec(responseSpec);
+    }
+
+    @Test
+    @Title("Get AWS Internet Gateway Attachments Details By Device Id")
+    public void getAwsInternetGatewayAttachmentsDetails() throws IOException {
+        String awsInternetGatewayDeviceId;
+        awsInternetGatewayDeviceId = getIdFromURL(AWS_INTERNET_GATEWAY_QUERY);
+        given().
+                spec(requestSpec).
+                when().
+                get(DEVICE_ENDPOINT + ATTACHMENTS + awsInternetGatewayDeviceId).
+                then().
+                spec(responseSpec);
+    }
+
+    @Test
+    @Title("Get AWS IP Address Summary Details By Device Id")
+    public void getAwsIpAddressSummaryDetails() throws IOException {
+        String awsIpAddressDeviceId;
+        awsIpAddressDeviceId = getIdFromURL(AWS_IP_ADDRESS_QUERY);
+        given().
+                spec(requestSpec).
+                when().
+                get(DEVICE_ENDPOINT + SUMMARY + awsIpAddressDeviceId).
+                then().
+                spec(responseSpec);
+    }
+
+    @Test
+    @Title("Get AWS IP Address Asset Tags Details By Device Id")
+    public void getAwsIpAddressAssetTagsDetails() throws IOException {
+        String awsIpAddressDeviceId;
+        awsIpAddressDeviceId = getIdFromURL(AWS_IP_ADDRESS_QUERY);
+        given().
+                spec(requestSpec).
+                when().
+                get(DEVICE_ENDPOINT + ASSET_TAGS + awsIpAddressDeviceId).
+                then().
+                spec(responseSpec);
+    }
+
+
+    @Test
+    @Title("Get AWS IP Address Attachment Details By Device Id")
+    public void getAwsIpAddressAttachmentDetails() throws IOException {
+        String awsIpAddressDeviceId;
+        awsIpAddressDeviceId = getIdFromURL(AWS_IP_ADDRESS_QUERY);
+        given().
+                spec(requestSpec).
+                when().
+                get(DEVICE_ENDPOINT + ATTACHMENTS + awsIpAddressDeviceId).
+                then().
+                spec(responseSpec);
+    }
+
+    @Test
+    @Title("Get AWS Lambda Function Summary Details By Device Id")
+    public void getAwsLambdaFunctionSummaryDetails() throws IOException {
+        String awsLambdaFunctionDeviceId;
+        awsLambdaFunctionDeviceId = getIdFromURL(AWS_LAMBDA_FUNCTION_QUERY);
+        given().
+                spec(requestSpec).
+                when().
+                get(DEVICE_ENDPOINT + SUMMARY + awsLambdaFunctionDeviceId).
+                then().
+                spec(responseSpec);
+    }
+
+
+    @Test
+    @Title("Get AWS Lambda Function Attachment Details By Device Id")
+    public void getAwsLambdaFunctionAttachmentDetails() throws IOException {
+        String awsLambdaFunctionDeviceId;
+        awsLambdaFunctionDeviceId = getIdFromURL(AWS_LAMBDA_FUNCTION_QUERY);
+        given().
+                spec(requestSpec).
+                when().
+                get(DEVICE_ENDPOINT + ATTACHMENTS + awsLambdaFunctionDeviceId).
+                then().
+                spec(responseSpec);
+    }
+
+    @Test
+    @Title("Get AWS Load Balancer Summary Details By Device Id")
+    public void getAwsLoadBalancerSummaryDetails() throws IOException {
+        String awsLoadBalancerDeviceId;
+        awsLoadBalancerDeviceId = getIdFromURL(AWS_LOAD_BALANCER_QUERY);
+        given().
+                spec(requestSpec).
+                when().
+                get(DEVICE_ENDPOINT + SUMMARY + awsLoadBalancerDeviceId).
+                then().
+                spec(responseSpec);
+    }
+
+    @Test
+    @Title("Get AWS Load Balancer Rules Details By Device Id")
+    public void getAwsLoadBalancerRulesDetails() throws IOException {
+        String awsLoadBalancerDeviceId;
+        awsLoadBalancerDeviceId = getIdFromURL(AWS_LOAD_BALANCER_QUERY);
+        given().
+                spec(requestSpec).
+                when().
+                get(DEVICE_ENDPOINT + LOAD_BALANCER_RULES + awsLoadBalancerDeviceId).
+                then().
+                spec(responseSpec);
+    }
+
+    @Test
+    @Title("Get AWS Load Balancer Attachment Details By Device Id")
+    public void getAwsLoadBalancerAttachmentDetails() throws IOException {
+        String awsLoadBalancerDeviceId;
+        awsLoadBalancerDeviceId = getIdFromURL(AWS_LOAD_BALANCER_QUERY);
+        given().
+                spec(requestSpec).
+                when().
+                get(DEVICE_ENDPOINT + ATTACHMENTS + awsLoadBalancerDeviceId).
+                then().
+                spec(responseSpec);
+    }
+
+    @Test
+    @Title("Get AWS Load Balancer Target Details By Device Id")
+    public void getAwsLoadBalancerTargetDetails() throws IOException {
+        String awsLoadBalancerDeviceId;
+        awsLoadBalancerDeviceId = getIdFromURL(AWS_LOAD_BALANCER_QUERY);
+        given().
+                spec(requestSpec).
+                when().
+                get(DEVICE_ENDPOINT + LOADBALANCER_TARGETS + awsLoadBalancerDeviceId).
+                then().
+                spec(responseSpec);
+    }
+
+    @Test
+    @Title("Get AWS Nat Gateway Summary Details By Device Id")
+    public void getAwsNatGatewaySummaryDetails() throws IOException {
+        String awsNetGatewayDeviceId;
+        awsNetGatewayDeviceId = getIdFromURL(AWS_NAT_GATEWAY_QUERY);
+        given().
+                spec(requestSpec).
+                when().
+                get(DEVICE_ENDPOINT + SUMMARY + awsNetGatewayDeviceId).
+                then().
+                spec(responseSpec);
+    }
+
+    @Test
+    @Title("Get AWS Nat Gateway Asset Tags Details By Device Id")
+    public void getAwsNatGatewayAssetTagsDetails() throws IOException {
+        String awsNetGatewayDeviceId;
+        awsNetGatewayDeviceId = getIdFromURL(AWS_NAT_GATEWAY_QUERY);
+        given().
+                spec(requestSpec).
+                when().
+                get(DEVICE_ENDPOINT + ASSET_TAGS + awsNetGatewayDeviceId).
+                then().
+                spec(responseSpec);
+    }
+
+    @Test
+    @Title("Get AWS Nat Gateway Attachments Details By Device Id")
+    public void getAwsNatGatewayAttachmentsDetails() throws IOException {
+        String awsNetGatewayDeviceId;
+        awsNetGatewayDeviceId = getIdFromURL(AWS_NAT_GATEWAY_QUERY);
+        given().
+                spec(requestSpec).
+                when().
+                get(DEVICE_ENDPOINT + ATTACHMENTS + awsNetGatewayDeviceId).
+                then().
+                spec(responseSpec);
+    }
+
+    @Test
+    @Title("Get AWS Network Access Control List Summary Details By Device Id")
+    public void getAwsNetworkAccessControlListSummaryDetails() throws IOException {
+        String awsNetworkAccessControlListDeviceId;
+        awsNetworkAccessControlListDeviceId = getIdFromURL(AWS_NETWORK_ACCESS_CONTROL_LIST_QUERY);
+        given().
+                spec(requestSpec).
+                when().
+                get(DEVICE_ENDPOINT + SUMMARY + awsNetworkAccessControlListDeviceId).
+                then().
+                spec(responseSpec);
+    }
+
+    @Test
+    @Title("Get AWS Network Access Control List Attachment Details By Device Id")
+    public void getAwsNetworkAccessControlListAttachmentDetails() throws IOException {
+        String awsNetworkAccessControlListDeviceId;
+        awsNetworkAccessControlListDeviceId = getIdFromURL(AWS_NETWORK_ACCESS_CONTROL_LIST_QUERY);
+        given().
+                spec(requestSpec).
+                when().
+                get(DEVICE_ENDPOINT + ATTACHMENTS + awsNetworkAccessControlListDeviceId).
+                then().
+                spec(responseSpec);
+    }
+
+    @Test
+    @Title("Get AWS Network Access Control List Asset Tags Details By Device Id")
+    public void getAwsNetworkAccessControlListAssetTagsDetails() throws IOException {
+        String awsNetworkAccessControlListDeviceId;
+        awsNetworkAccessControlListDeviceId = getIdFromURL(AWS_NETWORK_ACCESS_CONTROL_LIST_QUERY);
+        given().
+                spec(requestSpec).
+                when().
+                get(DEVICE_ENDPOINT + ASSET_TAGS + awsNetworkAccessControlListDeviceId).
+                then().
+                spec(responseSpec);
+    }
+
+    @Test
+    @Title("Get AWS Network Access Control List Entries Details By Device Id")
+    public void getAwsNetworkAccessControlListEntriesDetails() throws IOException {
+        String awsNetworkAccessControlListDeviceId;
+        awsNetworkAccessControlListDeviceId = getIdFromURL(AWS_NETWORK_ACCESS_CONTROL_LIST_QUERY);
+        given().
+                spec(requestSpec).
+                when().
+                get(DEVICE_ENDPOINT + ENTRIES + awsNetworkAccessControlListDeviceId).
+                then().
+                spec(responseSpec);
+    }
+
+    @Test
+    @Title("Get AWS Network Security Group Summary Details By Device Id")
+    public void getAwsNetworkSecurityGroupSummaryDetails() throws IOException {
+        String awsNetworkSecurityGroupDeviceId;
+        awsNetworkSecurityGroupDeviceId = getIdFromURL(AWS_NETWORK_SECURITY_GROUP_QUERY);
+        given().
+                spec(requestSpec).
+                when().
+                get(DEVICE_ENDPOINT + SUMMARY + awsNetworkSecurityGroupDeviceId).
+                then().
+                spec(responseSpec);
+    }
+
+    @Test
+    @Title("Get AWS Network Security Group Asset Tags Details By Device Id")
+    public void getAwsNetworkSecurityGroupAssetTagsDetails() throws IOException {
+        String awsNetworkSecurityGroupDeviceId;
+        awsNetworkSecurityGroupDeviceId = getIdFromURL(AWS_NETWORK_SECURITY_GROUP_QUERY);
+        given().
+                spec(requestSpec).
+                when().
+                get(DEVICE_ENDPOINT + ASSET_TAGS + awsNetworkSecurityGroupDeviceId).
+                then().
+                spec(responseSpec);
+    }
+
+    @Test
+    @Title("Get AWS Network Security Group Attachments Details By Device Id")
+    public void getAwsNetworkSecurityGroupAttachmentsDetails() throws IOException {
+        String awsNetworkSecurityGroupDeviceId;
+        awsNetworkSecurityGroupDeviceId = getIdFromURL(AWS_NETWORK_SECURITY_GROUP_QUERY);
+        given().
+                spec(requestSpec).
+                when().
+                get(DEVICE_ENDPOINT + ATTACHMENTS + awsNetworkSecurityGroupDeviceId).
+                then().
+                spec(responseSpec);
+    }
+
+    @Test
+    @Title("Get AWS Network Security Group Inbound Firewall Rule Details By Device Id")
+    public void getAwsNetworkSecurityGroupInboundFirewallRuleDetails() throws IOException {
+        String awsNetworkSecurityGroupDeviceId;
+        awsNetworkSecurityGroupDeviceId = getIdFromURL(AWS_NETWORK_SECURITY_GROUP_QUERY);
+        given().
+                spec(requestSpec).
+                when().
+                get(DEVICE_ENDPOINT + FIREWALL_RULES + awsNetworkSecurityGroupDeviceId + "&direction=Inbound").
+                then().
+                spec(responseSpec);
+    }
+
+    @Test
+    @Title("Get AWS Network Security Group Outbound Firewall Rule Details By Device Id")
+    public void getAwsNetworkSecurityGroupOutboundFirewallRuleDetails() throws IOException {
+        String awsNetworkSecurityGroupDeviceId;
+        awsNetworkSecurityGroupDeviceId = getIdFromURL(AWS_NETWORK_SECURITY_GROUP_QUERY);
+        given().
+                spec(requestSpec).
+                when().
+                get(DEVICE_ENDPOINT + FIREWALL_RULES + awsNetworkSecurityGroupDeviceId + "&direction=Outbound").
+                then().
+                spec(responseSpec);
+    }
+
+    @Test
+    @Title("Get AWS Route 53 DNS Records Summary Details By Device Id")
+    public void getAwsRoute53DNSRecordsSummaryDetails() throws IOException {
+        String awsRoute53DNSRecordsDeviceId;
+        awsRoute53DNSRecordsDeviceId = getIdFromURL(AWS_ROUTE_53_DNS_RECORDS_QUERY);
+        given().
+                spec(requestSpec).
+                when().
+                get(DEVICE_ENDPOINT + SUMMARY + awsRoute53DNSRecordsDeviceId).
+                then().
+                spec(responseSpec);
+    }
+
+    @Test
+    @Title("Get AWS Route 53 DNS Records In-Depth Details By Device Id")
+    public void getAwsRoute53DNSRecordsInDepthDetails() throws IOException {
+        String awsRoute53DNSRecordsDeviceId;
+        awsRoute53DNSRecordsDeviceId = getIdFromURL(AWS_ROUTE_53_DNS_RECORDS_QUERY);
+        given().
+                spec(requestSpec).
+                when().
+                get(DEVICE_ENDPOINT + DNS_RECORDS + awsRoute53DNSRecordsDeviceId).
+                then().
+                spec(responseSpec);
+    }
+
+    @Test
+    @Title("Get AWS Route Table Summary Details By Device Id")
+    public void getAwsRouteTableSummaryDetails() throws IOException {
+        String awsRouteTablesDeviceId;
+        awsRouteTablesDeviceId = getIdFromURL(AWS_ROUTE_TABLE_QUERY);
+        given().
+                spec(requestSpec).
+                when().
+                get(DEVICE_ENDPOINT + SUMMARY + awsRouteTablesDeviceId).
+                then().
+                spec(responseSpec);
+    }
+
+    @Test
+    @Title("Get AWS Route Table Asset Tags Details By Device Id")
+    public void getAwsRouteTableAssetTagsDetails() throws IOException {
+        String awsRouteTablesDeviceId;
+        awsRouteTablesDeviceId = getIdFromURL(AWS_ROUTE_TABLE_QUERY);
+        given().
+                spec(requestSpec).
+                when().
+                get(DEVICE_ENDPOINT + ASSET_TAGS + awsRouteTablesDeviceId).
+                then().
+                spec(responseSpec);
+    }
+
+    @Test
+    @Title("Get AWS Route Table Attachments Details By Device Id")
+    public void getAwsRouteTableAttachmentsDetails() throws IOException {
+        String awsRouteTablesDeviceId;
+        awsRouteTablesDeviceId = getIdFromURL(AWS_ROUTE_TABLE_QUERY);
+        given().
+                spec(requestSpec).
+                when().
+                get(DEVICE_ENDPOINT + ATTACHMENTS + awsRouteTablesDeviceId).
+                then().
+                spec(responseSpec);
+    }
+
+    @Test
+    @Title("Get AWS Route Table Entries Details By Device Id")
+    public void getAwsRouteTableEntriesDetails() throws IOException {
+        String awsRouteTablesDeviceId;
+        awsRouteTablesDeviceId = getIdFromURL(AWS_ROUTE_TABLE_QUERY);
+        given().
+                spec(requestSpec).
+                when().
+                get(DEVICE_ENDPOINT + ENTRIES + awsRouteTablesDeviceId).
+                then().
+                spec(responseSpec);
+    }
+
+    @Test
+    @Title("Get AWS S3 Bucket Summary Details By Device Id")
+    public void getAwsS3BucketSummaryDetails() throws IOException {
+        String awsS3BucketDeviceId;
+        awsS3BucketDeviceId = getIdFromURL(AWS_S3_BUCKET_QUERY);
+        given().
+                spec(requestSpec).
+                when().
+                get(DEVICE_ENDPOINT + SUMMARY + awsS3BucketDeviceId).
+                then().
+                spec(responseSpec);
+    }
+
+    @Test
+    @Title("Get AWS S3 Bucket Access Control List Details By Device Id")
+    public void getAwsS3BucketAccessControlListDetails() throws IOException {
+        String awsS3BucketDeviceId;
+        awsS3BucketDeviceId = getIdFromURL(AWS_S3_BUCKET_QUERY);
+        given().
+                spec(requestSpec).
+                when().
+                get(DEVICE_ENDPOINT + BUCKET_ACL + awsS3BucketDeviceId).
+                then().
+                spec(responseSpec);
+    }
+
+    @Test
+    @Title("Get AWS Subnet Summary Details By Device Id")
+    public void getAwsSubnetSummaryDetails() throws IOException {
+        String awsSubnetDeviceId;
+        awsSubnetDeviceId = getIdFromURL(AWS_SUBNET_QUERY);
+        given().
+                spec(requestSpec).
+                when().
+                get(DEVICE_ENDPOINT + SUMMARY + awsSubnetDeviceId).
+                then().
+                spec(responseSpec);
+    }
+
+    @Test
+    @Title("Get AWS Subnet Asset Tags Details By Device Id")
+    public void getAwsSubnetAssetTagsDetails() throws IOException {
+        String awsSubnetDeviceId;
+        awsSubnetDeviceId = getIdFromURL(AWS_SUBNET_QUERY);
+        given().
+                spec(requestSpec).
+                when().
+                get(DEVICE_ENDPOINT + ASSET_TAGS + awsSubnetDeviceId).
+                then().
+                spec(responseSpec);
+    }
+
+    @Test
+    @Title("Get AWS Virtual Machine Summary Details By Device Id")
+    public void getAwsVirtualMachineSummaryDetails() throws IOException {
+        String awsVirtualMachineDeviceId;
+        awsVirtualMachineDeviceId = getIdFromURL(AWS_VIRTUAL_MACHINE_QUERY);
+        given().
+                spec(requestSpec).
+                when().
+                get(DEVICE_ENDPOINT + SUMMARY + awsVirtualMachineDeviceId).
+                then().
+                spec(responseSpec);
+    }
+
+    @Test
+    @Title("Get AWS Virtual Machine Operating System Details By Device Id")
+    public void getAwsVirtualMachineOperatingSystemDetails() throws IOException {
+        String awsVirtualMachineDeviceId;
+        awsVirtualMachineDeviceId = getIdFromURL(AWS_VIRTUAL_MACHINE_QUERY);
+        given().
+                spec(requestSpec).
+                when().
+                get(DEVICE_ENDPOINT + OS_INFORMATION + awsVirtualMachineDeviceId).
+                then().
+                spec(responseSpec);
+    }
+
+    @Test
+    @Title("Get AWS Virtual Machine CPU Details By Device Id")
+    public void getAwsVirtualMachineCpuDetails() throws IOException {
+        String awsVirtualMachineDeviceId;
+        awsVirtualMachineDeviceId = getIdFromURL(AWS_VIRTUAL_MACHINE_QUERY);
+        given().
+                spec(requestSpec).
+                when().
+                get(DEVICE_ENDPOINT + CPU_INFO + awsVirtualMachineDeviceId).
+                then().
+                spec(responseSpec);
+    }
+
+    @Test
+    @Title("Get AWS Virtual Machine Hard Drive Details By Device Id")
+    public void getAwsVirtualMachineHardDriveDetails() throws IOException {
+        String awsVirtualMachineDeviceId;
+        awsVirtualMachineDeviceId = getIdFromURL(AWS_VIRTUAL_MACHINE_QUERY);
+        given().
+                spec(requestSpec).
+                when().
+                get(DEVICE_ENDPOINT + HARD_DRIVE_DETAIL + awsVirtualMachineDeviceId).
+                then().
+                spec(responseSpec);
+    }
+
+    @Test
+    @Title("Get AWS Virtual Machine Network Interfaces Details By Device Id")
+    public void getAwsVirtualMachineNetworkInterfacesDetails() throws IOException {
+        String awsVirtualMachineDeviceId;
+        awsVirtualMachineDeviceId = getIdFromURL(AWS_VIRTUAL_MACHINE_QUERY);
+        given().
+                spec(requestSpec).
+                when().
+                get(DEVICE_ENDPOINT + NETWORK_INTERFACES + awsVirtualMachineDeviceId).
+                then().
+                spec(responseSpec);
+    }
+
+
+    @Test
+    @Title("Get AWS Virtual Machine Inbound Firewall Rule Details By Device Id")
+    public void getAwsVirtualMachineInboundFirewallRuleDetails() throws IOException {
+        String awsVirtualMachineDeviceId;
+        awsVirtualMachineDeviceId = getIdFromURL(AWS_VIRTUAL_MACHINE_QUERY);
+        given().
+                spec(requestSpec).
+                when().
+                get(DEVICE_ENDPOINT + FIREWALL_RULES + awsVirtualMachineDeviceId + "&direction=Inbound").
+                then().
+                spec(responseSpec);
+    }
+
+
+    @Test
+    @Title("Get AWS Virtual Machine Outbound Firewall Rule Details By Device Id")
+    public void getAwsVirtualMachineOutboundFirewallRuleDetails() throws IOException {
+        String awsVirtualMachineDeviceId;
+        awsVirtualMachineDeviceId = getIdFromURL(AWS_VIRTUAL_MACHINE_QUERY);
+        given().
+                spec(requestSpec).
+                when().
+                get(DEVICE_ENDPOINT + FIREWALL_RULES + awsVirtualMachineDeviceId + "&direction=Outbound").
+                then().
+                spec(responseSpec);
+    }
+
+    @Test
+    @Title("Get AWS Virtual Machine Asset Tag Details By Device Id")
+    public void getAwsVirtualMachineAssetTagDetails() throws IOException {
+        String awsVirtualMachineDeviceId;
+        awsVirtualMachineDeviceId = getIdFromURL(AWS_VIRTUAL_MACHINE_QUERY);
+        given().
+                spec(requestSpec).
+                when().
+                get(DEVICE_ENDPOINT + ASSET_TAGS + awsVirtualMachineDeviceId).
+                then().
+                spec(responseSpec);
+    }
+
+    @Test
+    @Title("Get AWS Virtual Machine Attachment Details By Device Id")
+    public void getAwsVirtualMachineAttachmentDetails() throws IOException {
+        String awsVirtualMachineDeviceId;
+        awsVirtualMachineDeviceId = getIdFromURL(AWS_VIRTUAL_MACHINE_QUERY);
+        given().
+                spec(requestSpec).
+                when().
+                get(DEVICE_ENDPOINT + ATTACHMENTS + awsVirtualMachineDeviceId).
+                then().
+                spec(responseSpec);
+    }
+
+    @Test
+    @Title("Get AWS Virtual Machine Attached Role Details By Device Id")
+    public void getAwsVirtualMachineAttachedRoleDetails() throws IOException {
+        String awsVirtualMachineDeviceId;
+        awsVirtualMachineDeviceId = getIdFromURL(AWS_VIRTUAL_MACHINE_QUERY);
+        given().
+                spec(requestSpec).
+                when().
+                get(DEVICE_ENDPOINT + ATTACHED_ROLES + awsVirtualMachineDeviceId).
+                then().
+                spec(responseSpec);
+    }
+
+    @Test
+    @Title("Get AWS Virtual Network Summary Details By Device Id")
+    public void getAwsVirtualNetworkSummaryDetails() throws IOException {
+        String awsVirtualNetworkDeviceId;
+        awsVirtualNetworkDeviceId = getIdFromURL(AWS_VIRTUAL_NETWORK_QUERY);
+        given().
+                spec(requestSpec).
+                when().
+                get(DEVICE_ENDPOINT + SUMMARY + awsVirtualNetworkDeviceId).
+                then().
+                spec(responseSpec);
+    }
+
+    @Test
+    @Title("Get AWS Virtual Network Asset Tag Details By Device Id")
+    public void getAwsVirtualNetworkAssetTagDetails() throws IOException {
+        String awsVirtualNetworkDeviceId;
+        awsVirtualNetworkDeviceId = getIdFromURL(AWS_VIRTUAL_NETWORK_QUERY);
+        given().
+                spec(requestSpec).
+                when().
+                get(DEVICE_ENDPOINT + ASSET_TAGS + awsVirtualNetworkDeviceId).
+                then().
+                spec(responseSpec);
+    }
+
+    @Test
+    @Title("Get AWS Volume Summary Details By Device Id")
+    public void getAwsVolumeSummaryDetails() throws IOException {
+        String awsVolumeDeviceId;
+        awsVolumeDeviceId = getIdFromURL(AWS_VOLUME_QUERY);
+        given().
+                spec(requestSpec).
+                when().
+                get(DEVICE_ENDPOINT + SUMMARY + awsVolumeDeviceId).
+                then().
+                spec(responseSpec);
+    }
+
+    @Test
+    @Title("Get AWS Volume Hard Drive Details By Device Id")
+    public void getAwsVolumeHardDriveDetails() throws IOException {
+        String awsVolumeDeviceId;
+        awsVolumeDeviceId = getIdFromURL(AWS_VOLUME_QUERY);
+        given().
+                spec(requestSpec).
+                when().
+                get(DEVICE_ENDPOINT + HARD_DRIVE_DETAIL + awsVolumeDeviceId).
+                then().
+                spec(responseSpec);
+    }
+
+    @Test
+    @Title("Get AWS Volume Asset Tag Details By Device Id")
+    public void getAwsVolumeAssetTagDetails() throws IOException {
+        String awsVolumeDeviceId;
+        awsVolumeDeviceId = getIdFromURL(AWS_VOLUME_QUERY);
+        given().
+                spec(requestSpec).
+                when().
+                get(DEVICE_ENDPOINT + ASSET_TAGS + awsVolumeDeviceId).
+                then().
+                spec(responseSpec);
+    }
+
+    @Test
+    @Title("Get AWS VPC Peering Connection Summary Details By Device Id")
+    public void getAwsVPCPeeringConnectionSummaryDetails() throws IOException {
+        String awsVPCPeeringConnectionDeviceId;
+        awsVPCPeeringConnectionDeviceId = getIdFromURL(AWS_VPC_PEERING_CONNECTION_QUERY);
+        given().
+                spec(requestSpec).
+                when().
+                get(DEVICE_ENDPOINT + SUMMARY + awsVPCPeeringConnectionDeviceId).
+                then().
+                spec(responseSpec);
+    }
+
+    @Test
+    @Title("Get AWS VPC Peering Connection Asset Tag Details By Device Id")
+    public void getAwsVPCPeeringConnectionAssetTagDetails() throws IOException {
+        String awsVPCPeeringConnectionDeviceId;
+        awsVPCPeeringConnectionDeviceId = getIdFromURL(AWS_VPC_PEERING_CONNECTION_QUERY);
+        given().
+                spec(requestSpec).
+                when().
+                get(DEVICE_ENDPOINT + ASSET_TAGS + awsVPCPeeringConnectionDeviceId).
+                then().
+                spec(responseSpec);
+    }
+
+    @Test
+    @Title("Get AWS VPC Peering Connection Requester Peer Details By Device Id")
+    public void getAwsVPCPeeringConnectionRequesterPeerDetails() throws IOException {
+        String awsVPCPeeringConnectionDeviceId;
+        awsVPCPeeringConnectionDeviceId = getIdFromURL(AWS_VPC_PEERING_CONNECTION_QUERY);
+        given().
+                spec(requestSpec).
+                when().
+                get(DEVICE_ENDPOINT + REQUESTER_PEER + awsVPCPeeringConnectionDeviceId).
+                then().
+                spec(responseSpec);
+    }
+
+
+    @Test
+    @Title("Get AWS VPC Peering Connection Accepter Peer Details By Device Id")
+    public void getAwsVPCPeeringConnectionAccepterPeerDetails() throws IOException {
+        String awsVPCPeeringConnectionDeviceId;
+        awsVPCPeeringConnectionDeviceId = getIdFromURL(AWS_VPC_PEERING_CONNECTION_QUERY);
+        given().
+                spec(requestSpec).
+                when().
+                get(DEVICE_ENDPOINT + ACCEPTER_PEER + awsVPCPeeringConnectionDeviceId).
+                then().
+                spec(responseSpec);
+    }
+
+    @Test
+    @Title("Get AWS Workspace Summary Details By Device Id")
+    public void getAwsWorkspaceSummaryDetails() throws IOException {
+        String awsWorkspaceDeviceId;
+        awsWorkspaceDeviceId = getIdFromURL(AWS_WORKSPACES_QUERY);
+        given().
+                spec(requestSpec).
+                when().
+                get(DEVICE_ENDPOINT + SUMMARY + awsWorkspaceDeviceId).
+                then().
+                spec(responseSpec);
+    }
 
 }

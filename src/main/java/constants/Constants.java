@@ -1,7 +1,9 @@
 package constants;
 
-public class Constants{
 
+import utils.BaseTest;
+
+public class Constants extends BaseTest {
     /**
      * AuditLogs  Configuration Constant
      */
@@ -123,9 +125,8 @@ public class Constants{
     public static final String CONTAINERS = "containers?_id=";
 
 
-    //8 Traffic Manager - remaining
+    //8 Traffic Manager - complete
     public static final String TRAFFIC_MANAGER_RULES = "trafficManagerRules?_id=";
-    public static final String SUBNET = "subnets?_id=";
 
     // 9 Virtual Machine - completed
     public static final String SUMMARY = "summary?_id=";
@@ -139,6 +140,8 @@ public class Constants{
 
     //10 Virtual Network - completed
     public static final String CONNECTED_DEVICE = "connectedDevices?_id=";
+    public static final String SUBNET = "subnets?_id=";
+
 
     //11 IP Address - completed
 
@@ -242,32 +245,158 @@ public class Constants{
     public static final String DOCKER_ENDPOINT = "/docker/";
     public static final String ACTIVE_MQ = "activemq";
 
-    public static final String CROWDSTRIKE_QUERY = "http://inventaserver:9092/query/devices/?query=((adapters.adapter_crowdstrike.status%20==%20exists(true))and(adapters.adapter_crowdstrike.hostname%20==%20%22TESTBENCH%22))";
-    public static final String AZURE_CONTAINER_QUERY = "http://inventaserver:9092/query/devices/?query=(adapters.adapter_azure.Container%20Instance::Status%20==%20exists(true))&page=0&size=1";
-    public static final String AZURE_LOADBALANCER_QUERY = "http://inventaserver:9092/query/devices/?query=(adapters.adapter_azure.Load%20Balancer::Type%20==%20exists(true))&page=0&size=1";
-    public static final String AZURE_PRIVATE_DNS_ZONE_QUERY = "http://inventaserver:9092/query/devices/?query=(adapters.adapter_azure.Private%20DNS%20Zones::Id%20==%20exists(true))&page=0&size=1";
-    public static final String AZURE_PUBLIC_DNS_ZONE_QUERY = "http://inventaserver:9092/query/devices/?query=(adapters.adapter_azure.Public%20DNS%20Zones::Type%20==%20exists(true))&page=0&size=1";
-    public static final String AZURE_APPLICATION_GATEWAY_QUERY = "http://inventaserver:9092/query/devices/?query=(common.hostName%20==%20%22AppGwPubIP%22)&page=0&size=1";
-    public static final String AZURE_NETWORK_SECURITY_GROUP_QUERY = "http://inventaserver:9092/query/devices/?query=(adapters.adapter_azure.Network%20Security%20Group::Type%20==%20exists(true))&page=0&size=1";
-    public static final String AZURE_STORAGE_ACCOUNT_QUERY = "http://inventaserver:9092/query/devices/?query=(adapters.adapter_azure.Type%20==%20%22Storage%20Account%22)&page=0&size=1";
-    public static final String AZURE_VIRTUAL_MACHINE_QUERY = "http://inventaserver:9092/query/devices/?query=(adapters.adapter_azure.Virtual%20Machine::Status%20==%20exists(true))&page=0&size=1";
-    public static final String AZURE_VIRTUAL_NETWORK_QUERY = "http://inventaserver:9092/query/devices/?query=(adapters.adapter_azure.Virtual%20Network::Type%20==%20exists(true))&page=0&size=1";
-    public static final String AZURE_IP_ADDRESS_QUERY = "http://inventaserver:9092/query/devices/?query=(adapters.adapter_azure.Public%20IP%20Address::Type%20==%20exists(true))&page=0&size=1";
+    public static final String CROWDSTRIKE_QUERY = BASE_ENDPOINT + ":" + INVENTA_PORT + "/query/devices/?query=((adapters.adapter_crowdstrike.status%20==%20exists(true))and(adapters.adapter_crowdstrike.hostname%20==%20%22TESTBENCH%22))";
+    public static final String AZURE_CONTAINER_QUERY = BASE_ENDPOINT + ":" + INVENTA_PORT +  "/query/devices/?query=(adapters.adapter_azure.Container%20Instance::Status%20==%20exists(true))&page=0&size=1";
+    public static final String AZURE_LOADBALANCER_QUERY = BASE_ENDPOINT + ":" + INVENTA_PORT + "/query/devices/?query=(adapters.adapter_azure.Load%20Balancer::Type%20==%20exists(true))&page=0&size=1";
+    public static final String AZURE_PRIVATE_DNS_ZONE_QUERY = BASE_ENDPOINT + ":" + INVENTA_PORT + "/query/devices/?query=(adapters.adapter_azure.Private%20DNS%20Zones::Id%20==%20exists(true))&page=0&size=1";
+    public static final String AZURE_PUBLIC_DNS_ZONE_QUERY = BASE_ENDPOINT + ":" + INVENTA_PORT + "/query/devices/?query=(adapters.adapter_azure.Public%20DNS%20Zones::Type%20==%20exists(true))&page=0&size=1";
+    public static final String AZURE_APPLICATION_GATEWAY_QUERY = BASE_ENDPOINT + ":" + INVENTA_PORT + "/query/devices/?query=(common.hostName%20==%20%22AppGwPubIP%22)&page=0&size=1";
+    public static final String AZURE_NETWORK_SECURITY_GROUP_QUERY = BASE_ENDPOINT + ":" + INVENTA_PORT + "/query/devices/?query=(adapters.adapter_azure.Network%20Security%20Group::Type%20==%20exists(true))&page=0&size=1";
+    public static final String AZURE_STORAGE_ACCOUNT_QUERY = BASE_ENDPOINT + ":" + INVENTA_PORT + "/query/devices/?query=(adapters.adapter_azure.Type%20==%20%22Storage%20Account%22)&page=0&size=1";
+    public static final String AZURE_VIRTUAL_MACHINE_QUERY = BASE_ENDPOINT + ":" + INVENTA_PORT + "/query/devices/?query=(adapters.adapter_azure.Virtual%20Machine::Status%20==%20exists(true))&page=0&size=1";
+    public static final String AZURE_VIRTUAL_NETWORK_QUERY = BASE_ENDPOINT + ":" + INVENTA_PORT + "/query/devices/?query=(adapters.adapter_azure.Virtual%20Network::Type%20==%20exists(true))&page=0&size=1";
+    public static final String AZURE_IP_ADDRESS_QUERY = BASE_ENDPOINT + ":" + INVENTA_PORT + "/query/devices/?query=(adapters.adapter_azure.Public%20IP%20Address::Type%20==%20exists(true))&page=0&size=1";
+    public static final String AZURE_TRAFFIC_MANAGER_QUERY = BASE_ENDPOINT + ":" + INVENTA_PORT + "/query/devices/?query=(adapters.adapter_azure.Traffic%20Manager%20Profile::Status%20==%20exists(true))&page=0&size=1";
+
+    public static final String GET_ROLE_ID = BASE_ENDPOINT + ":" + INVENTA_PORT + "/role/getAllRole?page=0&size=1";
+    public static final String PUT_ROLE_ID = BASE_ENDPOINT + ":" + INVENTA_PORT + "/role/getAllRole?page=0&size=1&sort=dateCreated,desc";
+    public static final String DELETE_ROLE_ID = BASE_ENDPOINT + ":" + INVENTA_PORT + "/role/getAllRole?page=0&size=1&sort=dateModified,desc";
+    public static final String GET_ROLE_ID_FOR_USER = BASE_ENDPOINT + ":" + INVENTA_PORT + "/role/getAllRole?page=0&size=1";
+    public static final String GET_POLICY_ROUTINE_ID = BASE_ENDPOINT + ":" + INVENTA_PORT + "/policy-routine/?page=0&size=1&sort=dateCreated,desc";
+    public static final String PUT_POLICY_ROUTINE_ID = BASE_ENDPOINT + ":" + INVENTA_PORT + "/policy-routine/?page=0&size=1&sort=dateCreated,desc";
+    public static final String DELETE_POLICY_ROUTINE_ID = BASE_ENDPOINT + ":" + INVENTA_PORT + "/policy-routine/?page=0&size=1&sort=dateModified,desc";
+    public static final String GET_DEVICE_ID = BASE_ENDPOINT + ":" + INVENTA_PORT + "/devices/getAllDevices?page=0&size=1&sortBy=_id";
+    public static final String GET_USER_ID = BASE_ENDPOINT + ":" + INVENTA_PORT + "/users/getAllUsers/?page=0&size=1&sort=dateCreated,desc";
+    public static final String GET_AUDIT_ID = BASE_ENDPOINT + ":" + INVENTA_PORT + "/audit/getAllAudit?page=0&size=1&sort=dateCreated,desc";
+    public static final String GET_PERMISSION_ID = BASE_ENDPOINT + ":" + INVENTA_PORT + "/permission/getAllPermission";
+    public static final String GET_ADMIN_USER_ID = BASE_ENDPOINT + ":" + INVENTA_PORT + "/adminUsers/getAllAdminUsers?page=0&size=1&sort=dateCreated,desc";
+    public static final String DELETE_ADMIN_USER_ID = BASE_ENDPOINT + ":" + INVENTA_PORT + "/adminUsers/getAllAdminUsers?page=0&size=1&sort=dateModified,desc";
 
 
-    public static final String GET_ROLE_ID = "http://inventaserver:9092/role/getAllRole?page=0&size=1";
-    public static final String PUT_ROLE_ID = "http://inventaserver:9092/role/getAllRole?page=0&size=1&sort=dateCreated,desc";
-    public static final String DELETE_ROLE_ID = "http://inventaserver:9092/role/getAllRole?page=0&size=1&sort=dateModified,desc";
-    public static final String GET_ROLE_ID_FOR_USER = "http://inventaserver:9092/role/getAllRole?page=0&size=1";
-    public static final String GET_POLICY_ROUTINE_ID = "http://inventaserver:9092/policy-routine/?page=0&size=1&sort=dateCreated,desc";
-    public static final String PUT_POLICY_ROUTINE_ID = "http://inventaserver:9092/policy-routine/?page=0&size=1&sort=dateCreated,desc";
-    public static final String DELETE_POLICY_ROUTINE_ID = "http://inventaserver:9092/policy-routine/?page=0&size=1&sort=dateModified,desc";
-    public static final String GET_DEVICE_ID = "http://inventaserver:9092/devices/getAllDevices?page=0&size=1&sortBy=_id";
-    public static final String GET_USER_ID = "http://inventaserver:9092/users/getAllUsers/?page=0&size=1&sort=dateCreated,desc";
-    public static final String GET_AUDIT_ID = "http://inventaserver:9092/audit/getAllAudit?page=0&size=1&sort=dateCreated,desc";
-    public static final String GET_PERMISSION_ID = "http://inventaserver:9092/permission/getAllPermission";
-    public static final String GET_ADMIN_USER_ID = "http://inventaserver:9092/adminUsers/getAllAdminUsers?page=0&size=1&sort=dateCreated,desc";
-    public static final String DELETE_ADMIN_USER_ID = "http://inventaserver:9092/adminUsers/getAllAdminUsers?page=0&size=1&sort=dateModified,desc";
+    public static final String ATTACHMENTS = "attachments?_id=";
+    public static final String SUBNET_GROUP = "db/subnet?_id=";
+    public static final String LOADBALANCER_TARGETS = "lb/targets?_id=";
+    public static final String ENTRIES = "entries?_id=";
+    public static final String DNS_RECORDS = "dns/records?_id=";
+    public static final String BUCKET_ACL = "bucket-acl?_id=";
+    public static final String ATTACHED_ROLES = "roles?_id=";
+    public static final String REQUESTER_PEER = "vpc/requester?_id=";
+    public static final String ACCEPTER_PEER = "vpc/accepter?_id=";
 
+
+    /**
+ 1 Container
+        a Summary
+        b Network Interface
+
+ 2 DATABASE_INSTANCE
+        a Summary
+        b Firewall Rules
+        c Attachments
+        d Subnet Group
+
+ 3 INTERNET_GATEWAY
+        a Summary
+        b Asset Tags
+        c Attachments
+
+ 4 IP_ADDRESS
+         a Summary
+         b Asset Tags
+         c Attachments
+
+ 5 LAMBDA_FUNCTION
+         a Summary
+         b Attachments
+
+ 6 LOAD_BALANCER
+        a Summary
+        b Load Balancer Rules
+        c Attachment
+        d Targets
+
+ 7 NAT_GATEWAY
+         a Summary
+         b Asset Tags
+         c Attachments
+
+ 8 NETWORK_ACCESS_CONTROL_LIST
+        a Summary
+        b Attachments
+        c Asset Tags
+        d Entries
+
+ 9 NETWORK_SECURITY_GROUP
+        a Summary
+        b Firewall Rules
+        c Attachments
+        d Asset Tags
+
+ 10 ROUTE_53_DNS_RECORDS
+        a Summary
+        b DNS Records
+
+ 11 ROUTE_TABLE
+        a Summary
+        b Asset Tags
+        c Attachments
+        d Entries
+
+ 12 S3_BUCKET
+        a Summary
+        b Access Control List
+ 13 SUBNET
+        a Summary
+        b Asset Tags
+
+ 14 VIRTUAL_MACHINE
+        a Summary
+        b Operating System
+        c CPU
+        d Hard Drive
+        e Network Interfaces
+        f Firewall Rules
+        g Asset Tags
+        h Attachments
+        i Attached Roles
+
+ 15 VIRTUAL_NETWORK
+        a Summary
+        b Asset Tags
+
+ 16 VOLUME
+        a Summary
+        b Hard Drive
+        c Asset Tags
+
+ 17 VPC_PEERING_CONNECTION
+        a Summary
+        b Asset Tags
+        c Requester Peer
+        d Accepter Peer
+
+ 18 WORKSPACES
+        a Summary
+
+ */
+
+public static final String AWS_CONTAINER_QUERY = BASE_ENDPOINT + ":" + INVENTA_PORT +  "/query/devices/?query=(adapters.adapter_aws.Asset%20Type%20==%20%22CONTAINER%22)&page=0&size=1";
+public static final String AWS_DATABASE_INSTANCE_QUERY = BASE_ENDPOINT + ":" + INVENTA_PORT + "/query/devices/?query=(adapters.adapter_aws.Asset%20Type%20==%20%22DATABASE_INSTANCE%22)&page=0&size=1";
+public static final String AWS_INTERNET_GATEWAY_QUERY = BASE_ENDPOINT + ":" + INVENTA_PORT + "/query/devices/?query=(adapters.adapter_aws.Asset%20Type%20==%20%22INTERNET_GATEWAY%22)&page=0&size=1";
+public static final String AWS_IP_ADDRESS_QUERY = BASE_ENDPOINT + ":" + INVENTA_PORT + "/query/devices/?query=(adapters.adapter_aws.Asset%20Type%20==%20%22IP_ADDRESS%22)&page=0&size=1";
+public static final String AWS_LAMBDA_FUNCTION_QUERY = BASE_ENDPOINT + ":" + INVENTA_PORT + "/query/devices/?query=(adapters.adapter_aws.Asset%20Type%20==%20%22LAMBDA_FUNCTION%22)&page=0&size=1";
+public static final String AWS_LOAD_BALANCER_QUERY = BASE_ENDPOINT + ":" + INVENTA_PORT + "/query/devices/?query=(adapters.adapter_aws.Asset%20Type%20==%20%22LOAD_BALANCER%22)&page=0&size=1";
+public static final String AWS_NAT_GATEWAY_QUERY = BASE_ENDPOINT + ":" + INVENTA_PORT + "/query/devices/?query=(adapters.adapter_aws.Asset%20Type%20==%20%22NAT_GATEWAY%22)&page=0&size=1";
+public static final String AWS_NETWORK_ACCESS_CONTROL_LIST_QUERY = BASE_ENDPOINT + ":" + INVENTA_PORT + "/query/devices/?query=(adapters.adapter_aws.Asset%20Type%20==%20%22NETWORK_ACCESS_CONTROL_LIST%22)&page=0&size=1";
+public static final String AWS_NETWORK_SECURITY_GROUP_QUERY = BASE_ENDPOINT + ":" + INVENTA_PORT + "/query/devices/?query=(adapters.adapter_aws.Asset%20Type%20==%20%22NETWORK_SECURITY_GROUP%22)&page=0&size=1";
+public static final String AWS_ROUTE_53_DNS_RECORDS_QUERY = BASE_ENDPOINT + ":" + INVENTA_PORT + "/query/devices/?query=(adapters.adapter_aws.Asset%20Type%20==%20ends(%22ROUTE_53_DNS_RECORDS%22))&page=0&size=1";
+public static final String AWS_ROUTE_TABLE_QUERY = BASE_ENDPOINT + ":" + INVENTA_PORT + "/query/devices/?query=(adapters.adapter_aws.Asset%20Type%20==%20%22ROUTE_TABLE%22)&page=0&size=1";
+public static final String AWS_S3_BUCKET_QUERY = BASE_ENDPOINT + ":" + INVENTA_PORT + "/query/devices/?query=(adapters.adapter_aws.Asset%20Type%20==%20%22S3_BUCKET%22)&page=0&size=1";
+public static final String AWS_SUBNET_QUERY = BASE_ENDPOINT + ":" + INVENTA_PORT + "/query/devices/?query=(adapters.adapter_aws.Asset%20Type%20==%20%22SUBNET%22)&page=0&size=1";
+public static final String AWS_VIRTUAL_MACHINE_QUERY = BASE_ENDPOINT + ":" + INVENTA_PORT + "/query/devices/?query=(adapters.adapter_aws.Asset%20Type%20==%20%22VIRTUAL_MACHINE%22)&page=0&size=1";
+public static final String AWS_VIRTUAL_NETWORK_QUERY = BASE_ENDPOINT + ":" + INVENTA_PORT + "/query/devices/?query=(adapters.adapter_aws.Asset%20Type%20==%20%22VIRTUAL_NETWORK%22)&page=0&size=1";
+public static final String AWS_VOLUME_QUERY = BASE_ENDPOINT + ":" + INVENTA_PORT + "/query/devices/?query=(adapters.adapter_aws.Asset%20Type%20==%20%22VOLUME%22)&page=0&size=1";
+public static final String AWS_VPC_PEERING_CONNECTION_QUERY = BASE_ENDPOINT + ":" + INVENTA_PORT + "/query/devices/?query=(adapters.adapter_aws.Asset%20Type%20==%20%22VPC_PEERING_CONNECTION%22)&page=0&size=1";
+public static final String AWS_WORKSPACES_QUERY = BASE_ENDPOINT + ":" + INVENTA_PORT + "/query/devices/?query=(adapters.adapter_aws.Asset%20Type%20==%20%22WORKSPACES%22)&page=0&size=1";
 
 }
