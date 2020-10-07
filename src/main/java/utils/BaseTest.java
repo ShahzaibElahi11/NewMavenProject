@@ -10,6 +10,7 @@ import io.restassured.specification.ResponseSpecification;
 import org.apache.http.HttpStatus;
 import org.json.JSONException;
 import org.json.JSONObject;
+import org.junit.Assume;
 import org.junit.BeforeClass;
 
 import java.io.*;
@@ -61,7 +62,6 @@ public class BaseTest {
     public static JSONObject readJsonFromUrl(String url) throws IOException, JSONException {
         URL url1 = new URL(url);
         URLConnection uc = url1.openConnection();
-
         String basicAuth = "Bearer " + token;
 
         uc.setRequestProperty("Authorization", basicAuth);
@@ -81,6 +81,10 @@ public class BaseTest {
         ObjectMapper mapper = new ObjectMapper(); // just need one
         String json = readJsonFromUrl(url).toString();
         Map<String, Object> map = mapper.readValue(json, Map.class);
+        Assume.assumeNotNull(map.get("data"));
+        Assume.assumeNotNull(((Map)map.get("data")).get("content"));
+        Assume.assumeFalse(((List)((Map)map.get("data")).get("content")).isEmpty());
+        Assume.assumeNotNull(((Map)((List)((Map)map.get("data")).get("content")).get(0)).get("_id"));
         return ((Map) ((List) ((Map) map.get("data")).get("content")).get(0)).get("_id") + "";
 
     }

@@ -8,14 +8,13 @@ import models.devices.DeviceNotes;
 import models.devices.DeviceTag;
 import org.junit.runner.RunWith;
 import utils.BaseTest;
-
 import java.io.IOException;
 import java.util.Collections;
 
 import static constants.Constants.*;
 import static io.restassured.RestAssured.given;
-import static org.hamcrest.Matchers.equalTo;
 import static org.apache.http.HttpStatus.*;
+import static org.hamcrest.Matchers.*;
 
 @RunWith(SerenityRunner.class)
 public class DeviceDetailsTest extends BaseTest {
@@ -319,7 +318,6 @@ public class DeviceDetailsTest extends BaseTest {
     public void getCrowdStrikeIncident() throws IOException {
         String crowdStrikeDeviceId;
         crowdStrikeDeviceId = getIdFromURL(CROWDSTRIKE_QUERY);
-
         given().
                 spec(requestSpec).
                 when().
@@ -1949,6 +1947,191 @@ public class DeviceDetailsTest extends BaseTest {
                 spec(requestSpec).
                 when().
                 get(DEVICE_ENDPOINT + SUMMARY + awsWorkspaceDeviceId).
+                then().
+                spec(responseSpec);
+    }
+
+    @Test
+    @Title("Get VMware ESXi Virtual Machine Summary Details By Device Id")
+    public void getVmwareEsxiVirtualMachineSummaryDetails() throws IOException {
+        String VmwareEsxiVirtualMachineDeviceId;
+        VmwareEsxiVirtualMachineDeviceId = getIdFromURL(VMWARE_ESXI_VIRTUAL_MACHINE_QUERY);
+        given().
+                spec(requestSpec).
+                when().
+                get(DEVICE_ENDPOINT + SUMMARY + VmwareEsxiVirtualMachineDeviceId).
+                then().
+                spec(responseSpec);
+    }
+
+    @Test
+    @Title("Get VMware ESXi Virtual Machine Network Interface Details By Device Id")
+    public void getVmwareEsxiVirtualMachineNetworkInterfaceDetails() throws IOException {
+        String VmwareEsxiVirtualMachineDeviceId;
+        VmwareEsxiVirtualMachineDeviceId = getIdFromURL(VMWARE_ESXI_VIRTUAL_MACHINE_QUERY);
+        given().
+                spec(requestSpec).
+                when().
+                get(DEVICE_ENDPOINT + NETWORK_INTERFACES + VmwareEsxiVirtualMachineDeviceId).
+                then().
+                spec(responseSpec);
+    }
+
+
+    @Test
+    @Title("Get VMware ESXi Virtual Machine Datastore Details By Device Id")
+    public void getVmwareEsxiVirtualMachineDatastoreDetails() throws IOException {
+        String VmwareEsxiVirtualMachineDeviceId;
+        VmwareEsxiVirtualMachineDeviceId = getIdFromURL(VMWARE_ESXI_VIRTUAL_MACHINE_QUERY);
+        given().
+                spec(requestSpec).
+                when().
+                get(DEVICE_ENDPOINT + DATASTORES + VmwareEsxiVirtualMachineDeviceId).
+                then().
+                spec(responseSpec);
+    }
+
+    @Test
+    @Title("Get VMware ESXi Virtual Machine Network Details By Device Id")
+    public void getVmwareEsxiVirtualMachineNetworkDetails() throws IOException {
+        String VmwareEsxiVirtualMachineDeviceId;
+        VmwareEsxiVirtualMachineDeviceId = getIdFromURL(VMWARE_ESXI_VIRTUAL_MACHINE_QUERY);
+        given().
+                spec(requestSpec).
+                when().
+                get(DEVICE_ENDPOINT + NETWORKS + VmwareEsxiVirtualMachineDeviceId).
+                then().
+                spec(responseSpec);
+    }
+
+
+    @Test
+    @Title("Get VMware ESXi Virtual Machine Disk Details By Device Id")
+    public void getVmwareEsxiVirtualMachineDiskDetails() throws IOException {
+        String VmwareEsxiVirtualMachineDeviceId;
+        VmwareEsxiVirtualMachineDeviceId = getIdFromURL(VMWARE_ESXI_VIRTUAL_MACHINE_QUERY);
+        given().
+                spec(requestSpec).
+                when().
+                get(DEVICE_ENDPOINT + DISKS + VmwareEsxiVirtualMachineDeviceId).
+                then().
+                spec(responseSpec);
+    }
+
+    @Test
+    @Title("Get VMware ESXi Virtual Machine Snapshots Details By Device Id")
+    public void getVmwareEsxiVirtualMachineSnapshotDetails() throws IOException {
+        String VmwareEsxiVirtualMachineDeviceId;
+        VmwareEsxiVirtualMachineDeviceId = getIdFromURL(VMWARE_ESXI_VIRTUAL_MACHINE_QUERY);
+        given().
+                spec(requestSpec).
+                when().
+                get(DEVICE_ENDPOINT + SNAPSHOTS + VmwareEsxiVirtualMachineDeviceId).
+                then().
+                spec(responseSpec);
+    }
+
+
+    @Test
+    @Title("Get VMware ESXi Host Summary Details By Device Id")
+    public void getVmwareEsxiHostSummaryDetails() throws IOException {
+        String VmwareEsxiHostDeviceId;
+        VmwareEsxiHostDeviceId = getIdFromURL(VMWARE_ESXI_HOST_QUERY);
+        given().
+                spec(requestSpec).
+                when().
+                get(DEVICE_ENDPOINT + SUMMARY + VmwareEsxiHostDeviceId).
+                then().
+                spec(responseSpec);
+    }
+
+    @Test
+    @Title("Get VMware ESXi Host Datastore Details By Device Id")
+    public void getVmwareEsxiHostDatastoreDetails() throws IOException {
+        String VmwareEsxiHostDeviceId;
+        VmwareEsxiHostDeviceId = getIdFromURL(VMWARE_ESXI_HOST_QUERY);
+        given().
+                spec(requestSpec).
+                when().
+                get(DEVICE_ENDPOINT + DATASTORES + VmwareEsxiHostDeviceId).
+                then().
+                spec(responseSpec);
+    }
+
+    @Test
+    @Title("Get VMware ESXi Host Networks Details By Device Id")
+    public void getVmwareEsxiHostNetworksDetails() throws IOException {
+        String VmwareEsxiHostDeviceId;
+        VmwareEsxiHostDeviceId = getIdFromURL(VMWARE_ESXI_HOST_QUERY);
+        given().
+                spec(requestSpec).
+                when().
+                get(DEVICE_ENDPOINT + NETWORKS + VmwareEsxiHostDeviceId).
+                then().
+                spec(responseSpec);
+    }
+
+    @Test
+    @Title("Get VMware ESXi Host Attached Virtual Machine Details By Device Id")
+    public void getVmwareEsxiHostVirtualMachineDetails() throws IOException {
+        String VmwareEsxiHostDeviceId;
+        VmwareEsxiHostDeviceId = getIdFromURL(VMWARE_ESXI_HOST_QUERY);
+        given().
+                spec(requestSpec).
+                when().
+                get(DEVICE_ENDPOINT + VIRTUAL_MACHINE + VmwareEsxiHostDeviceId).
+                then().
+                spec(responseSpec);
+    }
+
+    @Test
+    @Title("Get VMware ESXi Host Storage Adapter Details By Device Id")
+    public void getVmwareEsxiHostStorageAdapterDetails() throws IOException {
+        String VmwareEsxiHostDeviceId;
+        VmwareEsxiHostDeviceId = getIdFromURL(VMWARE_ESXI_HOST_QUERY);
+        given().
+                spec(requestSpec).
+                when().
+                get(DEVICE_ENDPOINT + STORAGE_ADAPTERS + VmwareEsxiHostDeviceId).
+                then().
+                spec(responseSpec);
+    }
+
+    @Test
+    @Title("Get VMware ESXi Host Storage Device Details By Device Id")
+    public void getVmwareEsxiHostStorageDeviceDetails() throws IOException {
+        String VmwareEsxiHostDeviceId;
+        VmwareEsxiHostDeviceId = getIdFromURL(VMWARE_ESXI_HOST_QUERY);
+        given().
+                spec(requestSpec).
+                when().
+                get(DEVICE_ENDPOINT + STORAGE_DEVICES + VmwareEsxiHostDeviceId).
+                then().
+                spec(responseSpec);
+    }
+
+    @Test
+    @Title("Get VMware ESXi Host Physical Network Interface Card Details By Device Id")
+    public void getVmwareEsxiHostPhysicalNetworkInterfaceCardDeviceDetails() throws IOException {
+        String VmwareEsxiHostDeviceId;
+        VmwareEsxiHostDeviceId = getIdFromURL(VMWARE_ESXI_HOST_QUERY);
+        given().
+                spec(requestSpec).
+                when().
+                get(DEVICE_ENDPOINT + PHYSICAL_NETWORK_INTERFACE_CARDS + VmwareEsxiHostDeviceId).
+                then().
+                spec(responseSpec);
+    }
+
+    @Test
+    @Title("Get VMware ESXi Host Virtual Network Interface Cards Details By Device Id")
+    public void getVmwareEsxiHostVirtualNetworkInterfaceCardDeviceDetails() throws IOException {
+        String VmwareEsxiHostDeviceId;
+        VmwareEsxiHostDeviceId = getIdFromURL(VMWARE_ESXI_HOST_QUERY);
+        given().
+                spec(requestSpec).
+                when().
+                get(DEVICE_ENDPOINT + VIRTUAL_NETWORK_INTERFACE_CARDS + VmwareEsxiHostDeviceId).
                 then().
                 spec(responseSpec);
     }

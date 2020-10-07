@@ -142,9 +142,7 @@ public class Constants extends BaseTest {
     public static final String CONNECTED_DEVICE = "connectedDevices?_id=";
     public static final String SUBNET = "subnets?_id=";
 
-
     //11 IP Address - completed
-
 
 
     /**
@@ -245,6 +243,10 @@ public class Constants extends BaseTest {
     public static final String DOCKER_ENDPOINT = "/docker/";
     public static final String ACTIVE_MQ = "activemq";
 
+    /**
+     * CrowdStrike and Azure Assets Query
+     */
+
     public static final String CROWDSTRIKE_QUERY = BASE_ENDPOINT + ":" + INVENTA_PORT + "/query/devices/?query=((adapters.adapter_crowdstrike.status%20==%20exists(true))and(adapters.adapter_crowdstrike.hostname%20==%20%22TESTBENCH%22))";
     public static final String AZURE_CONTAINER_QUERY = BASE_ENDPOINT + ":" + INVENTA_PORT +  "/query/devices/?query=(adapters.adapter_azure.Container%20Instance::Status%20==%20exists(true))&page=0&size=1";
     public static final String AZURE_LOADBALANCER_QUERY = BASE_ENDPOINT + ":" + INVENTA_PORT + "/query/devices/?query=(adapters.adapter_azure.Load%20Balancer::Type%20==%20exists(true))&page=0&size=1";
@@ -258,6 +260,11 @@ public class Constants extends BaseTest {
     public static final String AZURE_IP_ADDRESS_QUERY = BASE_ENDPOINT + ":" + INVENTA_PORT + "/query/devices/?query=(adapters.adapter_azure.Public%20IP%20Address::Type%20==%20exists(true))&page=0&size=1";
     public static final String AZURE_TRAFFIC_MANAGER_QUERY = BASE_ENDPOINT + ":" + INVENTA_PORT + "/query/devices/?query=(adapters.adapter_azure.Traffic%20Manager%20Profile::Status%20==%20exists(true))&page=0&size=1";
 
+
+
+    /**
+     * User Management API Endpoints
+     */
     public static final String GET_ROLE_ID = BASE_ENDPOINT + ":" + INVENTA_PORT + "/role/getAllRole?page=0&size=1";
     public static final String PUT_ROLE_ID = BASE_ENDPOINT + ":" + INVENTA_PORT + "/role/getAllRole?page=0&size=1&sort=dateCreated,desc";
     public static final String DELETE_ROLE_ID = BASE_ENDPOINT + ":" + INVENTA_PORT + "/role/getAllRole?page=0&size=1&sort=dateModified,desc";
@@ -273,6 +280,10 @@ public class Constants extends BaseTest {
     public static final String DELETE_ADMIN_USER_ID = BASE_ENDPOINT + ":" + INVENTA_PORT + "/adminUsers/getAllAdminUsers?page=0&size=1&sort=dateModified,desc";
 
 
+    /**
+     * AWS Aggregated Tab Constants
+     */
+
     public static final String ATTACHMENTS = "attachments?_id=";
     public static final String SUBNET_GROUP = "db/subnet?_id=";
     public static final String LOADBALANCER_TARGETS = "lb/targets?_id=";
@@ -285,118 +296,46 @@ public class Constants extends BaseTest {
 
 
     /**
- 1 Container
-        a Summary
-        b Network Interface
+     * AWS Asset Type Queries
+     */
+    public static final String AWS_CONTAINER_QUERY = BASE_ENDPOINT + ":" + INVENTA_PORT +  "/query/devices/?query=(adapters.adapter_aws.Asset%20Type%20==%20%22CONTAINER%22)&page=0&size=1";
+    public static final String AWS_DATABASE_INSTANCE_QUERY = BASE_ENDPOINT + ":" + INVENTA_PORT + "/query/devices/?query=(adapters.adapter_aws.Asset%20Type%20==%20%22DATABASE_INSTANCE%22)&page=0&size=1";
+    public static final String AWS_INTERNET_GATEWAY_QUERY = BASE_ENDPOINT + ":" + INVENTA_PORT + "/query/devices/?query=(adapters.adapter_aws.Asset%20Type%20==%20%22INTERNET_GATEWAY%22)&page=0&size=1";
+    public static final String AWS_IP_ADDRESS_QUERY = BASE_ENDPOINT + ":" + INVENTA_PORT + "/query/devices/?query=(adapters.adapter_aws.Asset%20Type%20==%20%22IP_ADDRESS%22)&page=0&size=1";
+    public static final String AWS_LAMBDA_FUNCTION_QUERY = BASE_ENDPOINT + ":" + INVENTA_PORT + "/query/devices/?query=(adapters.adapter_aws.Asset%20Type%20==%20%22LAMBDA_FUNCTION%22)&page=0&size=1";
+    public static final String AWS_LOAD_BALANCER_QUERY = BASE_ENDPOINT + ":" + INVENTA_PORT + "/query/devices/?query=(adapters.adapter_aws.Asset%20Type%20==%20%22LOAD_BALANCER%22)&page=0&size=1";
+    public static final String AWS_NAT_GATEWAY_QUERY = BASE_ENDPOINT + ":" + INVENTA_PORT + "/query/devices/?query=(adapters.adapter_aws.Asset%20Type%20==%20%22NAT_GATEWAY%22)&page=0&size=1";
+    public static final String AWS_NETWORK_ACCESS_CONTROL_LIST_QUERY = BASE_ENDPOINT + ":" + INVENTA_PORT + "/query/devices/?query=(adapters.adapter_aws.Asset%20Type%20==%20%22NETWORK_ACCESS_CONTROL_LIST%22)&page=0&size=1";
+    public static final String AWS_NETWORK_SECURITY_GROUP_QUERY = BASE_ENDPOINT + ":" + INVENTA_PORT + "/query/devices/?query=(adapters.adapter_aws.Asset%20Type%20==%20%22NETWORK_SECURITY_GROUP%22)&page=0&size=1";
+    public static final String AWS_ROUTE_53_DNS_RECORDS_QUERY = BASE_ENDPOINT + ":" + INVENTA_PORT + "/query/devices/?query=(adapters.adapter_aws.Asset%20Type%20==%20ends(%22ROUTE_53_DNS_RECORDS%22))&page=0&size=1";
+    public static final String AWS_ROUTE_TABLE_QUERY = BASE_ENDPOINT + ":" + INVENTA_PORT + "/query/devices/?query=(adapters.adapter_aws.Asset%20Type%20==%20%22ROUTE_TABLE%22)&page=0&size=1";
+    public static final String AWS_S3_BUCKET_QUERY = BASE_ENDPOINT + ":" + INVENTA_PORT + "/query/devices/?query=(adapters.adapter_aws.Asset%20Type%20==%20%22S3_BUCKET%22)&page=0&size=1";
+    public static final String AWS_SUBNET_QUERY = BASE_ENDPOINT + ":" + INVENTA_PORT + "/query/devices/?query=(adapters.adapter_aws.Asset%20Type%20==%20%22SUBNET%22)&page=0&size=1";
+    public static final String AWS_VIRTUAL_MACHINE_QUERY = BASE_ENDPOINT + ":" + INVENTA_PORT + "/query/devices/?query=(adapters.adapter_aws.Asset%20Type%20==%20%22VIRTUAL_MACHINE%22)&page=0&size=1";
+    public static final String AWS_VIRTUAL_NETWORK_QUERY = BASE_ENDPOINT + ":" + INVENTA_PORT + "/query/devices/?query=(adapters.adapter_aws.Asset%20Type%20==%20%22VIRTUAL_NETWORK%22)&page=0&size=1";
+    public static final String AWS_VOLUME_QUERY = BASE_ENDPOINT + ":" + INVENTA_PORT + "/query/devices/?query=(adapters.adapter_aws.Asset%20Type%20==%20%22VOLUME%22)&page=0&size=1";
+    public static final String AWS_VPC_PEERING_CONNECTION_QUERY = BASE_ENDPOINT + ":" + INVENTA_PORT + "/query/devices/?query=(adapters.adapter_aws.Asset%20Type%20==%20%22VPC_PEERING_CONNECTION%22)&page=0&size=1";
+    public static final String AWS_WORKSPACES_QUERY = BASE_ENDPOINT + ":" + INVENTA_PORT + "/query/devices/?query=(adapters.adapter_aws.Asset%20Type%20==%20%22WORKSPACES%22)&page=0&size=1";
 
- 2 DATABASE_INSTANCE
-        a Summary
-        b Firewall Rules
-        c Attachments
-        d Subnet Group
+    /**
+     * VMware_ESXi Asset Type Queries
+     */
+    public static final String VMWARE_ESXI_VIRTUAL_MACHINE_QUERY = BASE_ENDPOINT + ":" + INVENTA_PORT + "/query/devices/?query=(adapters.adapter_vmware_esxi.type%20==%20%22VIRTUAL_MACHINE%22)&page=0&size=1";
+    public static final String VMWARE_ESXI_HOST_QUERY = BASE_ENDPOINT + ":" + INVENTA_PORT + "/query/devices/?query=(adapters.adapter_vmware_esxi.type%20==%20%22HOST%22)&page=0&size=1";
 
- 3 INTERNET_GATEWAY
-        a Summary
-        b Asset Tags
-        c Attachments
 
- 4 IP_ADDRESS
-         a Summary
-         b Asset Tags
-         c Attachments
+    /**
+     * VMware_ESXi Aggregated Tab Constant
+     */
+    public static final String DATASTORES = "datastores?_id=";
+    public static final String NETWORKS = "networks?_id=";
+    public static final String DISKS = "disks?_id=";
+    public static final String SNAPSHOTS = "snapshots?_id=";
+    public static final String VIRTUAL_MACHINE = "vms?_id=";
+    public static final String STORAGE_ADAPTERS = "storageAdapters?_id=";
+    public static final String STORAGE_DEVICES = "storageDevices?_id=";
+    public static final String PHYSICAL_NETWORK_INTERFACE_CARDS = "physicalNics?_id=";
+    public static final String VIRTUAL_NETWORK_INTERFACE_CARDS = "virtualNics?_id=";
 
- 5 LAMBDA_FUNCTION
-         a Summary
-         b Attachments
-
- 6 LOAD_BALANCER
-        a Summary
-        b Load Balancer Rules
-        c Attachment
-        d Targets
-
- 7 NAT_GATEWAY
-         a Summary
-         b Asset Tags
-         c Attachments
-
- 8 NETWORK_ACCESS_CONTROL_LIST
-        a Summary
-        b Attachments
-        c Asset Tags
-        d Entries
-
- 9 NETWORK_SECURITY_GROUP
-        a Summary
-        b Firewall Rules
-        c Attachments
-        d Asset Tags
-
- 10 ROUTE_53_DNS_RECORDS
-        a Summary
-        b DNS Records
-
- 11 ROUTE_TABLE
-        a Summary
-        b Asset Tags
-        c Attachments
-        d Entries
-
- 12 S3_BUCKET
-        a Summary
-        b Access Control List
- 13 SUBNET
-        a Summary
-        b Asset Tags
-
- 14 VIRTUAL_MACHINE
-        a Summary
-        b Operating System
-        c CPU
-        d Hard Drive
-        e Network Interfaces
-        f Firewall Rules
-        g Asset Tags
-        h Attachments
-        i Attached Roles
-
- 15 VIRTUAL_NETWORK
-        a Summary
-        b Asset Tags
-
- 16 VOLUME
-        a Summary
-        b Hard Drive
-        c Asset Tags
-
- 17 VPC_PEERING_CONNECTION
-        a Summary
-        b Asset Tags
-        c Requester Peer
-        d Accepter Peer
-
- 18 WORKSPACES
-        a Summary
-
- */
-
-public static final String AWS_CONTAINER_QUERY = BASE_ENDPOINT + ":" + INVENTA_PORT +  "/query/devices/?query=(adapters.adapter_aws.Asset%20Type%20==%20%22CONTAINER%22)&page=0&size=1";
-public static final String AWS_DATABASE_INSTANCE_QUERY = BASE_ENDPOINT + ":" + INVENTA_PORT + "/query/devices/?query=(adapters.adapter_aws.Asset%20Type%20==%20%22DATABASE_INSTANCE%22)&page=0&size=1";
-public static final String AWS_INTERNET_GATEWAY_QUERY = BASE_ENDPOINT + ":" + INVENTA_PORT + "/query/devices/?query=(adapters.adapter_aws.Asset%20Type%20==%20%22INTERNET_GATEWAY%22)&page=0&size=1";
-public static final String AWS_IP_ADDRESS_QUERY = BASE_ENDPOINT + ":" + INVENTA_PORT + "/query/devices/?query=(adapters.adapter_aws.Asset%20Type%20==%20%22IP_ADDRESS%22)&page=0&size=1";
-public static final String AWS_LAMBDA_FUNCTION_QUERY = BASE_ENDPOINT + ":" + INVENTA_PORT + "/query/devices/?query=(adapters.adapter_aws.Asset%20Type%20==%20%22LAMBDA_FUNCTION%22)&page=0&size=1";
-public static final String AWS_LOAD_BALANCER_QUERY = BASE_ENDPOINT + ":" + INVENTA_PORT + "/query/devices/?query=(adapters.adapter_aws.Asset%20Type%20==%20%22LOAD_BALANCER%22)&page=0&size=1";
-public static final String AWS_NAT_GATEWAY_QUERY = BASE_ENDPOINT + ":" + INVENTA_PORT + "/query/devices/?query=(adapters.adapter_aws.Asset%20Type%20==%20%22NAT_GATEWAY%22)&page=0&size=1";
-public static final String AWS_NETWORK_ACCESS_CONTROL_LIST_QUERY = BASE_ENDPOINT + ":" + INVENTA_PORT + "/query/devices/?query=(adapters.adapter_aws.Asset%20Type%20==%20%22NETWORK_ACCESS_CONTROL_LIST%22)&page=0&size=1";
-public static final String AWS_NETWORK_SECURITY_GROUP_QUERY = BASE_ENDPOINT + ":" + INVENTA_PORT + "/query/devices/?query=(adapters.adapter_aws.Asset%20Type%20==%20%22NETWORK_SECURITY_GROUP%22)&page=0&size=1";
-public static final String AWS_ROUTE_53_DNS_RECORDS_QUERY = BASE_ENDPOINT + ":" + INVENTA_PORT + "/query/devices/?query=(adapters.adapter_aws.Asset%20Type%20==%20ends(%22ROUTE_53_DNS_RECORDS%22))&page=0&size=1";
-public static final String AWS_ROUTE_TABLE_QUERY = BASE_ENDPOINT + ":" + INVENTA_PORT + "/query/devices/?query=(adapters.adapter_aws.Asset%20Type%20==%20%22ROUTE_TABLE%22)&page=0&size=1";
-public static final String AWS_S3_BUCKET_QUERY = BASE_ENDPOINT + ":" + INVENTA_PORT + "/query/devices/?query=(adapters.adapter_aws.Asset%20Type%20==%20%22S3_BUCKET%22)&page=0&size=1";
-public static final String AWS_SUBNET_QUERY = BASE_ENDPOINT + ":" + INVENTA_PORT + "/query/devices/?query=(adapters.adapter_aws.Asset%20Type%20==%20%22SUBNET%22)&page=0&size=1";
-public static final String AWS_VIRTUAL_MACHINE_QUERY = BASE_ENDPOINT + ":" + INVENTA_PORT + "/query/devices/?query=(adapters.adapter_aws.Asset%20Type%20==%20%22VIRTUAL_MACHINE%22)&page=0&size=1";
-public static final String AWS_VIRTUAL_NETWORK_QUERY = BASE_ENDPOINT + ":" + INVENTA_PORT + "/query/devices/?query=(adapters.adapter_aws.Asset%20Type%20==%20%22VIRTUAL_NETWORK%22)&page=0&size=1";
-public static final String AWS_VOLUME_QUERY = BASE_ENDPOINT + ":" + INVENTA_PORT + "/query/devices/?query=(adapters.adapter_aws.Asset%20Type%20==%20%22VOLUME%22)&page=0&size=1";
-public static final String AWS_VPC_PEERING_CONNECTION_QUERY = BASE_ENDPOINT + ":" + INVENTA_PORT + "/query/devices/?query=(adapters.adapter_aws.Asset%20Type%20==%20%22VPC_PEERING_CONNECTION%22)&page=0&size=1";
-public static final String AWS_WORKSPACES_QUERY = BASE_ENDPOINT + ":" + INVENTA_PORT + "/query/devices/?query=(adapters.adapter_aws.Asset%20Type%20==%20%22WORKSPACES%22)&page=0&size=1";
 
 }
