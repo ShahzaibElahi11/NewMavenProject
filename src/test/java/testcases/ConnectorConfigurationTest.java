@@ -64,22 +64,21 @@ public class ConnectorConfigurationTest extends BaseTest {
                 spec(responseSpec);
     }
 
-    @Ignore
-    @Test
-    @Title("Post AWS Connector Configuration")
-    public void postAWSConfiguration() {
-        AwsConfiguration awsConfiguration = new AwsConfiguration(true, AWS_KEY_ID, AWS_SECRET_KEY, "us-east-3", false, "Test", "", true, true, true, true, true, true, true, true, true, true, true, false, true, true, true, true, false);
-        given().
-                spec(requestSpecForConnector).
-                and().
-                body(awsConfiguration).
-                when().
-                post("/aws/configure").
-                then().
-                assertThat().
-                statusCode(SC_OK);
-
-    }
+//    @Test
+//    @Title("Post AWS Connector Configuration")
+//    public void postAWSConfiguration() {
+//        AwsConfiguration awsConfiguration = new AwsConfiguration(true, AWS_KEY_ID, AWS_SECRET_KEY, "us-east-3", false, "Test", "", true, true, true, true, true, true, true, true, true, true, true, false, true, true, true, true, false);
+//        given().
+//                spec(requestSpecForConnector).
+//                and().
+//                body(awsConfiguration).
+//                when().
+//                post("/aws/configure").
+//                then().
+//                assertThat().
+//                statusCode(SC_OK);
+//
+//    }
 
 
     @Test
@@ -140,7 +139,7 @@ public class ConnectorConfigurationTest extends BaseTest {
         given().
                 spec(requestSpecForConnector).
                 when().
-                get(CONNECTOR_ENDPOINT + CONNECTOR_CONFIGURATION + CROWDSTRIKE).
+                get(CONNECTOR_ENDPOINT + CONNECTOR_CONFIGURATION_INSTANCE + CROWDSTRIKE).
                 then().
                 spec(responseSpec);
     }
@@ -188,7 +187,7 @@ public class ConnectorConfigurationTest extends BaseTest {
         given().
                 spec(requestSpecForConnector).
                 when().
-                get(CONNECTOR_ENDPOINT + CONNECTOR_CONFIGURATION + VMWARE_ESXI).
+                get(CONNECTOR_ENDPOINT + CONNECTOR_CONFIGURATION_INSTANCE + VMWARE_ESXI).
                 then().
                 spec(responseSpec);
     }

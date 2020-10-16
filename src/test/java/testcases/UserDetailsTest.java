@@ -127,7 +127,7 @@ public class UserDetailsTest extends BaseTest {
         Response response = given().
                 spec(requestSpec).
                 when().
-                delete(USER_ENDPOINT + DELETE_SINGLE_TAG + USER_ID + "&tag=" + SINGLE_TAG_NAME);
+                delete(USER_ENDPOINT + DELETE_USER_SINGLE_TAG + USER_ID + "&tag=" + SINGLE_TAG_NAME);
         if (response.getStatusCode() == SC_OK)
             isPreviousTestPass = true;
         response.
@@ -198,7 +198,7 @@ public class UserDetailsTest extends BaseTest {
         given().
                 spec(requestSpec).
                 when().
-                delete(USER_ENDPOINT + DELETE_NOTE + USER_ID).
+                delete(USER_ENDPOINT + DELETE_USER_NOTE + USER_ID).
                 then().
                 assertThat().
                 statusCode(SC_OK);

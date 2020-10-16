@@ -15,4 +15,10 @@ public  class DeviceTag {
     @JsonProperty
     private List<String> deviceIds;
 
+
+    public DeviceTag(List<String> deviceIds) {
+        this.deviceIds = deviceIds;
+    }
+
 }
+

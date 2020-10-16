@@ -1,13 +1,17 @@
 package testcases;
 
+import io.restassured.response.Response;
 import net.serenitybdd.junit.runners.SerenityRunner;
 import net.thucydides.core.annotations.Title;
-import org.junit.Ignore;
+import org.junit.Assume;
+import org.junit.FixMethodOrder;
 import org.junit.Test;
 import models.devices.DeviceNotes;
 import models.devices.DeviceTag;
 import org.junit.runner.RunWith;
+import org.junit.runners.MethodSorters;
 import utils.BaseTest;
+
 import java.io.IOException;
 import java.util.Collections;
 
@@ -17,14 +21,20 @@ import static org.apache.http.HttpStatus.*;
 import static org.hamcrest.Matchers.*;
 
 @RunWith(SerenityRunner.class)
+@FixMethodOrder(MethodSorters.NAME_ASCENDING)
 public class DeviceDetailsTest extends BaseTest {
+
+    public static boolean isPreviousTestPass;
+    public static final String SINGLE_TAG_NAME = "Automation_Device_Tag_Number_" + value + "1";
+
+    //http://inventaserver:9092/devices/removeDiscoveredDevice?_id=5f891e11b2256b227f8677de
 
     public static String DEVICE_DETAIL_ID = "";
 
     // rethink
     static {
         try {
-            DEVICE_DETAIL_ID = getIdFromURL("http://inventaserver:9092/devices/getAllDevices?page=0&size=1&sortBy=_id");
+            DEVICE_DETAIL_ID = getIdFromURL("http://inventaserver:9092/devices/getAllDevices?page=0&size=1");
         } catch (IOException ex) {
             ex.printStackTrace();
         }
@@ -156,27 +166,6 @@ public class DeviceDetailsTest extends BaseTest {
                 spec(responseSpec);
     }
 
-    @Test
-    @Title("Get Device Note By Device Id")
-    public void getDeviceNoteDetailsById() {
-        given().
-                spec(requestSpec).
-                when().
-                get(DEVICE_ENDPOINT + DEVICE_NOTE + DEVICE_DETAIL_ID).
-                then().
-                spec(responseSpec);
-    }
-
-    @Test
-    @Title("Get Device Tags By Device Id")
-    public void getDeviceTagDetailsById() {
-        given().
-                spec(requestSpec).
-                when().
-                get(DEVICE_ENDPOINT + DEVICE_TAG + DEVICE_DETAIL_ID).
-                then().
-                spec(responseSpec);
-    }
 
     @Test //extra
     @Title("Get General Details By Device Id")
@@ -204,29 +193,19 @@ public class DeviceDetailsTest extends BaseTest {
 
     @Test
     @Title("Post Insert Tags on Device")
-    public void postInsertDeviceTag() {
+    public void testA_postInsertDeviceTag() {
+        isPreviousTestPass = false;
+
         DeviceTag deviceTag = new DeviceTag("Automation_Device_Tag_Number_" + value + "1", Collections.singletonList(DEVICE_DETAIL_ID));
-        given().
+        Response response = given().
                 spec(requestSpec).
                 and().
                 body(deviceTag).
                 when().
-                post(DEVICE_ENDPOINT + INSERT_TAG).
-                then().
-                assertThat().
-                statusCode(SC_OK);
-    }
-
-    @Test
-    @Title("Post Insert Note on Device")
-    public void postInsertDeviceNote() {
-        DeviceNotes deviceNotes = new DeviceNotes("Automation_Notes_#_" + value + "", "" + DEVICE_DETAIL_ID);
-        given().
-                spec(requestSpec).
-                and().
-                body(deviceNotes).
-                when().
-                post(DEVICE_ENDPOINT + INSERT_NOTE).
+                post(DEVICE_ENDPOINT + INSERT_TAG);
+        if (response.getStatusCode() == SC_OK)
+            isPreviousTestPass = true;
+        response.
                 then().
                 assertThat().
                 statusCode(SC_OK);
@@ -234,13 +213,117 @@ public class DeviceDetailsTest extends BaseTest {
 
     @Test
     @Title("Get All Device Tags")
-    public void getAllTags() {
+    public void testB_getAllTags() {
         given().
                 spec(requestSpec).
                 when().
                 get(DEVICE_ENDPOINT + ALL_TAGS).
                 then().
                 spec(responseSpec);
+    }
+
+
+    @Test
+    @Title("Get Device Tags By Device Id")
+    public void testC_getDeviceTagDetailsById() {
+        Assume.assumeTrue(isPreviousTestPass == true);
+        isPreviousTestPass = false;
+        Response response = given().
+                spec(requestSpec).
+                when().
+                get(DEVICE_ENDPOINT + DEVICE_TAG + DEVICE_DETAIL_ID);
+        if (response.getStatusCode() == SC_OK)
+            isPreviousTestPass = true;
+        response.
+                then().
+                spec(responseSpec).
+                and()
+                .body("data.tags[0]", equalTo("Automation_Device_Tag_Number_" + value + "1"));
+    }
+
+
+    @Test // Not throw exception if tag name not exist.
+    @Title("Delete Device Single Tag")
+    public void testD_deleteDeviceSingleTag() {
+        Assume.assumeTrue(isPreviousTestPass == true);
+        isPreviousTestPass = false;
+        Response response = given().
+                spec(requestSpec).
+                when().
+                delete(DEVICE_ENDPOINT + DELETE_DEVICE_SINGLE_TAG + DEVICE_DETAIL_ID + "&tag=" + SINGLE_TAG_NAME);
+        if (response.getStatusCode() == SC_OK)
+            isPreviousTestPass = true;
+        response.
+                then().
+                assertThat().
+                statusCode(SC_OK);
+    }
+
+    @Test // issue - not complete. also postman issue
+    @Title("Delete Device Bulk Tag")
+    public void testE_deleteDeviceBukTag() {
+        DeviceTag deleteDeviceTag = new DeviceTag(Collections.singletonList(DEVICE_DETAIL_ID));
+        given().
+                spec(requestSpec).
+                and().
+                body(deleteDeviceTag).
+                when().
+                delete(DEVICE_ENDPOINT + DELETE_BULK_TAG).
+                then().
+                spec(responseSpec).
+                and().
+                body("data.message", equalTo("Delete tag success"));
+
+    }
+
+    @Test
+    @Title("Post Insert Note on Device")
+    public void testF_postInsertDeviceNote() {
+        isPreviousTestPass = false;
+        DeviceNotes deviceNotes = new DeviceNotes("Automation_Notes_#_" + value + "", "" + DEVICE_DETAIL_ID);
+        Response response = given().
+                spec(requestSpec).
+                and().
+                body(deviceNotes).
+                when().
+                post(DEVICE_ENDPOINT + INSERT_NOTE);
+        if (response.getStatusCode() == SC_OK)
+            isPreviousTestPass = true;
+        response.
+                then().
+                assertThat().
+                statusCode(SC_OK);
+    }
+
+    @Test
+    @Title("Get Device Note By Device Id")
+    public void testG_getDeviceNoteDetailsById() {
+        Assume.assumeTrue(isPreviousTestPass == true);
+        isPreviousTestPass = false;
+        Response response = given().
+                spec(requestSpec).
+                when().
+                get(DEVICE_ENDPOINT + DEVICE_NOTE + DEVICE_DETAIL_ID);
+        if (response.getStatusCode() == SC_OK)
+            isPreviousTestPass = true;
+        response.
+                then().
+                spec(responseSpec).
+                and()
+                .body("data.note", equalTo("Automation_Notes_#_" + value));
+    }
+
+
+    @Test // Not throw exception if note does not exist.
+    @Title("Delete Device Note Tag")
+    public void testH_deleteDeviceNote() {
+        given().
+                spec(requestSpec).
+                when().
+                delete(DEVICE_ENDPOINT + DELETE_DEVICE_NOTE + DEVICE_DETAIL_ID).
+                then().
+                assertThat().
+                statusCode(SC_OK);
     }
 
     @Test
@@ -252,39 +335,6 @@ public class DeviceDetailsTest extends BaseTest {
                 get(DEVICE_ENDPOINT + LOAD_BALANCER_RULE + DEVICE_DETAIL_ID).
                 then().
                 spec(responseSpec);
-    }
-
-    @Ignore
-    @Test // Not throw exception if tag name not exist.
-    @Title("Delete Device Single Tag")
-    public void deleteDeviceSingleTag() {
-        //BASE_ENDPOINT_INVENTA + DEVICE_ENDPOINT + DELETE_SINGLE_TAG + DEVICE_DETAIL_ID +"&tag="+ SINGLE_TAG_NAME;
-
-
-    }
-
-    @Ignore
-    @Test // issue - not complete. also postman issue
-    @Title("Delete Device Bulk Tag")
-    public void deleteDeviceBukTag() {
-        //BASE_ENDPOINT_INVENTA + DEVICE_ENDPOINT + DELETE_BULK_TAG
-
-
-    }
-
-    @Ignore
-    @Test // Not throw exception if note does not exist.
-    @Title("Delete Device Note Tag")
-    public void deleteDeviceNote() {
-        //BASE_ENDPOINT_INVENTA + DEVICE_ENDPOINT + DELETE_NOTE + DEVICE_DETAIL_ID
-
-    }
-
-    @Ignore
-    @Test // Not throw exception if note does not exist.
-    @Title("Delete Discovered Devices")
-    public void deleteDiscoveredDevice() throws IOException {
-        //BASE_ENDPOINT_INVENTA + DEVICE_ENDPOINT + DELETE_DEVICE + DELETE_DEVICE_ID
     }
 
     @Test
@@ -2122,6 +2172,7 @@ public class DeviceDetailsTest extends BaseTest {
                 then().
                 spec(responseSpec);
     }
+
 
     @Test
     @Title("Get VMware ESXi Host Virtual Network Interface Cards Details By Device Id")
