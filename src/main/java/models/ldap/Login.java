@@ -4,7 +4,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.AllArgsConstructor;
 
 @AllArgsConstructor
-public class AdLogin {
+public class Login {
 
     @JsonProperty
     private String username;

@@ -154,18 +154,6 @@ public class PolicyRoutineTest extends BaseTest {
                 spec(responseSpec);
     }
 
-
-    @Test
-    @Title("Get Policy Routine Table With Filter")
-    public void getPolicyRoutineTableWithFilter() {
-        given().
-                spec(requestSpec).
-                when().
-                get(POLICY_ROUTINE + PR_TABLE + "&filter=" + PR_FILTER_NAME).
-                then().
-                spec(responseSpec);
-    }
-
     @Test
     @Title("Get Policy Routine Summary")
     public void getPolicyRoutineSummary() throws IOException {

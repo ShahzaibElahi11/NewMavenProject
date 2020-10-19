@@ -70,13 +70,8 @@ public class Constants extends BaseTest {
     public static final String GET_ALL_DEVICES = "getAllDevices?page=0&size=10";
     public static final String DEVICES_DETAILS = "deviceDetail?_id=";
     public static final String CONNECTOR_LIST_BY_ID = "adapters/list?_id=";
-    public static final String DRIVE_DETAILS = "drives?_id="; //will remove this test case later
-    public static final String OS_PATCHES = "os/patches/installed?_id=";
     public static final String RUNNING_PROCESSES = "processes/running?_id=";
     public static final String INSTALLED_SOFTWARE = "software/installed?_id=";
-    public static final String OS_INFO = "os/info?_id=";  //will remove this test case later
-    public static final String USER_DETAILS_BY_ID = "users?_id="; //will remove this test case later
-    public static final String NETWORK_INTERFACE = "network/interfaces?_id=";
     public static final String SHARED_FOLDER = "shared/folders?_id=";
     public static final String DEVICE_NOTE = "getDeviceNote?deviceId=";
     public static final String DEVICE_TAG = "getDeviceTag?deviceId=";
@@ -85,8 +80,8 @@ public class Constants extends BaseTest {
     public static final String INSERT_NOTE = "insertNote";
     public static final String INSERT_TAG = "insertTag";
     public static final String ALL_TAGS = "tags/";
-    public static final String LOAD_BALANCER_RULE = "loadbalancer-rules?_id=";  //will remove this test case later
     public static final String DEVICE_HARDWARE = "hardware/connected?_id="; //will remove this test case later
+    public static final String DEVICE_COMMON_MENU = "getCommonMenu?deviceId=";
 
     //http://inventaserver:9092/devices/getCommonMenu?deviceId=5f5b5a7217bb352246d6b68a
     //http://inventaserver:9092/permission/getUserPermission?userId=5f60dfe75af94a27e29cfe97&module=asset
@@ -339,6 +334,19 @@ public class Constants extends BaseTest {
     public static final String STORAGE_DEVICES = "storageDevices?_id=";
     public static final String PHYSICAL_NETWORK_INTERFACE_CARDS = "physicalNics?_id=";
     public static final String VIRTUAL_NETWORK_INTERFACE_CARDS = "virtualNics?_id=";
+
+    /**
+     * Shodan Queries
+     */
+    public static final String SHODAN_QUERY = BASE_ENDPOINT + ":" + INVENTA_PORT + "/query/devices/?query=(adapters.adapter_shodan.asn%20==%20exists(true))&page=0&size=1";
+
+    /**
+     * VMware_ESXi Aggregated Tab Constant
+     */
+    public static final String OPEN_PORTS = "openports?_id=";
+    public static final String VULNERABILITIES =  "vulnerabilities?_id=";
+
+    public static final String WMIC_QUERY = BASE_ENDPOINT + ":" + INVENTA_PORT + "/query/devices/?query=(adapters.adapter_wmic.IP%20Address%20==%20exists(true))&page=0&size=1";
 
 
 }

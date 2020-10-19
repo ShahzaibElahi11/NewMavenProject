@@ -1,9 +1,11 @@
 package testcases;
 
+import io.restassured.response.Response;
 import models.ldap.LdapConfiguration;
 import net.serenitybdd.junit.runners.SerenityRunner;
 import net.thucydides.core.annotations.Title;
-import models.ldap.AdLogin;
+import models.ldap.Login;
+import org.junit.Assume;
 import org.junit.FixMethodOrder;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -28,20 +30,25 @@ public class LDAPTest extends BaseTest {
     protected static final String LDAP_DOMAIN = ApplicationConfiguration.getLdapDomain();
     protected static final String AD_USERNAME = ApplicationConfiguration.getAdUsername();
     protected static final String AD_PASSWORD = ApplicationConfiguration.getAdPassword();
-
+    protected static final String USERNAME = ApplicationConfiguration.getUSERNAME();
+    protected static final String PASSWORD = ApplicationConfiguration.getPASSWORD();
 
     @Test
     @Title("Post LDAP Configuration")
     public void testA_PostConfigureLDAP() throws IOException {
+        isPreviousTestPass = false;
         String roleId;
         roleId = getIdFromURL(GET_ROLE_ID);
         LdapConfiguration ldapConfiguration = new LdapConfiguration(LDAP_MACHINE_IP, LDAP_DOMAIN, roleId);
-        given().
+        Response response = given().
                 spec(requestSpec).
                 and().
                 body(ldapConfiguration).
                 when().
-                post(CONFIG_ENDPOINT).
+                post(CONFIG_ENDPOINT);
+        if (response.getStatusCode() == SC_OK)
+            isPreviousTestPass = true;
+        response.
                 then().
                 assertThat().
                 statusCode(SC_OK);
@@ -51,19 +58,21 @@ public class LDAPTest extends BaseTest {
     @Test
     @Title("Post AD Login")
     public void testB_PostADLogin() {
-        AdLogin adLogin = new AdLogin(AD_USERNAME, AD_PASSWORD);
-        given().
+        Assume.assumeTrue(isPreviousTestPass == true);
+        isPreviousTestPass = false;
+        Login adLogin = new Login(AD_USERNAME, AD_PASSWORD);
+        Response response = given().
                 spec(requestSpec).
                 and().
                 body(adLogin).
                 when().
-                post(AD_LOGIN).
+                post(AD_LOGIN);
+        if (response.getStatusCode() == SC_OK)
+            isPreviousTestPass = true;
+        response.
                 then().
                 assertThat().
                 statusCode(SC_OK);
-
-
-
     }
 
     @Test
@@ -79,11 +88,23 @@ public class LDAPTest extends BaseTest {
                 spec(responseSpec).
                 and().
                 body("data.role", equalTo(roleId));
-
     }
 
+    @Test
+    @Title("Post AD Login")
+    public void testD_applicationLogin() {
+        Login login = new Login(USERNAME, PASSWORD);
+        given().
+                spec(requestSpec).
+                and().
+                body(login).
+                when().
+                post(LOGIN).
+                then().
+                assertThat().
+                statusCode(SC_OK);
+    }
 
-    //I will implement on assume test Strategy
 
 }
 
