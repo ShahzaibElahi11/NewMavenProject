@@ -6,10 +6,7 @@ import models.policyroutine.*;
 import net.serenitybdd.junit.runners.SerenityRunner;
 import net.thucydides.core.annotations.Title;
 import org.apache.http.HttpStatus;
-import org.junit.Assert;
-import org.junit.Assume;
-import org.junit.FixMethodOrder;
-import org.junit.Test;
+import org.junit.*;
 import org.junit.runner.RunWith;
 import org.junit.runners.MethodSorters;
 import utils.BaseAPI;
@@ -151,7 +148,7 @@ public class PolicyRoutineTest extends BaseTest {
                 .body("meta.status", equalTo("success"));
     }
 
-
+    @Ignore
     @Test
     @Title("Get Policy Routine Table With Filter")
     public void getPolicyRoutineTableWithFilter() {
