@@ -13,7 +13,7 @@ import static io.restassured.RestAssured.given;
 import static org.hamcrest.Matchers.equalTo;
 
 @RunWith(SerenityRunner.class)
-public class UserAuditLogsTest extends BaseTest {
+public class AuditControllerTest extends BaseTest {
 
     @Test
     @Title("Get User Audit Details By UserName")

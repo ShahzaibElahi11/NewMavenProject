@@ -15,7 +15,7 @@ import static io.restassured.RestAssured.given;
 import static org.hamcrest.Matchers.*;
 
 @RunWith(SerenityRunner.class)
-public class DashboardTest extends BaseTest {
+public class DashboardControllerTest extends BaseTest {
 
     List adapterName = new ArrayList();
 

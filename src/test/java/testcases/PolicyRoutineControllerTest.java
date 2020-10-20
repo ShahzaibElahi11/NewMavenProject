@@ -20,7 +20,7 @@ import static org.apache.http.HttpStatus.*;
 
 @RunWith(SerenityRunner.class)
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
-public class PolicyRoutineTest extends BaseTest {
+public class PolicyRoutineControllerTest extends BaseTest {
 
     public static boolean isPreviousTestPass;
 
@@ -70,10 +70,9 @@ public class PolicyRoutineTest extends BaseTest {
                 put(POLICY_ROUTINE + currentPolicyRoutineId);
         if (response.getStatusCode() == SC_OK)
             isPreviousTestPass = true;
-        response.then().
-                spec(responseSpec).
-                and().
-                body("meta.status", equalTo("success"));
+        response.
+                then().
+                spec(responseSpec);
     }
 
 

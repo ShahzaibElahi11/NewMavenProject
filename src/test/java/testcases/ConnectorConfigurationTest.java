@@ -3,7 +3,6 @@ package testcases;
 import models.configuration.AwsConfiguration;
 import net.serenitybdd.junit.runners.SerenityRunner;
 import net.thucydides.core.annotations.Title;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import utils.ApplicationConfiguration;
@@ -12,7 +11,6 @@ import utils.BaseTest;
 import static constants.Constants.*;
 import static io.restassured.RestAssured.given;
 import static org.hamcrest.Matchers.*;
-import static org.apache.http.HttpStatus.*;
 
 @RunWith(SerenityRunner.class)
 public class ConnectorConfigurationTest extends BaseTest {

@@ -145,8 +145,14 @@ public class Constants extends BaseTest {
      */
 
     public static final String CONFIG_ENDPOINT = "/config/";
-    public static final String CONFIG_TYPE = "?type=ldap";
+    public static final String CONFIG_TYPE = "?type=";
     public static final String AD_LOGIN = "/ad/login/";
+    public static final String LDAP = "ldap";
+    public static final String MAIL = "mail";
+    public static final String GUI = "gui";
+    public static final String DISCOVERY = "discovery";
+
+
 
     /**
      * Policy Routine Constants
@@ -184,6 +190,9 @@ public class Constants extends BaseTest {
 
     public static final String TYPE_DEVICE_FIELDS = "/query/fields/type/?fieldEntity=devices&field=adapters.adapter_";
 
+    public static final String SAVED_DEVICE_QUERY_NAME = BASE_ENDPOINT + ":" + INVENTA_PORT + "/saved-query/?type=DEVICE&page=0&size=1&sort=dateCreated,desc";
+    public static final String SAVED_USER_QUERY_NAME = BASE_ENDPOINT + ":" + INVENTA_PORT + "/saved-query/?type=USER&page=0&size=1";
+
 
     /**
      * User Management Constants
@@ -203,6 +212,7 @@ public class Constants extends BaseTest {
     public static final String GET_ROLE_MODULES = "getRoleModules?role=";
     public static final String GET_ROLE_PERMISSION = "getRolePermission?module=";
     public static final String GET_USER_MODULES = "getUserModules?userId=";
+    public static final String USER_PERMISSION = "getUserPermission";
 
     public final static String ADMIN_USER_ENDPOINT = "/adminUsers/";
     public static final String CREATE_ADMIN_USER = "createUser";
@@ -211,6 +221,8 @@ public class Constants extends BaseTest {
     public static final String UPDATE_ADMIN_USER = "updateUser?id=";
     public static final String DELETE_ADMIN_USER = "deleteAdminUser?_id=";
     public static final String ALL_ADMIN_USERNAME = "getAllUsername";
+    public static final String ADMIN_USER_SAVED_VIEW = "getUserSavedView";
+
 
     public final static String LOGIN = "/login";
     public static final String PAGINATION_PARAMETER = "?page=0&size=100";
@@ -225,6 +237,11 @@ public class Constants extends BaseTest {
     public static final String USER_DETAIL = "userDetail?_id=";
     public static final String USER_TAG = "getUserTag?userId=";
     public static final String USER_NOTE = "getUserNote?userId=";
+    public static final String USER_GROUPS = "groups?_id=";
+    public static final String USER_POLICIES = "policies?_id=";
+    public static final String USER_COMMON_MENU = "getCommonMenu?userId=";
+    public static final String USER_TERM_LISTING = "term/listing?term=";
+    public static final String USER_TERM_SUGGESTION = "term/suggest/";
 
 
     public static final String DELETE_USER_SINGLE_TAG = "deleteSingleTag/?userId=";
@@ -347,6 +364,24 @@ public class Constants extends BaseTest {
     public static final String VULNERABILITIES =  "vulnerabilities?_id=";
 
     public static final String WMIC_QUERY = BASE_ENDPOINT + ":" + INVENTA_PORT + "/query/devices/?query=(adapters.adapter_wmic.IP%20Address%20==%20exists(true))&page=0&size=1";
+
+    /**
+     * Active Directory User Aggregated Tab Constant
+     */
+    public static final String AD_USER_QUERY = BASE_ENDPOINT + ":" + INVENTA_PORT + "/query/users/?query=(adapters.adapter_ad.cn%20==%20exists(true))&page=0&size=1";
+
+
+    public static final String NOTIFICATION = "/notifications/";
+    public static final String UNREAD_NOTIFICATION_COUNT = "count/unread";
+    public static final String READ_NOTIFICATION = "mark/read";
+    public static final String TOP_NOTIFICATION = "top";
+
+    public static final String NOTIFICATION_QUERY = BASE_ENDPOINT + ":" + INVENTA_PORT + "/notifications/?page=0&size=1";
+
+    public static final String GENERAL = "/general/";
+        public static final String CLEAR_CACHE = "cache/clear/";
+    public static final String LOAD_CACHE = "cache/load";
+
 
 
 }

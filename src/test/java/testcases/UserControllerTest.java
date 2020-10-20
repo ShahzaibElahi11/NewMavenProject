@@ -20,7 +20,7 @@ import static org.apache.http.HttpStatus.*;
 
 @RunWith(SerenityRunner.class)
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
-public class UserDetailsTest extends BaseTest {
+public class UserControllerTest extends BaseTest {
     public static final String SINGLE_TAG_NAME = "Automation_User_Tag_Number_" + value + "1";
     public static boolean isPreviousTestPass;
 
@@ -217,7 +217,7 @@ public class UserDetailsTest extends BaseTest {
 
     @Test
     @Title("Get General Details By Id of Discovered User")
-    public void getGeneralDetails() {
+    public void getUserGeneralDetails() {
         given().
                 spec(requestSpec).
                 when().
@@ -228,4 +228,82 @@ public class UserDetailsTest extends BaseTest {
                 body("data._id", equalTo(USER_ID));
     }
 
+    @Test
+    @Title("Get Search Users For Listing of Discovered User")
+    public void getSearchUsersForListingDetails() {
+        given().
+                spec(requestSpec).
+                when().
+                get(USER_ENDPOINT + USER_TERM_LISTING + AWS).
+                then().
+                spec(responseSpec);
+    }
+
+    @Test
+    @Title("Get Suggest Term of Discovered User")
+    public void getUserSuggestTermDetails() {
+        given().
+                spec(requestSpec).
+                when().
+                get(USER_ENDPOINT + USER_TERM_SUGGESTION).
+                then().
+                spec(responseSpec);
+    }
+
+
+    /**
+     * Connector Specific Test Caseses
+     */
+
+    @Test
+    @Title("Get Active Directory Summary Details By User Id")
+    public void getAdUserSummaryDetails() throws IOException {
+        String adUserId;
+        adUserId = getIdFromURL(AD_USER_QUERY);
+        given().
+                spec(requestSpec).
+                when().
+                get(USER_ENDPOINT + SUMMARY + adUserId).
+                then().
+                spec(responseSpec);
+    }
+
+    @Test
+    @Title("Get Active Directory Group Details By User Id")
+    public void getAdUserGroupDetails() throws IOException {
+        String adUserId;
+        adUserId = getIdFromURL(AD_USER_QUERY);
+        given().
+                spec(requestSpec).
+                when().
+                get(USER_ENDPOINT + USER_GROUPS + adUserId).
+                then().
+                spec(responseSpec);
+    }
+
+    @Test
+    @Title("Get Active Directory Policy Details By User Id")
+    public void getAdUserPolicyDetails() throws IOException {
+        String adUserId;
+        adUserId = getIdFromURL(AD_USER_QUERY);
+        given().
+                spec(requestSpec).
+                when().
+                get(USER_ENDPOINT + USER_POLICIES + adUserId).
+                then().
+                spec(responseSpec);
+    }
+
+    @Test
+    @Title("Get Active Directory Common Menu Details By User Id")
+    public void getAdCommonMenuDetails() throws IOException {
+        String adUserId;
+        adUserId = getIdFromURL(AD_USER_QUERY);
+        given().
+                spec(requestSpec).
+                when().
+                get(USER_ENDPOINT + USER_COMMON_MENU + adUserId).
+                then().
+                spec(responseSpec);
+    }
 }

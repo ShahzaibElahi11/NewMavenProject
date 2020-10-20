@@ -1,25 +1,31 @@
 package testcases;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import io.restassured.response.Response;
+import models.savedquery.SavedQuery;
 import net.serenitybdd.junit.runners.SerenityRunner;
 import net.thucydides.core.annotations.Title;
-import org.junit.Ignore;
+import org.junit.Assume;
+import org.junit.FixMethodOrder;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.junit.runners.MethodSorters;
 import utils.BaseTest;
 
 import java.io.IOException;
+import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 
 import static constants.Constants.*;
 import static io.restassured.RestAssured.given;
+import static org.apache.http.HttpStatus.SC_OK;
 
 @RunWith(SerenityRunner.class)
-public class QueryWizardTest extends BaseTest {
+@FixMethodOrder(MethodSorters.NAME_ASCENDING)
+public class QueryWizardControllerTest extends BaseTest {
 
-    public static String SAVED_DEVICE_QUERY_NAME = "";
-    public static String SAVED_USER_QUERY_NAME = "";
+    public static boolean isPreviousTestPass;
 
 
     public static String getNameFromSaveQueryWizardURL(String url) throws IOException {
@@ -30,19 +36,9 @@ public class QueryWizardTest extends BaseTest {
     }
 
 
-    static {
-        try {
-            SAVED_DEVICE_QUERY_NAME = getNameFromSaveQueryWizardURL("http://inventaserver:9092/saved-query/?type=DEVICE&page=0&size=1");
-            //SAVED_USER_QUERY_NAME = getNameFromSaveQueryWizardURL("http://inventaserver:9092/saved-query/?type=USER&page=0&size=1");
-
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
-
     @Test
     @Title("Get Query Wizard Equal Operator")
-    public void getEqualOperator(){
+    public void getEqualOperator() {
         given().
                 spec(requestSpec).
                 when().
@@ -53,7 +49,7 @@ public class QueryWizardTest extends BaseTest {
 
     @Test
     @Title("Get Query Wizard Not Equal Operator")
-    public void getNotEqualOperator(){
+    public void getNotEqualOperator() {
         given().
                 spec(requestSpec).
                 when().
@@ -64,7 +60,7 @@ public class QueryWizardTest extends BaseTest {
 
     @Test
     @Title("Get Query Wizard Exists Operator with True Condition")
-    public void getExistsOperatorTrue(){
+    public void getExistsOperatorTrue() {
         given().
                 spec(requestSpec).
                 when().
@@ -83,9 +79,10 @@ public class QueryWizardTest extends BaseTest {
                 then().
                 spec(responseSpec);
     }
+
     @Test
     @Title("Get Query Wizard Starts With Operator")
-    public void getStartWithOperator(){
+    public void getStartWithOperator() {
         given().
                 spec(requestSpec).
                 when().
@@ -96,7 +93,7 @@ public class QueryWizardTest extends BaseTest {
 
     @Test
     @Title("Get Query Wizard End With Operator")
-    public void getEndWithOperator(){
+    public void getEndWithOperator() {
         given().
                 spec(requestSpec).
                 when().
@@ -104,20 +101,21 @@ public class QueryWizardTest extends BaseTest {
                 then().
                 spec(responseSpec);
     }
+
     @Test
     @Title("Get Query Wizard IN Operator")
-    public void getInOperator(){
+    public void getInOperator() {
         given().
                 spec(requestSpec).
                 when().
-                get( QUERY_ENDPOINT + IN_OPERATOR).
+                get(QUERY_ENDPOINT + IN_OPERATOR).
                 then().
                 spec(responseSpec);
     }
 
     @Test
     @Title("Get Query Wizard Contain Operator")
-    public void getContainOperator(){
+    public void getContainOperator() {
         given().
                 spec(requestSpec).
                 when().
@@ -125,9 +123,10 @@ public class QueryWizardTest extends BaseTest {
                 then().
                 spec(responseSpec);
     }
+
     @Test
     @Title("Get Query Wizard AND Operator")
-    public void getANDOperator(){
+    public void getANDOperator() {
         given().
                 spec(requestSpec).
                 when().
@@ -138,7 +137,7 @@ public class QueryWizardTest extends BaseTest {
 
     @Test
     @Title("Get Query Wizard OR Operator")
-    public void getOROperator(){
+    public void getOROperator() {
         given().
                 spec(requestSpec).
                 when().
@@ -149,7 +148,7 @@ public class QueryWizardTest extends BaseTest {
 
     @Test
     @Title("Get Query Wizard Connector Details Query")
-    public void getConnectorDetailsQuery(){
+    public void getConnectorDetailsQuery() {
         given().
                 spec(requestSpec).
                 when().
@@ -160,7 +159,7 @@ public class QueryWizardTest extends BaseTest {
 
     @Test
     @Title("Get Query Wizard Statement Query")
-    public void getStatementQuery(){
+    public void getStatementQuery() {
         given().
                 spec(requestSpec).
                 when().
@@ -171,37 +170,119 @@ public class QueryWizardTest extends BaseTest {
 
     /**
      * Saved Query Controller
-     *
      */
-    @Ignore
     @Test
-    @Title("Post Enforce Save Query on Device")
-    public void postDeviceSaveQuery(){
-        //BASE_ENDPOINT_INVENTA + SAVED_QUERY
-        //String json = "{\"name\":\"Automation_Device_SaveQuery_#"+value+"\",\"query\": \"(hostName==\\\"inventa-windows\\\")\",\"type\": \"DEVICE\", \"description\": \"Automation_Device_SaveQuery_#"+value+"\"}";
+    @Title("Post Save Query on Device")
+    public void testA_postDeviceSaveQuery() {
+        isPreviousTestPass = false;
+
+        SavedQuery deviceSavedQuery = new SavedQuery("Automation_Device_Query_" + value, "Created By Automation Script", "(adapters.adapter_ad.cn == exists(true))", "DEVICE", Collections.singletonList("Device_Tag_" + value));
+        Response response = given().
+                spec(requestSpec).
+                and().
+                body(deviceSavedQuery).
+                when().
+                post(SAVED_QUERY);
+
+        if (response.getStatusCode() == SC_OK)
+            isPreviousTestPass = true;
+        response.
+                then().
+                spec(responseSpec);
+    }
+
+
+    @Test
+    @Title("Post Save Query Overwrite")
+    public void testB_postDeviceSaveQueryOverWrite() {
+        Assume.assumeTrue(isPreviousTestPass == true);
+        isPreviousTestPass = false;
+        SavedQuery deviceSavedQuery = new SavedQuery("Automation_Device_Query_" + value, "Created By Automation Script", "(adapters.adapter_ad.cn == exists(true))", "DEVICE", Collections.singletonList("Device_Tag_" + value));
+        Response response = given().
+                spec(requestSpec).
+                and().
+                body(deviceSavedQuery).
+                when().
+                patch(SAVED_QUERY + "rename/?oldName=Automation_Device_Query_" + value + "&newName=" + "Update_Automation_Device_Query_" + value + "&type=DEVICE");
+        if (response.getStatusCode() == SC_OK)
+            isPreviousTestPass = true;
+        response.
+                then().
+                spec(responseSpec);
 
     }
 
-    @Ignore
     @Test
-    @Title("Post Enforce Save Query on User")
-    public void postUserSaveQuery(){
-        //BASE_ENDPOINT_INVENTA + SAVED_QUERY
-        // String json = "{\"name\":\"Automation_User_SaveQuery_#"+value+"\",\"query\": \"(common.displayName ==\\\"msiraj\\\")\",\"type\": \"USER\", \"description\": \"Automation_DeviceSaveQuery_#"+value+"\"}";
+    @Title("Get Execute Saved Queries on Devices")
+    public void testC_getExecuteDeviceSavedQuery() throws IOException {
+        String deviceSavedQueryName;
+        deviceSavedQueryName = getNameFromSaveQueryWizardURL(SAVED_DEVICE_QUERY_NAME);
+        given().
+                spec(requestSpec).
+                when().
+                get(SAVED_QUERY + "execute/device/" + deviceSavedQueryName).
+                then().
+                spec(responseSpec);
     }
 
-    @Ignore
+
     @Test
-    @Title("Post Enforce Save Query Overwrite")
-    public void postSaveQueryOverWrite(){
-        //BASE_ENDPOINT_INVENTA + SAVED_QUERY
-        // String json = "{\"name\":\"Automation_SaveQuery_OverWrite_#" + value + "\",\"query\": \"(hostName==\\\"inventa-windows\\\")\",\"type\": \"DEVICE\", \"description\": \"Over Write Done Automation_SaveQuery_#" + value + "\"}";
+    @Title("Post Save Query on User")
+    public void testD_postUserSaveQuery() {
+        isPreviousTestPass = false;
+
+        SavedQuery userSavedQuery = new SavedQuery("Automation_User_Query_" + value, "Created By Automation Script", "(adapters.adapter_ad.cn == exists(true))", "USER", Collections.singletonList("User_Tag_" + value));
+        Response response = given().
+                spec(requestSpec).
+                and().
+                body(userSavedQuery).
+                when().
+                post(SAVED_QUERY);
+        if (response.getStatusCode() == SC_OK)
+            isPreviousTestPass = true;
+        response.
+                then().
+                spec(responseSpec);
 
     }
+
+    @Test
+    @Title("Post User Save Query Overwrite")
+    public void testE_postUserSaveQueryOverWrite() {
+        Assume.assumeTrue(isPreviousTestPass == true);
+        isPreviousTestPass = false;
+        SavedQuery userSavedQuery = new SavedQuery("Automation_User_Query_" + value, "Created By Automation Script", "(adapters.adapter_ad.cn == exists(true))", "USER", Collections.singletonList("User_Tag_" + value));
+        Response response = given().
+                spec(requestSpec).
+                and().
+                body(userSavedQuery).
+                when().
+                patch(SAVED_QUERY + "rename/?oldName=Automation_User_Query_" + value + "&newName=" + "Update_Automation_User_Query" + value + "&type=USER");
+        if (response.getStatusCode() == SC_OK)
+            isPreviousTestPass = true;
+        response.
+                then().
+                spec(responseSpec);
+
+    }
+
+    @Test
+    @Title("Get Execute Saved Queries on Users")
+    public void testF_getExecuteUserSavedQuery() throws IOException {
+        String userSavedQueryName;
+        userSavedQueryName = getNameFromSaveQueryWizardURL(SAVED_USER_QUERY_NAME);
+        given().
+                spec(requestSpec).
+                when().
+                get(SAVED_QUERY + "execute/user/" + userSavedQueryName).
+                then().
+                spec(responseSpec);
+    }
+
 
     @Test
     @Title("Get Device Saved Queries")
-    public void getDeviceSavedQueries(){
+    public void getDeviceSavedQueries() {
         given().
                 spec(requestSpec).
                 when().
@@ -212,7 +293,7 @@ public class QueryWizardTest extends BaseTest {
 
     @Test
     @Title("Get User Saved Queries")
-    public void getUserSavedQueries(){
+    public void getUserSavedQueries() {
         given().
                 spec(requestSpec).
                 when().
@@ -221,33 +302,10 @@ public class QueryWizardTest extends BaseTest {
                 spec(responseSpec);
     }
 
-    @Test
-    @Title("Get Execute Saved Queries on Devices")
-    public void getExecuteDeviceSavedQuery(){
-        given().
-                spec(requestSpec).
-                when().
-                get(SAVED_QUERY + "execute/device/" + SAVED_DEVICE_QUERY_NAME).
-                then().
-                spec(responseSpec);
-    }
-
-    @Ignore
-    @Test
-    @Title("Get Execute Saved Queries on Users")
-    public void getExecuteUserSavedQuery(){
-        given().
-                spec(requestSpec).
-                when().
-                get(SAVED_QUERY + "execute/user/" + SAVED_USER_QUERY_NAME).
-                then().
-                spec(responseSpec);
-    }
-
 
     @Test
     @Title("Get All Saved Queries")
-    public void getAllSavedQueries(){
+    public void getAllSavedQueries() {
         given().
                 spec(requestSpec).
                 when().
@@ -258,7 +316,7 @@ public class QueryWizardTest extends BaseTest {
 
     @Test
     @Title("Get All Device Saved Queries Without Pagination")
-    public void getAllSavedQueriesNoPaginationDevice(){
+    public void getAllSavedQueriesNoPaginationDevice() {
         given().
                 spec(requestSpec).
                 when().
@@ -269,7 +327,7 @@ public class QueryWizardTest extends BaseTest {
 
     @Test
     @Title("Get All User Saved Queries Without Pagination")
-    public void getAllSavedQueriesNoPaginationUser(){
+    public void getAllSavedQueriesNoPaginationUser() {
         given().
                 spec(requestSpec).
                 when().
@@ -290,7 +348,7 @@ public class QueryWizardTest extends BaseTest {
 
     @Test
     @Title("Get Query Wizard All AD Device Fields")
-    public void getAllAdDeviceFields(){
+    public void getAllAdDeviceFields() {
         given().
                 spec(requestSpec).
                 when().
@@ -301,17 +359,18 @@ public class QueryWizardTest extends BaseTest {
 
     @Test
     @Title("Get Query Wizard All AWS Device Fields")
-    public void getAllAwsDeviceFields(){
+    public void getAllAwsDeviceFields() {
         given().
                 spec(requestSpec).
                 when().
-                get(  ALL_DEVICE_FIELDS + AWS).
+                get(ALL_DEVICE_FIELDS + AWS).
                 then().
                 spec(responseSpec);
     }
+
     @Test
     @Title("Get Query Wizard All Azure Device Fields")
-    public void getAllAzureDeviceFields(){
+    public void getAllAzureDeviceFields() {
         given().
                 spec(requestSpec).
                 when().
@@ -322,7 +381,7 @@ public class QueryWizardTest extends BaseTest {
 
     @Test
     @Title("Get Query Wizard All Wmic Device Fields")
-    public void getAllWmicDeviceFields(){
+    public void getAllWmicDeviceFields() {
         given().
                 spec(requestSpec).
                 when().
@@ -333,18 +392,18 @@ public class QueryWizardTest extends BaseTest {
 
     @Test
     @Title("Get Query Wizard All AD User Fields")
-    public void getAllAdUserFields(){
+    public void getAllAdUserFields() {
         given().
                 spec(requestSpec).
                 when().
-                get( ALL_USER_FIELDS + AD).
+                get(ALL_USER_FIELDS + AD).
                 then().
                 spec(responseSpec);
     }
 
     @Test
     @Title("Get Query Wizard All AWS User Fields")
-    public void getAllAwsUserFields(){
+    public void getAllAwsUserFields() {
         given().
                 spec(requestSpec).
                 when().
@@ -355,7 +414,7 @@ public class QueryWizardTest extends BaseTest {
 
     @Test
     @Title("Get Query Wizard All Azure User Fields")
-    public void getAllAzureUserFields(){
+    public void getAllAzureUserFields() {
         given().
                 spec(requestSpec).
                 when().
@@ -366,7 +425,7 @@ public class QueryWizardTest extends BaseTest {
 
     @Test
     @Title("Get Query Wizard Azure Type Fields For Devices")
-    public void getAzureTypeDeviceFields(){
+    public void getAzureTypeDeviceFields() {
         given().
                 spec(requestSpec).
                 when().
@@ -377,7 +436,7 @@ public class QueryWizardTest extends BaseTest {
 
     @Test
     @Title("Get Query Wizard Aws Type Fields For Devices")
-    public void getAwsTypeDeviceFields(){
+    public void getAwsTypeDeviceFields() {
         given().
                 spec(requestSpec).
                 when().
@@ -388,7 +447,7 @@ public class QueryWizardTest extends BaseTest {
 
     @Test
     @Title("Get Query Wizard Aws Type Fields For Devices")
-    public void getAdTypeDeviceFields(){
+    public void getAdTypeDeviceFields() {
         given().
                 spec(requestSpec).
                 when().
@@ -396,8 +455,6 @@ public class QueryWizardTest extends BaseTest {
                 then().
                 spec(responseSpec);
     }
-
-
 
 
 }

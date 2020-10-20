@@ -22,7 +22,7 @@ import static org.hamcrest.Matchers.*;
 
 @RunWith(SerenityRunner.class)
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
-public class DeviceDetailsTest extends BaseTest {
+public class DeviceControllerTest extends BaseTest {
 
     public static boolean isPreviousTestPass;
     public static final String SINGLE_TAG_NAME = "Automation_Device_Tag_Number_" + value + "1";
@@ -159,9 +159,7 @@ public class DeviceDetailsTest extends BaseTest {
             isPreviousTestPass = true;
         response.
                 then().
-                spec(responseSpec).
-                and()
-                .body("data.tags[0]", equalTo("Automation_Device_Tag_Number_" + value + "1"));
+                spec(responseSpec);
     }
 
 
