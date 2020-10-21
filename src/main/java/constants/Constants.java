@@ -11,7 +11,6 @@ public class Constants extends BaseTest {
     public static final String USER_AUDIT = "getUserAudit?username=admininventa&page=0&size=1";
     public static final String AUDIT_DETAIL = "getAuditDetail?id=";
     public static final String ALL_USER_AUDIT_LIST = "getAllAudit?page=0&size=10";
-    public static final String ALL_USER_NAME = "/adminUsers/getAllUsername";
 
 
     /**
@@ -21,7 +20,6 @@ public class Constants extends BaseTest {
     public static final String CONNECTOR_ENDPOINT = "/adapters/";
     public static final String CONNECTOR_CONFIGURATION = "active-directory/configure/?type=";
     public static final String CONNECTOR_CONFIGURATION_INSTANCE = "instance/list?source=";
-
     public static final String DISCOVER = "discover/";
 
     /**
@@ -69,7 +67,7 @@ public class Constants extends BaseTest {
     public static final String DEVICE_ENDPOINT = "/devices/";
     public static final String GET_ALL_DEVICES = "getAllDevices?page=0&size=10";
     public static final String DEVICES_DETAILS = "deviceDetail?_id=";
-    public static final String CONNECTOR_LIST_BY_ID = "adapters/list?_id=";
+    public static final String CONNECTOR_LIST_BY_ID = "adapters/list?_id="; //will check later
     public static final String RUNNING_PROCESSES = "processes/running?_id=";
     public static final String INSTALLED_SOFTWARE = "software/installed?_id=";
     public static final String SHARED_FOLDER = "shared/folders?_id=";
@@ -82,6 +80,9 @@ public class Constants extends BaseTest {
     public static final String ALL_TAGS = "tags/";
     public static final String DEVICE_HARDWARE = "hardware/connected?_id="; //will remove this test case later
     public static final String DEVICE_COMMON_MENU = "getCommonMenu?deviceId=";
+    public static final String ALL_CONNECTOR_LIST = "adapters/list/all";
+    public static final String ASSET_TYPE_LIST = "typelist";
+
 
     //http://inventaserver:9092/devices/getCommonMenu?deviceId=5f5b5a7217bb352246d6b68a
     //http://inventaserver:9092/permission/getUserPermission?userId=5f60dfe75af94a27e29cfe97&module=asset
@@ -160,6 +161,8 @@ public class Constants extends BaseTest {
     public static final String POLICY_ROUTINE = "/policy-routine/";
     public static final String PR_ACTION = "actions";
     public static final String PR_TABLE = "table/?page=0&size=10";
+    public static final String DEVICES = "devices";
+    public static final String USERS = "users";
 
     //re-think
     public static final String PR_FILTER_NAME = "TEST_FILTER";
@@ -203,6 +206,8 @@ public class Constants extends BaseTest {
     public static final String ROLE_DETAILS = "getRoleDetail?id=";
     public static final String UPDATE_ROLE = "updateRole?id=";
     public static final String DELETE_ROLE = "deleteRole?id=";
+    public static final String ROLE_DETAILS_BY_USER_ID = "getUserRole?userId=";
+
 
     public static final String PERMISSION_ENDPOINT = "/permission/";
     public static final String GET_ALL_PERMISSION = "getAllPermission";
@@ -222,6 +227,8 @@ public class Constants extends BaseTest {
     public static final String DELETE_ADMIN_USER = "deleteAdminUser?_id=";
     public static final String ALL_ADMIN_USERNAME = "getAllUsername";
     public static final String ADMIN_USER_SAVED_VIEW = "getUserSavedView";
+    public static final String ADMIN_USER_CHANGE_PASSWORD = "changePassword";
+
 
 
     public final static String LOGIN = "/login";
@@ -240,8 +247,8 @@ public class Constants extends BaseTest {
     public static final String USER_GROUPS = "groups?_id=";
     public static final String USER_POLICIES = "policies?_id=";
     public static final String USER_COMMON_MENU = "getCommonMenu?userId=";
-    public static final String USER_TERM_LISTING = "term/listing?term=";
-    public static final String USER_TERM_SUGGESTION = "term/suggest/";
+    public static final String TERM_LISTING = "term/listing?term=";
+    public static final String TERM_SUGGESTION = "term/suggest/";
 
 
     public static final String DELETE_USER_SINGLE_TAG = "deleteSingleTag/?userId=";

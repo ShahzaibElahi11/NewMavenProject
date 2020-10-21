@@ -42,5 +42,4 @@ public class AdminUser {
     private String _id;
 
 
-
 }

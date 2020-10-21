@@ -229,23 +229,23 @@ public class UserControllerTest extends BaseTest {
     }
 
     @Test
-    @Title("Get Search Users For Listing of Discovered User")
-    public void getSearchUsersForListingDetails() {
+    @Title("Get Search Keyword on User Listing Page")
+    public void getSearchKeywordOnAssetListingPage() {
         given().
                 spec(requestSpec).
                 when().
-                get(USER_ENDPOINT + USER_TERM_LISTING + AWS).
+                get(USER_ENDPOINT + TERM_LISTING + AWS).
                 then().
                 spec(responseSpec);
     }
 
     @Test
-    @Title("Get Suggest Term of Discovered User")
+    @Title("Get Display Suggest Term on User Page")
     public void getUserSuggestTermDetails() {
         given().
                 spec(requestSpec).
                 when().
-                get(USER_ENDPOINT + USER_TERM_SUGGESTION).
+                get(USER_ENDPOINT + TERM_SUGGESTION).
                 then().
                 spec(responseSpec);
     }

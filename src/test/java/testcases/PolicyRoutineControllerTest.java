@@ -51,7 +51,7 @@ public class PolicyRoutineControllerTest extends BaseTest {
 
     @Test
     @Title("Update Policy Routine")
-    public void testB_PutPolicyRoutineNew() throws IOException {
+    public void testB_PutPolicyRoutine() throws IOException {
         String currentPolicyRoutineId = "";
         currentPolicyRoutineId = getIdFromURL(PUT_POLICY_ROUTINE_ID);
 
@@ -98,7 +98,7 @@ public class PolicyRoutineControllerTest extends BaseTest {
     }
 
     @Test
-    @Title("Get Display All Policy Routine Data")
+    @Title("Get All Policy Routine Data")
     public void getPolicyRoutineAllData() {
         given().
                 spec(requestSpec).
@@ -178,7 +178,7 @@ public class PolicyRoutineControllerTest extends BaseTest {
                 and().
                 body(enforcePolicyOnDevice).
                 when().
-                post(POLICY_ROUTINE + "enforce/" + deviceId + "/devices/").
+                post(POLICY_ROUTINE + "enforce/" + deviceId + "/"+ DEVICES).
                 then().
                 assertThat().
                 statusCode(SC_OK);
@@ -195,7 +195,7 @@ public class PolicyRoutineControllerTest extends BaseTest {
                 and().
                 body(enforcePolicyOnUser).
                 when().
-                post(POLICY_ROUTINE + "enforce/" + userId + "/users/").
+                post(POLICY_ROUTINE + "enforce/" + userId + "/" + USERS).
                 then().
                 assertThat().
                 statusCode(SC_OK);
@@ -226,6 +226,55 @@ public class PolicyRoutineControllerTest extends BaseTest {
                 and().
                 body("data._id", equalTo(policyRoutineId));
     }
+
+    @Test
+    @Title("Get All Device Policy Routines")
+    public void getAllDevicePolicyRoutines() {
+        given().
+                spec(requestSpec).
+                when().
+                get(POLICY_ROUTINE + DEVICES).
+                then().
+                spec(responseSpec);
+    }
+
+    @Test
+    @Title("Get All User Policy Routines")
+    public void getAllUserPolicyRoutines() {
+        given().
+                spec(requestSpec).
+                when().
+                get(POLICY_ROUTINE + USERS).
+                then().
+                spec(responseSpec);
+    }
+
+    @Test
+    @Title("Get Policy Routine Set For Device")
+    public void getPolicyRoutineSetForDevice() throws IOException {
+        String deviceId;
+        deviceId = getIdFromURL(GET_DEVICE_ID);
+        given().
+                spec(requestSpec).
+                when().
+                get(POLICY_ROUTINE + "set/device/" + deviceId).
+                then().
+                spec(responseSpec);
+    }
+
+    @Test
+    @Title("Get Policy Routine Set For User")
+    public void getPolicyRoutineSetForUser() throws IOException {
+        String userId;
+        userId = getIdFromURL(GET_USER_ID);
+        given().
+                spec(requestSpec).
+                when().
+                get(POLICY_ROUTINE + "set/user/" + userId).
+                then().
+                spec(responseSpec);
+    }
+
 
 
 }

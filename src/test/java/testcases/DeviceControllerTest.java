@@ -2251,4 +2251,50 @@ public class DeviceControllerTest extends BaseTest {
                 spec(responseSpec);
     }
 
+
+    @Test
+    @Title("Get All Connector List")
+    public void getAllConnectorList() {
+        given().
+                spec(requestSpec).
+                when().
+                get(DEVICE_ENDPOINT + ALL_CONNECTOR_LIST).
+                then().
+                spec(responseSpec);
+    }
+
+    @Test
+    @Title("Get Search Keyword on Asset Listing Page")
+    public void getSearchKeywordOnAssetListingPage() {
+        given().
+                spec(requestSpec).
+                when().
+                get(USER_ENDPOINT + TERM_LISTING + AWS).
+                then().
+                spec(responseSpec);
+    }
+
+    @Test
+    @Title("Get Display Suggest Term on Asset Page")
+    public void getDeviceSuggestTermDetails() {
+        given().
+                spec(requestSpec).
+                when().
+                get(DEVICE_ENDPOINT + TERM_SUGGESTION).
+                then().
+                spec(responseSpec);
+    }
+
+    @Test
+    @Title("Get Display List of All Type Asset")
+    public void getTypeList() {
+        given().
+                spec(requestSpec).
+                when().
+                get(DEVICE_ENDPOINT + ASSET_TYPE_LIST).
+                then().
+                assertThat().
+                statusCode(SC_OK);
+    }
+
 }

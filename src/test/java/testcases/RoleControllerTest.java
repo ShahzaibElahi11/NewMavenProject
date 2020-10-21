@@ -151,5 +151,18 @@ public class RoleControllerTest extends BaseTest {
                 spec(responseSpec);
     }
 
+    @Test
+    @Title("Get All Role List")
+    public void testF_getUserRole() throws IOException {
+        String userId;
+        userId = getIdFromURL(GET_ADMIN_USER_ID);
+        given().
+                spec(requestSpec).
+                when().
+                get(ROLE_ENDPOINT + ROLE_DETAILS_BY_USER_ID + userId).
+                then().
+                spec(responseSpec);
+    }
+
 
 }

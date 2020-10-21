@@ -3,6 +3,7 @@ package testcases;
 import com.github.javafaker.Faker;
 import io.restassured.response.Response;
 import models.usermanagement.AdminUser;
+import models.usermanagement.ChangePassword;
 import net.serenitybdd.junit.runners.SerenityRunner;
 import net.thucydides.core.annotations.Title;
 import org.junit.Assume;
@@ -36,7 +37,7 @@ public class AdminUsersControllerTest extends BaseTest {
 
     @Test
     @Title("Create New User in the Application")
-    public void testA_PostCreateUser() throws IOException {
+    public void testA_PostCreateUser() throws IOException  {
         String adminRoleId;
         adminRoleId = getIdFromURL(GET_ROLE_ID_FOR_USER);
 
@@ -126,8 +127,30 @@ public class AdminUsersControllerTest extends BaseTest {
     }
 
     @Test
+    @Title("Get All User Permission")
+    public void testD_putPasswordChange() throws IOException {
+        String currentAdminId;
+        currentAdminId = getIdFromURL(GET_ADMIN_USER_ID);
+        ChangePassword changePassword =  ChangePassword.builder()
+                .userId(currentAdminId)
+                .newPassword("Pass123")
+                .confirmPassword("Pass123")
+                .build();
+        given().
+                spec(requestSpec).
+                and().
+                body(changePassword).
+                when().
+                put(ADMIN_USER_ENDPOINT + ADMIN_USER_CHANGE_PASSWORD).
+                then().
+                spec(responseSpec);
+
+    }
+
+
+    @Test
     @Title("Delete User Information")
-    public void testD_DeleteAdminUser() throws IOException {
+    public void testE_DeleteAdminUser() throws IOException {
         String currentDeleteAdminUserId;
         currentDeleteAdminUserId = getIdFromURL(DELETE_ADMIN_USER_ID);
 
@@ -143,7 +166,7 @@ public class AdminUsersControllerTest extends BaseTest {
 
     @Test
     @Title("Get All Admin User List")
-    public void testE_getAllAdminUser() {
+    public void testF_getAllAdminUser() {
         given().
                 spec(requestSpec).
                 when().
@@ -156,7 +179,7 @@ public class AdminUsersControllerTest extends BaseTest {
 
     @Test
     @Title("Get All Admin User Name")
-    public void testF_getAllAdminUserName() {
+    public void testG_getAllAdminUserName() {
         given().
                 spec(requestSpec).
                 when().
@@ -204,6 +227,9 @@ public class AdminUsersControllerTest extends BaseTest {
                 spec(responseSpec);
 
     }
+
+
+
 
 
 }
