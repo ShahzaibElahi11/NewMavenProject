@@ -1,9 +1,11 @@
 # Default ignored files
-.idea/
-/target/
 
-/.idea/
-/*.iml/
+#IDE files
+*/target/*
+target/*
+*/build/*
+.idea/*
+*.iml
 
 
 # Compiled class file
@@ -26,7 +28,7 @@
 *.zip
 *.tar.gz
 *.rar
-*.iml
+iml*.
 # virtual machine crash logs, see http://www.java.com/en/download/help/error_hotspot.xml
 hs_err_pid*
 

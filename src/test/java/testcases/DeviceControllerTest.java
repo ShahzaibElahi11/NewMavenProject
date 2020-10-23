@@ -201,13 +201,13 @@ public class DeviceControllerTest extends BaseTest {
     @Title("Post Insert Note on Device")
     public void testF_postInsertDeviceNote() {
         isPreviousTestPass = false;
-        DeviceNotes deviceNotes = new DeviceNotes("Automation_Notes_#_" + value + "", "" + DEVICE_DETAIL_ID);
+        DeviceNotes deviceNotes = new DeviceNotes("Automation_Notes_#_" + value);
         Response response = given().
                 spec(requestSpec).
                 and().
                 body(deviceNotes).
                 when().
-                post(DEVICE_ENDPOINT + INSERT_NOTE);
+                post(DEVICE_ENDPOINT + INSERT_NOTE  + "?deviceId=" +  DEVICE_DETAIL_ID);
         if (response.getStatusCode() == SC_OK)
             isPreviousTestPass = true;
         response.
@@ -224,24 +224,24 @@ public class DeviceControllerTest extends BaseTest {
         Response response = given().
                 spec(requestSpec).
                 when().
-                get(DEVICE_ENDPOINT + DEVICE_NOTE + DEVICE_DETAIL_ID);
+                get(DEVICE_ENDPOINT + DEVICE_NOTE_LIST + DEVICE_DETAIL_ID);
         if (response.getStatusCode() == SC_OK)
             isPreviousTestPass = true;
         response.
                 then().
-                spec(responseSpec).
-                and()
-                .body("data.note", equalTo("Automation_Notes_#_" + value));
+                spec(responseSpec);
     }
 
 
     @Test
     @Title("Delete Device Note Tag")
-    public void testH_deleteDeviceNote() {
+    public void testH_deleteDeviceNote() throws IOException {
+        String noteId;
+        noteId = getIdFromPermissionURL(DEVICE_NOTE_QUERY + DEVICE_DETAIL_ID);
         given().
                 spec(requestSpec).
                 when().
-                delete(DEVICE_ENDPOINT + DELETE_DEVICE_NOTE + DEVICE_DETAIL_ID).
+                delete(DEVICE_ENDPOINT + DELETE_DEVICE_NOTE + DEVICE_DETAIL_ID +"&noteId=" + noteId).
                 then().
                 assertThat().
                 statusCode(SC_OK);

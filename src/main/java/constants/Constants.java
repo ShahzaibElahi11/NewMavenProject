@@ -72,6 +72,8 @@ public class Constants extends BaseTest {
     public static final String INSTALLED_SOFTWARE = "software/installed?_id=";
     public static final String SHARED_FOLDER = "shared/folders?_id=";
     public static final String DEVICE_NOTE = "getDeviceNote?deviceId=";
+    public static final String DEVICE_NOTE_LIST = "getDeviceNoteList?deviceId=";
+
     public static final String DEVICE_TAG = "getDeviceTag?deviceId=";
     public static final String GENERAL_DETAILS = "general?_id=";
     public static final String CONNECTOR_DATA = "adapter/data?_id=";
@@ -258,6 +260,10 @@ public class Constants extends BaseTest {
     public static final String DELETE_USER_NOTE = "deleteNote?userId=";
     public static final String DELETE_DEVICE_NOTE = "deleteNote?deviceId=";
 
+    //Note Query
+    public static final String DEVICE_NOTE_QUERY = BASE_ENDPOINT + ":" + INVENTA_PORT + "/devices/getDeviceNoteList?deviceId=";
+
+
     /**
      * Integration Controller Constants
      */
@@ -386,7 +392,7 @@ public class Constants extends BaseTest {
     public static final String NOTIFICATION_QUERY = BASE_ENDPOINT + ":" + INVENTA_PORT + "/notifications/?page=0&size=1";
 
     public static final String GENERAL = "/general/";
-        public static final String CLEAR_CACHE = "cache/clear/";
+    public static final String CLEAR_CACHE = "cache/clear/";
     public static final String LOAD_CACHE = "cache/load";
 
 

@@ -95,7 +95,7 @@ public class BaseTest {
         String json = readJsonFromUrl(url).toString();
         Map<String, Object> map = mapper.readValue(json, Map.class);
         //System.out.println(((Map) ((List) map.get("data")).get(3)).get("_id"));
-        return ((Map) ((List) map.get("data")).get(3)).get("_id") + "";
+        return ((Map) ((List) map.get("data")).get(0)).get("_id") + "";
 
     }
 
