@@ -199,7 +199,7 @@ public class DeviceDetailsTest extends BaseTest {
     @Test
     @Title("Post Insert Note on Device")
     public void postInsertDeviceNote() {
-        DeviceNotes deviceNotes = new DeviceNotes("Automation_Notes_#_" + value + "", "" + DEVICE_DETAIL_ID);
+        DeviceNotes deviceNotes = new DeviceNotes("Automation_Notes_#_" + value);
         Response response = Devices.postInsertDeviceNote(deviceNotes);
         Assert.assertEquals("Invalid Status in Response: ", response.getStatusCode(), HttpStatus.SC_OK);
     }

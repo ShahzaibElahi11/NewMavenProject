@@ -162,7 +162,7 @@ public class Devices extends BaseAPI {
                 .header("Authorization", "Bearer " + token)
                 .body(deviceNotes)
                 .when()
-                .post(BASE_ENDPOINT_INVENTA + DEVICE_ENDPOINT+ INSERT_NOTE);
+                .post(BASE_ENDPOINT_INVENTA + DEVICE_ENDPOINT+ INSERT_NOTE + "?deviceId=" + DEVICE_DETAIL_ID);
 
     }
 

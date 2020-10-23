@@ -7,11 +7,10 @@ public class DeviceNotes {
     @JsonProperty
     private String note;
 
-    @JsonProperty
-    private String deviceId;
+//    @JsonProperty
+//    private String deviceId;
 
-    public DeviceNotes(String note, String deviceId) {
+    public DeviceNotes(String note) {
         this.note = note;
-        this.deviceId = deviceId;
     }
 }
