@@ -6,7 +6,7 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import utils.BaseTest;
 
-import static constants.Constants.*;
+import static constants.ConfigControllerConstants.*;
 import static io.restassured.RestAssured.given;
 
 @RunWith(SerenityRunner.class)

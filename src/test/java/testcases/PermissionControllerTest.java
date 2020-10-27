@@ -8,7 +8,8 @@ import utils.BaseTest;
 
 import java.io.IOException;
 
-import static constants.Constants.*;
+import static constants.AdminUsersControllerConstants.GET_ADMIN_USER_ID;
+import static constants.PermissionControllerConstants.*;
 import static io.restassured.RestAssured.given;
 
 @RunWith(SerenityRunner.class)

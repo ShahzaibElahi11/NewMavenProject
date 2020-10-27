@@ -13,7 +13,9 @@ import utils.BaseTest;
 import java.io.IOException;
 import java.util.Collections;
 
-import static constants.Constants.*;
+import static constants.ConnectorConfigurationConstants.AWS;
+import static constants.DeviceControllerConstants.*;
+import static constants.UserControllerConstants.*;
 import static io.restassured.RestAssured.given;
 import static org.hamcrest.Matchers.*;
 import static org.apache.http.HttpStatus.*;
@@ -21,7 +23,8 @@ import static org.apache.http.HttpStatus.*;
 @RunWith(SerenityRunner.class)
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
 public class UserControllerTest extends BaseTest {
-    public static final String SINGLE_TAG_NAME = "Automation_User_Tag_Number_" + value + "1";
+
+    public static final String SINGLE_TAG_NAME = "Automation_User_Tag_Number_" + VALUE + "1";
     public static boolean isPreviousTestPass;
 
     public static String USER_ID = "";
@@ -86,7 +89,7 @@ public class UserControllerTest extends BaseTest {
     @Title("Post Insert Tag on  Discovered User")
     public void testA_postInsertUserTag() {
         isPreviousTestPass = false;
-        UserTag userTag = new UserTag("Automation_User_Tag_Number_" + value + "1", Collections.singletonList(USER_ID));
+        UserTag userTag = new UserTag("Automation_User_Tag_Number_" + VALUE + "1", Collections.singletonList(USER_ID));
         Response response = given().
                 spec(requestSpec).
                 and().
@@ -116,7 +119,7 @@ public class UserControllerTest extends BaseTest {
                 then().
                 spec(responseSpec).
                 and()
-                .body("data.tags[0]", equalTo("Automation_User_Tag_Number_" + value + "1"));
+                .body("data.tags[0]", equalTo("Automation_User_Tag_Number_" + VALUE + "1"));
     }
 
     @Test // Not throw exception if tag name not exist.
@@ -158,7 +161,7 @@ public class UserControllerTest extends BaseTest {
     @Title("Post Insert Note on  Discovered User")
     public void testE_postInsertUserNote() {
         isPreviousTestPass = false;
-        UserNote userNote = new UserNote("Automation_Notes_#_" + value + "2", "" + USER_ID);
+        UserNote userNote = new UserNote("Automation_Notes_#_" + VALUE + "2", "" + USER_ID);
         Response response = given().
                 spec(requestSpec).
                 and().
@@ -189,7 +192,7 @@ public class UserControllerTest extends BaseTest {
                 then().
                 spec(responseSpec).
                 and()
-                .body("data.note", equalTo("Automation_Notes_#_" + value + "2"));
+                .body("data.note", equalTo("Automation_Notes_#_" + VALUE + "2"));
     }
 
     @Test

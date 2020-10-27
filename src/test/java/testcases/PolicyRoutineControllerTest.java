@@ -12,7 +12,8 @@ import utils.BaseTest;
 
 import java.io.IOException;
 
-import static constants.Constants.*;
+import static constants.PolicyRoutineControllerConstants.*;
+import static constants.UserControllerConstants.GET_USER_ID;
 import static io.restassured.RestAssured.given;
 import static org.hamcrest.Matchers.equalTo;
 import static org.apache.http.HttpStatus.*;
@@ -31,7 +32,7 @@ public class PolicyRoutineControllerTest extends BaseTest {
 
         PolicyRoutineProperties policyRoutineProperties = PolicyRoutineProperties.builder().username("test1").password("password123").build();
         PolicyRoutineMainAction policyRoutineMainAction = PolicyRoutineMainAction.builder().action("RC02").properties(policyRoutineProperties).build();
-        PolicyRoutine policyRoutine = PolicyRoutine.builder().name("Automation Policy Routine # " + value).mainAction(policyRoutineMainAction).build();
+        PolicyRoutine policyRoutine = PolicyRoutine.builder().name("Automation Policy Routine # " + VALUE).mainAction(policyRoutineMainAction).build();
 
         Response response = given().
                 spec(requestSpec).
@@ -60,7 +61,7 @@ public class PolicyRoutineControllerTest extends BaseTest {
 
         PolicyRoutineProperties policyRoutineProperties = PolicyRoutineProperties.builder().username("test1").password("password123").build();
         PolicyRoutineMainAction policyRoutineMainAction = PolicyRoutineMainAction.builder().action("RC02").properties(policyRoutineProperties).build();
-        PolicyRoutine policyRoutine = PolicyRoutine.builder().name("Update1_Automation Policy Routine # " + value).mainAction(policyRoutineMainAction).build();
+        PolicyRoutine policyRoutine = PolicyRoutine.builder().name("Update1_Automation Policy Routine # " + VALUE).mainAction(policyRoutineMainAction).build();
 
         Response response = given().
                 spec(requestSpec).

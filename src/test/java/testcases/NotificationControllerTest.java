@@ -8,7 +8,7 @@ import utils.BaseTest;
 
 import java.io.IOException;
 
-import static constants.Constants.*;
+import static constants.NotificationControllerConstants.*;
 import static io.restassured.RestAssured.given;
 import static org.apache.http.HttpStatus.SC_OK;
 

@@ -8,12 +8,12 @@ import org.junit.runner.RunWith;
 import utils.ApplicationConfiguration;
 import utils.BaseTest;
 
-import static constants.Constants.*;
+import static constants.ConnectorConfigurationConstants.*;
 import static io.restassured.RestAssured.given;
 import static org.hamcrest.Matchers.*;
 
 @RunWith(SerenityRunner.class)
-public class ConnectorConfigurationTest extends BaseTest {
+public class ConnectorConfigurationControllerTest extends BaseTest {
 
     protected static final String AWS_KEY_ID = ApplicationConfiguration.getAwsKeyId();
     protected static final String AWS_SECRET_KEY = ApplicationConfiguration.getAwsSecretKey();

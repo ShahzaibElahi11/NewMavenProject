@@ -9,6 +9,4 @@ public class DeviceNotes {
     @JsonProperty
     private String note;
 
-//    @JsonProperty
-//    private String deviceId;
 }

@@ -15,7 +15,7 @@ import utils.BaseTest;
 import java.io.IOException;
 import java.util.Collections;
 
-import static constants.Constants.*;
+import static constants.DeviceControllerConstants.*;
 import static io.restassured.RestAssured.given;
 import static org.apache.http.HttpStatus.*;
 import static org.hamcrest.Matchers.*;
@@ -25,7 +25,7 @@ import static org.hamcrest.Matchers.*;
 public class DeviceControllerTest extends BaseTest {
 
     public static boolean isPreviousTestPass;
-    public static final String SINGLE_TAG_NAME = "Automation_Device_Tag_Number_" + value + "1";
+    public static final String SINGLE_TAG_NAME = "Automation_Device_Tag_Number_" + VALUE + "1";
 
     //http://inventaserver:9092/devices/removeDiscoveredDevice?_id=5f891e11b2256b227f8677de
 
@@ -34,7 +34,7 @@ public class DeviceControllerTest extends BaseTest {
     // rethink
     static {
         try {
-            DEVICE_DETAIL_ID = getIdFromURL("http://inventaserver:9092/devices/getAllDevices?page=0&size=1");
+            DEVICE_DETAIL_ID = getIdFromURL(GET_DEVICE_ID_QUERY);
         } catch (IOException ex) {
             ex.printStackTrace();
         }
@@ -119,7 +119,7 @@ public class DeviceControllerTest extends BaseTest {
     public void testA_postInsertDeviceTag() {
         isPreviousTestPass = false;
 
-        DeviceTag deviceTag = new DeviceTag("Automation_Device_Tag_Number_" + value + "1", Collections.singletonList(DEVICE_DETAIL_ID));
+        DeviceTag deviceTag = new DeviceTag("Automation_Device_Tag_Number_" + VALUE + "1", Collections.singletonList(DEVICE_DETAIL_ID));
         Response response = given().
                 spec(requestSpec).
                 and().
@@ -201,7 +201,7 @@ public class DeviceControllerTest extends BaseTest {
     @Title("Post Insert Note on Device")
     public void testF_postInsertDeviceNote() {
         isPreviousTestPass = false;
-        DeviceNotes deviceNotes = new DeviceNotes("Automation_Notes_#_" + value);
+        DeviceNotes deviceNotes = new DeviceNotes("Automation_Notes_#_" + VALUE);
         Response response = given().
                 spec(requestSpec).
                 and().
@@ -1131,7 +1131,7 @@ public class DeviceControllerTest extends BaseTest {
     @Title("Get AWS Database Instance Summary Details By Device Id")
     public void getAwsDatabaseInstanceSummaryDetails() throws IOException {
         String awsDatabaseInstanceDeviceId;
-        awsDatabaseInstanceDeviceId = getIdFromURL(AWS_CONTAINER_QUERY);
+        awsDatabaseInstanceDeviceId = getIdFromURL(AWS_DATABASE_INSTANCE_QUERY);
         given().
                 spec(requestSpec).
                 when().
@@ -2269,7 +2269,7 @@ public class DeviceControllerTest extends BaseTest {
         given().
                 spec(requestSpec).
                 when().
-                get(USER_ENDPOINT + TERM_LISTING + AWS).
+                get(DEVICE_ENDPOINT + TERM_LISTING + "AWS").
                 then().
                 spec(responseSpec);
     }

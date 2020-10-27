@@ -17,7 +17,8 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 
-import static constants.Constants.*;
+import static constants.ConnectorConfigurationConstants.*;
+import static constants.QueryWizardControllerConstants.*;
 import static io.restassured.RestAssured.given;
 import static org.apache.http.HttpStatus.SC_OK;
 
@@ -176,7 +177,7 @@ public class QueryWizardControllerTest extends BaseTest {
     public void testA_postDeviceSaveQuery() {
         isPreviousTestPass = false;
 
-        SavedQuery deviceSavedQuery = new SavedQuery("Automation_Device_Query_" + value, "Created By Automation Script", "(adapters.adapter_ad.cn == exists(true))", "DEVICE", Collections.singletonList("Device_Tag_" + value));
+        SavedQuery deviceSavedQuery = new SavedQuery("Automation_Device_Query_" + VALUE, "Created By Automation Script", "(adapters.adapter_ad.cn == exists(true))", "DEVICE", Collections.singletonList("Device_Tag_" + VALUE));
         Response response = given().
                 spec(requestSpec).
                 and().
@@ -197,13 +198,13 @@ public class QueryWizardControllerTest extends BaseTest {
     public void testB_postDeviceSaveQueryOverWrite() {
         Assume.assumeTrue(isPreviousTestPass == true);
         isPreviousTestPass = false;
-        SavedQuery deviceSavedQuery = new SavedQuery("Automation_Device_Query_" + value, "Created By Automation Script", "(adapters.adapter_ad.cn == exists(true))", "DEVICE", Collections.singletonList("Device_Tag_" + value));
+        SavedQuery deviceSavedQuery = new SavedQuery("Automation_Device_Query_" + VALUE, "Created By Automation Script", "(adapters.adapter_ad.cn == exists(true))", "DEVICE", Collections.singletonList("Device_Tag_" + VALUE));
         Response response = given().
                 spec(requestSpec).
                 and().
                 body(deviceSavedQuery).
                 when().
-                patch(SAVED_QUERY + "rename/?oldName=Automation_Device_Query_" + value + "&newName=" + "Update_Automation_Device_Query_" + value + "&type=DEVICE");
+                patch(SAVED_QUERY + "rename/?oldName=Automation_Device_Query_" + VALUE + "&newName=" + "Update_Automation_Device_Query_" + VALUE + "&type=DEVICE");
         if (response.getStatusCode() == SC_OK)
             isPreviousTestPass = true;
         response.
@@ -231,7 +232,7 @@ public class QueryWizardControllerTest extends BaseTest {
     public void testD_postUserSaveQuery() {
         isPreviousTestPass = false;
 
-        SavedQuery userSavedQuery = new SavedQuery("Automation_User_Query_" + value, "Created By Automation Script", "(adapters.adapter_ad.cn == exists(true))", "USER", Collections.singletonList("User_Tag_" + value));
+        SavedQuery userSavedQuery = new SavedQuery("Automation_User_Query_" + VALUE, "Created By Automation Script", "(adapters.adapter_ad.cn == exists(true))", "USER", Collections.singletonList("User_Tag_" + VALUE));
         Response response = given().
                 spec(requestSpec).
                 and().
@@ -251,13 +252,13 @@ public class QueryWizardControllerTest extends BaseTest {
     public void testE_postUserSaveQueryOverWrite() {
         Assume.assumeTrue(isPreviousTestPass == true);
         isPreviousTestPass = false;
-        SavedQuery userSavedQuery = new SavedQuery("Automation_User_Query_" + value, "Created By Automation Script", "(adapters.adapter_ad.cn == exists(true))", "USER", Collections.singletonList("User_Tag_" + value));
+        SavedQuery userSavedQuery = new SavedQuery("Automation_User_Query_" + VALUE, "Created By Automation Script", "(adapters.adapter_ad.cn == exists(true))", "USER", Collections.singletonList("User_Tag_" + VALUE));
         Response response = given().
                 spec(requestSpec).
                 and().
                 body(userSavedQuery).
                 when().
-                patch(SAVED_QUERY + "rename/?oldName=Automation_User_Query_" + value + "&newName=" + "Update_Automation_User_Query" + value + "&type=USER");
+                patch(SAVED_QUERY + "rename/?oldName=Automation_User_Query_" + VALUE + "&newName=" + "Update_Automation_User_Query" + VALUE + "&type=USER");
         if (response.getStatusCode() == SC_OK)
             isPreviousTestPass = true;
         response.

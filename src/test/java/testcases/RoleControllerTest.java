@@ -15,7 +15,9 @@ import utils.BaseTest;
 import java.io.IOException;
 import java.util.Collections;
 
-import static constants.Constants.*;
+import static constants.AdminUsersControllerConstants.GET_ADMIN_USER_ID;
+import static constants.PermissionControllerConstants.GET_PERMISSION_ID;
+import static constants.RoleControllerConstants.*;
 import static io.restassured.RestAssured.given;
 import static org.hamcrest.Matchers.equalTo;
 import static org.apache.http.HttpStatus.*;
@@ -26,8 +28,8 @@ import static org.apache.http.HttpStatus.*;
 public class RoleControllerTest extends BaseTest {
 
 
-    protected static final String USERNAME = ApplicationConfiguration.getUSERNAME();
-    protected static final String PASSWORD = ApplicationConfiguration.getPASSWORD();
+    protected static final String USERNAME = ApplicationConfiguration.getUsername();
+    protected static final String PASSWORD = ApplicationConfiguration.getPassword();
     public static boolean isPreviousTestPass;
 
 
@@ -55,7 +57,7 @@ public class RoleControllerTest extends BaseTest {
         String permissionId;
         permissionId = getIdFromPermissionURL(GET_PERMISSION_ID);
         isPreviousTestPass = false;
-        Role role = new Role("Automation_Role_" + value + "1", "This is Test Role Created By new Regression Script", true, "Automation Script", Collections.singletonList(permissionId));
+        Role role = new Role("Automation_Role_" + VALUE + "1", "This is Test Role Created By new Regression Script", true, "Automation Script", Collections.singletonList(permissionId));
         Response response = given().
                 spec(requestSpec).
                 and().
@@ -103,7 +105,7 @@ public class RoleControllerTest extends BaseTest {
 
         Assume.assumeTrue(isPreviousTestPass == true);
         isPreviousTestPass = false;
-        Role role = new Role("Update_Automation_Role_" + value + "1", "Updated By Regression new Script", true, "Automation Script", Collections.singletonList(permissionId), currentRoleId);
+        Role role = new Role("Update_Automation_Role_" + VALUE + "1", "Updated By Regression new Script", true, "Automation Script", Collections.singletonList(permissionId), currentRoleId);
         Response response = given().
                 spec(requestSpec).
                 and().

@@ -10,7 +10,8 @@ import utils.BaseTest;
 import java.util.ArrayList;
 import java.util.List;
 
-import static constants.Constants.*;
+import static constants.DashboardControllerConstants.*;
+import static constants.ConnectorConfigurationConstants.*;
 import static io.restassured.RestAssured.given;
 import static org.hamcrest.Matchers.*;
 

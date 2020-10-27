@@ -8,7 +8,7 @@ import utils.BaseTest;
 
 import java.io.IOException;
 
-import static constants.Constants.*;
+import static constants.AuditControllerConstants.*;
 import static io.restassured.RestAssured.given;
 
 @RunWith(SerenityRunner.class)

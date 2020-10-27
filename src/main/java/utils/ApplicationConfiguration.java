@@ -2,29 +2,29 @@ package utils;
 
 public class ApplicationConfiguration {
 
-    private static final String inventaBaseURL = DefaultConfiguration.getProperty("inventaBaseURL");
+    private static String inventaBaseURL = DefaultConfiguration.getProperty("inventaBaseURL");
 
-    private static final String inventaServicePort = DefaultConfiguration.getProperty("inventaServicePort");
-    private static final String connectorServicePort = DefaultConfiguration.getProperty("connectorServicePort");
+    private static String inventaServicePort = DefaultConfiguration.getProperty("inventaServicePort");
+    private static String connectorServicePort = DefaultConfiguration.getProperty("connectorServicePort");
 
-    private static final String secretKey = DefaultConfiguration.getProperty("secretKey");
-    private static final String expirationTime = DefaultConfiguration.getProperty("expirationTime");
-    private static final String subject = DefaultConfiguration.getProperty("subject");
+    private static String secretKey = DefaultConfiguration.getProperty("secretKey");
+    private static  String expirationTime = DefaultConfiguration.getProperty("expirationTime");
+    private static  String subject = DefaultConfiguration.getProperty("subject");
 
-    private static final String LDAP_MACHINE_IP = DefaultConfiguration.getProperty("ldapIP");
-    private static final String LDAP_DOMAIN = DefaultConfiguration.getProperty("ldapDomain");
+    private static String ldapMachineIp = DefaultConfiguration.getProperty("ldapIP");
+    private static String ldapDomain = DefaultConfiguration.getProperty("ldapDomain");
 
-    private static final String AD_USERNAME = DefaultConfiguration.getProperty("ldapUsername");
-    private static final String AD_PASSWORD = DefaultConfiguration.getProperty("ldapPassword");
+    private static  String ldapUsername = DefaultConfiguration.getProperty("ldapUsername");
+    private static  String ldapPassword = DefaultConfiguration.getProperty("ldapPassword");
 
-    private static final String USERNAME = DefaultConfiguration.getProperty("username");
-    private static final String PASSWORD = DefaultConfiguration.getProperty("password");
+    private static  String username = DefaultConfiguration.getProperty("username");
+    private static  String password = DefaultConfiguration.getProperty("password");
 
-    private static final String AWS_KEY_ID = DefaultConfiguration.getProperty("accessKeyId");
-    private static final String AWS_SECRET_KEY = DefaultConfiguration.getProperty("accessKeySecret");
+    private static  String awsKeyId = DefaultConfiguration.getProperty("accessKeyId");
+    private static  String awsSecretKey = DefaultConfiguration.getProperty("accessKeySecret");
 
 
-    public static String getInventaBaseURL() {
+    public static String getInventaBaseUrl() {
         return inventaBaseURL;
     }
 
@@ -50,32 +50,29 @@ public class ApplicationConfiguration {
 
 
     public static String getLdapMachineIp() {
-        return LDAP_MACHINE_IP;
+        return ldapMachineIp;
     }
 
     public static String getLdapDomain() {
-        return LDAP_DOMAIN;
+        return ldapDomain;
     }
 
-    public static String getAdUsername() {
-        return AD_USERNAME;
+    public static String getLdapUsername() {
+        return ldapUsername;
     }
 
-    public static String getAdPassword() {
-        return AD_PASSWORD;
+    public static String getLdapPassword() {
+        return ldapPassword;
     }
 
-    public static String getUSERNAME() { return USERNAME; }
+    public static String getUsername() { return username; }
 
-    public static String getPASSWORD() { return PASSWORD; }
+    public static String getPassword() { return password; }
 
-    public static String getAwsKeyId() { return AWS_KEY_ID; }
+    public static String getAwsKeyId() { return awsKeyId; }
 
     public static String getAwsSecretKey() {
-        return AWS_SECRET_KEY;
+        return awsSecretKey;
     }
-
-
-
 
 }

@@ -6,7 +6,7 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import utils.BaseTest;
 
-import static constants.Constants.*;
+import static constants.GeneralControllerConstants.*;
 import static io.restassured.RestAssured.given;
 import static org.apache.http.HttpStatus.SC_OK;
 

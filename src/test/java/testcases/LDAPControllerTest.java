@@ -16,7 +16,8 @@ import utils.BaseTest;
 
 import java.io.IOException;
 
-import static constants.Constants.*;
+import static constants.ConfigControllerConstants.*;
+import static constants.RoleControllerConstants.GET_ROLE_ID;
 import static io.restassured.RestAssured.given;
 import static org.hamcrest.Matchers.equalTo;
 import static org.apache.http.HttpStatus.*;
@@ -28,10 +29,10 @@ public class LDAPControllerTest extends BaseTest {
     public static boolean isPreviousTestPass;
     protected static final String LDAP_MACHINE_IP = ApplicationConfiguration.getLdapMachineIp();
     protected static final String LDAP_DOMAIN = ApplicationConfiguration.getLdapDomain();
-    protected static final String AD_USERNAME = ApplicationConfiguration.getAdUsername();
-    protected static final String AD_PASSWORD = ApplicationConfiguration.getAdPassword();
-    protected static final String USERNAME = ApplicationConfiguration.getUSERNAME();
-    protected static final String PASSWORD = ApplicationConfiguration.getPASSWORD();
+    protected static final String AD_USERNAME = ApplicationConfiguration.getLdapUsername();
+    protected static final String AD_PASSWORD = ApplicationConfiguration.getLdapPassword();
+    protected static final String USERNAME = ApplicationConfiguration.getUsername();
+    protected static final String PASSWORD = ApplicationConfiguration.getPassword();
 
     @Test
     @Title("Post LDAP Configuration")
