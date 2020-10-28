@@ -1,4 +1,4 @@
-package models.ldap;
+package models.systemconfiguration;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.AllArgsConstructor;

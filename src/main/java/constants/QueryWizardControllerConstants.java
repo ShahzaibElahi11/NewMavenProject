@@ -26,9 +26,21 @@ public class QueryWizardControllerConstants extends BaseTest {
     public static final String SAVED_QUERY_PAGINATION = "page=0&size=10";
 
     public static final String ALL_DEVICE_FIELDS = "/query/fields/all/?fieldEntity=devices&field=adapters.adapter_";
-    public static final String ALL_USER_FIELDS = "/query/fields/all/?fieldEntity=users&field=adapters.adapter_";
+    public static final String ALL_DEVICE_COMMON_FIELDS = "/query/fields/all/?fieldEntity=devices&field=common";
 
     public static final String TYPE_DEVICE_FIELDS = "/query/fields/type/?fieldEntity=devices&field=adapters.adapter_";
+
+    public static final String OBJECT_DEVICE_FIELDS = "/query/fields/object/?fieldEntity=devices&field=adapters.adapter_";
+    public static final String OBJECT_DEVICE_COMMON_FIELDS = "/query/fields/object/?fieldEntity=devices&field=common";
+
+
+    public static final String ALL_USER_FIELDS = "/query/fields/all/?fieldEntity=users&field=adapters.adapter_";
+    public static final String ALL_USER_COMMON_FIELDS = "/query/fields/all/?fieldEntity=users&field=common";
+
+    public static final String OBJECT_USER_FIELDS = "/query/fields/object/?fieldEntity=users&field=adapters.adapter_";
+    public static final String OBJECT_USER_COMMON_FIELDS = "/query/fields/object/?fieldEntity=users&field=common";
+
+
 
     public static final String SAVED_DEVICE_QUERY_NAME = BASE_ENDPOINT + ":" + INVENTA_PORT + "/saved-query/?type=DEVICE&page=0&size=1&sort=dateCreated,desc";
     public static final String SAVED_USER_QUERY_NAME = BASE_ENDPOINT + ":" + INVENTA_PORT + "/saved-query/?type=USER&page=0&size=1";

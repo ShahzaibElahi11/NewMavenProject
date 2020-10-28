@@ -347,6 +347,9 @@ public class QueryWizardControllerTest extends BaseTest {
      * new
      */
 
+    /**
+     * All Device Fields
+     */
     @Test
     @Title("Get Query Wizard All AD Device Fields")
     public void getAllAdDeviceFields() {
@@ -381,6 +384,28 @@ public class QueryWizardControllerTest extends BaseTest {
     }
 
     @Test
+    @Title("Get Query Wizard All CrowdStrike Device Fields")
+    public void getAllCrowdStrikeDeviceFields() {
+        given().
+                spec(requestSpec).
+                when().
+                get(ALL_DEVICE_FIELDS + CROWD_STRIKE).
+                then().
+                spec(responseSpec);
+    }
+
+    @Test
+    @Title("Get Query Wizard All VMWARE ESXI Device Fields")
+    public void getAllVmwareEsxiDeviceFields() {
+        given().
+                spec(requestSpec).
+                when().
+                get(ALL_DEVICE_FIELDS + VMWARE).
+                then().
+                spec(responseSpec);
+    }
+
+    @Test
     @Title("Get Query Wizard All Wmic Device Fields")
     public void getAllWmicDeviceFields() {
         given().
@@ -391,6 +416,31 @@ public class QueryWizardControllerTest extends BaseTest {
                 spec(responseSpec);
     }
 
+    @Test
+    @Title("Get Query Wizard All Shodan Device Fields")
+    public void getAllShodanDeviceFields() {
+        given().
+                spec(requestSpec).
+                when().
+                get(ALL_DEVICE_FIELDS + SHODAN).
+                then().
+                spec(responseSpec);
+    }
+    @Test
+    @Title("Get Query Wizard All Common Device Fields")
+    public void getAllCommonDeviceFields() {
+        given().
+                spec(requestSpec).
+                when().
+                get(ALL_DEVICE_COMMON_FIELDS).
+                then().
+                spec(responseSpec);
+    }
+
+
+    /**
+     * All User Fields
+     */
     @Test
     @Title("Get Query Wizard All AD User Fields")
     public void getAllAdUserFields() {
@@ -414,6 +464,18 @@ public class QueryWizardControllerTest extends BaseTest {
     }
 
     @Test
+    @Title("Get Query Wizard All CrowdStrike User Fields")
+    public void getAllCrowdstrikeUserFields() {
+        given().
+                spec(requestSpec).
+                when().
+                get(ALL_USER_FIELDS + CROWD_STRIKE).
+                then().
+                spec(responseSpec);
+    }
+
+
+    @Test
     @Title("Get Query Wizard All Azure User Fields")
     public void getAllAzureUserFields() {
         given().
@@ -423,6 +485,21 @@ public class QueryWizardControllerTest extends BaseTest {
                 then().
                 spec(responseSpec);
     }
+
+    @Test
+    @Title("Get Query Wizard All Common User Fields")
+    public void getAllCommonUserFields() {
+        given().
+                spec(requestSpec).
+                when().
+                get(ALL_USER_COMMON_FIELDS).
+                then().
+                spec(responseSpec);
+    }
+
+    /**
+     *  Device TYPE Fields
+     */
 
     @Test
     @Title("Get Query Wizard Azure Type Fields For Devices")
@@ -436,7 +513,7 @@ public class QueryWizardControllerTest extends BaseTest {
     }
 
     @Test
-    @Title("Get Query Wizard Aws Type Fields For Devices")
+    @Title("Get Query Wizard AWS Type Fields For Devices")
     public void getAwsTypeDeviceFields() {
         given().
                 spec(requestSpec).
@@ -447,7 +524,7 @@ public class QueryWizardControllerTest extends BaseTest {
     }
 
     @Test
-    @Title("Get Query Wizard Aws Type Fields For Devices")
+    @Title("Get Query Wizard AD Type Fields For Devices")
     public void getAdTypeDeviceFields() {
         given().
                 spec(requestSpec).
@@ -457,5 +534,133 @@ public class QueryWizardControllerTest extends BaseTest {
                 spec(responseSpec);
     }
 
+    /**
+     *  Device Object Fields
+     */
 
+    @Test
+    @Title("Get Query Wizard Active Directory Object Fields For Devices")
+    public void getAdObjectDeviceFields() {
+        given().
+                spec(requestSpec).
+                when().
+                get(OBJECT_DEVICE_FIELDS + AD).
+                then().
+                spec(responseSpec);
+    }
+
+
+    @Test
+    @Title("Get Query Wizard AWS Object Fields For Devices")
+    public void getAwsObjectDeviceFields() {
+        given().
+                spec(requestSpec).
+                when().
+                get(OBJECT_DEVICE_FIELDS + AWS).
+                then().
+                spec(responseSpec);
+    }
+
+
+    @Test
+    @Title("Get Query Wizard Azure Object Fields For Devices")
+    public void getAzureObjectDeviceFields() {
+        given().
+                spec(requestSpec).
+                when().
+                get(OBJECT_DEVICE_FIELDS + AZURE).
+                then().
+                spec(responseSpec);
+    }
+
+    @Test
+    @Title("Get Query Wizard Crowd Strike Object Fields For Devices")
+    public void getCrowdStrikeObjectDeviceFields() {
+        given().
+                spec(requestSpec).
+                when().
+                get(OBJECT_DEVICE_FIELDS + CROWD_STRIKE).
+                then().
+                spec(responseSpec);
+    }
+
+    @Test
+    @Title("Get Query Wizard Shodan Object Fields For Devices")
+    public void getShodanObjectDeviceFields() {
+        given().
+                spec(requestSpec).
+                when().
+                get(OBJECT_DEVICE_FIELDS + SHODAN).
+                then().
+                spec(responseSpec);
+    }
+
+    @Test
+    @Title("Get Query Wizard VMWARE ESXI Object Fields For Devices")
+    public void getVmwareEsxiObjectDeviceFields() {
+        given().
+                spec(requestSpec).
+                when().
+                get(OBJECT_DEVICE_FIELDS + VMWARE).
+                then().
+                spec(responseSpec);
+    }
+
+    @Test
+    @Title("Get Query Wizard Common Object Fields For Devices")
+    public void getCommonObjectDeviceFields() {
+        given().
+                spec(requestSpec).
+                when().
+                get(OBJECT_DEVICE_COMMON_FIELDS).
+                then().
+                spec(responseSpec);
+    }
+    /**
+     * Object User Fields
+     */
+
+    @Test
+    @Title("Get Query Wizard AWS Object Fields For User")
+    public void getAwsObjectUserFields() {
+        given().
+                spec(requestSpec).
+                when().
+                get(OBJECT_USER_FIELDS + AWS).
+                then().
+                spec(responseSpec);
+    }
+
+    @Test
+    @Title("Get Query Wizard Azure Object Fields For User")
+    public void getAzureObjectUserFields() {
+        given().
+                spec(requestSpec).
+                when().
+                get(OBJECT_USER_FIELDS + AZURE).
+                then().
+                spec(responseSpec);
+    }
+
+    @Test
+    @Title("Get Query Wizard Active Directory Object Fields For User")
+    public void getAdObjectUserFields() {
+        given().
+                spec(requestSpec).
+                when().
+                get(OBJECT_USER_FIELDS + AD).
+                then().
+                spec(responseSpec);
+    }
+
+    @Test
+    @Title("Get Query Wizard Common Object Fields For User")
+    public void getCommonObjectUserFields() {
+        given().
+                spec(requestSpec).
+                when().
+                get(OBJECT_USER_COMMON_FIELDS).
+                then().
+                spec(responseSpec);
+    }
 }

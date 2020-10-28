@@ -27,7 +27,9 @@ import static org.hamcrest.Matchers.equalTo;
 public class AdminUsersControllerTest extends BaseTest {
 
     public static boolean isPreviousTestPass;
-    //Fake Class
+
+    //Using Faker Library for generating data
+
     Faker faker = new Faker();
     protected final String userName = faker.name().username();
     protected final String firstName = faker.name().firstName();
@@ -157,7 +159,7 @@ public class AdminUsersControllerTest extends BaseTest {
                  * Use a Hamcrest equalTo Method to verify that the data of
                  * the 1st id in the list equals newly created user id
                  ******************************************************/
-                        body("data._id", equalTo(adminUserId));
+                body("data._id", equalTo(adminUserId));
     }
 
     /*******************************************************

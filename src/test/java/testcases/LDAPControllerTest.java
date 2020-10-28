@@ -1,10 +1,10 @@
 package testcases;
 
 import io.restassured.response.Response;
-import models.ldap.LdapConfiguration;
+import models.systemconfiguration.LdapConfiguration;
 import net.serenitybdd.junit.runners.SerenityRunner;
 import net.thucydides.core.annotations.Title;
-import models.ldap.Login;
+import models.systemconfiguration.Login;
 import org.junit.Assume;
 import org.junit.FixMethodOrder;
 import org.junit.Test;

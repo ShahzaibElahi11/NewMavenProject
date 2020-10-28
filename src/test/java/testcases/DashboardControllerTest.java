@@ -96,6 +96,18 @@ public class DashboardControllerTest extends BaseTest {
                 spec(responseSpec);
     }
 
+    @Test
+    @Title("Get Connector Count for User")
+    public void getConnectorCountForUser() {
+        given().
+                spec(requestSpec).
+                when().
+                get(CONNECTORS_COUNT_FOR_USER).
+                then().
+                spec(responseSpec);
+    }
+
+
 
     @Test
     @Title("Get Count of Azure Type Assets")
@@ -278,4 +290,13 @@ public class DashboardControllerTest extends BaseTest {
                 then().spec(responseSpec);
     }
 
+    @Test
+    @Title("Get Scan By Vulnerability Assessment")
+    public void getScanByVulnerabilityAssessment() {
+        given().
+                spec(requestSpec).
+                when().
+                get(SCAN_BY_VA).
+                then().spec(responseSpec);
+    }
 }

@@ -9,6 +9,8 @@ public class DashboardControllerConstants {
     public static final String CONNECTOR_PARAM = "?adapter=adapter_";
     public static final String OS_DISTRIBUTION = "/query/dist/?field=common.operatingSystem.type";
     public static final String USER_COUNT = "/query/count/users/";
+    public static final String CONNECTORS_COUNT_FOR_USER = "/query/adapters/count/users/";
+
     public static final String ASSETS_TYPE_DISTRIBUTION = "/query/dist/?field=type&match=adapters.adapter_";
     public static final String CLOUD_VS_NON_CLOUD = "/query/pie/?field=adapterProperties&match=CLOUD%20PROVIDER";
 
@@ -29,5 +31,7 @@ public class DashboardControllerConstants {
     public static final String CPU_HEALTH = "/query/healthCheck?check=CPU";
     public static final String MEMORY_HEALTH = "/query/healthCheck?check=MEMORY";
     public static final String DISCOVERY_HEALTH = "/query/healthCheck?check=DISCOVERY";
+    public static final String SCAN_BY_VA = "/query/donut/scannedByVa";
+
 
 }

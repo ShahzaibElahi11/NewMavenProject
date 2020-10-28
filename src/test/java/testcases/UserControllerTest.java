@@ -36,8 +36,7 @@ public class UserControllerTest extends BaseTest {
             e.printStackTrace();
         }
     }
-
-        @Test
+    @Test
     @Title("Get Discovered User List")
     public void getAllUsers() {
         given().
