@@ -183,5 +183,5 @@ public class DeviceControllerConstants extends BaseTest {
     public static final String WMIC_QUERY = BASE_ENDPOINT + ":" + INVENTA_PORT + "/query/devices/?query=(adapters.adapter_wmic.IP%20Address%20==%20exists(true))&page=0&size=1";
 
 
-
+    private DeviceControllerConstants() { }
 }

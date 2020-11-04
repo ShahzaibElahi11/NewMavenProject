@@ -50,7 +50,7 @@ public class UserControllerTest extends BaseTest {
     }
 
     @Test
-    @Title("Get Discovered User Detail By  Id")
+    @Title("Get Discovered User Detail By Id")
     public void getUserByID() {
         given().
                 spec(requestSpec).

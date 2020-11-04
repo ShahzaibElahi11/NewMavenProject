@@ -45,5 +45,5 @@ public class QueryWizardControllerConstants extends BaseTest {
     public static final String SAVED_DEVICE_QUERY_NAME = BASE_ENDPOINT + ":" + INVENTA_PORT + "/saved-query/?type=DEVICE&page=0&size=1&sort=dateCreated,desc";
     public static final String SAVED_USER_QUERY_NAME = BASE_ENDPOINT + ":" + INVENTA_PORT + "/saved-query/?type=USER&page=0&size=1";
 
-
+    public QueryWizardControllerConstants() { }
 }

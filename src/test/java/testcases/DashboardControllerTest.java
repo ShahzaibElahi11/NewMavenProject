@@ -216,7 +216,8 @@ public class DashboardControllerTest extends BaseTest {
                 spec(requestSpec).
                 when().
                 get(TOTAL_CLOUD_ASSETS).
-                then().spec(responseSpec);
+                then().
+                spec(responseSpec);
     }
 
     @Test
@@ -226,7 +227,8 @@ public class DashboardControllerTest extends BaseTest {
                 spec(requestSpec).
                 when().
                 get(TOTAL_MISSING_EDR_ASSETS).
-                then().spec(responseSpec);
+                then().
+                spec(responseSpec);
     }
 
     @Test
@@ -236,7 +238,8 @@ public class DashboardControllerTest extends BaseTest {
                 spec(requestSpec).
                 when().
                 get(TOTAL_ASSETS_DISTRIBUTION).
-                then().spec(responseSpec);
+                then().
+                spec(responseSpec);
     }
 
 
@@ -247,7 +250,8 @@ public class DashboardControllerTest extends BaseTest {
                 spec(requestSpec).
                 when().
                 get(TOTAL_CLOUD_DEVICE_TYPE_ASSETS).
-                then().spec(responseSpec);
+                then().
+                spec(responseSpec);
     }
 
     @Test
@@ -257,7 +261,8 @@ public class DashboardControllerTest extends BaseTest {
                 spec(requestSpec).
                 when().
                 get(USER_DISTRIBUTION).
-                then().spec(responseSpec);
+                then().
+                spec(responseSpec);
     }
 
     @Test
@@ -267,7 +272,8 @@ public class DashboardControllerTest extends BaseTest {
                 spec(requestSpec).
                 when().
                 get(CPU_HEALTH).
-                then().spec(responseSpec);
+                then().
+                spec(responseSpec);
     }
 
     @Test
@@ -277,7 +283,8 @@ public class DashboardControllerTest extends BaseTest {
                 spec(requestSpec).
                 when().
                 get(MEMORY_HEALTH).
-                then().spec(responseSpec);
+                then().
+                spec(responseSpec);
     }
 
     @Test
@@ -287,7 +294,8 @@ public class DashboardControllerTest extends BaseTest {
                 spec(requestSpec).
                 when().
                 get(DISCOVERY_HEALTH).
-                then().spec(responseSpec);
+                then().
+                spec(responseSpec);
     }
 
     @Test
@@ -297,6 +305,8 @@ public class DashboardControllerTest extends BaseTest {
                 spec(requestSpec).
                 when().
                 get(SCAN_BY_VA).
-                then().spec(responseSpec);
+                then().
+                spec(responseSpec);
     }
+
 }

@@ -9,4 +9,5 @@ public class GeneralControllerConstants {
     public static final String DOCKER_ENDPOINT = "/docker/";
     public static final String ACTIVE_MQ = "activemq";
 
+    private GeneralControllerConstants(){ }
 }

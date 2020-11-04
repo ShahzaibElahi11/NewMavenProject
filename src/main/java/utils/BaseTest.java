@@ -149,8 +149,7 @@ public class BaseTest {
      * Create a static ResponseSpecification that checks whether:
      * - the response has statusCode 200
      * - the response contentType is JSON
-     * - the value of 'meta.status ' in the response body
-     *   is equal to 'success'
+     * - the value of 'meta.status ' in the response body is equal to 'success'
      ******************************************************/
 
     public static ResponseSpecification responseSpec;

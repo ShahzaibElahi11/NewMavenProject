@@ -93,7 +93,7 @@ public class AdminUsersControllerTest extends BaseTest {
      ******************************************************/
     @Test
     @Title("Update Newly User Information in the Application")
-    public void testB_PutUpdateAdminUser() throws IOException {
+    public void testB_putUpdateAdminUser() throws IOException {
         String currentAdminId;
         String adminRoleId;
         currentAdminId = getIdFromURL(GET_ADMIN_USER_ID);
@@ -104,15 +104,15 @@ public class AdminUsersControllerTest extends BaseTest {
         AdminUser adminUser = AdminUser.builder()
                 ._id(currentAdminId)
                 .emailAddress(emailAddress)
-                .phone(phoneNumber)
-                .userName(userName)
+               // .phone(phoneNumber)
+                .userName("Update "+ userName)
                 .firstName("Update " + firstName)
-                .lastName(lastName)
-                .password("password123")
-                .passwordConfirm("password123")
+                .lastName("Update " +  lastName)
+               // .password("password123")
+                //.passwordConfirm("password123")
                 .roleIds(adminRoleId)
-                .userType("OPERATOR")
-                .status(true)
+               // .userType("OPERATOR")
+                //.status(true)
                 .build();
 
         Response response = given().
@@ -199,7 +199,7 @@ public class AdminUsersControllerTest extends BaseTest {
      ******************************************************/
     @Test
     @Title("Delete Newly Created Admin User")
-    public void testE_DeleteAdminUser() throws IOException {
+    public void testE_deleteAdminUser() throws IOException {
         String currentDeleteAdminUserId;
         currentDeleteAdminUserId = getIdFromURL(DELETE_ADMIN_USER_ID);
 

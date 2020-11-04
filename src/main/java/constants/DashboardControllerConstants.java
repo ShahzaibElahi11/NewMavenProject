@@ -33,5 +33,5 @@ public class DashboardControllerConstants {
     public static final String DISCOVERY_HEALTH = "/query/healthCheck?check=DISCOVERY";
     public static final String SCAN_BY_VA = "/query/donut/scannedByVa";
 
-
+    private DashboardControllerConstants() { }
 }

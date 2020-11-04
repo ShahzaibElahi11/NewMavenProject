@@ -11,4 +11,5 @@ public class NotificationControllerConstants extends BaseTest {
 
     public static final String NOTIFICATION_QUERY = BASE_ENDPOINT + ":" + INVENTA_PORT + "/notifications/?page=0&size=1";
 
+    private NotificationControllerConstants() { }
 }

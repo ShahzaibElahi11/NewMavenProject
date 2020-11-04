@@ -15,5 +15,5 @@ public class ConfigControllerConstants {
     public static final  String LOGIN = "/login";
 
 
-
+    private ConfigControllerConstants() { }
 }

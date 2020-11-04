@@ -21,4 +21,5 @@ public class PolicyRoutineControllerConstants extends BaseTest {
     public static final String DELETE_POLICY_ROUTINE_ID = BASE_ENDPOINT + ":" + INVENTA_PORT + "/policy-routine/?page=0&size=1&sort=dateModified,desc";
     public static final String GET_DEVICE_ID = BASE_ENDPOINT + ":" + INVENTA_PORT + "/devices/getAllDevices?page=0&size=1&sortBy=_id";
 
+    private PolicyRoutineControllerConstants() { }
 }

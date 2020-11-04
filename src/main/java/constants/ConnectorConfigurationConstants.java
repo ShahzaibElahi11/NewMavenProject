@@ -18,6 +18,7 @@ public class ConnectorConfigurationConstants {
     public static final String AD = "ad";
     public static final String CROWD_STRIKE = "crowdstrike";
     public static final String VMWARE = "vmware_esxi";
+    public static final String RAPID7 = "rapid7";
 
     public static final String ACTIVE_DIRECTORY = "ACTIVE_DIRECTORY";
     public static final String AWS_ENDPOINT = "AWS";
@@ -25,4 +26,6 @@ public class ConnectorConfigurationConstants {
     public static final String CROWDSTRIKE = "CROWDSTRIKE";
     public static final String SHODAN = "shodan";
     public static final String VMWARE_ESXI = "VMWARE_ESXI";
+
+    private ConnectorConfigurationConstants(){ }
 }

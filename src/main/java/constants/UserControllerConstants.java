@@ -27,4 +27,5 @@ public class UserControllerConstants extends BaseTest {
      */
     public static final String AD_USER_QUERY = BASE_ENDPOINT + ":" + INVENTA_PORT + "/query/users/?query=(adapters.adapter_ad.cn%20==%20exists(true))&page=0&size=1";
 
+    private UserControllerConstants() { }
 }

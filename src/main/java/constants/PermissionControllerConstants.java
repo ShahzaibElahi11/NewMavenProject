@@ -18,5 +18,6 @@ public class PermissionControllerConstants extends BaseTest {
     public static final String GET_PERMISSION_ID = BASE_ENDPOINT + ":" + INVENTA_PORT + "/permission/getAllPermission";
     public static final String GET_DEVICE_ID = BASE_ENDPOINT + ":" + INVENTA_PORT + "/devices/getAllDevices?page=0&size=1&sortBy=_id";
 
+    private PermissionControllerConstants() { }
 }
 

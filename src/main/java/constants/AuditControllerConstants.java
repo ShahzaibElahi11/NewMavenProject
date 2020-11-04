@@ -14,4 +14,5 @@ public class AuditControllerConstants extends BaseTest {
 
     public static final String GET_AUDIT_ID = BASE_ENDPOINT + ":" + INVENTA_PORT + "/audit/getAllAudit?page=0&size=1&sort=dateCreated,desc";
 
+    private AuditControllerConstants() { }
 }

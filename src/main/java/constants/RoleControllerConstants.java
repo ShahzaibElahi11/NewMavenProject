@@ -20,4 +20,5 @@ public class RoleControllerConstants extends BaseTest {
     public static final String DELETE_ROLE_ID = BASE_ENDPOINT + ":" + INVENTA_PORT + "/role/getAllRole?page=0&size=1&sort=dateModified,desc";
     public static final String GET_ROLE_ID_FOR_USER = BASE_ENDPOINT + ":" + INVENTA_PORT + "/role/getAllRole?page=0&size=1";
 
+    private RoleControllerConstants() { }
 }
