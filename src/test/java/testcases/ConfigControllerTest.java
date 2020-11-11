@@ -3,10 +3,8 @@ package testcases;
 import io.restassured.response.Response;
 import models.systemconfiguration.EmailConfiguration;
 import models.systemconfiguration.GuiConfiguration;
-import models.systemconfiguration.SetUserColumns;
 import net.serenitybdd.junit.runners.SerenityRunner;
 import net.thucydides.core.annotations.Title;
-import org.junit.Assert;
 import org.junit.Assume;
 import org.junit.FixMethodOrder;
 import org.junit.Test;
@@ -14,8 +12,6 @@ import org.junit.runner.RunWith;
 import org.junit.runners.MethodSorters;
 import utils.ApplicationConfiguration;
 import utils.BaseTest;
-
-import java.util.Collections;
 
 import static constants.ConfigControllerConstants.*;
 import static io.restassured.RestAssured.given;

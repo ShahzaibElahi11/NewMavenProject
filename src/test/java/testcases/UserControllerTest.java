@@ -160,13 +160,13 @@ public class UserControllerTest extends BaseTest {
     @Title("Post Insert Note on  Discovered User")
     public void testE_postInsertUserNote() {
         isPreviousTestPass = false;
-        UserNote userNote = new UserNote("Automation_Notes_#_" + VALUE + "2", "" + USER_ID);
+        UserNote userNote = new UserNote("Automation_Notes_#_" + VALUE + "2");
         Response response = given().
                 spec(requestSpec).
                 and().
                 body(userNote).
                 when().
-                post(USER_ENDPOINT + INSERT_NOTE);
+                post(USER_ENDPOINT + INSERT_NOTE + "?userId=" + USER_ID);
         if (response.getStatusCode() == SC_OK)
             isPreviousTestPass = true;
         response.
@@ -184,23 +184,39 @@ public class UserControllerTest extends BaseTest {
         Response response = given().
                 spec(requestSpec).
                 when().
-                get(USER_ENDPOINT + USER_NOTE + USER_ID);
+                get(USER_ENDPOINT + USER_NOTE_LIST + USER_ID);
         if (response.getStatusCode() == SC_OK)
             isPreviousTestPass = true;
         response.
                 then().
-                spec(responseSpec).
-                and()
-                .body("data.note", equalTo("Automation_Notes_#_" + VALUE + "2"));
+                spec(responseSpec);
+
     }
+
+    /**
+     * PUT/users/updateNote?userId=5fa2d1affd69895620cac2b3
+     *
+     * Request Body:
+     * {
+     * "_id": "5fa3d19b9b93f00234e46142",
+     * "note": "this is test note update 1",
+     * "createdBy": "admininventa",
+     * "dateCreated": 1604571311032,
+     * "dateModified": 1604571311032,
+     * "modifiedBy": "admininventa"
+     * }
+     * @throws IOException
+     */
 
     @Test
     @Title("Delete Note of Discovered User")
-    public void testG_deleteUserNote() {
+    public void testG_deleteUserNote() throws IOException {
+        String noteId;
+        noteId = getIdFromPermissionURL(USER_NOTE_QUERY + USER_ID);
         given().
                 spec(requestSpec).
                 when().
-                delete(USER_ENDPOINT + DELETE_USER_NOTE + USER_ID).
+                delete(USER_ENDPOINT + DELETE_USER_NOTE + USER_ID + "&noteId=" + noteId).
                 then().
                 assertThat().
                 statusCode(SC_OK);

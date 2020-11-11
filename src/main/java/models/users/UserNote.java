@@ -9,7 +9,7 @@ public class UserNote {
     @JsonProperty
     private String note;
 
-    @JsonProperty
-    private String userId;
+//    @JsonProperty
+//    private String userId;
 
 }

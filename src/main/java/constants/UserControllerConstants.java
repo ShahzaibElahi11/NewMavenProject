@@ -20,7 +20,12 @@ public class UserControllerConstants extends BaseTest {
 
     public static final String DELETE_USER_SINGLE_TAG = "deleteSingleTag/?userId=";
     public static final String DELETE_USER_NOTE = "deleteNote?userId=";
+    public static final String USER_NOTE_LIST = "getUserNoteList?userId=";
+
+
     public static final String GET_USER_ID = BASE_ENDPOINT + ":" + INVENTA_PORT + "/users/getAllUsers/?page=0&size=1&sort=dateCreated,desc";
+    public static final String USER_NOTE_QUERY = BASE_ENDPOINT + ":" + INVENTA_PORT + "/users/getUserNoteList?userId=";
+
 
     /**
      * Active Directory User Aggregated Tab Constant
