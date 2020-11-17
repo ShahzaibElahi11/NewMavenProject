@@ -175,11 +175,11 @@ public class AdminUsersControllerTest extends BaseTest {
     @Title("Put Password Change of Newly Created User")
     public void testD_putPasswordChange() throws IOException {
         String currentAdminId;
-        currentAdminId = getIdFromURL(GET_ADMIN_USER_ID);
+        currentAdminId = getIdFromURL(DELETE_ADMIN_USER_ID);
         ChangePassword changePassword = ChangePassword.builder()
                 .userId(currentAdminId)
-                .newPassword("Pass123")
-                .confirmPassword("Pass123")
+                .newPassword("admin")
+                .confirmPassword("admin")
                 .build();
         given().
                 spec(requestSpec).
