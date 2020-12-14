@@ -18,5 +18,5 @@ public class AdminUsersControllerConstants extends BaseTest {
     public static final String DELETE_ADMIN_USER_ID = BASE_ENDPOINT + ":" + INVENTA_PORT + "/adminUsers/getAllAdminUsers?page=0&size=1&sort=dateModified,desc";
     public static final String PAGINATION_PARAMETER = "?page=0&size=100";
 
-    private AdminUsersControllerConstants() { }
+    //private AdminUsersControllerConstants() { }
 }

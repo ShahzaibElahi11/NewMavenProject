@@ -1,5 +1,7 @@
 package utils;
 
+import java.util.Base64;
+
 public class ApplicationConfiguration {
 
     private static String inventaBaseURL = DefaultConfiguration.getProperty("inventaBaseURL");
@@ -26,9 +28,9 @@ public class ApplicationConfiguration {
     private static String emailHost = DefaultConfiguration.getProperty("emailHost");
     private static String emailPort = DefaultConfiguration.getProperty("emailPort");
     private static String emailUsername = DefaultConfiguration.getProperty("emailUsername");
-    private static String emailPassword = DefaultConfiguration.getProperty("emailPassword");
     private static String senderEmail = DefaultConfiguration.getProperty("senderEmail");
 
+    private static String emailPassword = new String (Base64.getDecoder().decode(DefaultConfiguration.getProperty("emailPassword")));
 
     public static String getInventaBaseUrl() {
         return inventaBaseURL;
@@ -103,11 +105,12 @@ public class ApplicationConfiguration {
         return emailUsername;
     }
 
-    public static String getEmailPassword() {
-        return emailPassword;
-    }
+    public static String getEmailPassword() { return emailPassword; }
+
 
     public static String getSenderEmail() {
         return senderEmail;
     }
+
+
 }

@@ -22,7 +22,7 @@ import static org.hamcrest.Matchers.*;
 
 @RunWith(SerenityRunner.class)
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
-public class DeviceControllerTest extends BaseTest {
+public class DeviceTest extends BaseTest {
 
     public static boolean isPreviousTestPass;
     public static final String SINGLE_TAG_NAME = "Automation_Device_Tag_Number_" + VALUE + "1";
@@ -680,7 +680,7 @@ public class DeviceControllerTest extends BaseTest {
     }
 
 
-    @Test
+/*
     @Title("Get Azure Network Security Group Firewall In Bound Rules Details By Device Id")
     public void getAzureNSGFirewallInBoundRulesDetails() throws IOException {
         String azureNsgDeviceId;
@@ -693,7 +693,7 @@ public class DeviceControllerTest extends BaseTest {
                 spec(responseSpec);
     }
 
-    @Test
+
     @Title("Get Azure Network Security Group Firewall Out Bound Rules Details By Device Id")
     public void getAzureNSGFirewallOutBoundRulesDetails() throws IOException {
         String azureNsgDeviceId;
@@ -705,7 +705,7 @@ public class DeviceControllerTest extends BaseTest {
                 then().
                 spec(responseSpec);
     }
-
+*/
     @Test
     @Title("Get Azure Network Security Group Connected Hardware Details By Device Id")
     public void getAzureNSGConnectedHardwareDetails() throws IOException {
@@ -891,7 +891,7 @@ public class DeviceControllerTest extends BaseTest {
                 spec(responseSpec);
     }
 
-    @Test
+ /*
     @Title("Get Azure Virtual Machine Inbound Firewall Rules Details By Device Id")
     public void getAzureVirtualMachineInboundFirewallRulesDetails() throws IOException {
         String azureVirtualMachineDeviceId;
@@ -904,7 +904,6 @@ public class DeviceControllerTest extends BaseTest {
                 spec(responseSpec);
     }
 
-    @Test
     @Title("Get Azure Virtual Machine Outbound Firewall Rules Details By Device Id")
     public void getAzureVirtualMachineOutboundFirewallRulesDetails() throws IOException {
         String azureVirtualMachineDeviceId;
@@ -916,6 +915,7 @@ public class DeviceControllerTest extends BaseTest {
                 then().
                 spec(responseSpec);
     }
+*/
 
     @Test
     @Title("Get Azure Virtual Machine Installed Agents Details By Device Id")

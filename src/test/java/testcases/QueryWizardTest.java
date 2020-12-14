@@ -24,7 +24,7 @@ import static org.apache.http.HttpStatus.SC_OK;
 
 @RunWith(SerenityRunner.class)
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
-public class QueryWizardControllerTest extends BaseTest {
+public class QueryWizardTest extends BaseTest {
 
     public static boolean isPreviousTestPass;
 

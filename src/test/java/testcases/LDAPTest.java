@@ -24,7 +24,7 @@ import static org.apache.http.HttpStatus.*;
 
 @RunWith(SerenityRunner.class)
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
-public class LDAPControllerTest extends BaseTest {
+public class LDAPTest extends BaseTest {
 
     public static boolean isPreviousTestPass;
     protected static final String LDAP_MACHINE_IP = ApplicationConfiguration.getLdapMachineIp();

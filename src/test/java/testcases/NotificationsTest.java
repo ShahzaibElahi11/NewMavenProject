@@ -13,7 +13,7 @@ import static io.restassured.RestAssured.given;
 import static org.apache.http.HttpStatus.SC_OK;
 
 @RunWith(SerenityRunner.class)
-public class NotificationControllerTest extends BaseTest {
+public class NotificationsTest extends BaseTest {
 
     @Test
     @Title("Get All Notification")

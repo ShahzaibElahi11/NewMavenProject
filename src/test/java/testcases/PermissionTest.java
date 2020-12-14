@@ -13,7 +13,7 @@ import static constants.PermissionControllerConstants.*;
 import static io.restassured.RestAssured.given;
 
 @RunWith(SerenityRunner.class)
-public class PermissionControllerTest extends BaseTest {
+public class PermissionTest extends BaseTest {
 
     @Test
     @Title("Get All Permission")

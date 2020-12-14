@@ -22,7 +22,7 @@ import static org.apache.http.HttpStatus.*;
 
 @RunWith(SerenityRunner.class)
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
-public class UserControllerTest extends BaseTest {
+public class UserTest extends BaseTest {
 
     public static final String SINGLE_TAG_NAME = "Automation_User_Tag_Number_" + VALUE + "1";
     public static boolean isPreviousTestPass;

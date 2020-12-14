@@ -8,35 +8,21 @@ import utils.BaseTest;
 
 import static constants.GeneralControllerConstants.*;
 import static io.restassured.RestAssured.given;
-import static org.apache.http.HttpStatus.SC_OK;
+import static org.apache.http.HttpStatus.*;
 
 @RunWith(SerenityRunner.class)
-public class GeneralControllerTest extends BaseTest {
+public class IntegrationTest extends BaseTest {
 
 
     @Test
-    @Title("Get Clear Cache")
-    public void getClearCache() {
+    @Title("Get Active MQ Connection")
+    public void getActiveMQConnectivity() {
         given().
                 spec(requestSpec).
                 when().
-                get(GENERAL + CLEAR_CACHE).
+                get(DOCKER_ENDPOINT + ACTIVE_MQ).
                 then().
                 assertThat().
                 statusCode(SC_OK);
     }
-
-    @Test
-    @Title("Get Load Cache")
-    public void getLoadCache() {
-        given().
-                spec(requestSpec).
-                when().
-                get(GENERAL + LOAD_CACHE).
-                then().
-                assertThat().
-                statusCode(SC_OK);
-    }
-
-
 }

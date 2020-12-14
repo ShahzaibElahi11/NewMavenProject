@@ -20,7 +20,7 @@ import static org.hamcrest.Matchers.equalTo;
 
 @RunWith(SerenityRunner.class)
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
-public class ConfigControllerTest extends BaseTest {
+public class ConfigTest extends BaseTest {
 
     public static boolean isPreviousTestPass;
 
@@ -29,6 +29,8 @@ public class ConfigControllerTest extends BaseTest {
     protected static final String EMAIL_USERNAME = ApplicationConfiguration.getEmailUsername();
     protected static final String EMAIL_PASSWORD = ApplicationConfiguration.getEmailPassword();
     protected static final String SENDER_EMAIL = ApplicationConfiguration.getSenderEmail();
+
+    //protected static final String EMAIL_PASSWORD1 = ApplicationConfiguration.getEmailPassword1();
 
     @Test
     @Title("Post Email Configuration")

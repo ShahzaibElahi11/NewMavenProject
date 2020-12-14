@@ -12,7 +12,7 @@ import static constants.AuditControllerConstants.*;
 import static io.restassured.RestAssured.given;
 
 @RunWith(SerenityRunner.class)
-public class AuditControllerTest extends BaseTest {
+public class UserAuditTest extends BaseTest {
 
     @Test
     @Title("Get User Audit Details By UserName")

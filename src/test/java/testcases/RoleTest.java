@@ -25,7 +25,7 @@ import static org.apache.http.HttpStatus.*;
 
 @RunWith(SerenityRunner.class)
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
-public class RoleControllerTest extends BaseTest {
+public class RoleTest extends BaseTest {
 
 
     protected static final String USERNAME = ApplicationConfiguration.getUsername();

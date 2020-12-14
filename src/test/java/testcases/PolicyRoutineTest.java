@@ -21,7 +21,7 @@ import static org.apache.http.HttpStatus.*;
 
 @RunWith(SerenityRunner.class)
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
-public class PolicyRoutineControllerTest extends BaseTest {
+public class PolicyRoutineTest extends BaseTest {
 
     public static boolean isPreviousTestPass;
 

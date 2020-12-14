@@ -11,7 +11,7 @@ import static constants.QueryControllerConstants.*;
 import static io.restassured.RestAssured.given;
 
 @RunWith(SerenityRunner.class)
-public class QueryControllerTest extends BaseTest {
+public class QueryTest extends BaseTest {
 
     @Test
     @Title("Get Connectors List of Discovered Devices")

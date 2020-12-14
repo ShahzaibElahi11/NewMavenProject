@@ -13,7 +13,7 @@ import static io.restassured.RestAssured.given;
 import static org.hamcrest.Matchers.*;
 
 @RunWith(SerenityRunner.class)
-public class ConnectorConfigurationControllerTest extends BaseTest {
+public class ConnectorConfigurationTest extends BaseTest {
 
     protected static final String AWS_KEY_ID = ApplicationConfiguration.getAwsKeyId();
     protected static final String AWS_SECRET_KEY = ApplicationConfiguration.getAwsSecretKey();

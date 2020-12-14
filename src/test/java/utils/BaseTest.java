@@ -8,6 +8,7 @@ import io.restassured.http.ContentType;
 import io.restassured.specification.RequestSpecification;
 import io.restassured.specification.ResponseSpecification;
 import org.apache.http.HttpStatus;
+import org.hamcrest.Matchers;
 import org.json.JSONObject;
 import org.junit.Assume;
 import org.junit.BeforeClass;
@@ -16,7 +17,10 @@ import java.io.*;
 import java.net.URL;
 import java.net.URLConnection;
 import java.nio.charset.StandardCharsets;
-import java.util.*;
+import java.util.Date;
+import java.util.List;
+import java.util.Map;
+import java.util.Random;
 
 import static com.auth0.jwt.algorithms.Algorithm.HMAC512;
 import static org.hamcrest.Matchers.equalTo;
@@ -161,6 +165,7 @@ public class BaseTest {
                 expectStatusCode(HttpStatus.SC_OK).
                 expectContentType(ContentType.JSON).
                 expectBody("meta.status", equalTo("success")).
+                expectResponseTime(Matchers.lessThan(5000L)).
                 build();
 
     }
