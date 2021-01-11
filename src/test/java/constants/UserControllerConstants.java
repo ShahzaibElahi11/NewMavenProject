@@ -30,7 +30,7 @@ public class UserControllerConstants extends BaseTest {
     /**
      * Active Directory User Aggregated Tab Constant
      */
-    public static final String AD_USER_QUERY = BASE_ENDPOINT + ":" + INVENTA_PORT + "/query/users/?query=(adapters.adapter_ad.cn%20==%20exists(true))&page=0&size=1";
+    public static final String AD_USER_QUERY = BASE_ENDPOINT + ":" + INVENTA_PORT + "/query/users/?query=(adapters.adapter_ad.CN%20==%20exists(true))&page=0&size=1";
 
     private UserControllerConstants() { }
 }

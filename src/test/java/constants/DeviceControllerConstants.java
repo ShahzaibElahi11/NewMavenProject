@@ -102,7 +102,7 @@ public class DeviceControllerConstants extends BaseTest {
     public static final String AZURE_PUBLIC_DNS_ZONE_QUERY = BASE_ENDPOINT + ":" + INVENTA_PORT + "/query/devices/?query=(adapters.adapter_azure.Public%20DNS%20Zones::Type%20==%20exists(true))&page=0&size=1";
     public static final String AZURE_APPLICATION_GATEWAY_QUERY = BASE_ENDPOINT + ":" + INVENTA_PORT + "/query/devices/?query=(common.hostName%20==%20%22AppGwPubIP%22)&page=0&size=1";
     public static final String AZURE_NETWORK_SECURITY_GROUP_QUERY = BASE_ENDPOINT + ":" + INVENTA_PORT + "/query/devices/?query=(adapters.adapter_azure.Network%20Security%20Group::Type%20==%20exists(true))&page=0&size=1";
-    public static final String AZURE_STORAGE_ACCOUNT_QUERY = BASE_ENDPOINT + ":" + INVENTA_PORT + "/query/devices/?query=(adapters.adapter_azure.Type%20==%20%22STORAGE_ACCOUNT%22)&page=0&size=1";
+    public static final String AZURE_STORAGE_ACCOUNT_QUERY = BASE_ENDPOINT + ":" + INVENTA_PORT + "/query/devices/?query=(common.type%20==%20%22STORAGE_ACCOUNT%22)&page=0&size=1";
     public static final String AZURE_VIRTUAL_MACHINE_QUERY = BASE_ENDPOINT + ":" + INVENTA_PORT + "/query/devices/?query=(adapters.adapter_azure.Virtual%20Machine::Status%20==%20exists(true))&page=0&size=1";
     public static final String AZURE_VIRTUAL_NETWORK_QUERY = BASE_ENDPOINT + ":" + INVENTA_PORT + "/query/devices/?query=(adapters.adapter_azure.Virtual%20Network::Type%20==%20exists(true))&page=0&size=1";
     public static final String AZURE_IP_ADDRESS_QUERY = BASE_ENDPOINT + ":" + INVENTA_PORT + "/query/devices/?query=(adapters.adapter_azure.Public%20IP%20Address::Type%20==%20exists(true))&page=0&size=1";

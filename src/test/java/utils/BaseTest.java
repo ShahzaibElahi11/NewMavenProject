@@ -21,22 +21,23 @@ import java.util.Date;
 import java.util.List;
 import java.util.Map;
 import java.util.Random;
+import java.util.concurrent.TimeUnit;
 
 import static com.auth0.jwt.algorithms.Algorithm.HMAC512;
 import static org.hamcrest.Matchers.equalTo;
 
 public class BaseTest {
 
-    protected static final String BASE_ENDPOINT = ApplicationConfiguration.getInventaBaseUrl();
-    protected static final int INVENTA_PORT = Integer.parseInt(ApplicationConfiguration.getInventaServicePort());
-    protected static final int CONNECTOR_PORT = Integer.parseInt(ApplicationConfiguration.getConnectorServicePort());
+    protected static String BASE_ENDPOINT = ApplicationConfiguration.getInventaBaseUrl();
+    protected static int INVENTA_PORT = Integer.parseInt(ApplicationConfiguration.getInventaServicePort());
+    protected static int CONNECTOR_PORT = Integer.parseInt(ApplicationConfiguration.getConnectorServicePort());
 
     //For Token
     public static final String SUBJECT = ApplicationConfiguration.getSubject();
     public static final int EXPIRATION_TIME = Integer.parseInt(ApplicationConfiguration.getExpirationTime());
     public static final String SECRET = ApplicationConfiguration.getSecretKey();
-    public static final String BEARER = "Bearer ";
-    public static final String AUTHORIZATION = "Authorization";
+    public static String BEARER = "Bearer ";
+    public static String AUTHORIZATION = "Authorization";
 
     protected static final String TOKEN = JWT.create()
             .withSubject(SUBJECT)
@@ -165,7 +166,7 @@ public class BaseTest {
                 expectStatusCode(HttpStatus.SC_OK).
                 expectContentType(ContentType.JSON).
                 expectBody("meta.status", equalTo("success")).
-                expectResponseTime(Matchers.lessThan(5000L)).
+                expectResponseTime(Matchers.lessThan(5000L ), TimeUnit.SECONDS).
                 build();
 
     }

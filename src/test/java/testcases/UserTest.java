@@ -112,13 +112,14 @@ public class UserTest extends BaseTest {
                 spec(requestSpec).
                 when().
                 get(USER_ENDPOINT + USER_TAG + USER_ID);
+
         if (response.getStatusCode() == SC_OK)
             isPreviousTestPass = true;
         response.
                 then().
                 spec(responseSpec).
                 and()
-                .body("data.tags[0]", equalTo("Automation_User_Tag_Number_" + VALUE + "1"));
+                .body("data.labels[0]", equalTo("Automation_User_Tag_Number_" + VALUE + "1"));
     }
 
     @Test // Not throw exception if tag name not exist.
