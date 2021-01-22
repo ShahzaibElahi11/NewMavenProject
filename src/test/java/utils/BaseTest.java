@@ -2,6 +2,7 @@ package utils;
 
 import com.auth0.jwt.JWT;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.github.javafaker.Faker;
 import io.restassured.builder.RequestSpecBuilder;
 import io.restassured.builder.ResponseSpecBuilder;
 import io.restassured.http.ContentType;
@@ -53,8 +54,10 @@ public class BaseTest {
     /**
      * Random Number Generation
      */
-    static Random rand = new Random();
-    public static final int VALUE = rand.nextInt(5000);
+//    static Random rand = new Random();
+//    public static final int VALUE = rand.nextInt(5000);
+    static Faker faker = new Faker();
+    protected static final String VALUE = faker.number().digits(5);
 
     /**
      * ID Extraction Implementation

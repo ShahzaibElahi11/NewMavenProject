@@ -25,7 +25,7 @@ import static org.hamcrest.Matchers.*;
 public class DeviceTest extends BaseTest {
 
     public static boolean isPreviousTestPass;
-    public static final String SINGLE_TAG_NAME = "Automation_Device_Tag_Number_" + VALUE + "1";
+    public final String SINGLE_TAG_NAME = "Automation_Device_Tag_Number_" + VALUE + "1";
 
     //http://inventaserver:9092/devices/removeDiscoveredDevice?_id=5f891e11b2256b227f8677de
 
