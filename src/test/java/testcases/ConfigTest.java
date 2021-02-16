@@ -22,6 +22,7 @@ import static org.hamcrest.Matchers.equalTo;
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
 public class ConfigTest extends BaseTest {
 
+    //https://stackoverflow.com/questions/7303103/java-aes-encryption-with-salt
     public static boolean isPreviousTestPass;
 
     protected static final String EMAIL_HOST = ApplicationConfiguration.getEmailHost();

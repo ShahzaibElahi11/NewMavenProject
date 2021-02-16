@@ -58,9 +58,9 @@ public class DeviceTest extends BaseTest {
     public void getDevicesDetailsById() {
         given().
                 spec(requestSpec).
-                when().
+        when().
                 get(DEVICE_ENDPOINT + DEVICES_DETAILS + DEVICE_DETAIL_ID).
-                then().
+        then().
                 spec(responseSpec).
                 and().
                 body("data._id", equalTo(DEVICE_DETAIL_ID));
@@ -1585,7 +1585,7 @@ public class DeviceTest extends BaseTest {
                 spec(responseSpec);
     }
 
-
+/*
     @Test
     @Title("Get AWS Virtual Machine Inbound Firewall Rule Details By Device Id")
     public void getAwsVirtualMachineInboundFirewallRuleDetails() throws IOException {
@@ -1612,7 +1612,7 @@ public class DeviceTest extends BaseTest {
                 then().
                 spec(responseSpec);
     }
-
+*/
     @Test
     @Title("Get AWS Virtual Machine Asset Tag Details By Device Id")
     public void getAwsVirtualMachineAssetTagDetails() throws IOException {
