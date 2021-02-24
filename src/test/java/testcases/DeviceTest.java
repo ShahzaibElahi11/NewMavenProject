@@ -1139,7 +1139,7 @@ public class DeviceTest extends BaseTest {
                 then().
                 spec(responseSpec);
     }
-
+/*
     @Test
     @Title("Get AWS Database Instance Inbound Firewall Rule Details By Device Id")
     public void getAwsDatabaseInstanceInboundFirewallRuleDetails() throws IOException {
@@ -1166,7 +1166,7 @@ public class DeviceTest extends BaseTest {
                 then().
                 spec(responseSpec);
     }
-
+*/
     @Test
     @Title("Get AWS Database Instance Attachment Details By Device Id")
     public void getAwsDatabaseInstanceAttachmentsDetails() throws IOException {
@@ -1440,7 +1440,7 @@ public class DeviceTest extends BaseTest {
                 then().
                 spec(responseSpec);
     }
-
+/*
     @Test
     @Title("Get AWS Network Security Group Inbound Firewall Rule Details By Device Id")
     public void getAwsNetworkSecurityGroupInboundFirewallRuleDetails() throws IOException {
@@ -1466,7 +1466,7 @@ public class DeviceTest extends BaseTest {
                 then().
                 spec(responseSpec);
     }
-
+*/
     @Test
     @Title("Get AWS Route 53 DNS Records Summary Details By Device Id")
     public void getAwsRoute53DNSRecordsSummaryDetails() throws IOException {

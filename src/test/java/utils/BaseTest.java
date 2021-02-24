@@ -5,6 +5,9 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.github.javafaker.Faker;
 import io.restassured.builder.RequestSpecBuilder;
 import io.restassured.builder.ResponseSpecBuilder;
+import io.restassured.filter.log.ErrorLoggingFilter;
+import io.restassured.filter.log.RequestLoggingFilter;
+import io.restassured.filter.log.ResponseLoggingFilter;
 import io.restassured.http.ContentType;
 import io.restassured.specification.RequestSpecification;
 import io.restassured.specification.ResponseSpecification;
@@ -128,6 +131,9 @@ public class BaseTest {
                 .setPort(INVENTA_PORT)
                 .setContentType(ContentType.JSON)
                 .addHeader(AUTHORIZATION, BEARER + TOKEN)
+                .addFilter(new RequestLoggingFilter())
+                .addFilter(new ResponseLoggingFilter())
+                .addFilter(new ErrorLoggingFilter())
                 .build();
     }
 
@@ -149,6 +155,9 @@ public class BaseTest {
                 .setPort(CONNECTOR_PORT)
                 .setContentType(ContentType.JSON)
                 .addHeader(AUTHORIZATION, BEARER + TOKEN)
+                .addFilter(new RequestLoggingFilter())
+                .addFilter(new ResponseLoggingFilter())
+                .addFilter(new ErrorLoggingFilter())
                 .build();
     }
 
