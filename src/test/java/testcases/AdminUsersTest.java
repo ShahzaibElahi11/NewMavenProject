@@ -60,8 +60,8 @@ public class AdminUsersTest extends BaseTest {
                 .userName(userName)
                 .firstName(firstName)
                 .lastName(lastName)
-                .password("password123")
-                .passwordConfirm("password123")
+                .password("Password123+")
+                .passwordConfirm("Password123+")
                 .roleIds(adminRoleId)
                 .userType("OPERATOR")
                 .status(true)
@@ -178,8 +178,8 @@ public class AdminUsersTest extends BaseTest {
         currentAdminId = getIdFromURL(DELETE_ADMIN_USER_ID);
         ChangePassword changePassword = ChangePassword.builder()
                 .userId(currentAdminId)
-                .newPassword("admin")
-                .confirmPassword("admin")
+                .newPassword("Password123+")
+                .confirmPassword("Password123+")
                 .build();
         given().
                 spec(requestSpec).

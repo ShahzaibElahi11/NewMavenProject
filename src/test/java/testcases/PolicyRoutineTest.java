@@ -25,7 +25,7 @@ public class PolicyRoutineTest extends BaseTest {
 
     public static boolean isPreviousTestPass;
 
-        @Test
+    @Test
     @Title("Create New Policy Routine")
     public void testA_PostCreatePolicyRoutine() {
         isPreviousTestPass = false;
