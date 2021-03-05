@@ -154,6 +154,7 @@ public class PolicyRoutineTest extends BaseTest {
                 spec(responseSpec);
     }
 
+    @Ignore
     @Test
     @Title("Get Policy Routine Summary")
     public void getPolicyRoutineSummary() throws IOException {
@@ -212,6 +213,7 @@ public class PolicyRoutineTest extends BaseTest {
                 then().
                 spec(responseSpec);
     }
+
 
     @Test
     @Title("Get Policy Routine Details By Id")
