@@ -7,6 +7,7 @@ import net.serenitybdd.junit.runners.SerenityRunner;
 import net.thucydides.core.annotations.Title;
 import org.junit.Assume;
 import org.junit.FixMethodOrder;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.MethodSorters;
@@ -24,6 +25,7 @@ import static org.apache.http.HttpStatus.SC_OK;
 
 @RunWith(SerenityRunner.class)
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
+@Ignore
 public class QueryWizardTest extends BaseTest {
 
     public static boolean isPreviousTestPass;
