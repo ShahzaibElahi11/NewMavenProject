@@ -24,6 +24,7 @@ import static org.hamcrest.Matchers.equalTo;
 
 @RunWith(SerenityRunner.class)
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
+@Ignore
 public class AdminUsersTest extends BaseTest {
 
     public static boolean isPreviousTestPass;
