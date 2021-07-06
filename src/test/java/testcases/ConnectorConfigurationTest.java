@@ -117,7 +117,7 @@ public class ConnectorConfigurationTest extends BaseTest {
                 and().
                 body("data", equalTo("Triggered Discovery"));
     }
-
+    @Ignore
     @Test
     @Title("Get All Connector Discover Now")
     public void getAllConnectorDiscoverNow() {
