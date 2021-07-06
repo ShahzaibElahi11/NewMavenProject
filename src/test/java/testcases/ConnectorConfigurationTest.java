@@ -17,7 +17,7 @@ public class ConnectorConfigurationTest extends BaseTest {
 
     protected static final String AWS_KEY_ID = ApplicationConfiguration.getAwsKeyId();
     protected static final String AWS_SECRET_KEY = ApplicationConfiguration.getAwsSecretKey();
-
+/*
     @Test
     @Title("Get All Connectors")
     public void getAllConnectors() {
@@ -91,7 +91,6 @@ public class ConnectorConfigurationTest extends BaseTest {
                 and().
                 body("data", equalTo("Triggered Discovery"));
     }
-
     @Test
     @Title("Get Azure Discover Now")
     public void getAzureDiscoverNow() {
@@ -117,7 +116,7 @@ public class ConnectorConfigurationTest extends BaseTest {
                 and().
                 body("data", equalTo("Triggered Discovery"));
     }
-    @Ignore
+
     @Test
     @Title("Get All Connector Discover Now")
     public void getAllConnectorDiscoverNow() {
@@ -141,7 +140,7 @@ public class ConnectorConfigurationTest extends BaseTest {
                 then().
                 spec(responseSpec);
     }
-
+   
     @Test
     @Title("Get CrowdStrike Discover Now")
     public void getCrowdStrikeDiscoverNow() {
@@ -154,7 +153,7 @@ public class ConnectorConfigurationTest extends BaseTest {
                 and().
                 body("data", equalTo("Triggered Discovery"));
     }
-
+   
     @Test
     @Title("Get Shodan Connector Configuration")
     public void getShodanConnectorConfiguration() {
@@ -165,7 +164,7 @@ public class ConnectorConfigurationTest extends BaseTest {
                 then().
                 spec(responseSpec);
     }
-
+  
     @Test
     @Title("Get Shodan Discover Now")
     public void getShodanDiscoverNow() {
@@ -189,7 +188,7 @@ public class ConnectorConfigurationTest extends BaseTest {
                 then().
                 spec(responseSpec);
     }
-
+ 
     @Test
     @Title("Get VMware ESXi Discover Now")
     public void getVmwareEsxiDiscoverNow() {
@@ -202,6 +201,6 @@ public class ConnectorConfigurationTest extends BaseTest {
                 and().
                 body("data", equalTo("Triggered Discovery"));
     }
-
+*/
 
 }
