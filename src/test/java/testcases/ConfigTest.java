@@ -80,7 +80,7 @@ public class ConfigTest extends BaseTest {
                 spec(responseSpec).
                 body("data.username", equalTo(EMAIL_USERNAME));
     }
-
+/*
     @Test
     @Title("Post GUI Configuration")
     public void testC_postGuiConfiguration() {
@@ -106,6 +106,7 @@ public class ConfigTest extends BaseTest {
                 statusCode(SC_OK);
 
     }
+    */
     @Test
     @Title("Get GUI Setting Configuration")
     public void testD_getGuiConfiguration() {
